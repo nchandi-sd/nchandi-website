@@ -1,0 +1,85 @@
+/*Extra small devices (portrait phones, less than 576px)  */
+/*No media query since this is the default in Bootstrap*/
+
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  .view {
+    background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+  }
+  .container {
+    margin-top: 140px;
+  }
+  .text {
+    font-family: Georgia;
+    font-size:x-large;
+  }
+  .sub-text {
+    font-family: Arial;
+    font-size: medium;
+  }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .view {
+    background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+  }
+  .container {
+    margin-top: 160px;
+  }
+  .text {
+    font-family: Georgia;
+    font-size:x-large;
+  }
+  .sub-text {
+    font-family: Arial;
+    font-size: medium;
+  }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .view {
+    background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+  }
+  .container {
+    margin-top: 180px;
+  }
+  .text {
+    font-family: Georgia;
+    font-size:x-large;
+  }
+  .sub-text {
+    font-family: Arial;
+    font-size: medium;
+  }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  .view {
+    background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+  }
+  .container {
+    margin-top: 200px;
+  }
+  .text {
+    font-family: Georgia;
+    font-size:x-large;
+  }
+  .sub-text {
+    font-family: Arial;
+    font-size: medium;
+  }
+}
+
+
