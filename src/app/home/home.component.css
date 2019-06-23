@@ -1,6 +1,21 @@
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
-
+.view {
+  background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+}
+.container {
+  margin-top: 120px;
+}
+.text {
+  font-family: Georgia;
+  font-size:x-large;
+}
+.sub-text {
+  font-family: Arial;
+  font-size: medium;
+}
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {

@@ -1,26 +1,26 @@
- <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav" [containerInside]="false">
+ <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark shadow scrolling-navbar intro-fixed-nav" [containerInside]="false">
     <mdb-navbar-brand>
       <a class="logo navbar-brand" href="#"><strong>NCHandI</strong></a>
     </mdb-navbar-brand>
     <links>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active waves-light" mdbWavesEffect>
-          <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link" routerLink="/home"  routerLinkActive="active-link">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">About</a>
+          <a class="nav-link" routerLink="/about" routerLinkActive="active-link">About</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">Panels</a>
+          <a class="nav-link" routerLink="/panels" routerLinkActive="active-link">Panels</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">Resources</a>
+          <a class="nav-link" routerLink="/resources" routerLinkActive="active-link">Resources</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">Contact</a>
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active-link">Contact</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">Log In</a>
+          <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Log In</a>
         </li>
       </ul>
     </links>
