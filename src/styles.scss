@@ -1,9 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+  --light-blue: #6D98AB;
+  --dark-blue: #00275E;
+  --yellow: #FEB729;
+  --grey: #A8B1B8;
+}
 .navbar {
-  background-color: #00275E !important;
+  background-color: var(--dark-blue);
 }
 .shadow{
   box-shadow: .5rem .5rem 1rem rgba(0,6,6,.45)!important;
 }
-.active-link{
+.view{
+
 }
