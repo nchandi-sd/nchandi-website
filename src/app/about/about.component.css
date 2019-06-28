@@ -1,109 +1,46 @@
-/*Extra small devices (portrait phones, less than 576px)  */
-/*No media query since this is the default in Bootstrap*/
 .about-main-view {
   background-color: var(--yellow);
   background-size: cover;
-  height: 100vh;
+  height: 100%;
 }
 .about-location-view {
   background-color: var(--dark-blue);
   background-size: cover;
   height: 100vh;
 }
-.about-container {
-  padding-top: 85px;
+.about-main-container {
+  margin: 0 50px 0 50px;
 }
 .section-header {
   font-family: Georgia;
   font-size: 46px;
-  text-align: center;
+  margin: 50px 0;
 }
+.main-container {
+  height: 100vh;
+}
+
+.container1 {
+  background-color: var(--grey);
+  height: 100vh;
+}
+
+/*Extra small devices (portrait phones, less than 576px)  */
+/*No media query since this is the default in Bootstrap*/
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
-  .about-main-view {
-    background-color: var(--yellow);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-location-view {
-    background-color: var(--dark-blue);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-container {
-    padding-top: 85px;
-  }
-  .section-header {
-    font-family: Georgia;
-    font-size: 46px;
-    text-align: center;
-  }
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
-  .about-main-view {
-    background-color: var(--yellow);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-location-view {
-    background-color: var(--dark-blue);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-container {
-    padding-top: 85px;
-  }
-  .section-header {
-    text-align: center;
-    font-family: Georgia;
-    font-size: 46px;
-  }
 }
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
-  .about-main-view {
-    background-color: var(--yellow);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-location-view {
-    background-color: var(--dark-blue);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-container {
-    padding-top: 85px;
-  }
-  .section-header {
-    text-align: center;
-    font-family: Georgia;
-    font-size: 46px;
-  }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {
-  .about-main-view {
-    background-color: var(--yellow);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-location-view {
-    background-color: var(--dark-blue);
-    background-size: cover;
-    height: 100vh;
-  }
-  .about-container {
-    padding-top: 85px;
-  }
-  .section-header {
-    font-family: Georgia;
-    font-size: 46px;
-  }
-}
+@media (min-width: 1200px) {  }
 
 

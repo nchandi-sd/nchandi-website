@@ -14,6 +14,8 @@ import { PanelsComponent } from './panels/panels.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { EventsComponent } from './about/events/events.component';
+import { MainEventComponent } from './about/main-event/main-event.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { LoginComponent } from './login/login.component';
     PanelsComponent,
     ResourcesComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    EventsComponent,
+    MainEventComponent
   ],
   imports: [
     BrowserModule,
