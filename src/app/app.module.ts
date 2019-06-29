@@ -16,6 +16,8 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { EventsComponent } from './about/events/events.component';
 import { MainEventComponent } from './about/main-event/main-event.component';
+import {AngularSvgIconModule} from 'angular-svg-icon';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MainEventComponent } from './about/main-event/main-event.component';
     MainEventComponent
   ],
   imports: [
+    AngularSvgIconModule,
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),

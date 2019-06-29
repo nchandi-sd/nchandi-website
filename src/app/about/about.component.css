@@ -20,8 +20,12 @@
   height: 100vh;
 }
 
-.container1 {
+.container-1 {
   background-color: var(--grey);
+  height: 100vh;
+}
+
+.container-3 {
   height: 100vh;
 }
 
