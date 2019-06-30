@@ -11,6 +11,12 @@
 .about-main-container {
   margin: 0 50px 0 50px;
 }
+.btn-round-lg{
+  border-radius: 17px;
+  color: white;
+  background: var(--dark-blue) !important;
+}
+
 .mission-statement-header {
   -webkit-text-stroke-width: .5px;
   margin-top: 40px
@@ -19,12 +25,14 @@
   text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
   font-family: Georgia;
   font-size: 46px;
-  margin: 50px 0;
+  margin: 32px auto
+}
+.mission-para {
+  font-size: 20px;
 }
 .container-2 {
   height: 100%;
 }
-
 
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
