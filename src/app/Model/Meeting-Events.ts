@@ -8,6 +8,4 @@ export const EVENTS: Event[] = [
   {id: 5, name: 'Oct 23rd, 2019', type: 'Committee Meeting', date: '9:30am'},
   {id: 6, name: 'Nov 23rd, 2019', type: 'Committee Meeting', date: '9:30am'},
   {id: 7, name: 'Dec 23rd, 2019', type: 'Committee Meeting', date: '9:30am'},
-
-
 ];

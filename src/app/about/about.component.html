@@ -10,11 +10,14 @@
           col
         </div>
         <div class="col-md-3">
+          <div class="container-2">
+          <app-main-event [event]="clickedEvent"></app-main-event>
+          </div>
         </div>
         <div class="col-md-3">
           <div class="container-3">
             <div class="verticalLine">
-            <app-events></app-events>
+            <app-events (eventClicked)="childEventClicked($event)"></app-events>
             </div>
           </div>
         </div>
