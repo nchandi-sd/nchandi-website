@@ -1,0 +1,29 @@
+.events{
+  list-style-type: none;
+}
+.verticalLine {
+  margin-left: 20px;
+  border-left: solid white;
+  border-radius: .5px;
+}
+.list-title{
+  font-weight: normal;
+  font-size: 24px;
+  font-family: "Segoe UI", sans-serif;
+  margin-bottom: 50px;
+  -webkit-text-stroke-width: .7px;
+}
+li{
+  font-size:20px;
+  font-family: "Segoe UI", sans-serif;
+  -webkit-text-stroke-width: .5px;
+  color: white;
+  margin-top:1.5em;
+  padding-top: 10px;
+  line-height: 5px;
+
+}
+li span {
+  position: relative;
+  left: 10px;
+}

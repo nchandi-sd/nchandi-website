@@ -1,0 +1,13 @@
+<div class="main-event-container flex-center">
+  <div class="event-container">
+    <h3 class="event-title text-white">Next Meeting:</h3>
+    <div class="event text-white">
+      <div *ngIf="event">
+        <h2>
+          <span>{{event.name}}</span>
+          <br>{{ event.date }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
