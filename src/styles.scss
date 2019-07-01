@@ -12,13 +12,19 @@
   position: relative;
   height: 64px;
 }
-.bottom-spacer{
+.spacer{
   position: relative;
   height: 64px;
+}
+.section-header {
+  text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
+  font-family: Georgia;
+  font-size: 46px;
+  margin: 32px auto
 }
 .shadow{
   box-shadow: .5rem .5rem 1rem rgba(0,6,6,.45)!important;
 }
-.view{
-
+.section{
+  padding-top: 1rem;
 }
