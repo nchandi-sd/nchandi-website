@@ -40,9 +40,12 @@ export class PanelsComponent implements OnInit {
       .subscribe((data: TableData) => {
 
         data.feed.entry.forEach( ent => {
+          //set your data with the ent item here.  Im not sure the proper way to do with with angular. 
+          // Id assume its 1way binding the data to html elements. 
+          
           console.log(ent.content);
         });
-        
+
       })
 
     }
