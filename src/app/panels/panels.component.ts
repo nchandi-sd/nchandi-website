@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EntryEntity, PanelService} from './panel.service';
+import {EntryEntity, PanelService, TableData} from './panel.service';
 
 @Component({
   selector: 'app-panels',
@@ -9,7 +9,7 @@ import {EntryEntity, PanelService} from './panel.service';
 
 export class PanelsComponent implements OnInit {
   error: any;
-  entries: EntryEntity[];
+  entries: TableData[];
 
   constructor(private panelService: PanelService) {
   }
@@ -35,9 +35,17 @@ export class PanelsComponent implements OnInit {
   // }
 
   showOpenings2() {
+    console.log("test test")
     this.panelService.getOpenings2()
-      .subscribe((data: EntryEntity[]) => this.entries = { ...data});
-  }
+      .subscribe((data: TableData) => {
+
+        data.feed.entry.forEach( ent => {
+          console.log(ent.content);
+        });
+        
+      })
+
+    }
 
   // showTest() {
   //   let dogs: Array<any> = [];

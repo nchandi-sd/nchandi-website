@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-export interface Weather {
+export interface TableData {
   version: string;
   encoding: string;
   feed: Feed;
@@ -64,24 +64,24 @@ export interface EntryEntity {
 
 @Injectable()
 export class PanelService {
-  constructor(private http: HttpClient) {}
+  constructor(private https: HttpClient) {}
 
   testURL = 'https://spreadsheets.google.com/feeds/list/1Qx0ckOsye46DYvFed8zA02I0mZSb-cvNOlAOuwRq4ZQ/1/public/full?alt=json';
 
   getOpenings() {
-    return this.http.get<EntryEntity[]>(this.testURL)
+    return this.https.get<EntryEntity[]>(this.testURL)
       .pipe(retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
       );
   }
 
-  getOpenings2(): Observable<EntryEntity[]> {
+  getOpenings2(): Observable<TableData> {
     // now returns an Observable of Config
-    return this.http.get<EntryEntity[]>(this.testURL);
+    return this.https.get<TableData>(this.testURL);
   }
 
   getOpenings3() {
-    return this.http.get<any>(this.testURL);
+    return this.https.get<any>(this.testURL);
   }
 
   private handleError(error: HttpErrorResponse) {
