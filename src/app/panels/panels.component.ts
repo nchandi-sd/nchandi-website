@@ -36,7 +36,9 @@ export class PanelsComponent implements OnInit {
 
   showOpenings2() {
     this.panelService.getOpenings2()
-      .subscribe((data: EntryEntity[]) => this.entries = { ...data});
+      .subscribe((data: EntryEntity[]) => entries => {
+        this.entries = entries.EntryEntity;
+      });
   }
 
   // showTest() {
