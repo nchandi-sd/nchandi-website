@@ -1,5 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {EntryEntity, PanelService} from './panel.service';
+import {PanelService, TableData} from './panel.service';
+
+interface Opening {
+  dayOfWeek: string;
+  weekOfMonth: string;
+  time: string;
+  facility: string;
+  location: string;
+  gender: string;
+  positionsAvailable: string;
+  panelCoordinator: string;
+  boardChampion: string;
+}
 
 @Component({
   selector: 'app-panels',
@@ -9,37 +21,38 @@ import {EntryEntity, PanelService} from './panel.service';
 
 export class PanelsComponent implements OnInit {
   error: any;
-  entries: EntryEntity[];
+  entries: TableData[];
+  opening: Opening;
+  openings: Array<Opening> = [];
 
   constructor(private panelService: PanelService) {
   }
 
   ngOnInit() {
     this.showOpenings2();
-    // console.log(this.entries[0].gsx$dayofweek);
   }
-
-  // showOpenings() {
-  //   this.panelService.getOpenings()
-  //     .subscribe((data: OPENINGS) => this.opening = {
-  //       dayOfWeek: data['gsx$dayofweek.$t'],
-  //       weekOfMonth: data['gsx$weekofmonth.$t'],
-  //       time: data['gsx#time.$t'],
-  //       facility: data['gsx$facility.$t'],
-  //       location: data['gsx$location.$t'],
-  //       gender: data['gsx$menwomen.$t'],
-  //       numberNeeded: data['gsx$needed.$t'],
-  //       panelCordinator: data['gsx$panelcoordinator.$t'],
-  //       boardChampion: data['gsx$boardchampion.$t'],
-  //     });
-  // }
 
   showOpenings2() {
     this.panelService.getOpenings2()
-      .subscribe((data: EntryEntity[]) => entries => {
-        this.entries = entries.EntryEntity;
+      .subscribe((data: TableData) => {
+        data.feed.entry.forEach( ent => {
+          console.log(ent.content.$t);
+          this.opening = {
+            dayOfWeek: ent.gsx$dayofweek.$t,
+            weekOfMonth: ent.gsx$weekofmonth.$t,
+            time: ent.gsx$time.$t,
+            facility: ent.gsx$facility.$t,
+            location: ent.gsx$location.$t,
+            positionsAvailable: ent.gsx$needed.$t,
+            gender: ent.gsx$menwomen.$t,
+            panelCoordinator: ent.gsx$panelcoordinator.$t,
+            boardChampion: ent.gsx$boardchampion.$t
+          };
+          this.openings.push(this.opening);
+          console.log(this.opening);
+        });
       });
-  }
+    }
 
   // showTest() {
   //   let dogs: Array<any> = [];
