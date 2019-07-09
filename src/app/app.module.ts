@@ -18,6 +18,7 @@ import { EventsComponent } from './about/events/events.component';
 import { MainEventComponent } from './about/main-event/main-event.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from '@angular/common/http';
     ContactComponent,
     LoginComponent,
     EventsComponent,
-    MainEventComponent
+    MainEventComponent,
+    FooterComponent
   ],
   imports: [
     AngularSvgIconModule,
