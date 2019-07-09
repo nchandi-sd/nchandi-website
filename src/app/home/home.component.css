@@ -16,6 +16,9 @@
   font-family: Arial;
   font-size: medium;
 }
+.img-container{
+  margin-top: 50px
+}
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
@@ -34,6 +37,9 @@
   .sub-text {
     font-family: Arial;
     font-size: medium;
+  }
+  .img-container{
+    margin-top: 50px
   }
 }
 
@@ -75,6 +81,9 @@
     font-family: Arial;
     font-size: medium;
   }
+  .img-container{
+    margin-top: 50px
+  }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
@@ -94,6 +103,9 @@
   .sub-text {
     font-family: Arial;
     font-size: medium;
+  }
+  .img-container{
+    margin-top: 50px
   }
 }
 

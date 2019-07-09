@@ -16,7 +16,6 @@
   color: white;
   background: var(--dark-blue) !important;
 }
-
 .mission-statement-header {
   -webkit-text-stroke-width: .5px;
   margin-top: 16px
@@ -30,7 +29,6 @@
 .container-2 {
   height: 100%;
 }
-
 .map-container-2{
   overflow:hidden;
   padding-bottom:56.25%;

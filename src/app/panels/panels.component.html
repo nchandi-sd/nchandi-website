@@ -1,3 +1,55 @@
-<p>
-  panels works!
-</p>
+<div class="panels-main-view">
+  <div class="panels-main-container vertical-center">
+    <div class="navbar-spacer">
+      <div class="main-container">
+        <div class="row justify-content center">
+          <div class="container">
+            <h2 class="section-header text-white flex-center"> NCHANDI Panels </h2>
+          </div>
+          <h2 class="section-header text-white"> Open Panels </h2>
+            <div class="panel-container flex-center">
+              <!-- Table  -->
+              <table class="table table bordered table-responsive text-nowrap table-striped" id="testTable">
+                <!-- Table head -->
+                <thead>
+                <tr>
+                  <th>Day of Week</th>
+                  <th>Week of Month</th>
+                  <th>Time</th>
+                  <th>Facility</th>
+                  <th>Location</th>
+                  <th>Men/Women</th>
+                  <th># Needed</th>
+                  <th>Panel Coordinator</th>
+                  <th>Facility Champion</th>
+                </tr>
+                </thead>
+                <!-- Table head -->
+                <!-- Table body -->
+                <tbody id="demo">
+                <tr *ngFor="let opening of openings">
+                  <td>{{opening?.dayOfWeek}}</td>
+                  <td>{{opening?.weekOfMonth}}</td>
+                  <td>{{opening?.time}}</td>
+                  <td style="word-wrap: normal">{{opening?.facility}}</td>
+                  <td>{{opening?.location}}</td>
+                  <td>{{opening?.gender}}</td>
+                  <td style="word-wrap: break-word">{{opening?.positionsAvailable}}</td>
+                  <td>{{opening?.panelCoordinator}}</td>
+                  <td>{{opening?.boardChampion}}</td>
+                </tr>
+                <!--                <th>Name</th>-->
+                <!--                <td *ngFor="let record"> {{record.Name}} </td>-->
+                <!-- Table body -->
+              </table>
+              <!-- Table  -->
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="spacer">
+    </div>
+    <div class="about-location-view section">
+    </div>
+  </div>
+</div>

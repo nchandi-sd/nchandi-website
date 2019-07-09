@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
-
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,7 +16,7 @@ import { EventsComponent } from './about/events/events.component';
 import { MainEventComponent } from './about/main-event/main-event.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
-import { FooterComponent } from './footer/footer.component';
+import {PanelService} from './panels/panel.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +41,9 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    PanelService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
