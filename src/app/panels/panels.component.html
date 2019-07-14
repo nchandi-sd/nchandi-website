@@ -1,55 +1,120 @@
-<div class="panels-main-view">
-  <div class="panels-main-container vertical-center">
-    <div class="navbar-spacer">
-      <div class="main-container">
-        <div class="row justify-content center">
-          <div class="container">
-            <h2 class="section-header text-white flex-center"> NCHANDI Panels </h2>
-          </div>
-          <h2 class="section-header text-white"> Open Panels </h2>
-            <div class="panel-container flex-center">
-              <!-- Table  -->
-              <table class="table table bordered table-responsive text-nowrap table-striped" id="testTable">
-                <!-- Table head -->
-                <thead>
-                <tr>
-                  <th>Day of Week</th>
-                  <th>Week of Month</th>
-                  <th>Time</th>
-                  <th>Facility</th>
-                  <th>Location</th>
-                  <th>Men/Women</th>
-                  <th># Needed</th>
-                  <th>Panel Coordinator</th>
-                  <th>Facility Champion</th>
-                </tr>
-                </thead>
-                <!-- Table head -->
-                <!-- Table body -->
-                <tbody id="demo">
-                <tr *ngFor="let opening of openings">
-                  <td>{{opening?.dayOfWeek}}</td>
-                  <td>{{opening?.weekOfMonth}}</td>
-                  <td>{{opening?.time}}</td>
-                  <td style="word-wrap: normal">{{opening?.facility}}</td>
-                  <td>{{opening?.location}}</td>
-                  <td>{{opening?.gender}}</td>
-                  <td style="word-wrap: break-word">{{opening?.positionsAvailable}}</td>
-                  <td>{{opening?.panelCoordinator}}</td>
-                  <td>{{opening?.boardChampion}}</td>
-                </tr>
-                <!--                <th>Name</th>-->
-                <!--                <td *ngFor="let record"> {{record.Name}} </td>-->
-                <!-- Table body -->
-              </table>
-              <!-- Table  -->
-            </div>
-          </div>
-      </div>
+<div class="panel-main-container">
+  <div class="navbar-spacer"></div>
+  <h2 class="section-header text-white flex-center headline"> NCHANDI Panels </h2>
+  <div class="intro-container flex-center">
+    <p class="intro-para text-white"><b>How-To's of Joining H&I</b><br></p>
+    <ol class="howtos-list text-white">
+      <li>Find an open panel on this page.</li>
+      <li>Verify that you qualify based on the sobriety requirements below.</li>
+      <li>Use contact finder to find person the right person to speak to about joining the panel.</li>
+      3b) Attend an orientation
+    </ol>
+    <p class="intro-para text-white"><b>The Sobriety Requirements</b></p>
+    <ul class="sobreity-reqs text-white">
+      <li>Panel Coordinator: 2 Years</li>
+      <li>Panel Leaders: 1 year </li>
+      <li>Panel Members: 6 months </li>
+      <li>Panel Visitors/Guests: 3 Months. </li>
+    </ul>
+    <br>
+    <p class="intro-para text-white"><b>Contact Finder:</b><br>
+      Are you interested in a volunteering at a: <br>
+    </p>
+    <div class="row offset-xl-1 ">
+      <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id ="btn-treatment">Treatment Center</button>
+      <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id="btn-corrections">Correctional Facility</button>
     </div>
-    <div class="spacer">
-    </div>
-    <div class="about-location-view section">
-    </div>
+    <br>
+    <p class="intro-para text-white"><b>Contact:</b><br></p>
+  </div>
+  <h2 class="section-header text-white flex-center"> Open Panels </h2>
+    <div class="panel-container flex-center">
+      <table class="table table bordered table-responsive text-nowrap table-striped" id="openingsTable">
+        <thead>
+        <tr>
+          <th>Day of Week</th>
+          <th>Week of Month</th>
+          <th>Time</th>
+          <th>Facility</th>
+          <th>Location</th>
+          <th>Men/Women</th>
+          <th># Needed</th>
+          <th>Panel Coordinator</th>
+          <th>Facility Champion</th>
+        </tr>
+        </thead>
+        <tbody id="openings-panel">
+        <tr *ngFor="let opening of openings">
+          <td>{{opening?.dayOfWeek}}</td>
+          <td>{{opening?.weekOfMonth}}</td>
+          <td>{{opening?.time}}</td>
+          <td style="word-wrap: normal">{{opening?.facility}}</td>
+          <td>{{opening?.location}}</td>
+          <td>{{opening?.gender}}</td>
+          <td style="word-wrap: break-word">{{opening?.positionsAvailable}}</td>
+          <td>{{opening?.panelCoordinator}}</td>
+          <td>{{opening?.boardChampion}}</td>
+        </tr>
+      </table>
+  </div>
+  <div class="spacer">
+  </div>
+  <h2 class="section-header text-white flex-center"> Current Panels </h2>
+  <div class="panel-container flex-center">
+    <table class="table table bordered table-responsive text-nowrap table-striped" id="treatmentPanels">
+      <thead>
+      <tr>
+        <th>Facility</th>
+        <th>Location</th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Gender</th>
+        <th>Panel Coordinator</th>
+        <th>Facility Champion</th>
+      </tr>
+      </thead>
+      <tbody id="facility-panels">
+      <tr *ngFor="let facilityPanel of currentPanels">
+        <td style="word-wrap: normal">{{facilityPanel?.facility}}</td>
+        <td>{{facilityPanel?.location}}</td>
+        <td><{{facilityPanel?.day}}</td>
+        <td>{{facilityPanel?.time}}</td>
+        <td>{{facilityPanel?.gender}}</td>
+        <td>{{facilityPanel?.panelCoordinator}}</td>
+        <td>{{facilityPanel?.boardChampion}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="spacer">
+  </div>
+  <h2 class="section-header text-white flex-center"> Correctional Facilities </h2>
+  <div class="panel-container flex-center">
+    <table class="table table bordered table-responsive text-nowrap table-striped" id="correctionalPanels">
+      <thead>
+      <tr>
+        <th>Facility</th>
+        <th>Location</th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Gender</th>
+        <th>Panel Coordinator</th>
+        <th>Facility Champion</th>
+      </tr>
+      </thead>
+      <tbody id="correctional-facilities">
+      <tr *ngFor="let correctionalPanel of correctionalPanels">
+        <td style="word-wrap: normal">{{correctionalPanel?.facility}}</td>
+        <td>{{correctionalPanel?.location}}</td>
+        <td><{{correctionalPanel?.day}}</td>
+        <td>{{correctionalPanel?.time}}</td>
+        <td>{{correctionalPanel?.gender}}</td>
+        <td>{{correctionalPanel?.panelCoordinator}}</td>
+        <td>{{correctionalPanel?.boardChampion}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="spacer">
+  </div>
+  <div class="about-location-view section">
   </div>
 </div>

@@ -1,10 +1,27 @@
-.panels-main-view{
-  background-color: var(--grey);
-  height: 100vh;
-  background-size: cover;
-}
 .panel-main-container {
-  margin: 0 50px 0 50px;
+  background-color: var(--grey);
+  min-height: 100vh;
+  background-size: cover;
+  width: 100vw;
+}
+.intro-para {
+  font-size: 20px;
+}
+.headline {
+  text-align: center;
+  color: white;
+  margin: 50px 0;
+}
+.btn-round-lg{
+  float: left;
+  border-radius: 17px;
+  color: white;
+  background: var(--light-blue) !important;
+}
+.intro-container{
+  padding-left: 200px;
+  display:table-cell;
+  text-align:left;
 }
 .verticalLine {
   margin-left: 20px;
@@ -12,9 +29,13 @@
   border-radius: .5px;
 }
 .panel-container {
-    margin: 0 auto;
-    border-radius: 40px;
-    padding: 30px 0;
-    max-width: 1200px;
-    background-color: white;
+  margin: 0 auto;
+  border-radius: 40px;
+  padding: 30px 0;
+  max-width: 1200px;
+  background-color: white;
+}
+.sobreity-reqs{
+  text-align: left;
+  line-height: 10px;
 }

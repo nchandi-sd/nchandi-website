@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { EVENTS} from '../../Model/Meeting-Events';
-import {Event} from '../../Model/Event';
+import { EVENTS} from '../../model/Meeting-Events';
+import {Event} from '../../model/Event';
 import {SvgIconRegistryService} from 'angular-svg-icon';
 
 @Component({
