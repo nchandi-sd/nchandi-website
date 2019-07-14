@@ -1,17 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {PanelService, TableData} from './panel.service';
-
-interface Opening {
-  dayOfWeek: string;
-  weekOfMonth: string;
-  time: string;
-  facility: string;
-  location: string;
-  gender: string;
-  positionsAvailable: string;
-  panelCoordinator: string;
-  boardChampion: string;
-}
+import {PanelService} from './panel.service';
+import {Panels} from '../model/Panels';
+import {TableData} from '../model/TableData';
+import {Opening} from '../model/Opening';
+import {Panel} from '../model/Panel';
 
 @Component({
   selector: 'app-panels',
@@ -24,16 +16,22 @@ export class PanelsComponent implements OnInit {
   entries: TableData[];
   opening: Opening;
   openings: Array<Opening> = [];
+  currentPanel: Panel;
+  currentPanels: Array<Panel> = [];
+  correctionalPanel: Panel;
+  correctionalPanels: Array<Panel> = [];
 
   constructor(private panelService: PanelService) {
   }
 
   ngOnInit() {
-    this.showOpenings2();
+    this.showOpenings();
+    this.showCurrentPanels();
+    this.showCorrectionalFacilities();
   }
 
-  showOpenings2() {
-    this.panelService.getOpenings2()
+  showOpenings() {
+    this.panelService.getOpenings()
       .subscribe((data: TableData) => {
         data.feed.entry.forEach( ent => {
           console.log(ent.content.$t);
@@ -49,61 +47,51 @@ export class PanelsComponent implements OnInit {
             boardChampion: ent.gsx$boardchampion.$t
           };
           this.openings.push(this.opening);
-          console.log(this.opening);
         });
       });
     }
 
-  // showTest() {
-  //   let dogs: Array<any> = [];
-  //   let count = 0;
-  //   this.panelService.getOpenings3()
-  //   // clone the data object, using its known shape
-  //     .subscribe(next => {
-  //       if (next != null) {
-  //         dogs = this.transformDogs(next);
-  //         count = dogs.length;
-  //         console.log(count);
-  //       }
-  //     });
-  // }
+  showCurrentPanels() {
+    this.panelService.getCurrentPanels()
+      .subscribe((data: Panels) => {
+        data.feed.entry.forEach( ent => {
+          console.log(ent.content.$t);
+          this.currentPanel = {
+            facility: ent.gsx$facility.$t,
+            location: ent.gsx$location.$t,
+            day: ent.gsx$day.$t,
+            time: ent.gsx$time.$t,
+            gender: ent.gsx$gender.$t,
+            panelCoordinator: ent.gsx$panelcoordinator.$t,
+            boardChampion: ent.gsx$boardchampion.$t
+          };
+          this.currentPanels.push(this.currentPanel);
+          console.log(this.currentPanel);
+        });
+      });
+  }
 
-  // transformDogs(dataReceived: Array<any>): Array<any> {
-  //
-  //   console.log(dataReceived);
-  //   const tempArray: Array<any> = [];
-  //   for (const i of dataReceived) {
-  //     console.log(i.gsx$dayofweek.$t);
-  //       tempArray.push({
-  //       Name: i.gsx$dayofweek.$t,
-  //       Breed: i.gsx$weekofmonth.$t,
-  //       Birthdate: i.gsx$time.$t,
-  //       CurrentAge: i.gsx$facility.$t
-  //     });
-  //   }
-  //   return tempArray;
-  //
-  // }
+  showCorrectionalFacilities() {
+    this.panelService.getCorrectionalFacilities()
+      .subscribe((data: Panels) => {
+        data.feed.entry.forEach( ent => {
+          console.log(ent.content.$t);
+          this.correctionalPanel = {
+            facility: ent.gsx$facility.$t,
+            location: ent.gsx$location.$t,
+            day: ent.gsx$day.$t,
+            time: ent.gsx$time.$t,
+            gender: ent.gsx$gender.$t,
+            panelCoordinator: ent.gsx$panelcoordinator.$t,
+            boardChampion: ent.gsx$boardchampion.$t
+          };
+          this.correctionalPanels.push(this.correctionalPanel);
+          console.log(this.correctionalPanel);
+        });
+      });
+  }
 }
-  // loadDogs(objName: string){
-  //
-  //   let animalCount = 0;
-  //   let dogs: Array<any> = [];
-  //   this.openings$ = this.getHTTPData_SS(objName);
-  //   this.openings$.subscribe(next => {
-  //
-  //     if (next != null) {
-  //       // transform the JSON returned to make it more usable
-  //       dogs = this.transformDogs(next);
-  //       animalCount = dogs.length;
-  //     }
-  //     SpreadsheetDS.setLocal(dogs, this.ssIDs.getCacheName(objName));
-  //     this.dogsLabel = this.buildLabel(animalCount, objName);
-  //     this.dogsUpdated.emit(dogs);
-  //
-  //   });
-  //
-  // }
+
 
 
 
