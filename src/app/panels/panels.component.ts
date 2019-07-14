@@ -4,6 +4,7 @@ import {Panels} from '../model/Panels';
 import {TableData} from '../model/TableData';
 import {Opening} from '../model/Opening';
 import {Panel} from '../model/Panel';
+import {FacilityChampion} from '../model/FacilityChampion';
 
 @Component({
   selector: 'app-panels',
@@ -20,6 +21,9 @@ export class PanelsComponent implements OnInit {
   currentPanels: Array<Panel> = [];
   correctionalPanel: Panel;
   correctionalPanels: Array<Panel> = [];
+  txChampions: Array<FacilityChampion> = [];
+  inChampions: Array<FacilityChampion> = [];
+
 
   constructor(private panelService: PanelService) {
   }
@@ -28,6 +32,48 @@ export class PanelsComponent implements OnInit {
     this.showOpenings();
     this.showCurrentPanels();
     this.showCorrectionalFacilities();
+  }
+
+  // This is all information that should be stored in a backend- not frontend
+  getTxContact() {
+    this.txChampions[0] = {
+      name: 'Jim R',
+      phone: '(619) 890-2299',
+      email: 'jimbosd619@hotmail.com',
+      contactMethod: 'Text',
+      type: 'tx'
+    };
+    this.txChampions[1] = {
+      name: 'Brigette L',
+      phone: '(714) 269-4476',
+      email: 'blabar@cox.net',
+      contactMethod: 'Any',
+      type: 'tx'
+    };
+    this.txChampions[2] = {
+      name: 'Don C',
+      phone: '(760) 212-9759',
+      email: 'donald.crites@yahoo.com',
+      contactMethod: 'Text',
+      type: 'tx'
+    };
+  }
+
+  getInContact() {
+    this.inChampions[0] = {
+      name: 'Matthew C',
+      phone: '(760) 803-2182',
+      email: 'thatguymattewc@gmail.com',
+      contactMethod: 'Text',
+      type: 'in'
+    };
+    this.inChampions[1] = {
+      name: 'Dan H',
+      phone: '(760) 822-6601',
+      email: 'dhowardx@yahoo.com',
+      contactMethod: 'Any',
+      type: 'in'
+    };
   }
 
   showOpenings() {

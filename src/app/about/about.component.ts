@@ -8,12 +8,11 @@ import {Event} from '../model/Event';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-
-  constructor() { }
   public clickedEvent: Event;
 
-  ngOnInit() {
-  }
+  constructor() { }
+
+  ngOnInit() {}
 
   childEventClicked(event: Event) {
     this.clickedEvent = event;

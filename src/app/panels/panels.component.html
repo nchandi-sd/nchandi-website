@@ -21,11 +21,11 @@
       Are you interested in a volunteering at a: <br>
     </p>
     <div class="row offset-xl-1 ">
-      <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id ="btn-treatment">Treatment Center</button>
+      <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id ="btn-treatment" (click)="getTxContact()">Treatment Center</button>
       <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id="btn-corrections">Correctional Facility</button>
     </div>
     <br>
-    <p class="intro-para text-white"><b>Contact:</b><br></p>
+    <p class="intro-para text-white"><b>Contact:</b><br> {{txChampions[0].name}}</p>
   </div>
   <h2 class="section-header text-white flex-center"> Open Panels </h2>
     <div class="panel-container flex-center">
@@ -118,3 +118,4 @@
   <div class="about-location-view section">
   </div>
 </div>
+<app-footer></app-footer>
