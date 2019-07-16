@@ -1,33 +1,119 @@
 <div class="panel-main-container">
   <div class="navbar-spacer"></div>
   <h2 class="section-header text-white flex-center headline"> NCHANDI Panels </h2>
-  <div class="intro-container flex-center">
-    <p class="intro-para text-white"><b>How-To's of Joining H&I</b><br></p>
-    <ol class="howtos-list text-white">
-      <li>Find an open panel on this page.</li>
-      <li>Verify that you qualify based on the sobriety requirements below.</li>
-      <li>Use contact finder to find person the right person to speak to about joining the panel.</li>
-      3b) Attend an orientation
-    </ol>
-    <p class="intro-para text-white"><b>The Sobriety Requirements</b></p>
-    <ul class="sobreity-reqs text-white">
-      <li>Panel Coordinator: 2 Years</li>
-      <li>Panel Leaders: 1 year </li>
-      <li>Panel Members: 6 months </li>
-      <li>Panel Visitors/Guests: 3 Months. </li>
-    </ul>
-    <br>
-    <p class="intro-para text-white"><b>Contact Finder:</b><br>
-      Are you interested in a volunteering at a: <br>
-    </p>
-    <div class="row offset-xl-1 ">
-      <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id ="btn-treatment" (click)="getTxContact()">Treatment Center</button>
-      <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" id="btn-corrections">Correctional Facility</button>
+  <div class="container">
+
+    <div class="row justify-content-center text-center mt-5">
+      <div class="col-12 col-md-6 my-auto justify-content-center">
+        <img src="./assets/svg/coordination.svg" class="img-fluid" width="220" height="220" alt="My responsive image.">
+      </div>
+      <div class="col-12 col-md-6 my-auto">
+        <div class="intro-container intro-content flex-center">
+          <h3><b>How-To's of Joining H&I</b><br></h3>
+          <ol>
+            <li>Find an open panel on this page.</li>
+            <li>Verify that you qualify based on the sobriety requirements below.</li>
+            <li>Use contact finder to find person the right person to speak to about joining the panel.</li>
+            <li>Attend an orientation</li>
+          </ol>
+        </div>
+      </div>
     </div>
-    <br>
-    <p class="intro-para text-white"><b>Contact:</b><br> {{txChampions[0].name}}</p>
-  </div>
-  <h2 class="section-header text-white flex-center"> Open Panels </h2>
+
+    <div class="spacer"></div>
+
+    <div class="row justify-content-center text-center mt-5">
+      <div class="col-12 col-md-6 order-md-2 my-auto justify-content-center">
+        <img src="./assets/svg/checklist.svg" class="img-fluid" width="220" height="220" alt="My responsive image.">
+      </div>
+      <div class="col-12 col-md-6 order-md-1 my-auto">
+        <div class="intro-content">
+          <h3><b>The Sobriety Requirements</b><br></h3>
+          <ul class="sobriety-reqs">
+            <li>Panel Coordinator: 2 Years</li>
+            <li>Panel Leaders: 1 year </li>
+            <li>Panel Members: 6 months </li>
+            <li>Panel Visitors/Guests: 3 Months. </li>
+          </ul>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="accordion" id="accordionExample">
+        <div class="card z-depth-0 bordered">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne">
+                Collapsible Group Item #1
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+               data-parent="#accordionExample">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+              wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+              eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+              assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+              farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+              labore sustainable.
+            </div>
+          </div>
+        </div>
+        <div class="card z-depth-0 bordered">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                      data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Collapsible Group Item #2
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+              wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+              eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+              assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+              farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+              labore sustainable.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!--  <div class="container flex-center">-->
+    <!--  <table class="contact-table text-white tab-content">-->
+    <!--    <tr *ngFor="let txChampion of txChampions">-->
+    <!--      <td>{{txChampion?.name}}</td>-->
+    <!--      <td>{{txChampion?.email}}</td>-->
+    <!--      <td>{{txChampion?.phone}}</td>-->
+    <!--      <td>Contact method: {{txChampion?.contactMethod}}</td>-->
+    <!--    </tr>-->
+    <!--  </table>-->
+    <!--    <table class="contact-table text-white tab-content">-->
+    <!--      <tr *ngFor="let inChampion of inChampions">-->
+    <!--        <td>{{inChampion?.name}}</td>-->
+    <!--        <td>{{inChampion?.email}}</td>-->
+    <!--        <td>{{inChampion?.phone}}</td>-->
+    <!--        <td>Contact method: {{inChampion?.contactMethod}}</td>-->
+    <!--      </tr>-->
+    <!--    </table>-->
+    <!--  </div>-->
+
+
+
+    <h2 class="section-header text-white flex-center"> Open Panels </h2>
     <div class="panel-container flex-center">
       <table class="table table bordered table-responsive text-nowrap table-striped" id="openingsTable">
         <thead>
@@ -56,66 +142,66 @@
           <td>{{opening?.boardChampion}}</td>
         </tr>
       </table>
+    </div>
+    <div class="spacer">
+    </div>
+    <h2 class="section-header text-white flex-center"> Current Panels </h2>
+    <div class="panel-container flex-center">
+      <table class="table table bordered table-responsive text-nowrap table-striped" id="treatmentPanels">
+        <thead>
+        <tr>
+          <th>Facility</th>
+          <th>Location</th>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Gender</th>
+          <th>Panel Coordinator</th>
+          <th>Facility Champion</th>
+        </tr>
+        </thead>
+        <tbody id="facility-panels">
+        <tr *ngFor="let facilityPanel of currentPanels">
+          <td style="word-wrap: normal">{{facilityPanel?.facility}}</td>
+          <td>{{facilityPanel?.location}}</td>
+          <td><{{facilityPanel?.day}}</td>
+          <td>{{facilityPanel?.time}}</td>
+          <td>{{facilityPanel?.gender}}</td>
+          <td>{{facilityPanel?.panelCoordinator}}</td>
+          <td>{{facilityPanel?.boardChampion}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="spacer">
+    </div>
+    <h2 class="section-header text-white flex-center"> Correctional Facilities </h2>
+    <div class="panel-container flex-center">
+      <table class="table table bordered table-responsive text-nowrap table-striped" id="correctionalPanels">
+        <thead>
+        <tr>
+          <th>Facility</th>
+          <th>Location</th>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Gender</th>
+          <th>Panel Coordinator</th>
+          <th>Facility Champion</th>
+        </tr>
+        </thead>
+        <tbody id="correctional-facilities">
+        <tr *ngFor="let correctionalPanel of correctionalPanels">
+          <td style="word-wrap: normal">{{correctionalPanel?.facility}}</td>
+          <td>{{correctionalPanel?.location}}</td>
+          <td><{{correctionalPanel?.day}}</td>
+          <td>{{correctionalPanel?.time}}</td>
+          <td>{{correctionalPanel?.gender}}</td>
+          <td>{{correctionalPanel?.panelCoordinator}}</td>
+          <td>{{correctionalPanel?.boardChampion}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="spacer">
+    </div>
+    <div class="about-location-view section">
+    </div>
   </div>
-  <div class="spacer">
-  </div>
-  <h2 class="section-header text-white flex-center"> Current Panels </h2>
-  <div class="panel-container flex-center">
-    <table class="table table bordered table-responsive text-nowrap table-striped" id="treatmentPanels">
-      <thead>
-      <tr>
-        <th>Facility</th>
-        <th>Location</th>
-        <th>Day</th>
-        <th>Time</th>
-        <th>Gender</th>
-        <th>Panel Coordinator</th>
-        <th>Facility Champion</th>
-      </tr>
-      </thead>
-      <tbody id="facility-panels">
-      <tr *ngFor="let facilityPanel of currentPanels">
-        <td style="word-wrap: normal">{{facilityPanel?.facility}}</td>
-        <td>{{facilityPanel?.location}}</td>
-        <td><{{facilityPanel?.day}}</td>
-        <td>{{facilityPanel?.time}}</td>
-        <td>{{facilityPanel?.gender}}</td>
-        <td>{{facilityPanel?.panelCoordinator}}</td>
-        <td>{{facilityPanel?.boardChampion}}</td>
-      </tr>
-    </table>
-  </div>
-  <div class="spacer">
-  </div>
-  <h2 class="section-header text-white flex-center"> Correctional Facilities </h2>
-  <div class="panel-container flex-center">
-    <table class="table table bordered table-responsive text-nowrap table-striped" id="correctionalPanels">
-      <thead>
-      <tr>
-        <th>Facility</th>
-        <th>Location</th>
-        <th>Day</th>
-        <th>Time</th>
-        <th>Gender</th>
-        <th>Panel Coordinator</th>
-        <th>Facility Champion</th>
-      </tr>
-      </thead>
-      <tbody id="correctional-facilities">
-      <tr *ngFor="let correctionalPanel of correctionalPanels">
-        <td style="word-wrap: normal">{{correctionalPanel?.facility}}</td>
-        <td>{{correctionalPanel?.location}}</td>
-        <td><{{correctionalPanel?.day}}</td>
-        <td>{{correctionalPanel?.time}}</td>
-        <td>{{correctionalPanel?.gender}}</td>
-        <td>{{correctionalPanel?.panelCoordinator}}</td>
-        <td>{{correctionalPanel?.boardChampion}}</td>
-      </tr>
-    </table>
-  </div>
-  <div class="spacer">
-  </div>
-  <div class="about-location-view section">
-  </div>
-</div>
-<app-footer></app-footer>
+  <app-footer></app-footer>
