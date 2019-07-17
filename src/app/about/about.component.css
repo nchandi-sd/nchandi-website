@@ -1,12 +1,14 @@
 .about-main-view {
   background-color: var(--yellow);
+  min-height: 100vh;
   background-size: cover;
-  height: 100%;
+  width: 100vw;
 }
 .about-location-view {
   background-color: var(--dark-blue);
+  min-height: 100vh;
   background-size: cover;
-  height: 100vh;
+  width: 100vw;
 }
 .about-main-container {
   margin: 0 50px 0 50px;
@@ -24,6 +26,12 @@
   font-size: 20px;
 }
 .location-para {
+  font-size: 20px;
+}
+.location-content{
+  color: white;
+  float: left;
+  text-align: left;
   font-size: 20px;
 }
 .container-2 {
@@ -51,7 +59,6 @@
   border-radius: 100px;
   background-size: cover;
   background-position: center center;
-
 }
 
 /*Extra small devices (portrait phones, less than 576px)  */

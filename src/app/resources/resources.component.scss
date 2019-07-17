@@ -1,0 +1,27 @@
+.resources-main-container {
+  background-color: var(--light-blue);
+  min-height: 100vh;
+  background-size: cover;
+  width: 100vw;
+}
+.report-sheet {
+  margin: 0 auto;
+  border-radius: 40px;
+  padding: 30px 0;
+  width: 600px;
+  background-color: var(--yellow);
+}
+.report-content {
+  -webkit-text-stroke-width: .5px;
+  color: white;
+  font-family: "Segoe UI", serif;
+  font-size: 16px;
+}
+.committeeReports {
+  text-align: left;
+  float: left;
+}
+.report-title {
+  font-size: 20px;
+  -webkit-text-stroke-width: .7px;
+}
