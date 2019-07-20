@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+//mandatory angular material theme
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 :root{
   --light-blue: #6D98AB;
   --dark-blue: #00275E;

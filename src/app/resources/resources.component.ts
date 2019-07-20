@@ -26,10 +26,6 @@ export class ResourcesComponent implements OnInit {
     for (let i = 6; i < 12; i++) {
       this.winterReports.push(MONTHLY_REPORTS[i]);
     }
-
-    for (let thisone of GENERAL_RESOURCES) {
-      console.log(thisone.name);
-    }
   }
 
 }

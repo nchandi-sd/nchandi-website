@@ -5,6 +5,8 @@ import {TableData} from '../model/TableData';
 import {Opening} from '../model/Opening';
 import {Panel} from '../model/Panel';
 import {FacilityChampion} from '../model/FacilityChampion';
+import {MatTableDataSource} from '@angular/material';
+
 
 @Component({
   selector: 'app-panels',
@@ -23,9 +25,11 @@ export class PanelsComponent implements OnInit {
   correctionalPanels: Array<Panel> = [];
   txChampions: Array<FacilityChampion> = [];
   inChampions: Array<FacilityChampion> = [];
+  champs: MatTableDataSource<FacilityChampion>;
 
 
   constructor(private panelService: PanelService) {
+    this.champs = new MatTableDataSource<FacilityChampion>();
   }
 
   ngOnInit() {
@@ -80,7 +84,6 @@ export class PanelsComponent implements OnInit {
     this.panelService.getOpenings()
       .subscribe((data: TableData) => {
         data.feed.entry.forEach( ent => {
-          console.log(ent.content.$t);
           this.opening = {
             dayOfWeek: ent.gsx$dayofweek.$t,
             weekOfMonth: ent.gsx$weekofmonth.$t,
@@ -101,7 +104,6 @@ export class PanelsComponent implements OnInit {
     this.panelService.getCurrentPanels()
       .subscribe((data: Panels) => {
         data.feed.entry.forEach( ent => {
-          console.log(ent.content.$t);
           this.currentPanel = {
             facility: ent.gsx$facility.$t,
             location: ent.gsx$location.$t,
@@ -112,7 +114,6 @@ export class PanelsComponent implements OnInit {
             boardChampion: ent.gsx$boardchampion.$t
           };
           this.currentPanels.push(this.currentPanel);
-          console.log(this.currentPanel);
         });
       });
   }
@@ -121,7 +122,6 @@ export class PanelsComponent implements OnInit {
     this.panelService.getCorrectionalFacilities()
       .subscribe((data: Panels) => {
         data.feed.entry.forEach( ent => {
-          console.log(ent.content.$t);
           this.correctionalPanel = {
             facility: ent.gsx$facility.$t,
             location: ent.gsx$location.$t,
@@ -132,7 +132,6 @@ export class PanelsComponent implements OnInit {
             boardChampion: ent.gsx$boardchampion.$t
           };
           this.correctionalPanels.push(this.correctionalPanel);
-          console.log(this.correctionalPanel);
         });
       });
   }

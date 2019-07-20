@@ -43,51 +43,45 @@
     <div class="spacer"></div>
 
     <div class="row justify-content-center mt-5">
-      <div class="accordion" id="accordionExample">
-        <div class="card z-depth-0 bordered">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                      aria-expanded="true" aria-controls="collapseOne">
-                Collapsible Group Item #1
-              </button>
-            </h5>
-          </div>
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-               data-parent="#accordionExample">
-            <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-              wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-              eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-              assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-              farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-              labore sustainable.
-            </div>
-          </div>
-        </div>
-        <div class="card z-depth-0 bordered">
-          <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                      data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Collapsible Group Item #2
-              </button>
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-              wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-              eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-              assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-              farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-              labore sustainable.
-            </div>
-          </div>
-        </div>
-      </div>
+      
+      
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Treatment Center Contacts</mat-panel-title>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="txChampions" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let txChampion "> {{txChampion.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="age">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let txChampion"> {{txChampion.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="numberPokemons">
+              <th mat-header-cell *matHeaderCellDef> Phone</th>
+              <td mat-cell *matCellDef="let txChampion"> {{txChampion.phone}} </td>
+            </ng-container>
+<!--            <ng-container matColumnDef="edit">-->
+<!--              <th mat-header-cell *matHeaderCellDef> Edit </th>-->
+<!--              <td mat-cell *matCellDef="let txChampion">-->
+<!--                <button mat-raised-button color="primary" (click)='edittxChampion(txChampion)'> Edit-->
+<!--                </button>-->
+<!--              </td>-->
+<!--            </ng-container>-->
+            <tr mat-header-row *matHeaderRowDef="txChampions"></tr>
+            <tr mat-row *matRowDef="let row; columns: txChampions;"></tr>
+          </table>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Mini title</mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+      
     </div>
 
     <div class="spacer"></div>
