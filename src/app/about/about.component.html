@@ -2,6 +2,7 @@
   <div class="about-main-container vertical-center">
     <div class="navbar-spacer"></div>
     <h1 class="section-header text-white flex-center"> About Us </h1>
+    <div class="spacer"></div>
     <div class="main-container">
       <div class="row justify-content center">
         <div class="col-md-6">
@@ -11,8 +12,8 @@
               <h2 class="mission-statement-header text-center text-white">Who We Are:</h2>
               <p class="mission-para text-white">
                 &nbsp;&nbsp;&nbsp;&nbsp;Formally known as the North County Area Institutional Committee (NCAIC), NCHANDI is a volunteer organization
-              which organizes "Hospital and Institution" meetings of Alcoholics Anonymous. We help bring meetings into facilities
-              in North San Diego county. Visit our resource area to learn more about how you can be of service.
+                which organizes "Hospital and Institution" meetings of Alcoholics Anonymous. We help bring meetings into facilities
+                in North San Diego county. Visit our resource area to learn more about how you can be of service.
               </p>
               <div class="button-container flex-center">
                 <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/resources"  routerLinkActive="active-link">Resources</button>
@@ -22,41 +23,48 @@
         </div>
         <div class="col-md-3">
           <div class="container-2">
-          <app-main-event [event]="clickedEvent"></app-main-event>
+            <app-main-event [event]="clickedEvent"></app-main-event>
           </div>
         </div>
         <div class="col-md-3">
           <div class="container-3">
             <div class="verticalLine">
-            <app-events (eventClicked)="childEventClicked($event)"></app-events>
+              <app-events (eventClicked)="childEventClicked($event)"></app-events>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="spacer">
-  </div>
+  <div class="spacer"></div>
   <div class="about-location-view section">
-  <div class="spacer">
-    <h1 class="section-header text-white flex-center"> Location </h1>
-      <div class="container">
-        <p class="location-para text-white" style="text-align:center">
-          <b>*** All Panel Coordinators Strongly Encouraged to Attend ***</b><br>
-          <b>*** For New Panel Member Placement ***</b>
-          <br><br>
-          All meetings are held at: <br>
-          North County Alano Club, 4198 Mission Ave, Oceanside, 92057 <br>
-          The third Saturday of every month<br><br>
-          9:00am - 9:45am General Information and Orientation <br>
-          9:45am - 11:00am Board Meeting
-        </p>
-        <div class="row flex-center">
-          <div id="map-container-google-2" class="z-depth-1-half map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3337.2348320481365!2d-117.31724244936302!3d33.23415076774928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc705884aa56f7%3A0x52c77ca77694f5b6!2s4198+Mission+Ave%2C+Oceanside%2C+CA+92057!5e0!3m2!1sen!2sus!4v1561911802427!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-          </div>
+    <h2 class="section-header text-white flex-center headline"> Location </h2>
+    <div class="container">
+      <div class="row justify-content-center text-center mt-5">
+        <div class="col-12 col-md-6 my-auto justify-content-center">
+          <img src="./assets/svg/destination.svg" class="img-fluid" width="220" height="220" alt="My responsive image.">
+        </div>
+        <div class="col-12 col-md-6 my-auto location-content">
+          <br>
+          <h3>All meetings are held at:</h3><br>
+          <p>
+            North County Alano Club, 4198 Mission Ave, Oceanside, 92057 <br>
+            The third Saturday of every month<br><br>
+            9:00am - 9:45am General Information and Orientation <br>
+            9:45am - 11:00am Board Meeting
+          </p>
         </div>
       </div>
+
+      <div class="spacer"></div>
+
+      <div class="row flex-center">
+        <div id="map-container-google-2" class="z-depth-1-half map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3337.2348320481365!2d-117.31724244936302!3d33.23415076774928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc705884aa56f7%3A0x52c77ca77694f5b6!2s4198+Mission+Ave%2C+Oceanside%2C+CA+92057!5e0!3m2!1sen!2sus!4v1561911802427!5m2!1sen!2sus" width="800" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="spacer"></div>
+    </div>
   </div>
 </div>
-</div>
+<app-footer></app-footer>

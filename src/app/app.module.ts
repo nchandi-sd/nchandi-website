@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +18,8 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PanelService} from './panels/panel.service';
 import { FooterComponent } from './footer/footer.component';
+import {MatExpansionModule, MatTableModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,9 @@ import { FooterComponent } from './footer/footer.component';
     MDBBootstrapModule.forRoot(),
     FormsModule,
     AppRoutingModule,
+    MatExpansionModule,
+    NoopAnimationsModule,
+    MatTableModule,
   ],
   providers: [
     PanelService

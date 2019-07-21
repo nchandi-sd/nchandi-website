@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+//mandatory angular material theme
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 :root{
   --light-blue: #6D98AB;
   --dark-blue: #00275E;
@@ -16,6 +20,10 @@
   position: relative;
   height: 64px;
 }
+.vertical-spacer{
+  position: relative;
+  width: 64px;
+}
 .section-header {
   text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
   font-family: Georgia;
@@ -27,5 +35,8 @@
 }
 .section{
   padding-top: 1rem;
+}
+li.noStyle {
+  list-style-type: none;
 }
 
