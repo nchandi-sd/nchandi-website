@@ -1,22 +1,22 @@
 .about-main-view {
-  background-color: var(--yellow);
+  background-color: var(--primary-option);
   min-height: 100vh;
   background-size: cover;
   width: 100vw;
 }
 .about-location-view {
-  background-color: var(--dark-blue);
+  background-color: var(--primary-dark);
   min-height: 100vh;
   background-size: cover;
   width: 100vw;
 }
 .about-main-container {
-  margin: 0 50px 0 50px;
+  margin: 0 96px 0 96px;
 }
 .btn-round-lg{
   border-radius: 17px;
   color: white;
-  background: var(--dark-blue) !important;
+  background: var(--primary) !important;
 }
 .mission-statement-header {
   -webkit-text-stroke-width: .5px;
@@ -55,10 +55,14 @@
   height: 150px;
   margin: 0 auto;
   width: 150px;
-  border: solid 8px var(--grey);
   border-radius: 100px;
   background-size: cover;
   background-position: center center;
+}
+
+.gradient-spacer{
+  background: linear-gradient( var(--primary-option), var(--primary-dark));
+  height: 64px;
 }
 
 /*Extra small devices (portrait phones, less than 576px)  */

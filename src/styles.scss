@@ -2,15 +2,17 @@
 //mandatory angular material theme
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
 :root{
-  --light-blue: #6D98AB;
-  --dark-blue: #00275E;
-  --yellow: #FEB729;
-  --grey: #A8B1B8;
+  --primary-dark: #007343;
+  --primary: #31a36e;
+  --secondary-dark: #c79100;
+  --secondary: #ffc107;
+
+  --primary-option: #245980;
+  --secondary-option: #A8B1B8;
 }
 .navbar {
-  background-color: var(--dark-blue);
+  background-color: var(--primary-dark);
 }
 .navbar-spacer{
   position: relative;

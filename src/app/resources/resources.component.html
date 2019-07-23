@@ -2,67 +2,79 @@
   <div class="navbar-spacer"></div>
   <h2 class="section-header text-white flex-center headline"> Resources </h2>
   <div class="spacer"></div>
+  <div class="resources-container">
 
-  <div class="container">
     <div class="row">
 
-
-      <div class="col-md-4 flex-center">
+      <div class="col-md-3 flex-center">
         <div class="resources-side-container">
 
           <div class="report-sheet report-content">
-            <h3 class="flex-center">General Resources</h3>
-            <br>
+            <h3 class="flex-center title">NCHANDI Panel Materials</h3>
             <div class="container">
               <div class="row">
                 <ul class="committeeReports">
-                  <li class="report-li" *ngFor="let resource of generalResources">
-                    <!--                <span class="report-title">{{resource.name}}</span>-->
-                    <strong><u><a href="{{resource.link}}">{{resource.name}}</a></u></strong>
+                  <li class="report-li" *ngFor="let resource of panelMaterials">
+                    <strong><u><a class="genLink" href="{{resource.link}}" id="link">{{resource.name}}</a></u></strong>
                   </li>
                 </ul>
               </div>
             </div>
-
           </div>
-
-          <div class="spacer"></div>
-
-          <div class="report-sheet report-content">
-            <h3 class="flex-center">NCHANDI Panel Materials</h3>
-
-            dfg
-          </div>
-
         </div>
       </div>
 
-      <div class="col-md-2"></div>
+      <div class="col-md-3 flex-center">
+        <div class="resources-side-container">
+
+          <div class="report-sheet report-content">
+            <h3 class="flex-center title">General Resources</h3>
+            <div class="container">
+              <div class="row">
+                <ul class="committeeReports">
+                  <li class="report-li" *ngFor="let resource of generalResources">
+                    <strong><u><a class="genLink" href="{{resource.link}}" id="link">{{resource.name}}</a></u></strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="col-md-6 flex-center">
-        <div class="report-sheet report-content">
-          <h3 class="flex-center">NCHANDI Monthly Reports</h3>
-          <br>
+        <div class="report-sheet2 report-content">
+          <h3 class="flex-center title">NCHANDI Monthly Reports</h3>
           <div class="container">
             <div class="row">
 
               <!-- add list of report resource here : 6 per col-->
               <div class="col-md">
                 <ul class="committeeReports">
-                  <li class="report-li" *ngFor="let report of summerReports">
+                  <li class="report-li" *ngFor="let report of firstTriReports">
                     <span class="report-title">{{report.monthDate}}</span>
-                    <strong><br><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
-                    <strong><br><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong>
+                    <strong><br><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
+                    <strong><br><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong>
                   </li>
                 </ul>
               </div>
 
               <div class = "col-md">
                 <ul class="committeeReports">
-                  <li class="report-li" *ngFor="let report of winterReports">
+                  <li class="report-li" *ngFor="let report of secTriReports">
                     <span class="report-title">{{report.monthDate}}</span>
-                    <strong><br><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
-                    <strong><br><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong>
+                    <strong><br><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
+                    <strong><br><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong>
+                  </li>
+                </ul>
+              </div>
+
+              <div class = "col-md">
+                <ul class="committeeReports">
+                  <li class="report-li" *ngFor="let report of thirdTriReports">
+                    <span class="report-title">{{report.monthDate}}</span>
+                    <strong><br><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
+                    <strong><br><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong>
                   </li>
                 </ul>
               </div>

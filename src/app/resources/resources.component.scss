@@ -1,15 +1,14 @@
 .resources-main-container {
-  background-color: var(--light-blue);
+  background-color: var(--primary-option);
   min-height: 100vh;
   background-size: cover;
   width: 100vw;
 }
-.report-sheet {
-  margin: 0 auto;
-  border-radius: 40px;
-  padding: 30px 0;
-  width: 600px;
-  background-color: var(--yellow);
+.resources-container {
+  margin: 0 96px 0 96px;
+}
+.genLink{
+  font-size: large;
 }
 .report-content {
   -webkit-text-stroke-width: .5px;
@@ -24,4 +23,15 @@
 .report-title {
   font-size: 20px;
   -webkit-text-stroke-width: .7px;
+}
+.title {
+    font-weight: normal;
+    font-size: 24px;
+    font-family: "Segoe UI", sans-serif;
+    margin-bottom: 50px;
+    -webkit-text-stroke-width: .7px;
+}
+#link{
+  color: lightgrey;
+  -webkit-text-stroke-width: .3px;
 }

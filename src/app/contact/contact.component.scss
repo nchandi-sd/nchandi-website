@@ -1,5 +1,5 @@
 .contact-container{
-    background-color: var(--grey);
+    background-color: var(--primary-option);
     min-height: 100vh;
     background-size: cover;
     width: 100vw;
@@ -22,18 +22,17 @@
 .submit-button{
     display: block;
     padding: 10px;
-    background-color: var(--dark-blue);
+    background-color: var(--primary);
     color: white;
     margin: 0 auto;
     width: 200px;
     border-radius: 30px;
-
 }
 
 .form-label{
     margin-top: 10px;
     font-weight: bold;
-    color: var(--dark-blue);
+    color: var(--primary-dark);
     width: 100%;
 }
 .form-container{
