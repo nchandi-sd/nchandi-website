@@ -1,17 +1,19 @@
 .about-main-view {
-  background-color: var(--primary-option);
-  min-height: 100vh;
+  background-color: #E5E5E5;
   background-size: cover;
   width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
 }
 .about-location-view {
   background-color: var(--primary-dark);
-  min-height: 100vh;
   background-size: cover;
-  width: 100vw;
+  max-width: 1700px
 }
 .about-main-container {
   margin: 0 96px 0 96px;
+  background-color: var(--primary-option);
+  max-width: 1700px
 }
 .btn-round-lg{
   border-radius: 17px;
