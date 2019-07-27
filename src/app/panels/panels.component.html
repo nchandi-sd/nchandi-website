@@ -1,8 +1,8 @@
 <div class="panel-main-container">
   <div class="navbar-spacer"></div>
   <h2 class="section-header text-white flex-center headline"> NCHANDI Panels </h2>
-  <div class="container">
-
+  <div class="spacer"></div>
+  <div class="panels-container">
     <div class="row justify-content-center text-center mt-5">
       <div class="col-12 col-md-6 my-auto justify-content-center">
         <div class="intro-container intro-content flex-center">
@@ -43,45 +43,22 @@
     <div class="spacer"></div>
 
     <div class="row justify-content-center mt-5">
-      
-      
+
+
       <mat-accordion>
         <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Treatment Center Contacts</mat-panel-title>
-          </mat-expansion-panel-header>
-          <table mat-table [dataSource]="txChampions" class="mat-elevation-z8">
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let txChampion "> {{txChampion.name}} </td>
-            </ng-container>
-            <ng-container matColumnDef="age">
-              <th mat-header-cell *matHeaderCellDef> Email </th>
-              <td mat-cell *matCellDef="let txChampion"> {{txChampion.email}} </td>
-            </ng-container>
-            <ng-container matColumnDef="numberPokemons">
-              <th mat-header-cell *matHeaderCellDef> Phone</th>
-              <td mat-cell *matCellDef="let txChampion"> {{txChampion.phone}} </td>
-            </ng-container>
-<!--            <ng-container matColumnDef="edit">-->
-<!--              <th mat-header-cell *matHeaderCellDef> Edit </th>-->
-<!--              <td mat-cell *matCellDef="let txChampion">-->
-<!--                <button mat-raised-button color="primary" (click)='edittxChampion(txChampion)'> Edit-->
-<!--                </button>-->
-<!--              </td>-->
-<!--            </ng-container>-->
-            <tr mat-header-row *matHeaderRowDef="txChampions"></tr>
-            <tr mat-row *matRowDef="let row; columns: txChampions;"></tr>
-          </table>
-        </mat-expansion-panel>
+          <mat-expansion-panel-header class="disable_ripple">
+            <mat-panel-title><h4 class="text-white"><strong>Treatment Center Contacts</strong></h4></mat-panel-title>
+          </mat-expansion-panel-header><h5>
+          Jim R.        jimr@gmail.com          760-957-3453
+
+        </h5></mat-expansion-panel>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>Mini title</mat-panel-title>
           </mat-expansion-panel-header>
         </mat-expansion-panel>
       </mat-accordion>
-      
-      
     </div>
 
     <div class="spacer"></div>

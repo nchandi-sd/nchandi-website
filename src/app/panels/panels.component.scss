@@ -1,5 +1,5 @@
 .panel-main-container {
-  background-color: var(--grey);
+  background-color: var(--primary-option);
   min-height: 100vh;
   background-size: cover;
   width: 100vw;
@@ -10,17 +10,36 @@
 .headline {
   text-align: center;
   color: white;
-  margin: 50px 0;
 }
 .btn-round-lg{
   float: left;
   border-radius: 17px;
   color: white;
-  background: var(--light-blue) !important;
+  background: var(--primary) !important;
 }
 .intro-container{
   display:table-cell;
   text-align:left;
+}
+
+.mat-expanded{
+}
+
+.disable_ripple:hover{
+  background: #7BA0C0 !important;
+}
+
+.mat-expansion-panel-header{
+  background: #7BA0C0;
+  font-size: 20px;
+  font-family: "Segoe UI", serif;
+  outline: white;
+  elevation: higher;
+  width: 800px;
+}
+
+.mat-expanded{
+  background: #7BA0C0;
 }
 
 .verticalLine {
@@ -35,6 +54,10 @@
   max-width: 1200px;
   background-color: white;
 }
+.panels-container {
+  margin: 0 96px 0 96px;
+}
+
 .intro-content{
   font-size: 20px;
   color: white;

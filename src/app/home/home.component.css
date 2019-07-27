@@ -1,7 +1,7 @@
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 .view {
-  background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+  background: url("../../assets/background_picture.jpg")no-repeat center center;
   background-size: cover;
   height: 100vh;
 }
