@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {PanelService} from './panels/panel.service';
 import { FooterComponent } from './footer/footer.component';
 import {MatExpansionModule, MatTableModule} from '@angular/material';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './register/register.component';
+
 
 
 @NgModule({
@@ -33,7 +40,9 @@ import {MatExpansionModule, MatTableModule} from '@angular/material';
     LoginComponent,
     EventsComponent,
     MainEventComponent,
-    FooterComponent
+    FooterComponent,
+    UserComponent,
+    RegisterComponent
   ],
   imports: [
     AngularSvgIconModule,
@@ -42,10 +51,14 @@ import {MatExpansionModule, MatTableModule} from '@angular/material';
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MatExpansionModule,
     NoopAnimationsModule,
     MatTableModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [
     PanelService

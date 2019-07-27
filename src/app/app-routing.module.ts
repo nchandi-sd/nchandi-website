@@ -7,6 +7,9 @@ import { PanelsComponent} from './panels/panels.component';
 import { ResourcesComponent} from './resources/resources.component';
 import {ContactComponent} from './contact/contact.component';
 import {LoginComponent} from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { UserResolver } from './user/user.resolver';
+import { AuthGuard } from './core/auth.guard';
 
 const routes: Routes = [
   {
@@ -31,8 +34,18 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuard]
   },
+
+  {
+    path: 'user',
+    component: UserComponent,
+    resolve: {
+      data: UserResolver
+    }
+  },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
