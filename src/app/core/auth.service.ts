@@ -8,7 +8,7 @@ export class AuthService {
 
   constructor(
    public afAuth: AngularFireAuth
- ){}
+ ) {}
 
   doFacebookLogin() {
     return new Promise<any>((resolve, reject) => {
@@ -20,8 +20,8 @@ export class AuthService {
       }, err => {
         console.log(err);
         reject(err);
-      })
-    })
+      });
+    });
   }
 
   doTwitterLogin() {
@@ -34,8 +34,8 @@ export class AuthService {
       }, err => {
         console.log(err);
         reject(err);
-      })
-    })
+      });
+    });
   }
 
   doGoogleLogin() {
@@ -54,7 +54,7 @@ export class AuthService {
     });
   }
 
-  doRegister(value){
+  doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {
@@ -63,7 +63,7 @@ export class AuthService {
     });
   }
 
-  doLogin(value){
+  doLogin(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(res => {

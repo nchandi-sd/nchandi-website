@@ -25,6 +25,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
+import {AuthGuard} from './core/auth.guard';
+import {UserService} from './core/user.service';
+import {AuthService} from './core/auth.service';
 
 
 
@@ -61,7 +64,10 @@ import { RegisterComponent } from './register/register.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [
-    PanelService
+    PanelService,
+    AuthGuard,
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,10 @@
 .panel-main-container {
-  background-color: var(--primary-option);
-  min-height: 100vh;
-  background-size: cover;
-  width: 100vw;
+  //background-color: var(--primary-option);
+  //min-height: 100vh;
+  //background-size: cover;
+  //width: 100vw;
+  background-color: #E5E5E5;
+  width: 100%;
 }
 .intro-para {
   font-size: 20px;
@@ -56,6 +58,7 @@
 }
 .panels-container {
   margin: 0 96px 0 96px;
+  max-width: 1700px;
 }
 
 .intro-content{

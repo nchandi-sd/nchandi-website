@@ -10,20 +10,20 @@ export class UserService {
   constructor(
    public db: AngularFirestore,
    public afAuth: AngularFireAuth
- ){
- }
+ ) {}
 
 
-  getCurrentUser(){
+  getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
+      // tslint:disable-next-line:no-shadowed-variable
       const user = firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           resolve(user);
         } else {
           reject('No user logged in');
         }
-      })
-    })
+      });
+    });
   }
 
   updateCurrentUser(value) {
@@ -34,7 +34,7 @@ export class UserService {
         photoURL: user.photoURL
       }).then(res => {
         resolve(res);
-      }, err => reject(err))
-    })
+      }, err => reject(err));
+    });
   }
 }
