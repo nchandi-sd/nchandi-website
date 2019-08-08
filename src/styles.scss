@@ -33,7 +33,7 @@ body{
 }
 .spacer{
   position: relative;
-  height: 64px;
+  height: 24px;
 }
 .vertical-spacer{
   position: relative;
@@ -43,7 +43,7 @@ body{
   text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
   font-family: Georgia;
   font-size: 46px;
-  margin: 32px auto
+  margin: 12px auto
 }
 .shadow{
   box-shadow: .5rem .5rem 1rem rgba(0,6,6,.45)!important;
@@ -55,3 +55,46 @@ li.noStyle {
   list-style-type: none;
 }
 
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  .navbar-spacer{
+    position: relative;
+    height: 64px;
+  }
+  .section-header {
+    text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
+    font-family: Georgia;
+    font-size: 46px;
+    margin: 32px auto
+  }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .section-header {
+    text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
+    font-family: Georgia;
+    font-size: 46px;
+    margin: 28px auto
+  }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .section-header {
+    text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
+    font-family: Georgia;
+    font-size: 46px;
+    margin: 24px auto
+  }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  .section-header {
+    text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
+    font-family: Georgia;
+    font-size: 46px;
+    margin: 20px auto;
+  }
+}

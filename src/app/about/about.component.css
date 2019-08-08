@@ -19,17 +19,14 @@
   color: white;
   background: var(--primary) !important;
 }
-
 .mission-statement-container{
   margin-left: 12px;
   margin-right: 12px
 }
-
 .mission-statement-header {
   -webkit-text-stroke-width: .5px;
   margin-top: 16px;
 }
-
 .container-2 {
   margin-top:48px;
   margin-bottom:48px

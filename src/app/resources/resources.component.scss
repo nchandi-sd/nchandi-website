@@ -1,12 +1,15 @@
-.resources-main-container {
-  background-color: var(--primary-option);
+.resources-view{
+  background-color: #E5E5E5;
   width: 100%;
-  margin: 0 auto;
 }
-.resources-container {
-  margin: 0 64px 0 64px;
+.resources-main-container {
+  margin: 0 auto;
+  background-color: var(--primary-option);
+  max-width: 1920px;
   background-size: cover;
-min-height: 100vh;
+}
+.resources-container{
+  min-height: 800px;
 }
 .genLink{
   font-size: large;
@@ -67,11 +70,16 @@ min-height: 100vh;
   color: var(--primary-dark);
   width: 100%;
 }
-
 .form-spacer{
   position: relative;
   height: 32px;
 }
 .form-container{
   padding:20px;
+}
+.quote-content{
+  text-align: right;
+  margin-top: 64px;
+  margin-left: 64px;
+  font-size: 32px
 }

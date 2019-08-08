@@ -5,60 +5,53 @@
 .panel-main-container {
   background-color: var(--primary-option);
   background-size: cover;
-  width: 100%;
+  max-width: 1920px;
   margin: 0 auto;
 }
-
-.intro-para {
-  font-size: 20px;
+.intro-title{
+  margin-top: 64px;
 }
-
-.headline {
-  text-align: center;
-  color: white;
-}
-
-.btn-round-lg{
-  float: left;
-  border-radius: 17px;
-  color: white;
-  background: var(--primary) !important;
-}
-
-.intro-container{
-  display:table-cell;
+.sobriety-reqs{
   text-align: left;
-  padding-left: 64px;
-  padding-right: 64px
 }
-
-.disable_ripple:hover{
-  background: #7BA0C0 !important;
-}
-
 .mat-expansion-panel-header{
   background: #7BA0C0;
   font-size: 20px;
   font-family: "Segoe UI", serif;
   outline: white;
   elevation: higher;
-  width: 800px;
+  width: 100%;
 }
-
 .mat-expansion-panel{
   font-size: 20px;
   font-family: "Segoe UI", serif;
+}
+.btn-round-lg{
+  float: left;
+  border-radius: 17px;
+  color: white;
+  background: var(--primary) !important;
+}
+.intro-content{
+  font-size: 20px;
+  color: white;
+}
+.intro-container{
+  display:table-cell;
+  text-align: left;
+  margin-top: 16px;
+  padding-left: 24px;
+  padding-right: 24px
+}
+
+.disable_ripple:hover{
+  background: #7BA0C0 !important;
 }
 
 .mat-expanded{
   background: #7BA0C0;
 }
 
-.verticalLine {
-  margin-left: 20px;
-  border-left: solid white;
-  border-radius: .5px;
-}
 .panel-container1 {
   margin: 0 auto;
   border-radius: 40px;
@@ -81,20 +74,67 @@
   background-color: white;
 }
 .panels-container {
-  margin: 0 96px 0 96px;
+  margin: 0 24px 0 24px;
   max-width: 1700px;
 }
+.section-header {
+  text-align: center;
+}
 
-.intro-content{
-  font-size: 20px;
-  color: white;
-}
-.sobriety-reqs{
-  text-align: left;
-}
-.contactViewer{
-  width: 1020px;
-}
-.contact-table td{
+.contact-content{
   padding:0 15px 0 15px;
+  font-size: 16px;
+}
+.contact-table{
+  padding:0 15px 0 15px;
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  .intro-para {
+    font-size: 20px;
+  }
+  .headline {
+    text-align: center;
+    color: white;
+  }
+  .intro-content{
+    font-size: 20px;
+    color: white;
+  }
+
+  .contactViewer{
+    width: 1020px;
+  }
+  .contact-table td{
+    padding:0 15px 0 15px;
+  }
+  .panels-container {
+    margin: 0 96px 0 96px;
+    max-width: 1700px;
+  }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .panels-container {
+    margin: 0 64px 0 64px;
+    max-width: 1700px;
+  }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .panels-container {
+    margin: 0 48px 0 48px;
+    max-width: 1700px;
+  }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  .panels-container {
+    margin: 0 24px 0 24px;
+    max-width: 1700px;
+  }
 }
