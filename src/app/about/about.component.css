@@ -5,81 +5,236 @@
 .about-location-view {
   background-color: var(--primary-dark);
   background-size: cover;
-  max-width: 1700px
 }
 .about-main-container {
   margin: 0 auto;
   background-color: var(--primary-option);
-  max-width: 1700px
+  max-width: 1920px;
+}
+.mission-para {
+  font-size: 18px;
 }
 .btn-round-lg{
   border-radius: 17px;
   color: white;
   background: var(--primary) !important;
 }
+
+.mission-statement-container{
+  margin-left: 12px;
+  margin-right: 12px
+}
+
 .mission-statement-header {
   -webkit-text-stroke-width: .5px;
-  margin-top: 16px
+  margin-top: 16px;
 }
-.mission-para {
-  font-size: 20px;
+
+.container-2 {
+  margin-top:48px;
+  margin-bottom:48px
 }
-.location-para {
-  font-size: 20px;
+.container-3{
+  margin-left: 64px;
+  margin-bottom: 48px
+}
+.spacer{
+  height: 24px;
+  position: relative;
+}
+.map-container{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+  margin-right: 12px;
+  margin-left: 12px
 }
 .location-content{
   color: white;
   float: left;
   text-align: left;
-  font-size: 20px;
+  font-size: 18px;
 }
-.container-2 {
-  height: 100%;
-}
-.map-container-2{
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
-}
-.map-container-2 iframe{
-  left:0;
-  top:0;
-  height:100%;
-  width:100%;
-  position:absolute;
-}
-
-.team-img-wrapper{
-  height: 150px;
-  margin: 0 auto;
-  width: 150px;
-  border-radius: 100px;
-  background-size: cover;
-  background-position: center center;
-}
-
-.gradient-spacer{
-  background: linear-gradient( var(--primary-option), var(--primary-dark));
-  height: 64px;
-}
-
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
+  .mission-statement-container{
+    margin-left: 12px;
+    margin-right: 12px
+  }
+  .mission-statement-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 19px;
+  }
+  .location-para {
+    font-size: 18px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+  }
+  .container-2 {
+    margin-top:48px;
+    margin-bottom:48px
+  }
+  .container-3{
+    margin-left: 96px;
+    margin-bottom: 48px
+  }
+  .spacer{
+    height: 24px;
+    position: relative;
+  }
+  .map-container{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+    margin-right: 12px;
+    margin-left: 12px
+  }
+  .map-container-2 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+  }
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
+
+  .mission-statement-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 19px;
+  }
+  .location-para {
+    font-size: 18px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+  }
+  .container-1 {
+    padding-left: 64px;
+  }
+  .container-2 {
+    height: 100%;
+  }
+  .container-3{
+    margin-left:-48px
+  }
+  .map-container-2{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+  }
+  .map-container-2 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
+  .mission-statement-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 19px;
+  }
+  .location-para {
+    font-size: 18px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+  }
+  .container-1 {
+    padding-left: 64px;
+  }
+  .container-2 {
+    height: 100%;
+  }
+  .container-3{
+    margin-left:-64px
+  }
+  .map-container-2{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+  }
+  .map-container-2 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+  }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {  }
+@media (min-width: 1200px) {
+  .mission-statement-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 20px;
+  }
+  .location-para {
+    font-size: 20px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 20px;
+  }
+  .container-1 {
+    padding-left: 64px;
+  }
+  .container-2 {
+    height: 100%;
+  }
+  .container-3{
+    margin-left:-64px
+  }
+  .map-container-2{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+  }
+  .map-container-2 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+  }
+}
 
 

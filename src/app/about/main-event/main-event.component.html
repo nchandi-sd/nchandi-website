@@ -3,9 +3,9 @@
     <h3 class="event-title text-white">Next Meeting:</h3>
     <div class="event text-white">
       <div *ngIf="event">
-        <h2>
+        <div class="event-content">
           <span>{{event.name}}</span>
-          <br>{{ event.date }}</h2>
+          <br>{{ event.date }}</div>
       </div>
     </div>
   </div>

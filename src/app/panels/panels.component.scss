@@ -1,30 +1,35 @@
-.panel-main-container {
-  //background-color: var(--primary-option);
-  //min-height: 100vh;
-  //background-size: cover;
-  //width: 100vw;
+.panel-main-view {
   background-color: #E5E5E5;
   width: 100%;
 }
+.panel-main-container {
+  background-color: var(--primary-option);
+  background-size: cover;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .intro-para {
   font-size: 20px;
 }
+
 .headline {
   text-align: center;
   color: white;
 }
+
 .btn-round-lg{
   float: left;
   border-radius: 17px;
   color: white;
   background: var(--primary) !important;
 }
+
 .intro-container{
   display:table-cell;
-  text-align:left;
-}
-
-.mat-expanded{
+  text-align: left;
+  padding-left: 64px;
+  padding-right: 64px
 }
 
 .disable_ripple:hover{
@@ -40,6 +45,11 @@
   width: 800px;
 }
 
+.mat-expansion-panel{
+  font-size: 20px;
+  font-family: "Segoe UI", serif;
+}
+
 .mat-expanded{
   background: #7BA0C0;
 }
@@ -49,11 +59,25 @@
   border-left: solid white;
   border-radius: .5px;
 }
-.panel-container {
+.panel-container1 {
   margin: 0 auto;
   border-radius: 40px;
-  padding: 30px 0;
-  max-width: 1200px;
+  max-width: 1180px;
+  padding-left: 24px;
+  background-color: white;
+}
+.panel-container2 {
+  margin: 0 auto;
+  border-radius: 40px;
+  max-width: 1324px;
+  padding-left: 24px;
+  background-color: white;
+}
+.panel-container3 {
+  margin: 0 auto;
+  border-radius: 40px;
+  max-width: 1120px;
+  padding-left: 24px;
   background-color: white;
 }
 .panels-container {
@@ -64,11 +88,13 @@
 .intro-content{
   font-size: 20px;
   color: white;
-  padding-left: 40px;
 }
 .sobriety-reqs{
   text-align: left;
 }
 .contactViewer{
   width: 1020px;
+}
+.contact-table td{
+  padding:0 15px 0 15px;
 }

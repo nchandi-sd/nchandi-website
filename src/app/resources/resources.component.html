@@ -33,7 +33,7 @@
               <div class="row">
                 <ul class="committeeReports">
                   <li class="report-li" *ngFor="let resource of generalResources">
-                    <strong><u><a class="genLink" href="{{resource.link}}" id="link">{{resource.name}}</a></u></strong>
+                    <strong><u><a class="genLink" href="{{resource.link}}" id="link2">{{resource.name}}</a></u></strong>
                   </li>
                 </ul>
               </div>
@@ -53,8 +53,8 @@
                 <ul class="committeeReports">
                   <li class="report-li" *ngFor="let report of firstTriReports">
                     <span class="report-title">{{report.monthDate}}</span>
-                    <strong><br><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
-                    <strong><br><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong>
+                    <strong><br><u><a href="{{report.finLink}}" id="link3">{{report.financialReport}}</a></u></strong>
+                    <strong><br><u><a href="{{report.minLink}}" id="link4">{{report.minutes}}</a></u></strong>
                   </li>
                 </ul>
               </div>
@@ -63,8 +63,8 @@
                 <ul class="committeeReports">
                   <li class="report-li" *ngFor="let report of secTriReports">
                     <span class="report-title">{{report.monthDate}}</span>
-                    <strong><br><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
-                    <strong><br><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong>
+                    <strong><br><u><a href="{{report.finLink}}" id="link5">{{report.financialReport}}</a></u></strong>
+                    <strong><br><u><a href="{{report.minLink}}" id="link6">{{report.minutes}}</a></u></strong>
                   </li>
                 </ul>
               </div>
@@ -73,8 +73,8 @@
                 <ul class="committeeReports">
                   <li class="report-li" *ngFor="let report of thirdTriReports">
                     <span class="report-title">{{report.monthDate}}</span>
-                    <strong><br><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
-                    <strong><br><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong>
+                    <strong><br><u><a href="{{report.finLink}}" id="link7">{{report.financialReport}}</a></u></strong>
+                    <strong><br><u><a href="{{report.minLink}}" id="link8">{{report.minutes}}</a></u></strong>
                   </li>
                 </ul>
               </div>
@@ -85,6 +85,148 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="literature-container">
+    <div class="form-sheet">
+      <div class="container">
+        <div class="row">
+          <div class="md-row4">
+            <h4 class="form-title">Literature Request Form</h4>
+            <div class="form-spacer"></div>
+            <div class="form-blurb">
+              Thank you for your service bringing the message of AA to those who cannot get to a meeting.
+              To order literature for the facility you are a panel member of, please complete the form below.
+              Once we receive your order, we will contact you with delivery and/or pick-up information.
+            </div>
+          </div>
+          <div class="md-row8">
+            <div class= form-container>
+              <form>
+                <div class="row">
+
+                  <label class="form-label" style="padding-left: 15px;">Name</label>
+
+                  <div class="col-12 col-lg-6">
+                    <input type="text" class="form-control" placeholder="First">
+                  </div>
+
+                  <div class="col-12 col-lg-6">
+                    <input type="text" class="form-control" placeholder="Last">
+                  </div>
+
+                  <div class="col-12 col-lg-6">
+                    <label class="form-label">H&I Commitments</label>
+                    <select class="browser-default custom-select">
+                      <option selected>Open this select menu</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+
+                  <div class="col-12 col-lg-6">
+                    <label class="form-label">Facility</label>
+                    <select class="browser-default custom-select">
+                      <option selected>Open this select menu</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+
+                  <div class="col-9">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" placeholder="Email">
+                  </div>
+
+                  <div class="col-4">
+                    <label class="form-label">Phone</label>
+
+                    <input type="phone" class="form-control" placeholder="Phone Number">
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label">Literature Request</label>
+                  </div>
+
+                  <div class="col-12 col-lg-4">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="check1" checked>
+                    <label class="custom-control-label" for="check1">Living Sober</label>
+                  </div>
+                  </div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check2" checked>
+                      <label class="custom-control-label" for="check2">12 Steps and 12 Traditions</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check3" checked>
+                      <label class="custom-control-label" for="check3">Alcoholic Anonymous <i>paperback</i></label>
+                    </div>
+                  </div>
+
+                  <div class="form-spacer"></div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check4" checked>
+                      <label class="custom-control-label" for="check4">Alcoholic Anonymous <i>pocket size</i></label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check5" checked>
+                      <label class="custom-control-label" for="check5">Grapevines</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check6" checked>
+                      <label class="custom-control-label" for="check6">La Vina</label>
+                    </div>
+                  </div>
+
+                  <div class="form-spacer"></div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check7" checked>
+                      <label class="custom-control-label" for="check7">Newcomer Packets</label>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-lg-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="check8" checked>
+                      <label class="custom-control-label" for="check8">Literature Rack w/ Pamphlets</label>
+                    </div>
+                  </div>
+
+                  <div class="form-spacer"></div>
+
+                  <label class="form-label" style="padding-left: 15px;">Quantity</label>
+                  <div class="col-12 col-lg-4">
+                    <input type="number" class="form-control" placeholder="Amount">
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+          <button class="btn submit-button align-self-end">Submit</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="spacer"></div>

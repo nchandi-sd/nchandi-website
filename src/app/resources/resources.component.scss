@@ -1,11 +1,12 @@
 .resources-main-container {
   background-color: var(--primary-option);
-  min-height: 100vh;
-  background-size: cover;
-  width: 100vw;
+  width: 100%;
+  margin: 0 auto;
 }
 .resources-container {
-  margin: 0 96px 0 96px;
+  margin: 0 64px 0 64px;
+  background-size: cover;
+min-height: 100vh;
 }
 .genLink{
   font-size: large;
@@ -34,4 +35,43 @@
 #link{
   color: lightgrey;
   -webkit-text-stroke-width: .3px;
+}
+.form-sheet{
+  margin: 0 auto;
+  border-radius: 40px;
+  padding: 30px 0;
+  max-width: 1200px;
+  background-color: white;
+}
+.form-title{
+  text-align: center;
+}
+.submit-button{
+  display: block;
+  padding: 10px;
+  background-color: var(--primary);
+  color: white;
+  margin: 0 auto;
+  width: 200px;
+  border-radius: 30px;
+}
+
+.form-label{
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--primary-dark);
+  width: 100%;
+}
+.form-label 2{
+  font-weight: bold;
+  color: var(--primary-dark);
+  width: 100%;
+}
+
+.form-spacer{
+  position: relative;
+  height: 32px;
+}
+.form-container{
+  padding:20px;
 }

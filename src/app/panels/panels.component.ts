@@ -27,7 +27,6 @@ export class PanelsComponent implements OnInit {
   inChampions: Array<FacilityChampion> = [];
   champs: MatTableDataSource<FacilityChampion>;
 
-
   constructor(private panelService: PanelService) {
     this.champs = new MatTableDataSource<FacilityChampion>();
   }
@@ -36,6 +35,8 @@ export class PanelsComponent implements OnInit {
     this.showOpenings();
     this.showCurrentPanels();
     this.showCorrectionalFacilities();
+    this.getTxContact();
+    this.getInContact();
   }
 
   // This is all information that should be stored in a backend- not frontend

@@ -27,3 +27,47 @@ li span {
   position: relative;
   left: 10px;
 }
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  li{
+    font-size:16px;
+    font-family: "Segoe UI", sans-serif;
+    -webkit-text-stroke-width: .5px;
+    color: white;
+    margin-top:1.5em;
+    padding-top: 10px;
+    line-height: 5px;
+
+  }
+  li span {
+    position: relative;
+    left: 10px;
+  }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  li{
+    font-size:20px;
+    font-family: "Segoe UI", sans-serif;
+    -webkit-text-stroke-width: .5px;
+    color: white;
+    margin-top:1.5em;
+    padding-top: 10px;
+    line-height: 5px;
+
+  }
+  li span {
+    position: relative;
+    left: 10px;
+  }
+}
