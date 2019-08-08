@@ -28,6 +28,7 @@ import { RegisterComponent } from './register/register.component';
 import {AuthGuard} from './core/auth.guard';
 import {UserService} from './core/user.service';
 import {AuthService} from './core/auth.service';
+import {UserResolver} from './user/user.resolver';
 
 
 
@@ -67,7 +68,8 @@ import {AuthService} from './core/auth.service';
     PanelService,
     AuthGuard,
     UserService,
-    AuthService
+    AuthService,
+    UserResolver
   ],
   bootstrap: [AppComponent]
 })
