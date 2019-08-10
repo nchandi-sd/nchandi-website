@@ -1,8 +1,11 @@
+.contact-main-view {
+  background-color: #E5E5E5;
+  width: 100%;
+}
 .contact-container{
     background-color: var(--primary-option);
-    min-height: 100vh;
-    background-size: cover;
-    width: 100vw;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 .headline{
     text-align: center;

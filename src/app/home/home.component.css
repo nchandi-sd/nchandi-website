@@ -1,9 +1,13 @@
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 .view {
+  background-color: #E5E5E5;
+  width: 100%;
+}
+.home-main-container {
   background: url("../../assets/background_picture.jpg")no-repeat center center;
-  background-size: cover;
-  height: 100vh;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 .container {
   margin-top: 120px;

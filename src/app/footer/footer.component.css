@@ -10,22 +10,91 @@
   padding-top: 10px;
 }
 
+.address{
+  text-align: right;
+  font-size: 12px;
+}
+
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
+  .footer-section {
+    background-color: #2B3440;
+    color: aliceblue;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .footer-container {
+    margin: 0px 50px 0 50px;
+    padding-top: 10px;
+  }
+
+  .address{
+    text-align: right;
+    font-size: 14px;
+  }
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
+  .footer-section {
+    background-color: #2B3440;
+    color: aliceblue;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .footer-container {
+    margin: 0px 50px 0 50px;
+    padding-top: 10px;
+  }
+  .address{
+    text-align: right;
+    font-size: 15px;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
+  .footer-section {
+    background-color: #2B3440;
+    color: aliceblue;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .footer-container {
+    margin: 0px 50px 0 50px;
+    padding-top: 10px;
+  }
+
+  .address{
+    text-align: right;
+    font-size: 16px;
+  }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {  }
+@media (min-width: 1200px) {
+  .footer-section {
+    background-color: #2B3440;
+    color: aliceblue;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .footer-container {
+    margin: 0px 50px 0 50px;
+    padding-top: 10px;
+  }
+
+  .address{
+    text-align: right;
+    font-size: 16px;
+  }
+}
 
 
