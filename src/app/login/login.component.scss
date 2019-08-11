@@ -1,29 +1,64 @@
-.header{
+.login-main-view {
+  background-color: var(--secondary);
+  background-size: cover;
+
+}
+
+.login-header{
   text-align: center;
   font-size: 30px;
+  padding-top: 25px;
+  margin-top: 60px;
   margin-bottom: 40px;
 }
 
+.login-container {
+color: white;
+padding-top: 50px;
+padding-left: 10%;
+padding-right: 50px;
+margin-bottom: 0%;
+justify-content: center;
+background-size: cover;
+min-height: 823px;
+}
+
 .row{
+  justify-content: center;
   margin-top: 10px;
 }
 
+.button {
+  justify-content: center;
+}
 .error{
   color: red;
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
+  .login-container {
+    min-height: 910px;
+  }
+
 }
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
+
+
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
+
 }
+
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
+
+
 }
+
+
