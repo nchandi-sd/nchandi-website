@@ -53,6 +53,9 @@
   text-align: left;
   font-size: 18px;
 }
+#first_name_error{
+  color: darkred;
+}
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 
