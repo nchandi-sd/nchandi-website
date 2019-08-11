@@ -7,32 +7,43 @@
         <div class="row">
           <div class="col-8">
             <div class= form-container>
-              <form>
+              <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
                 <div class="row">
-                  <label class="form-label" style="padding-left: 15px;">Name</label>
-                  <div class="col-12 col-lg-6">
 
-                    <input type="text" class="form-control" placeholder="First">
+                  <div class="col-12 col-lg-6">
+                    <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }"> <!-- First Name -->
+                      <label for="first_name" class="form-label">First Name</label>
+                      <input type="text" formControlName="first_name" class="form-control" id="first_name" name="first_name" placeholder="John">
+                      <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
+                    </div>
                   </div>
 
                   <div class="col-12 col-lg-6">
-                    <input type="text" class="form-control" placeholder="Last">
+                    <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }"> <!-- Last Name -->
+                      <label for="last_name" class="form-label">Last Name</label>
+                      <input type="text" formControlName="last_name" class="form-control" id="last_name" name="last_name" placeholder="Smith">
+                      <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
+                    </div>
                   </div>
 
                   <div class="col-12">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Email">
+                    <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }"> <!-- Email -->
+                      <label for="email" class="form-label">Email</label>
+                      <input type="text" formControlName="email" class="form-control" id="email" name="email" placeholder="your@email.com">
+                      <p *ngIf="invalidEmail()" id="email_error" class="help-block">Invalid email address.</p>
+                    </div>
                   </div>
+
                   <div class="col-12">
                     <label class="form-label">Phone</label>
-
                     <input type="phone" class="form-control" placeholder="Phone Number">
                   </div>
+
                   <div class="col-12">
                     <label class="form-label">Message</label>
                     <textarea class="form-control rounded-0 form-textarea" id="messageTextArea" rows="10"></textarea>
-
                   </div>
+
                 </div>
               </form>
             </div>
@@ -48,7 +59,14 @@
               sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
               mollit anim id est laborum.
             </div>
-            <button class="btn submit-button align-self-end">Submit</button>
+
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-group has-error"> <!-- Register Button -->
+                <button type="submit" class="btn submit-button align-self-end">Register</button>
+              </div>
+            </form>
+
           </div>
         </div>
       </div>

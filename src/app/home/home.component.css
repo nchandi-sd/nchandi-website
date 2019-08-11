@@ -1,24 +1,20 @@
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 .view {
-  background-color: #E5E5E5;
-  width: 100%;
-}
-.home-main-container {
-  background: url("../../assets/background_picture.jpg")no-repeat center center;
-  max-width: 1920px;
-  margin: 0 auto;
+  background: url("https://images.unsplash.com/photo-1474525130496-69e85f09f050")no-repeat center center;
+  background-size: cover;
+  height: 100vh;
 }
 .container {
   margin-top: 120px;
 }
 .text {
   font-family: Georgia;
-  font-size:x-large;
+  font-size:large;
 }
 .sub-text {
   font-family: Arial;
-  font-size: medium;
+  font-size: 14px;
 }
 .img-container{
   margin-top: 50px
@@ -35,12 +31,12 @@
     margin-top: 140px;
   }
   .text {
-    font-family: Georgia;
+    font-family: Georgia, serif;
     font-size:x-large;
   }
   .sub-text {
-    font-family: Arial;
-    font-size: medium;
+    font-family: Arial, serif;
+    font-size: large;
   }
   .img-container{
     margin-top: 50px
@@ -63,7 +59,7 @@
   }
   .sub-text {
     font-family: Arial;
-    font-size: medium;
+    font-size: large;
   }
 }
 
@@ -83,7 +79,7 @@
   }
   .sub-text {
     font-family: Arial;
-    font-size: medium;
+    font-size: x-large;
   }
   .img-container{
     margin-top: 50px
@@ -106,7 +102,7 @@
   }
   .sub-text {
     font-family: Arial;
-    font-size: medium;
+    font-size: x-large;
   }
   .img-container{
     margin-top: 50px
