@@ -27,6 +27,7 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthGuard} from './core/auth.guard';
 import {UserService} from './core/user.service';
+import {ContactService} from './contact/contact.service';
 import {AuthService} from './core/auth.service';
 import {UserResolver} from './user/user.resolver';
 
@@ -65,6 +66,7 @@ import {UserResolver} from './user/user.resolver';
   ],
   providers: [
     PanelService,
+    ContactService,
     AuthGuard,
     UserService,
     AuthService,

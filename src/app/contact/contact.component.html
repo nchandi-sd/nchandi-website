@@ -4,72 +4,86 @@
     <h1 class="headline">We'd love to hear from you!</h1>
     <div class="form-sheet">
       <div class="container">
-        <div class="row">
-          <div class="col-8">
-            <div class= form-container>
-              <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
+          <div class="row">
+            <div class="col-8">
+              <div class=form-container>
+
                 <div class="row">
 
                   <div class="col-12 col-lg-6">
-                    <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }"> <!-- First Name -->
+                    <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }">
+                      <!-- First Name -->
                       <label for="first_name" class="form-label">First Name</label>
-                      <input type="text" formControlName="first_name" class="form-control" id="first_name" name="first_name" placeholder="John">
+                      <input type="text" formControlName="first_name" class="form-control" id="first_name"
+                        name="first_name" placeholder="John" require>
                       <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
                     </div>
                   </div>
 
                   <div class="col-12 col-lg-6">
-                    <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }"> <!-- Last Name -->
+                    <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }">
+                      <!-- Last Name -->
                       <label for="last_name" class="form-label">Last Name</label>
-                      <input type="text" formControlName="last_name" class="form-control" id="last_name" name="last_name" placeholder="Smith">
+                      <input type="text" formControlName="last_name" class="form-control" id="last_name"
+                        name="last_name" placeholder="Smith">
                       <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
                     </div>
                   </div>
 
                   <div class="col-12">
-                    <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }"> <!-- Email -->
+                    <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }">
+                      <!-- Email -->
                       <label for="email" class="form-label">Email</label>
-                      <input type="text" formControlName="email" class="form-control" id="email" name="email" placeholder="your@email.com">
+                      <input type="text" formControlName="email" class="form-control" id="email" name="email"
+                        placeholder="your@email.com">
                       <p *ngIf="invalidEmail()" id="email_error" class="help-block">Invalid email address.</p>
                     </div>
                   </div>
 
                   <div class="col-12">
-                    <label class="form-label">Phone</label>
-                    <input type="phone" class="form-control" placeholder="Phone Number">
-                  </div>
+                      <div class="form-group">
+                        <!-- Email -->
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" formControlName="phone" class="form-control" id="phone" name="phone"
+                          placeholder="1234">
+                      </div>
+                    </div>
 
                   <div class="col-12">
                     <label class="form-label">Message</label>
-                    <textarea class="form-control rounded-0 form-textarea" id="messageTextArea" rows="10"></textarea>
+                    <textarea class="form-control rounded-0 form-textarea form-group"  id="message" name="message"
+                      rows="10"></textarea>
                   </div>
 
                 </div>
-              </form>
+              </div>
             </div>
-          </div>
-          <div class="col-4">
-            <h4 class="form-title">Contact Form</h4>
-            <div class="form-blurb">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-              ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-              in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
-            </div>
+            <div class="col-4">
+              <h4 class="form-title">Contact Form</h4>
+              <div class="form-blurb">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+              </div>
 
-            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
-              <div class="form-group has-error"> <!-- Register Button -->
+              <div class="form-group has-error">
+                <!-- Register Button -->
                 <button type="submit" class="btn submit-button align-self-end">Register</button>
               </div>
-            </form>
+
+
+            </div>
 
           </div>
-        </div>
+        </form>
       </div>
+
     </div>
     <div class="spacer"></div>
     <app-footer></app-footer>
