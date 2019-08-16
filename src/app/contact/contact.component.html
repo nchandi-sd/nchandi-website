@@ -6,11 +6,8 @@
       <div class="container">
         <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
           <div class="row">
-            <div class="col-8">
-              <div class=form-container>
-
+            <div class="col-12 col-md-8 order-2 order-md-1">
                 <div class="row">
-
                   <div class="col-12 col-lg-6">
                     <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }">
                       <!-- First Name -->
@@ -55,11 +52,17 @@
                     <textarea class="form-control rounded-0 form-textarea form-group"  id="message" name="message"
                       rows="10"></textarea>
                   </div>
+                  <div class="col-12">
+                  <div class="form-group has-error">
+                      <!-- Register Button -->
+                      <button type="submit" class="btn submit-button mx-auto">Register</button>
+                    </div>
+                  </div>
 
                 </div>
-              </div>
+              
             </div>
-            <div class="col-4">
+            <div class="col-12 col-md-4 order-1 order-md-2">
               <h4 class="form-title">Contact Form</h4>
               <div class="form-blurb">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -70,14 +73,6 @@
                 sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum.
               </div>
-
-
-              <div class="form-group has-error">
-                <!-- Register Button -->
-                <button type="submit" class="btn submit-button align-self-end">Register</button>
-              </div>
-
-
             </div>
 
           </div>
