@@ -2,12 +2,20 @@
 <div class="verticalLine">
 <ul class="events">
   <li *ngFor="let event of events" (click)="onClick(event)">
-    <svg-icon src="icon" [svgStyle]="{ 'margin-right':5,
-                                       'margin-top':30,
-                                       'margin-bottom':-5,
-                                       'width.px': 18}"></svg-icon>
-    <span>{{event.name}}</span>
-    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{event.date}}
+
+    <div class="event-wrapper">
+        <img src="../../../assets/bullet.svg" class="svg-icon">
+      <div class="event-content-container">
+      <div class="event-content">
+          {{event.name}}
+      </div>
+      <div class="event-content">
+          {{event.date}}
+      </div>
+    </div>
+    </div>
+    
+   
   </li>
 </ul>
 </div>
