@@ -15,7 +15,7 @@
                 <div class="row">
                   <ul class="committeeReports">
                     <li class="report-li" *ngFor="let resource of panelMaterials">
-                      <strong><u><a class="genLink" href="{{resource.link}}" id="link">{{resource.name}}</a></u></strong>
+                      <strong><u><a class="genLink" href="{{resource.link}}" id="link" target="_blank">{{resource.name}}</a></u></strong>
                     </li>
                   </ul>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="row">
                   <ul class="committeeReports">
                     <li class="report-li" *ngFor="let resource of generalResources">
-                      <strong><u><a class="genLink" href="{{resource.link}}" id="link2">{{resource.name}}</a></u></strong>
+                      <strong><u><a class="genLink" href="{{resource.link}}" id="link2" target="_blank">{{resource.name}}</a></u></strong>
                     </li>
                   </ul>
                 </div>
@@ -63,8 +63,8 @@
                   <ul class="committeeReports">
                     <li class="report-li" *ngFor="let report of secTriReports">
                       <span class="report-title">{{report.monthDate}}</span>
-                      <strong><br><u><a href="{{report.finLink}}" id="link5">{{report.financialReport}}</a></u></strong>
-                      <strong><br><u><a href="{{report.minLink}}" id="link6">{{report.minutes}}</a></u></strong>
+                      <strong><br><u><a href="{{report.finLink}}" id="link5" target="_blank">{{report.financialReport}}</a></u></strong>
+                      <strong><br><u><a href="{{report.minLink}}" id="link6" target="_blank">{{report.minutes}}</a></u></strong>
                     </li>
                   </ul>
                 </div>
@@ -73,8 +73,8 @@
                   <ul class="committeeReports">
                     <li class="report-li" *ngFor="let report of thirdTriReports">
                       <span class="report-title">{{report.monthDate}}</span>
-                      <strong><br><u><a href="{{report.finLink}}" id="link7">{{report.financialReport}}</a></u></strong>
-                      <strong><br><u><a href="{{report.minLink}}" id="link8">{{report.minutes}}</a></u></strong>
+                      <strong><br><u><a href="{{report.finLink}}" id="link7" target="_blank">{{report.financialReport}}</a></u></strong>
+                      <strong><br><u><a href="{{report.minLink}}" id="link8" target="_blank">{{report.minutes}}</a></u></strong>
                     </li>
                   </ul>
                 </div>
