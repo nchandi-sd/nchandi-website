@@ -13,7 +13,7 @@
                       <!-- First Name -->
                       <label for="first_name" class="form-label">First Name</label>
                       <input type="text" formControlName="first_name" class="form-control" id="first_name"
-                        name="first_name" placeholder="John" require>
+                        name="first_name" placeholder="First Name" require>
                       <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
                     </div>
                   </div>
@@ -23,7 +23,7 @@
                       <!-- Last Name -->
                       <label for="last_name" class="form-label">Last Name</label>
                       <input type="text" formControlName="last_name" class="form-control" id="last_name"
-                        name="last_name" placeholder="Smith">
+                        name="last_name" placeholder="Last Name">
                       <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
                     </div>
                   </div>
@@ -39,21 +39,25 @@
                   </div>
 
                   <div class="col-12">
-                      <div class="form-group">
+                      <div class="form-group" [ngClass]="{ 'has-error': invalidPhone() }">
                         <!-- Email -->
-                        <label for="phone" class="form-label">Phone</label>
+                        <label for="phone" class="form-label" >Phone</label>
                         <input type="text" formControlName="phone" class="form-control" id="phone" name="phone"
-                          placeholder="1234">
+                          placeholder="Phone">
+                          <p *ngIf="invalidPhone()" id="phone_error" class="help-block">Invalid phone number</p>
                       </div>
                     </div>
 
                   <div class="col-12">
+                      <div class="form-group" [ngClass]="{ 'has-error': invalidMessage() }">
                     <label class="form-label">Message</label>
                     <textarea class="form-control rounded-0 form-textarea form-group"  id="message" name="message"
                       rows="10"></textarea>
+                      <p *ngIf="invalidMessage()" id="message_error" class="help-block">Please enter a message...</p>
+                      </div>
                   </div>
                   <div class="col-12">
-                  <div class="form-group has-error">
+                  <div class="form-group">
                       <!-- Register Button -->
                       <button type="submit" class="btn submit-button mx-auto">Register</button>
                     </div>

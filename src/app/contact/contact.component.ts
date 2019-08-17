@@ -31,23 +31,23 @@ export class ContactComponent implements OnInit {
     return (this.submitted && this.userForm.controls.email.errors != null);
   }
 
-  invalidZipcode() {
-    return (this.submitted && this.userForm.controls.zipcode.errors != null);
+  invalidPhone() {
+    return (this.submitted && this.userForm.controls.phone.errors != null);
   }
 
-  invalidPassword() {
-    return (this.submitted && this.userForm.controls.password.errors != null);
+  invalidMessage() {
+    return (this.submitted && this.userForm.controls.message.errors != null);
   }
+
+ 
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      // zipcode: ['', [Validators.required, Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')]],
-      // password: ['', [Validators.required, Validators.minLength(5), Validators.pattern
-      // ('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
+      phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
+      message: ['', Validators.required]
     });
   }
 
