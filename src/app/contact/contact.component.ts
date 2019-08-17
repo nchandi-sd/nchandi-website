@@ -51,18 +51,18 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  onSubmit(form:NgForm) {
+  onSubmit(form: NgForm) {
     this.submitted = true;
     if (this.userForm.invalid === true) {
       return;
     } else {
       this.registered = true;
     }
-    this.postContactForm(form.value)
+    this.postContactForm(form.value);
   }
 
   postContactForm(form: NgForm) {
-    console.log(form)
+    console.log(form);
     // this.contactService.postContactForm(this.contact)
     //   .subscribe(() => console.log("yay done"))
   }
