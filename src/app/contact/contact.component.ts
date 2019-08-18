@@ -42,12 +42,13 @@ export class ContactComponent implements OnInit {
  
 
   ngOnInit() {
+    this.contact = new Contact()
     this.userForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
-      message: ['', Validators.required]
+      message: ['',[Validators.required]]
     });
   }
 
@@ -58,12 +59,33 @@ export class ContactComponent implements OnInit {
     } else {
       this.registered = true;
     }
-    this.postContactForm(form.value);
+    this.contact.email = this.userForm.controls.email.value
+    this.contact.firstName = this.userForm.controls.first_name.value
+    this.contact.lastName = this.userForm.controls.last_name.value
+    this.contact.phone = this.userForm.controls.phone.value
+    this.contact.message = this.userForm.controls.message.value
+
+    this.postContactForm(form.value)
   }
 
   postContactForm(form: NgForm) {
-    console.log(form);
-    // this.contactService.postContactForm(this.contact)
-    //   .subscribe(() => console.log("yay done"))
+    console.log("contact: "+ this.contact)
+
+    // let contactUrl = 'https://script.google.com/macros/s/AKfycbzezNitOBOTReBZ7kvtV8fzTEiW-bA8mGOnJDQl7orAr65gvRd8/exec';
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', contactUrl);
+    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // xhr.onload = function() {
+
+    //   console.log("yay subscribe called")
+    //     if (xhr.status === 200) {
+    //       console.log("got 200");
+    //         //var userInfo = JSON.parse(xhr.responseText);
+    //     }
+    // };
+    // xhr.send(JSON.stringify(form));
+
+     this.contactService.postContactForm(this.contact)
+       .subscribe(() => console.log("yay subscribe called"))
   }
 }

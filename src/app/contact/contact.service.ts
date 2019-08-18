@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 import {Observable, throwError} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import {Panels} from '../model/Panels';
@@ -12,14 +12,20 @@ import { Contact } from '../model/Contact';
 export class ContactService {
   constructor(private https: HttpClient) {}
 
-  contactUrl = 'https://spreadsheets.google.com/feeds/list/1Qx0ckOsye46DYvFed8zA02I0mZSb-cvNOlAOuwRq4ZQ/1/public/full?alt=json';
+  contactUrl = 'https://script.google.com/macros/s/AKfycbzezNitOBOTReBZ7kvtV8fzTEiW-bA8mGOnJDQl7orAr65gvRd8/exec';
 
   postContactForm(contact: Contact): Observable<Contact> {
-    return this.https.post<Contact>(this.contactUrl, contact);
-  }
+
+    console.log("entered ContactForm.postConactForm")
+    let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'})
+    let options = {headers: headers}
+    return this.https.post<Contact>(this.contactUrl, JSON.stringify(contact), options)
+    };
+  
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
+      console.log("entered ContactForm.handleError ERROR")
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
