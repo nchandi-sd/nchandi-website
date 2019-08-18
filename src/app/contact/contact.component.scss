@@ -41,6 +41,11 @@
 .form-container{
     padding:20px;
 }
+.help-block{
+    position: absolute;
+    color:red;
+    font-weight: bold;
+}
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (max-width: 1200px) {
 }
