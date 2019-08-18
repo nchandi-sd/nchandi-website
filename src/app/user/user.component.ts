@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
 import {HttpClient} from '@angular/common/http';
+import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-user',
@@ -19,6 +20,8 @@ export class UserComponent implements OnInit {
   fileData: File = null;
   public name: any = 'Choose file';
   public str: any;
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
 
   constructor(
     public userService: UserService,
@@ -26,7 +29,8 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private afStorage: AngularFireStorage
   ) {
 
   }
@@ -56,14 +60,8 @@ export class UserComponent implements OnInit {
       });
   }
 
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('file', this.fileData);
-    this.http.post('url/to/your/api', formData)
-      .subscribe(res => {
-        console.log(res);
-        alert('SUCCESS !!');
-      });
+  onSubmit(event) {
+    // this.upload(event);
   }
 
   fileProgress(fileInput: any) {
@@ -75,7 +73,16 @@ export class UserComponent implements OnInit {
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.afStorage.ref(id);
+    this.task = this.ref.put(this.fileData);
   }
+
+  // upload(event) {
+  //   const id = Math.random().toString(36).substring(2);
+  //   this.ref = this.afStorage.ref(id);
+  //   this.task = this.ref.put(event.target.files[0]);
+  // }
 }
 
 

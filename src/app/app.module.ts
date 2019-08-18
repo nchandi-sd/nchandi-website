@@ -30,6 +30,7 @@ import {UserService} from './core/user.service';
 import {ContactService} from './contact/contact.service';
 import {AuthService} from './core/auth.service';
 import {UserResolver} from './user/user.resolver';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {UserResolver} from './user/user.resolver';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireStorageModule
   ],
   providers: [
     PanelService,

@@ -35,7 +35,7 @@
 
           <div class="spacer"></div>
 
-          <form (ngSubmit)="onSubmit()">
+          <form (ngSubmit)="onSubmit($event)">
             <div class="form-group">
               <div class="add-resource-title text-white">Upload Your Document</div>
               <div class="custom-file">
@@ -48,6 +48,10 @@
               <div class="button-container">
                 <button type="submit" class="btn btn-primary btn-round-lg btn-lg flex-center">Submit</button>
               </div>
+            </div>
+            <div class="progress">
+<!--              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"-->
+<!--                   [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>-->
             </div>
           </form>
 

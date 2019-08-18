@@ -10,7 +10,7 @@ export const environment = {
     authDomain: 'nchandi-website.firebaseapp.com',
     databaseURL: 'https://nchandi-website.firebaseio.com',
     projectId: 'nchandi-website',
-    storageBucket: '',
+    storageBucket: 'nchandi-website.appspot.com',
     messagingSenderId: '71952078526',
     appId: '1:71952078526:web:b833c466158728f1'
     }
