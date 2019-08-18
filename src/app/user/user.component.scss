@@ -1,13 +1,24 @@
-.header{
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 40px;
+.user-main-view {
+  background-color: #E5E5E5;
+  width: 100%;
 }
-
-.row{
-  margin-top: 10px;
+.user-container{
+  background-color: var(--primary-option);
+  max-width: 1920px;
+  margin: 0 auto;
 }
-
-.image {
-  width: 100%
+.add-resource-title {
+  font-weight: normal;
+  font-size: 24px;
+  font-family: "Segoe UI", sans-serif;
+  -webkit-text-stroke-width: .5px
+}
+.custom-control-label{
+  color: white;
+  font-size: 16px
+}
+.btn-round-lg{
+  border-radius: 17px;
+  color: white;
+  background: var(--primary) !important;
 }
