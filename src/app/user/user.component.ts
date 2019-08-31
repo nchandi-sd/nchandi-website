@@ -135,6 +135,10 @@ export class UserComponent implements OnInit {
   titleChangeHandler(event: any) {
     this.title = event.target.value;
   }
+
+  isDisabled(event: any) {
+    console.log(event.toString());
+  }
 }
 
 
