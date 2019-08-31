@@ -1,7 +1,5 @@
 .login-main-view {
   background-color: var(--secondary);
-  
-
 }
 
 .login-header{
@@ -36,6 +34,13 @@
 
 .button {
   justify-content: center;
+  display: block;
+  padding: 10px;
+  background: var(--secondary-option);
+  color: white;
+  margin: 0 auto;
+  width: 200px;
+  border-radius: 30px;
 }
 .error{
   color: red;
