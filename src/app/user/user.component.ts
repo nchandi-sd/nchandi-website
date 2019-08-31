@@ -22,6 +22,27 @@ export class UserComponent implements OnInit {
   public str: any;
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
+  basePath: string;
+  resource: string;
+  resources: any = [
+    'Panel Material',
+    'General Resource'
+  ];
+  months: any = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+
 
   constructor(
     public userService: UserService,
@@ -37,12 +58,12 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(routeData => {
-      let data = routeData['data'];
+      const data = routeData['data'];
       if (data) {
         this.user = data;
         this.createForm(this.user.name);
       }
-    })
+    });
   }
 
   createForm(name) {
@@ -60,8 +81,15 @@ export class UserComponent implements OnInit {
       });
   }
 
+  setReportMonth() {
+  }
+
   onSubmit(event) {
-    // this.upload(event);
+    console.log('Submitted ' +  this.resource.toString() + ' file for ' + this.basePath.toString());
+    // this.basePath =
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.afStorage.ref(id);
+    this.task = this.ref.child(this.resource.toString() + ' ' + this.basePath.toString()).put(this.fileData);
   }
 
   fileProgress(fileInput: any) {
@@ -73,9 +101,9 @@ export class UserComponent implements OnInit {
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
-    const id = Math.random().toString(36).substring(2);
-    this.ref = this.afStorage.ref(id);
-    this.task = this.ref.put(this.fileData);
+    // const id = Math.random().toString(36).substring(2);
+    // this.ref = this.afStorage.ref(id);
+    // this.task = this.ref.child(`${this.basePath}/${upload.file.name}`).put(this.fileData);
   }
 
   // upload(event) {
@@ -83,6 +111,14 @@ export class UserComponent implements OnInit {
   //   this.ref = this.afStorage.ref(id);
   //   this.task = this.ref.put(event.target.files[0]);
   // }
+
+  monthChangeHandler(event: any) {
+    this.basePath = event.target.value;
+  }
+
+  resourceChangeHandler(event: any) {
+    this.resource = event.target.value;
+  }
 }
 
 

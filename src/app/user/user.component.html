@@ -9,28 +9,38 @@
           <div class="add-resource-title text-white">
             What type of resource would you like to add?
           </div>
-          <div class="row">
+          <div class ="container">
 
-            <!-- Default inline 1-->
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
-              <label class="custom-control-label" for="defaultInline1">Panel Material</label>
+            <div class="custom-control custom-radio custom-control-inline" *ngFor="let resource of resources">
+              <!-- create a radio button-->
+              <input
+                type="radio"
+                name="resourceType"
+                class="custom-control-input"
+                value="{{resource}}"
+                id="{{resource}}"
+                (change)="resourceChangeHandler($event)">
+              <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
             </div>
 
-            <!-- Default inline 2-->
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
-              <label class="custom-control-label" for="defaultInline2">General Resources</label>
-            </div>
-
-            <div class="spacer"></div>
-            <!-- End row -->
           </div>
 
-          <div class="add-resource-title text-white">Resource Name</div>
+            <div class="spacer"></div>
+
+          <div class="add-resource-title text-white">Current Month</div>
           <div class ="container">
-            <input type="text" id="resource_name"
-                   name="resource_name" placeholder="Name">
+
+            <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
+              <!-- create a radio button-->
+                <input
+                  type="radio"
+                  name="monthOfYear"
+                  class="custom-control-input"
+                  value="{{month}}"
+                  id="{{month}}"
+                  (change)="monthChangeHandler($event)">
+              <label class="custom-control-label" for="{{month}}">{{month}}</label>
+            </div>
           </div>
 
           <div class="spacer"></div>
@@ -38,9 +48,14 @@
           <form (ngSubmit)="onSubmit($event)">
             <div class="form-group">
               <div class="add-resource-title text-white">Upload Your Document</div>
+              <p class="text-white"> Please upload the .pdf report here </p>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                       aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)" >
+                <input type="file"
+                       accept="application/pdf"
+                       class="custom-file-input"
+                       id="inputGroupFile01"
+                       aria-describedby="inputGroupFileAddon01"
+                       (change)="onFileChange($event)" >
                 <label class="custom-file-label" for="inputGroupFile01" >{{name}}</label>
               </div>
             </div>
