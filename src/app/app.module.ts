@@ -31,6 +31,7 @@ import {ContactService} from './contact/contact.service';
 import {AuthService} from './core/auth.service';
 import {UserResolver} from './user/user.resolver';
 import {AngularFireStorageModule} from '@angular/fire/storage';
+import { ResourceListComponent } from './resource-list/resource-list.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
     MainEventComponent,
     FooterComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResourceListComponent,
   ],
   imports: [
     AngularSvgIconModule,

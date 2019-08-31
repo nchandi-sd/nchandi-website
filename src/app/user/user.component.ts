@@ -13,6 +13,7 @@ import {GENERAL_RESOURCES} from '../model/General-Resources';
 import {Resource} from '../model/Resource';
 import {PANEL_MATERIALS} from '../model/Panel-Materials';
 
+
 @Component({
   selector: 'app-user',
   templateUrl: 'user.component.html',
@@ -29,7 +30,6 @@ export class UserComponent implements OnInit {
   task: AngularFireUploadTask;
   basePath: string;
   resource: string;
-  testString: string;
   report: string;
   title: string;
   resources: any = [
@@ -132,7 +132,6 @@ export class UserComponent implements OnInit {
 
   resourceChangeHandler(event: any) {
     this.resource = event.target.value;
-
     switch (this.resource){
       case this.resources[0] : {
           //panel material selected

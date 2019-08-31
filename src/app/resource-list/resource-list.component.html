@@ -1,0 +1,34 @@
+<div *ngIf="selectedResouce == availableResources[0]" class="panel-material-container">
+  <h2>Current Panel Material</h2>
+ 
+  <div *ngFor="let item of panelMaterials">
+    <button class="btn-delete">DELETE</button>
+    {{item.name}}
+  </div>
+ 
+
+</div>
+<div *ngIf="selectedResouce == availableResources[1]" class="general-resouces-container">
+    <h2>Current General Resouces</h2>
+ 
+    <div *ngFor="let item of generalResources">
+      <button class="btn-delete">DELETE</button>
+      {{item.name}}
+    </div>
+</div>
+<div *ngIf="selectedResouce == availableResources[2]" class="monthly-reports-container">
+    <h2>Current Monthly Reports</h2>
+ 
+    <div *ngFor="let item of monthlyReports">
+      <div class="month-header">{{item.monthDate}}</div>
+
+      <button class="btn-delete">DELETE</button>
+      {{item.financialReport}}
+      <br>
+
+      <button class="btn-delete">DELETE</button>
+      {{item.minutes}}
+      <br><br>
+    </div>
+
+</div>
