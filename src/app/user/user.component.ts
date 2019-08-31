@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
 import {HttpClient} from '@angular/common/http';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
+import {Observable} from 'rxjs';
+import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-user',
@@ -25,6 +27,7 @@ export class UserComponent implements OnInit {
   basePath: string;
   resource: string;
   report: string;
+  title: string;
   resources: any = [
     'Panel Material',
     'General Resource',
@@ -48,6 +51,7 @@ export class UserComponent implements OnInit {
     'November',
     'December'
   ];
+  uploadProgress: Observable<number>;
 
   constructor(
     public userService: UserService,
@@ -57,9 +61,7 @@ export class UserComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private afStorage: AngularFireStorage
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(routeData => {
@@ -87,11 +89,24 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(event) {
-    console.log('Submitted ' +  this.resource.toString() + ' file for ' + this.basePath.toString());
-    // this.basePath =
     const id = Math.random().toString(36).substring(2);
     this.ref = this.afStorage.ref(id);
-    this.task = this.ref.child(this.resource.toString() + ' ' + this.basePath.toString()).put(this.fileData);
+    if (this.resource.toString() === this.resources[0]) {
+      console.log('Panel Material selected');
+      // Monthly reports and current month should be disabled
+      this.task = this.ref.child(this.title.toString()).put(this.fileData);
+      this.uploadProgress = this.task.percentageChanges();
+      console.log(this.uploadProgress);
+    } else if (this.resource.toString() === this.resources[1]) {
+      console.log('General Resource selected');
+      // Monthly reports and current month should be disabled
+      this.task = this.ref.child(this.title.toString()).put(this.fileData);
+      this.uploadProgress = this.task.percentageChanges();
+    } else {
+      console.log('Monthly report selected');
+      this.task = this.ref.child(this.resource.toString() + ' ' + this.basePath.toString()).put(this.fileData);
+      this.uploadProgress = this.task.percentageChanges();
+    }
   }
 
   fileProgress(fileInput: any) {
@@ -115,6 +130,10 @@ export class UserComponent implements OnInit {
 
   reportChangeHandler(event: any) {
     this.report = event.target.value;
+  }
+
+  titleChangeHandler(event: any) {
+    this.title = event.target.value;
   }
 }
 

@@ -12,7 +12,6 @@
           <div class ="container">
 
             <div class="custom-control custom-radio custom-control-inline" *ngFor="let resource of resources">
-              <!-- create a radio button-->
               <input
                 type="radio"
                 name="resourceType"
@@ -22,7 +21,19 @@
                 (change)="resourceChangeHandler($event)">
               <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
             </div>
+          </div>
 
+          <div class="spacer"></div>
+
+          <div class="add-resource-title text-white">Resource Title</div>
+          <div class ="container">
+
+            <div class="col-12 col-lg-6">
+              <input class="form-control"
+                     type="text"
+                     placeholder="Title"
+                     (change)="titleChangeHandler($event)">
+            </div>
           </div>
 
           <div class="spacer"></div>
@@ -31,7 +42,6 @@
           <div class ="container">
 
             <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
-              <!-- create a radio button-->
               <input
                 type="radio"
                 name="reportType"
@@ -48,45 +58,51 @@
           <div class="add-resource-title text-white">Current Month</div>
           <div class ="container">
 
-            <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
-              <!-- create a radio button-->
-              <input
-                type="radio"
-                name="monthOfYear"
-                class="custom-control-input"
-                value="{{month}}"
-                id="{{month}}"
-                (change)="monthChangeHandler($event)">
-              <label class="custom-control-label" for="{{month}}">{{month}}</label>
+            <div class="col-12 col-lg-9">
+              <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
+                <input
+                  type="radio"
+                  name="monthOfYear"
+                  class="custom-control-input"
+                  value="{{month}}"
+                  id="{{month}}"
+                  (change)="monthChangeHandler($event)">
+                <label class="custom-control-label" for="{{month}}">{{month}}</label>
+              </div>
             </div>
           </div>
 
           <div class="spacer"></div>
 
-          <form (ngSubmit)="onSubmit($event)">
-            <div class="form-group">
-              <div class="add-resource-title text-white">Upload Your Document</div>
-              <p class="text-white"> Please upload the .pdf report here </p>
-              <div class="custom-file">
-                <input type="file"
-                       accept="application/pdf"
-                       class="custom-file-input"
-                       id="inputGroupFile01"
-                       aria-describedby="inputGroupFileAddon01"
-                       (change)="onFileChange($event)" >
-                <label class="custom-file-label" for="inputGroupFile01" >{{name}}</label>
+          <div class="add-resource-title text-white">Upload Your Document</div>
+          <div class="col-12 col-lg-9">
+            <form (ngSubmit)="onSubmit($event)">
+              <div class="form-group">
+                <p class="text-white"> Please upload the .pdf report here </p>
+                <div class="custom-file">
+                  <input type="file"
+                         accept="application/pdf"
+                         class="custom-file-input"
+                         id="inputGroupFile01"
+                         aria-describedby="inputGroupFileAddon01"
+                         (change)="onFileChange($event)" >
+                  <label class="custom-file-label" for="inputGroupFile01" >{{name}}</label>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="button-container">
-                <button type="submit" class="btn btn-primary btn-round-lg btn-lg flex-center">Submit</button>
+              <div class="form-group">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+                       [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="button-container flex-center">
+                  <button type="submit" class="submit-button btn btn-block button">Submit</button>
+                </div>
               </div>
-            </div>
-            <div class="progress">
-              <!--              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"-->
-              <!--                   [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>-->
-            </div>
-          </form>
+            </form>
+          </div>
 
           <div class="spacer"></div>
 

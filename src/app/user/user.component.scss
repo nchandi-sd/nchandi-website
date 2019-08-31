@@ -17,8 +17,12 @@
   color: white;
   font-size: 16px
 }
-.btn-round-lg{
-  border-radius: 17px;
+.submit-button{
+  display: block;
+  padding: 10px;
+  background-color: var(--primary);
   color: white;
-  background: var(--primary) !important;
+  margin: 0 auto;
+  width: 400px;
+  border-radius: 17px;
 }
