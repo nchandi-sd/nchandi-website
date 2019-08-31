@@ -24,9 +24,15 @@ export class UserComponent implements OnInit {
   task: AngularFireUploadTask;
   basePath: string;
   resource: string;
+  report: string;
   resources: any = [
     'Panel Material',
-    'General Resource'
+    'General Resource',
+    'Monthly Report'
+  ];
+  reports: any = [
+    'Financial Report',
+    'Business Committee'
   ];
   months: any = [
     'January',
@@ -42,7 +48,6 @@ export class UserComponent implements OnInit {
     'November',
     'December'
   ];
-
 
   constructor(
     public userService: UserService,
@@ -81,9 +86,6 @@ export class UserComponent implements OnInit {
       });
   }
 
-  setReportMonth() {
-  }
-
   onSubmit(event) {
     console.log('Submitted ' +  this.resource.toString() + ' file for ' + this.basePath.toString());
     // this.basePath =
@@ -101,16 +103,7 @@ export class UserComponent implements OnInit {
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
-    // const id = Math.random().toString(36).substring(2);
-    // this.ref = this.afStorage.ref(id);
-    // this.task = this.ref.child(`${this.basePath}/${upload.file.name}`).put(this.fileData);
   }
-
-  // upload(event) {
-  //   const id = Math.random().toString(36).substring(2);
-  //   this.ref = this.afStorage.ref(id);
-  //   this.task = this.ref.put(event.target.files[0]);
-  // }
 
   monthChangeHandler(event: any) {
     this.basePath = event.target.value;
@@ -118,6 +111,10 @@ export class UserComponent implements OnInit {
 
   resourceChangeHandler(event: any) {
     this.resource = event.target.value;
+  }
+
+  reportChangeHandler(event: any) {
+    this.report = event.target.value;
   }
 }
 

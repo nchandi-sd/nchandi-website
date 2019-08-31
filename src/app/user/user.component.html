@@ -25,20 +25,38 @@
 
           </div>
 
-            <div class="spacer"></div>
+          <div class="spacer"></div>
+
+          <div class="add-resource-title text-white">Monthly Reports</div>
+          <div class ="container">
+
+            <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
+              <!-- create a radio button-->
+              <input
+                type="radio"
+                name="reportType"
+                class="custom-control-input"
+                value="{{report}}"
+                id="{{report}}"
+                (change)="reportChangeHandler($event)">
+              <label class="custom-control-label" for="{{report}}">{{report}}</label>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
 
           <div class="add-resource-title text-white">Current Month</div>
           <div class ="container">
 
             <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
               <!-- create a radio button-->
-                <input
-                  type="radio"
-                  name="monthOfYear"
-                  class="custom-control-input"
-                  value="{{month}}"
-                  id="{{month}}"
-                  (change)="monthChangeHandler($event)">
+              <input
+                type="radio"
+                name="monthOfYear"
+                class="custom-control-input"
+                value="{{month}}"
+                id="{{month}}"
+                (change)="monthChangeHandler($event)">
               <label class="custom-control-label" for="{{month}}">{{month}}</label>
             </div>
           </div>
@@ -65,8 +83,8 @@
               </div>
             </div>
             <div class="progress">
-<!--              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"-->
-<!--                   [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>-->
+              <!--              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"-->
+              <!--                   [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>-->
             </div>
           </form>
 
