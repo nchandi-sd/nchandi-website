@@ -18,7 +18,8 @@
                 class="custom-control-input"
                 value="{{resource}}"
                 id="{{resource}}"
-                (change)="resourceChangeHandler($event)">
+                (change)="resourceChangeHandler($event)"
+                [checked]="idx === 0">
               <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
             </div>
           </div>
@@ -112,7 +113,7 @@
 
       <div class="col-md-6">
         <div class="container">
-          Column 2
+          {{testString}}
         </div>
       </div>
     </div>
