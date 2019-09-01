@@ -20,7 +20,7 @@ export class ResourceListComponent implements OnInit {
   panelMaterials: Array<Resource> = PANEL_MATERIALS
   monthlyReports: Array<CommitteeReport> = MONTHLY_REPORTS
 
-  constructor() { 
+  constructor() {
 
   }
 
@@ -30,32 +30,10 @@ export class ResourceListComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
-        if (property === 'selectedResouce') {
-          this.resourceChanged()
-        } 
-    }
-}
-
-  resourceChanged(){
-    
-      switch (this.selectedResouce){
-        case this.availableResources[0] : {
-            //panel material selected
-            
-            break
-        }
-        case this.availableResources[1] : {
-            //General resources elected
-  
-            break
-        }
-        case this.availableResources[2] : {
-          //monthly report selected
-  
-          break
+      if (property === 'selectedResouce') {
+        
       }
     }
-    
   }
 
 }
