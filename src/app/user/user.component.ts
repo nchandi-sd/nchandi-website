@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {GENERAL_RESOURCES} from '../model/General-Resources';
 import {Resource} from '../model/Resource';
-import {PANEL_MATERIALS} from '../model/Panel-Materials';
+import {finalize} from 'rxjs/operators';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class UserComponent implements OnInit {
   ];
   reports: any = [
     'Financial Report',
-    'Business Committee'
+    'Committee Minutes'
   ];
   months: any = [
     'January',
@@ -56,8 +56,10 @@ export class UserComponent implements OnInit {
     'December'
   ];
   uploadProgress: Observable<number>;
+  downloadUrl: any;
+  uploadState: Subscription;
 
-  panelMaterials: Array<Resource> = PANEL_MATERIALS;
+  // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
 
   constructor(
@@ -95,30 +97,30 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(event) {
-    const id = Math.random().toString(36).substring(2);
-    this.ref = this.afStorage.ref(id);
+    // const id = Math.random().toString(36).substring(2);
     if (this.resource.toString() === this.resources[0]) {
       console.log('Panel Material selected');
-      // Monthly reports and current month should be disabled
+      this.ref = this.afStorage.ref('/Panel Materials');
       this.task = this.ref.child(this.title.toString()).put(this.fileData);
-      this.uploadProgress = this.task.percentageChanges();
-      console.log(this.uploadProgress);
+      // this.uploadProgress = this.task.percentageChanges();
+      this.uploadState = this.task.snapshotChanges().pipe(
+        finalize(() => {
+          this.ref.getDownloadURL().subscribe(url => {
+            console.log(url); // <-- do what ever you want with the url..
+          });
+        })
+      ).subscribe();
     } else if (this.resource.toString() === this.resources[1]) {
       console.log('General Resource selected');
-      // Monthly reports and current month should be disabled
+      this.ref = this.afStorage.ref('/General Resources');
       this.task = this.ref.child(this.title.toString()).put(this.fileData);
       this.uploadProgress = this.task.percentageChanges();
     } else {
       console.log('Monthly report selected');
+      this.ref = this.afStorage.ref('/Monthly Reports');
       this.task = this.ref.child(this.resource.toString() + ' ' + this.basePath.toString()).put(this.fileData);
       this.uploadProgress = this.task.percentageChanges();
     }
-  }
-
-  fileProgress(fileInput: any) {
-    this.fileData = <File>fileInput.target.files[0];
-    console.log(this.fileData.name);
-    this.name = this.fileData.name;
   }
 
   onFileChange(event) {
@@ -132,26 +134,6 @@ export class UserComponent implements OnInit {
 
   resourceChangeHandler(event: any) {
     this.resource = event.target.value;
-    switch (this.resource){
-      case this.resources[0] : {
-          //panel material selected
-
-
-          break
-      }
-      case this.resources[1] : {
-          //General resources elected
-
-
-          break
-      }
-      case this.resources[2] : {
-        //monthly report selected
-
-
-        break
-    }
-  }
   }
 
   reportChangeHandler(event: any) {
@@ -160,10 +142,6 @@ export class UserComponent implements OnInit {
 
   titleChangeHandler(event: any) {
     this.title = event.target.value;
-  }
-
-  isDisabled(event: any) {
-    console.log(event.toString());
   }
 }
 
