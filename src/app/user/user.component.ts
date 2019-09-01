@@ -109,12 +109,6 @@ export class UserComponent implements OnInit {
     }
   }
 
-  fileProgress(fileInput: any) {
-    this.fileData = <File>fileInput.target.files[0];
-    console.log(this.fileData.name);
-    this.name = this.fileData.name;
-  }
-
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -126,6 +120,8 @@ export class UserComponent implements OnInit {
 
   resourceChangeHandler(event: any) {
     this.resource = event.target.value;
+    if (this.resource === this.resources[0]) {
+    }
   }
 
   reportChangeHandler(event: any) {
