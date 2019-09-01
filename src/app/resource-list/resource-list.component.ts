@@ -27,13 +27,4 @@ export class ResourceListComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-
-    for (let property in changes) {
-      if (property === 'selectedResouce') {
-        
-      }
-    }
-  }
-
 }
