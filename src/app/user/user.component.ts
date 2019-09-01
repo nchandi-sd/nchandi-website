@@ -9,6 +9,10 @@ import {HttpClient} from '@angular/common/http';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import {Observable} from 'rxjs';
 import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
+import {GENERAL_RESOURCES} from '../model/General-Resources';
+import {Resource} from '../model/Resource';
+import {PANEL_MATERIALS} from '../model/Panel-Materials';
+
 
 @Component({
   selector: 'app-user',
@@ -53,13 +57,15 @@ export class UserComponent implements OnInit {
   ];
   uploadProgress: Observable<number>;
 
+  panelMaterials: Array<Resource> = PANEL_MATERIALS;
+  generalResources: Array<Resource> = GENERAL_RESOURCES;
+
   constructor(
     public userService: UserService,
     public authService: AuthService,
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-    private http: HttpClient,
     private afStorage: AngularFireStorage
   ) {}
 
@@ -109,6 +115,12 @@ export class UserComponent implements OnInit {
     }
   }
 
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    console.log(this.fileData.name);
+    this.name = this.fileData.name;
+  }
+
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -120,8 +132,26 @@ export class UserComponent implements OnInit {
 
   resourceChangeHandler(event: any) {
     this.resource = event.target.value;
-    if (this.resource === this.resources[0]) {
+    switch (this.resource){
+      case this.resources[0] : {
+          //panel material selected
+
+
+          break
+      }
+      case this.resources[1] : {
+          //General resources elected
+
+
+          break
+      }
+      case this.resources[2] : {
+        //monthly report selected
+
+
+        break
     }
+  }
   }
 
   reportChangeHandler(event: any) {

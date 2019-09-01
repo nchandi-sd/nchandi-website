@@ -16,3 +16,17 @@ export const PANEL_MATERIALS: Resource[] = [
   {name: 'The Traditions',
     link: 'https://docs.wixstatic.com/ugd/f3d7da_ae21c2a81e7d4aa48724b6bee6305f38.pdf'},
 ];
+
+
+function addPanelMaterial(){
+
+}
+
+function removePanelMaterial(name: String){
+  
+  this.PANEL_MATERIALS.array.forEach(elem => {
+    if(elem.name === name){
+      alert("should delete "+name);
+    }
+  });
+}

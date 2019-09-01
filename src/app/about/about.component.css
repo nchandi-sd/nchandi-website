@@ -41,12 +41,16 @@
 }
 .map-container{
   overflow:hidden;
-  padding-bottom:56.25%;
   position:relative;
-  height:0;
-  margin-right: 12px;
-  margin-left: 12px
+  height:500px;
+  max-width: 800px;
+  width: 90%;
 }
+.map-container iframe{
+  width: 100%;
+  height: 500px;
+}
+
 .location-content{
   color: white;
   float: left;
@@ -93,21 +97,7 @@
     height: 24px;
     position: relative;
   }
-  .map-container{
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-    margin-right: 12px;
-    margin-left: 12px
-  }
-  .map-container-2 iframe{
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
-  }
+  
 }
 
 /*Medium devices (tablets, 768px and up)*/
@@ -138,19 +128,7 @@
   .container-3{
     margin-left:-48px
   }
-  .map-container-2{
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-  }
-  .map-container-2 iframe{
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
-  }
+  
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -180,19 +158,7 @@
   .container-3{
     margin-left:-64px
   }
-  .map-container-2{
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-  }
-  .map-container-2 iframe{
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
-  }
+  
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
@@ -222,19 +188,7 @@
   .container-3{
     margin-left:-64px
   }
-  .map-container-2{
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-  }
-  .map-container-2 iframe{
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
-  }
+  
 }
 
 

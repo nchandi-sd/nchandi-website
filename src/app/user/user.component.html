@@ -18,27 +18,29 @@
                 class="custom-control-input"
                 value="{{resource}}"
                 id="{{resource}}"
-                (disabled)="isDisabled()"
-                (change)="resourceChangeHandler($event)">
+                (change)="resourceChangeHandler($event)"
+                [checked]="idx === 0">
               <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
             </div>
           </div>
 
           <div class="spacer"></div>
 
-          <div class="add-resource-title text-white">Resource Title</div>
-          <div class ="container">
+          <div *ngIf="resource === resources[0] || resource === resources[1]">
+            <div class="add-resource-title text-white">Resource Title</div>
+            <div class ="container">
 
-            <div class="col-12 col-lg-6">
-              <input class="form-control"
-                     type="text"
-                     placeholder="Title"
-                     (change)="titleChangeHandler($event)">
+              <div class="col-12 col-lg-6">
+                <input class="form-control"
+                       type="text"
+                       placeholder="Title"
+                       (change)="titleChangeHandler($event)">
+              </div>
             </div>
           </div>
 
           <div class="spacer"></div>
-
+          <div *ngIf="resource === resources[2]">
           <div class="add-resource-title text-white">Monthly Reports</div>
           <div class ="container">
 
@@ -71,6 +73,8 @@
                 <label class="custom-control-label" for="{{month}}">{{month}}</label>
               </div>
             </div>
+          </div>
+
           </div>
 
           <div class="spacer"></div>
@@ -107,13 +111,12 @@
 
           <div class="spacer"></div>
 
-
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="container">
-          Column 2
+          <app-resource-list [selectedResouce]=resource [availableResources] = resources></app-resource-list>
         </div>
       </div>
     </div>
