@@ -14,8 +14,8 @@
               <div class="container">
                 <div class="row">
                   <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let resource of panelMaterials">
-                      <strong><u><a class="genLink" href="{{resource.link}}" id="link" target="_blank">{{resource.name}}</a></u></strong>
+                    <li class="report-li" *ngFor="let panel of panelMaterials">
+                      <strong><u><a class="genLink" href="{{panel.url}}" id="link" target="_blank">{{panel.title}}</a></u></strong>
                     </li>
                   </ul>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="row">
                   <ul class="committeeReports">
                     <li class="report-li" *ngFor="let resource of generalResources">
-                      <strong><u><a class="genLink" href="{{resource.link}}" id="link2" target="_blank">{{resource.name}}</a></u></strong>
+                      <strong><u><a class="genLink" href="{{resource.url}}" id="link2" target="_blank">{{resource.title}}</a></u></strong>
                     </li>
                   </ul>
                 </div>

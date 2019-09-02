@@ -125,13 +125,13 @@ export class UserComponent implements OnInit {
           this.ref.getDownloadURL().subscribe(url => {
             this.panelMaterial.title = this.title.toString();
             this.panelMaterial.url = url;
-            this.createPanelMaterial(this.panelMaterial);
+            this.createGeneralResource(this.panelMaterial);
           });
         })
       ).subscribe();
     } else {
       const year = new Date().getFullYear().toString();
-      this.title =  year + '_' +this.basePath + '_' + this.report;
+      this.title =  year + '_' + this.basePath + '_' + this.report;
       this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
       this.task = this.ref.put(this.fileData);
       this.uploadProgress = this.task.percentageChanges();

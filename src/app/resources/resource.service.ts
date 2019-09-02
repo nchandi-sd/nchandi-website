@@ -8,7 +8,11 @@ export class ResourceService {
   constructor(private firestore: AngularFirestore) {}
 
   getPanelMaterials() {
-    return this.firestore.collection('panels').snapshotChanges();
+    return this.firestore.collection('Panel Materials').snapshotChanges();
+  }
+
+  getGeneralResources() {
+    return this.firestore.collection('General Resources').snapshotChanges();
   }
 
   createPanelMaterial(resource: PanelMaterials) {

@@ -4,15 +4,8 @@ import {CommitteeReport} from '../model/CommitteeReport';
 import {GENERAL_RESOURCES} from '../model/General-Resources';
 import {Resource} from '../model/Resource';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {forEach} from '@angular/router/src/utils/collection';
-import {FirebaseListObservable, FirebaseObjectObservable} from '@angular/fire/database-deprecated';
-import {AngularFireDatabase} from '@angular/fire/database';
 import {PanelMaterials} from '../model/Panel-Materials';
-import {query} from '@angular/animations';
-import {toPromise} from 'rxjs-compat/operator/toPromise';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {TableData} from '../model/TableData';
+import {ResourceService} from './resource.service';
 
 @Component({
   selector: 'app-resources',
@@ -25,27 +18,32 @@ export class ResourcesComponent implements OnInit {
   secTriReports: Array<CommitteeReport> = [];
   thirdTriReports: Array<CommitteeReport> = [];
 
-  generalResources: Array<Resource> = GENERAL_RESOURCES;
-  // panelMaterials: Array<Resource> = PANEL_MATERIALS;
-  items: FirebaseListObservable<PanelMaterials[]> = null;
-  // item: AngularFireObject<any> = null;
-  panelUrl: any;
-
+  panelMaterials: PanelMaterials[] = null;
+  generalResources: PanelMaterials[] = null;
 
 
 constructor(private storage: AngularFireStorage,
-              private https: HttpClient) {
-
-    // const ref = this.storage.ref('Panel Materials/A Custom Report');
-    // ref.getDownloadURL().toPromise().then( url => {
-    //   this.panelUrl = url;
-    //  console.log(url);
-    // });
-    // ref.getMetadata().toPromise().then( data => {
-    //   console.log(data.name);
-    // });
-  }
+              private resourceService: ResourceService) {}
   ngOnInit() {
+    this.resourceService.getPanelMaterials().subscribe(data => {
+        this.panelMaterials = data.map(e => {
+          console.log('retrieved from firestore');
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()
+          } as PanelMaterials;
+        });
+    });
+
+    this.resourceService.getGeneralResources().subscribe(data => {
+      this.generalResources = data.map(e => {
+        console.log('retrieved from firestore');
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as PanelMaterials;
+      });
+    });
 
     // first 4 reports to be added to the first column
     for (let i = 0; i < 4; i++) {

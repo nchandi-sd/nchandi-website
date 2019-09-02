@@ -1,4 +1,5 @@
 export class PanelMaterials {
+  id: string;
   title: string;
   url: string;
 }
