@@ -32,6 +32,7 @@ import {AuthService} from './core/auth.service';
 import {UserResolver} from './user/user.resolver';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import { ResourceListComponent } from './resource-list/resource-list.component';
+import {ResourceService} from './resources/resource.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ResourceListComponent } from './resource-list/resource-list.component';
     AuthGuard,
     UserService,
     AuthService,
-    UserResolver
+    UserResolver,
+    ResourceService
   ],
   bootstrap: [AppComponent]
 })

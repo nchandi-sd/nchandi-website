@@ -36,32 +36,14 @@ export class ResourcesComponent implements OnInit {
 constructor(private storage: AngularFireStorage,
               private https: HttpClient) {
 
-  interface MyObj {
-    name: string;
-    bucket: string;
-    generation: string;
-    metageneration: string;
-    contentType: string;
-    timeCreated: string;
-    updated: string;
-    storageClass: string;
-    size: string;
-    md5Hash: string;
-    contentEncoding: string;
-    contentDisposition: string;
-    crc32c: string;
-    etag: string;
-    downloadTokens: string;
-  }
-
-    const ref = this.storage.ref('Panel Materials/A Custom Report');
-    ref.getDownloadURL().toPromise().then( url => {
-      this.panelUrl = url;
-     console.log(url);
-    });
-    ref.getMetadata().toPromise().then( data => {
-      console.log(data.name);
-    });
+    // const ref = this.storage.ref('Panel Materials/A Custom Report');
+    // ref.getDownloadURL().toPromise().then( url => {
+    //   this.panelUrl = url;
+    //  console.log(url);
+    // });
+    // ref.getMetadata().toPromise().then( data => {
+    //   console.log(data.name);
+    // });
   }
   ngOnInit() {
 

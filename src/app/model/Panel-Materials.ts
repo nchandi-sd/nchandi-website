@@ -1,15 +1,8 @@
-import {Resource} from './Resource';
-
 export class PanelMaterials {
-  $key: string;
   title: string;
   url: string;
 }
 
-
-function addPanelMaterial() {
-
-}
 
 function removePanelMaterial(name: String) {
   this.PANEL_MATERIALS.array.forEach(elem => {

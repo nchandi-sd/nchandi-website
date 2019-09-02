@@ -7,11 +7,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
 import {HttpClient} from '@angular/common/http';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 import {GENERAL_RESOURCES} from '../model/General-Resources';
 import {Resource} from '../model/Resource';
 import {finalize} from 'rxjs/operators';
+import {PanelMaterials} from '../model/Panel-Materials';
+import {ResourceService} from '../resources/resource.service';
+import {MonthlyReport} from '../model/MonthlyReport';
 
 
 @Component({
@@ -56,8 +59,9 @@ export class UserComponent implements OnInit {
     'December'
   ];
   uploadProgress: Observable<number>;
-  downloadUrl: any;
   uploadState: Subscription;
+  panelMaterial: PanelMaterials = new PanelMaterials();
+  monthlyReport: MonthlyReport = new MonthlyReport();
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
@@ -68,7 +72,8 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private resourceService: ResourceService
   ) {}
 
   ngOnInit(): void {
@@ -99,28 +104,70 @@ export class UserComponent implements OnInit {
   onSubmit(event) {
     // const id = Math.random().toString(36).substring(2);
     if (this.resource.toString() === this.resources[0]) {
-      console.log('Panel Material selected');
-      this.ref = this.afStorage.ref('/Panel Materials');
-      this.task = this.ref.child(this.title.toString()).put(this.fileData);
-      // this.uploadProgress = this.task.percentageChanges();
+      this.ref = this.afStorage.ref('/Panel Materials/' + this.title.toString());
+      this.task = this.ref.put(this.fileData);
+      this.uploadProgress = this.task.percentageChanges();
       this.uploadState = this.task.snapshotChanges().pipe(
         finalize(() => {
           this.ref.getDownloadURL().subscribe(url => {
-            console.log(url); // <-- do what ever you want with the url..
+            this.panelMaterial.title = this.title.toString();
+            this.panelMaterial.url = url;
+            this.createPanelMaterial(this.panelMaterial);
           });
         })
       ).subscribe();
     } else if (this.resource.toString() === this.resources[1]) {
-      console.log('General Resource selected');
-      this.ref = this.afStorage.ref('/General Resources');
-      this.task = this.ref.child(this.title.toString()).put(this.fileData);
+      this.ref = this.afStorage.ref('/General Resources/' + this.title.toString());
+      this.task = this.ref.put(this.fileData);
       this.uploadProgress = this.task.percentageChanges();
+      this.uploadState = this.task.snapshotChanges().pipe(
+        finalize(() => {
+          this.ref.getDownloadURL().subscribe(url => {
+            this.panelMaterial.title = this.title.toString();
+            this.panelMaterial.url = url;
+            this.createPanelMaterial(this.panelMaterial);
+          });
+        })
+      ).subscribe();
     } else {
-      console.log('Monthly report selected');
-      this.ref = this.afStorage.ref('/Monthly Reports');
-      this.task = this.ref.child(this.resource.toString() + ' ' + this.basePath.toString()).put(this.fileData);
+      const year = new Date().getFullYear().toString();
+      this.title =  year + '_' +this.basePath + '_' + this.report;
+      this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
+      this.task = this.ref.put(this.fileData);
       this.uploadProgress = this.task.percentageChanges();
+      this.uploadState = this.task.snapshotChanges().pipe(
+        finalize(() => {
+          this.ref.getDownloadURL().subscribe(url => {
+            this.monthlyReport.title = this.title.toString();
+            this.monthlyReport.url = url;
+            this.monthlyReport.month = this.basePath;
+            this.monthlyReport.type = this.report;
+            this.createMonthlyReport(this.monthlyReport);
+          });
+        })
+      ).subscribe();
     }
+  }
+
+  createPanelMaterial(resource: PanelMaterials) {
+    this.resourceService.createPanelMaterial(resource)
+      .then(res => {
+        // update UI
+      });
+  }
+
+  createGeneralResource(resource: PanelMaterials) {
+    this.resourceService.createGeneralResource(resource)
+      .then(res => {
+        // update UI
+      });
+  }
+
+  createMonthlyReport(report: MonthlyReport) {
+    this.resourceService.createMonthlyReport(report)
+      .then(res => {
+        // update UI
+      });
   }
 
   onFileChange(event) {
