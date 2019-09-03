@@ -5,6 +5,7 @@ export class MonthlyReport {
   type: string;
   url: string;
   month: string;
+  timestamp: number;
 }
 
 

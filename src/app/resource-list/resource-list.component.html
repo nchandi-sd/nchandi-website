@@ -3,7 +3,7 @@
  
   <div *ngFor="let item of panelMaterials">
     <button class="btn-delete">DELETE</button>
-    {{item.name}}
+    {{item.title}}
   </div>
  
 
@@ -13,7 +13,7 @@
  
     <div *ngFor="let item of generalResources">
       <button class="btn-delete">DELETE</button>
-      {{item.name}}
+      {{item.title}}
     </div>
 </div>
 <div *ngIf="selectedResouce == availableResources[2]" class="monthly-reports-container">

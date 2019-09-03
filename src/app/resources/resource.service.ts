@@ -15,6 +15,10 @@ export class ResourceService {
     return this.firestore.collection('General Resources').snapshotChanges();
   }
 
+  getMonthlyReports() {
+    return this.firestore.collection('Monthly Reports').snapshotChanges();
+  }
+
   createPanelMaterial(resource: PanelMaterials) {
     return this.firestore.collection('Panel Materials').add({...resource});
   }

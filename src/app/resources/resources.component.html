@@ -50,35 +50,26 @@
 
                 <!-- add list of report resource here : 6 per col-->
                 <div class="col-md">
-                  <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let report of firstTriReports">
-                      <span class="report-title">{{report.monthDate}}</span>
-                      <strong><br><u><a href="{{report.finLink}}" id="link3">{{report.financialReport}}</a></u></strong>
-                      <strong><br><u><a href="{{report.minLink}}" id="link4">{{report.minutes}}</a></u></strong>
+                  <ul class="committeeReports" style="list-style: none;">
+                    <li class="report-li" *ngFor="let report of monthlyReports; let i = index">
+                      <div *ngIf="i % 2 == 0">
+                        <span class="report-title">{{report.month}}</span>
+                      </div>
+                        <strong><u><a href="{{report.url}}">{{report.title}}</a></u></strong>
+                      <div *ngIf="i % 3 == 0">
+                      </div>
+                      <!--                      <div *ngIf=" report.type === 'Financial Report'">-->
+                      <!--                        <strong><br><u><a href="{{report.url}}" id="link4">{{report[++i].title}}</a></u></strong>-->
+
+                      <!--                      </div>-->
+
+                      <!--                      </div>-->
+                      <!--                      <div *ngIf=" report.type === 'Committee Minutes'">-->
+                      <!--                      <strong><br><u><a href="{{report.url}}" id="link4">{{report.title}}</a></u></strong>-->
+                      <!--                      </div>-->
                     </li>
                   </ul>
                 </div>
-
-                <div class = "col-md">
-                  <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let report of secTriReports">
-                      <span class="report-title">{{report.monthDate}}</span>
-                      <strong><br><u><a href="{{report.finLink}}" id="link5" target="_blank">{{report.financialReport}}</a></u></strong>
-                      <strong><br><u><a href="{{report.minLink}}" id="link6" target="_blank">{{report.minutes}}</a></u></strong>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class = "col-md">
-                  <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let report of thirdTriReports">
-                      <span class="report-title">{{report.monthDate}}</span>
-                      <strong><br><u><a href="{{report.finLink}}" id="link7" target="_blank">{{report.financialReport}}</a></u></strong>
-                      <strong><br><u><a href="{{report.minLink}}" id="link8" target="_blank">{{report.minutes}}</a></u></strong>
-                    </li>
-                  </ul>
-                </div>
-
 
               </div>
             </div>
@@ -195,7 +186,7 @@
 
                     </div>
 
-                      <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4">
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="check6" checked>
                         <label class="custom-control-label" for="check6">La Vina</label><input type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY">
@@ -220,17 +211,17 @@
                     </div>
 
                     <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="check9" checked>
-                          <label class="custom-control-label"for="check9">
-                            Other </label><input type="number" class="form-control" placeholder="Other QTY"id="Other_QTY">
-                        </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check9" checked>
+                        <label class="custom-control-label"for="check9">
+                          Other </label><input type="number" class="form-control" placeholder="Other QTY"id="Other_QTY">
                       </div>
+                    </div>
 
                     <div class="form-spacer"></div>
                     <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
                     <div class="col-12 col-lg-12">
-                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                      <textarea class="form-control" rows="3" id="comment"></textarea>
                     </div>
                   </div>
                 </form>
