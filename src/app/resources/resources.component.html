@@ -52,7 +52,7 @@
                   <ul class="committeeReports" style="list-style: none;">
                     <li class="report-li" *ngFor="let report of committeeReports; let i = index">
                       <div *ngIf="report !== undefined">
-                      <span class="report-title">{{report.monthDate}}</span><br>
+                      <span class="report-title"><br>{{report.monthDate}}</span><br>
                       <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
                       <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
                       </div>
