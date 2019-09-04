@@ -131,7 +131,7 @@ export class UserComponent implements OnInit {
       ).subscribe();
     } else {
       const year = new Date().getFullYear().toString();
-      this.title = year + '_' + this.basePath + '_' + this.report;
+      this.title = this.basePath + '_' + this.report;
       this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
       this.task = this.ref.put(this.fileData);
       this.uploadProgress = this.task.percentageChanges();
@@ -140,7 +140,7 @@ export class UserComponent implements OnInit {
           this.ref.getDownloadURL().subscribe(url => {
             this.monthlyReport.title = this.title.toString();
             this.monthlyReport.url = url;
-            this.monthlyReport.month = this.basePath;
+            this.monthlyReport.month = this.getMonth(this.basePath);
             this.monthlyReport.type = this.report;
             this.monthlyReport.timestamp = new Date().getTime();
             this.createMonthlyReport(this.monthlyReport);
@@ -150,6 +150,34 @@ export class UserComponent implements OnInit {
     }
   }
 
+  getMonth(month: string): number {
+    if (month === 'January') {
+      return 1;
+    } else if (month === 'February') {
+      return 2;
+    } else if (month === 'March') {
+      return 3;
+    } else if (month === 'April') {
+      return 4;
+    } else if (month === 'May') {
+      return 5;
+    } else if (month === 'June') {
+      return 6;
+    } else if (month === 'July') {
+      return 7;
+    } else if (month === 'August') {
+      return 8;
+    } else if (month === 'September') {
+      return 9;
+    } else if (month === 'October') {
+      return 10;
+    } else if (month === 'November') {
+      return 11;
+    } else if (month === 'December') {
+      return 12;
+    }
+
+  }
   createPanelMaterial(resource: PanelMaterials) {
     this.resourceService.createPanelMaterial(resource)
       .then(res => {

@@ -25,9 +25,10 @@ export class ResourcesComponent implements OnInit {
   counter: number;
 
 
-
   constructor(private storage: AngularFireStorage,
-              private resourceService: ResourceService) {}
+              private resourceService: ResourceService) {
+  }
+
   ngOnInit() {
     this.resourceService.getPanelMaterials().subscribe(data => {
       this.panelMaterials = data.map(e => {
@@ -59,28 +60,66 @@ export class ResourcesComponent implements OnInit {
       });
       // sort reports by timestamp added
       this.monthlyReports.sort(function (a, b) {
-        if (a.timestamp < b.timestamp) { return -1; }
-        if (a.timestamp > b.timestamp) { return 1; }
+        if (a.month < b.month) {
+          return -1;
+        }
+        if (a.month > b.month) {
+          return 1;
+        }
         return 0;
       });
 
-      for (let i = 0; i < this.monthlyReports.length - 1; i++) {
-        const report = new CommitteeReport();
-        this.committeeReports.push(report);
-        this.committeeReports[i].monthDate = this.monthlyReports[i].month;
-        if (i % 2 !== 0) {
-          this.committeeReports[i].minLink = this.monthlyReports[i].url;
-          this.committeeReports[i].minutes = this.monthlyReports[i].title;
+      for (let i = 0; i < this.monthlyReports.length; i++) {
+        if (this.committeeReports[this.monthlyReports[i].month] === undefined) {
+          const report = new CommitteeReport();
+          this.committeeReports[this.monthlyReports[i].month] = report;
+          this.committeeReports[this.monthlyReports[i].month].monthDate = this.getStringMonth(this.monthlyReports[i].month);
+          if (this.monthlyReports[i].title.endsWith('Minutes')) {
+            this.committeeReports[this.monthlyReports[i].month].minLink = this.monthlyReports[i].url;
+            this.committeeReports[this.monthlyReports[i].month].minutes = this.monthlyReports[i].title;
+          } else if (this.monthlyReports[i].title.endsWith('Report')) {
+            this.committeeReports[this.monthlyReports[i].month].finLink = this.monthlyReports[i].url;
+            this.committeeReports[this.monthlyReports[i].month].financialReport = this.monthlyReports[i].title;
+          }
         } else {
-          this.committeeReports[i].finLink = this.monthlyReports[i].url;
-          this.committeeReports[i].financialReport = this.monthlyReports[i].title;
+          if (this.monthlyReports[i].title.endsWith('Minutes')) {
+            this.committeeReports[this.monthlyReports[i].month].minLink = this.monthlyReports[i].url;
+            this.committeeReports[this.monthlyReports[i].month].minutes = this.monthlyReports[i].title;
+          } else if (this.monthlyReports[i].title.endsWith('Report')) {
+            this.committeeReports[this.monthlyReports[i].month].finLink = this.monthlyReports[i].url;
+            this.committeeReports[this.monthlyReports[i].month].financialReport = this.monthlyReports[i].title;
+          }
         }
       }
-
-      this.committeeReports.forEach(item => {
-        console.log(item);
-      });
     });
+  }
+
+  getStringMonth(month: number): string {
+    if (month === 1) {
+      return 'January';
+    } else if (month === 2) {
+      return 'February';
+    } else if (month === 3) {
+      return 'March';
+    } else if (month === 4) {
+      return 'April';
+    } else if (month === 5) {
+      return 'May';
+    } else if (month === 6) {
+      return 'June';
+    } else if (month === 7) {
+      return 'July';
+    } else if (month === 8) {
+      return 'August';
+    } else if (month === 9) {
+      return 'September';
+    } else if (month === 10) {
+      return 'October';
+    } else if (month === 11) {
+      return 'November';
+    } else if (month === 12) {
+      return 'December';
+    }
   }
 }
 

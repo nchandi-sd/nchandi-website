@@ -3,7 +3,6 @@
     <div class="navbar-spacer"></div>
     <h2 class="section-header text-white flex-center headline"> Resources </h2>
     <div class="spacer"></div>
-
     <div class="resources-container">
       <div class="row">
         <div class="col-md-3 flex-center">
@@ -42,7 +41,7 @@
           </div>
         </div>
 
-        <div class="col-md-6 flex-center">
+        <div class="col-md-6">
           <div class="report-sheet2 report-content">
             <h3 class="flex-center title">NCHANDI Monthly Reports</h3>
             <div class="container">
@@ -51,22 +50,12 @@
                 <!-- add list of report resource here : 6 per col-->
                 <div class="col-md">
                   <ul class="committeeReports" style="list-style: none;">
-                    <li class="report-li" *ngFor="let report of monthlyReports; let i = index">
-                      <div *ngIf="i % 2 == 0">
-                        <span class="report-title">{{report.month}}</span>
+                    <li class="report-li" *ngFor="let report of committeeReports; let i = index">
+                      <div *ngIf="report !== undefined">
+                      <span class="report-title">{{report.monthDate}}</span><br>
+                      <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
+                      <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
                       </div>
-                        <strong><u><a href="{{report.url}}">{{report.title}}</a></u></strong>
-                      <div *ngIf="i % 3 == 0">
-                      </div>
-                      <!--                      <div *ngIf=" report.type === 'Financial Report'">-->
-                      <!--                        <strong><br><u><a href="{{report.url}}" id="link4">{{report[++i].title}}</a></u></strong>-->
-
-                      <!--                      </div>-->
-
-                      <!--                      </div>-->
-                      <!--                      <div *ngIf=" report.type === 'Committee Minutes'">-->
-                      <!--                      <strong><br><u><a href="{{report.url}}" id="link4">{{report.title}}</a></u></strong>-->
-                      <!--                      </div>-->
                     </li>
                   </ul>
                 </div>
@@ -75,164 +64,160 @@
             </div>
           </div>
         </div>
-        s
       </div>
       <div class="col-lg-6 quote-content text-white">
         <i>"Be part of the solution, not the problem"</i> <br>
         - AA Slogan
       </div>
+      <div class="spacer"></div>
 
-    </div>
-
-    <div class="spacer"></div>
-
-    <div class="literature-container">
-      <div class="form-sheet">
-        <div class="container">
-          <div class="row">
-            <div class="md-row4">
-              <h4 class="form-title">Literature Request Form</h4>
-              <div class="form-spacer"></div>
-              <div class="form-blurb">
-                Thank you for your service bringing the message of AA to those who cannot get to a meeting.
-                To order literature for the facility you are a panel member of, please complete the form below.
-                Once we receive your order, we will contact you with delivery and/or pick-up information.
+      <div class="literature-container">
+        <div class="form-sheet">
+          <div class="container">
+            <div class="row">
+              <div class="md-row4">
+                <h4 class="form-title">Literature Request Form</h4>
+                <div class="form-spacer"></div>
+                <div class="form-blurb">
+                  Thank you for your service bringing the message of AA to those who cannot get to a meeting.
+                  To order literature for the facility you are a panel member of, please complete the form below.
+                  Once we receive your order, we will contact you with delivery and/or pick-up information.
+                </div>
               </div>
-            </div>
-            <div class="md-row8">
-              <div class= form-container>
-                <form>
-                  <div class="row">
+              <div class="md-row8">
+                <div class= form-container>
+                  <form>
+                    <div class="row">
 
-                    <label class="form-label" style="padding-left: 15px;">Name</label>
+                      <label class="form-label" style="padding-left: 15px;">Name</label>
 
-                    <div class="col-12 col-lg-6">
-                      <input type="text" class="form-control" placeholder="First">
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                      <input type="text" class="form-control" placeholder="Last">
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                      <label class="form-label">H&I Commitments</label>
-                      <select class="browser-default custom-select">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                      <label class="form-label">Facility</label>
-                      <select class="browser-default custom-select">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </div>
-
-                    <div class="col-9">
-                      <label class="form-label">Email</label>
-                      <input type="email" class="form-control" placeholder="Email">
-                    </div>
-
-                    <div class="col-4">
-                      <label class="form-label">Phone</label>
-
-                      <input type="phone" class="form-control" placeholder="Phone Number">
-                    </div>
-
-                    <div class="col-12">
-                      <label class="form-label">Literature Request</label>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check1" checked>
-                        <label class="custom-control-label" for="check1">Living Sober</label> <input type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY">
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check2" checked>
-                        <label class="custom-control-label" for="check2">12 Steps and 12 Traditions</label><input type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY">
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check3" checked>
-                        <label class="custom-control-label" for="check3">Alcoholic Anonymous <i>paperback</i></label><input type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY">
-                      </div>
-                    </div>
-
-                    <div class="form-spacer"></div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check4" checked>
-                        <label class="custom-control-label" for="check4">Alcoholic Anonymous <i>pocket size</i></label><input type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY">
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="Check5" checked><label class="custom-control-label" for="Check5">Grapevines</label><input type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY">
+                      <div class="col-12 col-lg-6">
+                        <input type="text" class="form-control" placeholder="First">
                       </div>
 
-                    </div>
+                      <div class="col-12 col-lg-6">
+                        <input type="text" class="form-control" placeholder="Last">
+                      </div>
 
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check6" checked>
-                        <label class="custom-control-label" for="check6">La Vina</label><input type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY">
+                      <div class="col-12 col-lg-6">
+                        <label class="form-label">H&I Commitments</label>
+                        <select class="browser-default custom-select">
+                          <option selected>Open this select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+
+                      <div class="col-12 col-lg-6">
+                        <label class="form-label">Facility</label>
+                        <select class="browser-default custom-select">
+                          <option selected>Open this select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+
+                      <div class="col-9">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" placeholder="Email">
+                      </div>
+
+                      <div class="col-4">
+                        <label class="form-label">Phone</label>
+
+                        <input type="phone" class="form-control" placeholder="Phone Number">
+                      </div>
+
+                      <div class="col-12">
+                        <label class="form-label">Literature Request</label>
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check1" checked>
+                          <label class="custom-control-label" for="check1">Living Sober</label> <input type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY">
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check2" checked>
+                          <label class="custom-control-label" for="check2">12 Steps and 12 Traditions</label><input type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY">
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check3" checked>
+                          <label class="custom-control-label" for="check3">Alcoholic Anonymous <i>paperback</i></label><input type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY">
+                        </div>
+                      </div>
+
+                      <div class="form-spacer"></div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check4" checked>
+                          <label class="custom-control-label" for="check4">Alcoholic Anonymous <i>pocket size</i></label><input type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY">
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="Check5" checked><label class="custom-control-label" for="Check5">Grapevines</label><input type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY">
+                        </div>
+
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check6" checked>
+                          <label class="custom-control-label" for="check6">La Vina</label><input type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY">
+                        </div>
+                      </div>
+
+                      <div class="form-spacer"></div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check7" checked>
+                          <label class="custom-control-label" for="check7">Newcomer Packets</label><input type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY">
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check8" checked>
+                          <label class="custom-control-label"for="check8">
+                            Literature  Rack w/ Pamphlets</label><input type="number" class="form-control" placeholder="Literature Rack QTY"id="Rack_QTY">
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="check9" checked>
+                          <label class="custom-control-label"for="check9">
+                            Other </label><input type="number" class="form-control" placeholder="Other QTY"id="Other_QTY">
+                        </div>
+                      </div>
+
+                      <div class="form-spacer"></div>
+                      <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
+                      <div class="col-12 col-lg-12">
+                        <textarea class="form-control" rows="3" id="comment"></textarea>
                       </div>
                     </div>
-
-                    <div class="form-spacer"></div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check7" checked>
-                        <label class="custom-control-label" for="check7">Newcomer Packets</label><input type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY">
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check8" checked>
-                        <label class="custom-control-label"for="check8">
-                          Literature  Rack w/ Pamphlets</label><input type="number" class="form-control" placeholder="Literature Rack QTY"id="Rack_QTY">
-                      </div>
-                    </div>
-
-                    <div class="col-12 col-lg-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="check9" checked>
-                        <label class="custom-control-label"for="check9">
-                          Other </label><input type="number" class="form-control" placeholder="Other QTY"id="Other_QTY">
-                      </div>
-                    </div>
-
-                    <div class="form-spacer"></div>
-                    <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
-                    <div class="col-12 col-lg-12">
-                      <textarea class="form-control" rows="3" id="comment"></textarea>
-                    </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
+              <button class="btn submit-button align-self-end">Submit</button>
             </div>
-            <button class="btn submit-button align-self-end">Submit</button>
           </div>
         </div>
       </div>
+      <div class="spacer"></div>
+      <app-footer></app-footer>
     </div>
-    <div class="spacer"></div>
-    <app-footer></app-footer>
   </div>
-</div>

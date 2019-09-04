@@ -4,7 +4,8 @@ export class MonthlyReport {
   title: string;
   type: string;
   url: string;
-  month: string;
+  month: number;
+  year: string;
   timestamp: number;
 }
 

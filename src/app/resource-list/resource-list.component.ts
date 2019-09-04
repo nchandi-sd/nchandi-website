@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Resource } from '../model/Resource';
 import { GENERAL_RESOURCES } from '../model/General-Resources';
-import {PANEL_MATERIALS, PanelMaterials} from '../model/Panel-Materials';
 import { MONTHLY_REPORTS } from '../model/Monthly-Reports';
 import { CommitteeReport } from '../model/CommitteeReport';
 import {ResourceService} from '../resources/resource.service';
+import {PanelMaterials} from '../model/Panel-Materials';
 
 @Component({
   selector: 'app-resource-list',
