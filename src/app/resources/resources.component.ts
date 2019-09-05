@@ -19,7 +19,7 @@ export class ResourcesComponent implements OnInit {
   firstTriReports: MonthlyReport[] = null;
   secTriReports: MonthlyReport[] = null;
   thirdTriReports: MonthlyReport[] = null;
-  committeeReports = Array<CommitteeReport>();
+  committeeReports: Array<CommitteeReport> = null;
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
   counter: number;

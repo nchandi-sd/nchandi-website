@@ -5,6 +5,7 @@ import { MONTHLY_REPORTS } from '../model/Monthly-Reports';
 import { CommitteeReport } from '../model/CommitteeReport';
 import {ResourceService} from '../resources/resource.service';
 import {PanelMaterials} from '../model/Panel-Materials';
+import { MonthlyReport } from '../model/MonthlyReport';
 
 @Component({
   selector: 'app-resource-list',
@@ -16,9 +17,10 @@ export class ResourceListComponent implements OnInit {
   @Input() selectedResouce: string;
   @Input() availableResources: string[];
 
+  monthlyReports: MonthlyReport[] = null;
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
-  monthlyReports: Array<CommitteeReport> = MONTHLY_REPORTS;
+  committeeReports: Array<CommitteeReport> = [];
 
   constructor(private resourceService: ResourceService) {}
 
@@ -42,6 +44,81 @@ export class ResourceListComponent implements OnInit {
         } as PanelMaterials;
       });
     });
+    this.resourceService.getMonthlyReports().subscribe(data => {
+      this.monthlyReports = data.map(e => {
+        console.log('retrieved monthly reports from firestore');
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as MonthlyReport;
+      });
+
+    // sort reports by timestamp added
+    this.monthlyReports.sort(function (a, b) {
+      if (a.month < b.month) {
+        return -1;
+      }
+      if (a.month > b.month) {
+        return 1;
+      }
+      return 0;
+    });
+
+    for (let i = 0; i < this.monthlyReports.length; i++) {
+      let report = new CommitteeReport();
+      if (this.committeeReports[this.monthlyReports[i].month] === undefined) {
+        this.committeeReports.push(report);
+        report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
+        if (this.monthlyReports[i].title.endsWith('Minutes')) {
+          report.minLink = this.monthlyReports[i].url;
+          report.minutes = this.monthlyReports[i].title;
+        } else if (this.monthlyReports[i].title.endsWith('Report')) {
+          report.finLink = this.monthlyReports[i].url;
+          report.financialReport = this.monthlyReports[i].title;
+        }
+      } else {
+        if (this.monthlyReports[i].title.endsWith('Minutes')) {
+          report.minLink = this.monthlyReports[i].url;
+          report.minutes = this.monthlyReports[i].title;
+        } else if (this.monthlyReports[i].title.endsWith('Report')) {
+          report.finLink = this.monthlyReports[i].url;
+          report.financialReport = this.monthlyReports[i].title;
+        }
+      }
+    }
+    console.log("CR")
+      console.log(this.committeeReports)
+  });
   }
+
+
+  getStringMonth(month: number): string {
+    if (month === 1) {
+      return 'January';
+    } else if (month === 2) {
+      return 'February';
+    } else if (month === 3) {
+      return 'March';
+    } else if (month === 4) {
+      return 'April';
+    } else if (month === 5) {
+      return 'May';
+    } else if (month === 6) {
+      return 'June';
+    } else if (month === 7) {
+      return 'July';
+    } else if (month === 8) {
+      return 'August';
+    } else if (month === 9) {
+      return 'September';
+    } else if (month === 10) {
+      return 'October';
+    } else if (month === 11) {
+      return 'November';
+    } else if (month === 12) {
+      return 'December';
+    }
+  }
+  
 
 }

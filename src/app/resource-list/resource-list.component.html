@@ -19,15 +19,19 @@
 <div *ngIf="selectedResouce == availableResources[2]" class="monthly-reports-container">
     <h2>Current Monthly Reports</h2>
  
-    <div *ngFor="let item of monthlyReports">
+    <div *ngFor="let item of committeeReports">
       <div class="month-header">{{item.monthDate}}</div>
 
-      <button class="btn-delete">DELETE</button>
-      {{item.financialReport}}
+      <div *ngIf="item.fin">
+      <button  class="btn-delete">DELETE</button>
+      Financial Report
       <br>
+    </div>
 
-      <button class="btn-delete">DELETE</button>
-      {{item.minutes}}
+    <div *ngIf="item.minutes">
+      <button  class="btn-delete">DELETE</button>
+      Committee Minutes
+    </div>
       <br><br>
     </div>
 
