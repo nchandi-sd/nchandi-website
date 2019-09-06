@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {MonthlyReport} from '../model/MonthlyReport';
 
 @Injectable()
 export class ResourceService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private afStorage: AngularFireStorage,) {}
 
   getPanelMaterials() {
     return this.firestore.collection('Panel Materials').snapshotChanges();
@@ -30,6 +31,20 @@ export class ResourceService {
 
   createMonthlyReport(report: MonthlyReport) {
     return this.firestore.collection('Monthly Reports').add({...report});
+  }
+
+  deleteItem(reportType: string, reportId: string){
+
+    this.firestore.collection(reportType).doc(reportId).get().subscribe(resp =>{
+      if(resp.exists){
+        let name = resp.data().title
+        this.afStorage.ref('/'+reportType+'/'+name).delete().subscribe(_ => {
+          this.firestore.collection(reportType).doc(reportId).delete()
+        })
+
+      }
+      
+    })
   }
   //
   // deletePolicy(policyId: string){

@@ -102,6 +102,7 @@ export class ResourcesComponent implements OnInit {
     });
   }
 
+ 
   getStringMonth(month: number): string {
     if (month === 1) {
       return 'January';

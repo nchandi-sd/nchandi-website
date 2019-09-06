@@ -1,5 +1,6 @@
 export class CommitteeReport {
-  id: string;
+  finId: string;
+  minId: string;
   monthDate: string;
   financialReport: string;
   minutes: string;

@@ -2,8 +2,8 @@
   <h2>Current Panel Material</h2>
  
   <div *ngFor="let item of panelMaterials">
-    <button class="btn-delete">DELETE</button>
-    {{item.title}}
+    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">DELETE</button>
+    <a href="{{item.url}}" target="_blank">{{item.title}}</a>
   </div>
  
 
@@ -12,8 +12,8 @@
     <h2>Current General Resouces</h2>
  
     <div *ngFor="let item of generalResources">
-      <button class="btn-delete">DELETE</button>
-      {{item.title}}
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">DELETE</button>
+      <a href="{{item.url}}" target="_blank">{{item.title}}</a>
     </div>
 </div>
 <div *ngIf="selectedResouce == availableResources[2]" class="monthly-reports-container">
@@ -23,13 +23,13 @@
       <div class="month-header">{{item.monthDate}}</div>
 
       <div *ngIf="item.financialReport">
-      <button  class="btn-delete">DELETE</button>
-      Financial Report
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.finId}}" data-type="{{selectedResouce}}">DELETE</button>
+      <a href="{{item.finLink}}" target="_blank">Financial Report</a>
       <br>
     </div>
     <div *ngIf="item.minutes">
-      <button  class="btn-delete">DELETE</button>
-      Committee Minutes
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.minId}}" data-type="{{selectedResouce}}">DELETE</button>
+      <a href="{{item.minLink}}" target="_blank">Committee Minutes</a>
     </div>
       <br>
     </div>

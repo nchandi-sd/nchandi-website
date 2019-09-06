@@ -46,7 +46,7 @@ export class ResourceListComponent implements OnInit {
     });
     this.resourceService.getMonthlyReports().subscribe(data => {
       this.monthlyReports = data.map(e => {
-        console.log('retrieved monthly reports from firestore');
+        console.log('retrieved monthly reports from firestore: '+e.payload.doc.id);
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -71,9 +71,11 @@ export class ResourceListComponent implements OnInit {
           if(this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)){
             containsReport = true;
             if (this.monthlyReports[i].title.endsWith('Minutes')) {
+              this.committeeReports[j].minId = this.monthlyReports[i].id;
               this.committeeReports[j].minLink = this.monthlyReports[i].url;
               this.committeeReports[j].minutes = this.monthlyReports[i].title;
             } else if (this.monthlyReports[i].title.endsWith('Report')) {
+              this.committeeReports[j].finId = this.monthlyReports[i].id;
               this.committeeReports[j].finLink = this.monthlyReports[i].url;
               this.committeeReports[j].financialReport = this.monthlyReports[i].title;
             }
@@ -86,15 +88,42 @@ export class ResourceListComponent implements OnInit {
         this.committeeReports.push(report);
         report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
         if (this.monthlyReports[i].title.endsWith('Minutes')) {
+          report.minId = this.monthlyReports[i].id;
           report.minLink = this.monthlyReports[i].url;
           report.minutes = this.monthlyReports[i].title;
         } else if (this.monthlyReports[i].title.endsWith('Report')) {
+          report.finId = this.monthlyReports[i].id;
           report.finLink = this.monthlyReports[i].url;
           report.financialReport = this.monthlyReports[i].title;
         }
       }
     }
   });
+  }
+
+  deleteItem(event: any){
+    let id = event.target.getAttribute("id")
+    let type = event.target.getAttribute("type")
+    if(type === this.availableResources[0]){
+      this.resourceService.deleteItem("Panel Materials", id)
+    }else if(type ===this.availableResources[1]){
+      this.resourceService.deleteItem("General Resources", id)
+    }else if(type ===this.availableResources[2]){
+      this.resourceService.deleteItem("Monthly Reports", id)
+      this.committeeReports.forEach(report => {
+        if(report.finId === id){
+          report.finId = null
+          report.finLink = null
+          report.financialReport = null
+        }else if(report.minId === id){
+          report.minId = null
+          report.minLink = null
+          report.minutes = null
+        }
+      })
+    }
+    
+
   }
 
 
