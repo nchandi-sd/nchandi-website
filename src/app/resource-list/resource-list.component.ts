@@ -94,8 +94,6 @@ export class ResourceListComponent implements OnInit {
         }
       }
     }
-    console.log("CR")
-      console.log(this.committeeReports)
   });
   }
 

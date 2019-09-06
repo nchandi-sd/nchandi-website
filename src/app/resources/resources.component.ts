@@ -19,7 +19,7 @@ export class ResourcesComponent implements OnInit {
   firstTriReports: MonthlyReport[] = null;
   secTriReports: MonthlyReport[] = null;
   thirdTriReports: MonthlyReport[] = null;
-  committeeReports: Array<CommitteeReport> = null;
+  committeeReports: Array<CommitteeReport> = [];
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
   counter: number;
@@ -70,27 +70,35 @@ export class ResourcesComponent implements OnInit {
       });
 
       for (let i = 0; i < this.monthlyReports.length; i++) {
-        if (this.committeeReports[this.monthlyReports[i].month] === undefined) {
-          const report = new CommitteeReport();
-          this.committeeReports[this.monthlyReports[i].month] = report;
-          this.committeeReports[this.monthlyReports[i].month].monthDate = this.getStringMonth(this.monthlyReports[i].month);
-          if (this.monthlyReports[i].title.endsWith('Minutes')) {
-            this.committeeReports[this.monthlyReports[i].month].minLink = this.monthlyReports[i].url;
-            this.committeeReports[this.monthlyReports[i].month].minutes = this.monthlyReports[i].title;
-          } else if (this.monthlyReports[i].title.endsWith('Report')) {
-            this.committeeReports[this.monthlyReports[i].month].finLink = this.monthlyReports[i].url;
-            this.committeeReports[this.monthlyReports[i].month].financialReport = this.monthlyReports[i].title;
-          }
-        } else {
-          if (this.monthlyReports[i].title.endsWith('Minutes')) {
-            this.committeeReports[this.monthlyReports[i].month].minLink = this.monthlyReports[i].url;
-            this.committeeReports[this.monthlyReports[i].month].minutes = this.monthlyReports[i].title;
-          } else if (this.monthlyReports[i].title.endsWith('Report')) {
-            this.committeeReports[this.monthlyReports[i].month].finLink = this.monthlyReports[i].url;
-            this.committeeReports[this.monthlyReports[i].month].financialReport = this.monthlyReports[i].title;
+        let containsReport: boolean = false
+
+        for(let j = 0; j < this.committeeReports.length; j++){
+          if(this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)){
+            containsReport = true;
+            if (this.monthlyReports[i].title.endsWith('Minutes')) {
+              this.committeeReports[j].minLink = this.monthlyReports[i].url;
+              this.committeeReports[j].minutes = this.monthlyReports[i].title;
+            } else if (this.monthlyReports[i].title.endsWith('Report')) {
+              this.committeeReports[j].finLink = this.monthlyReports[i].url;
+              this.committeeReports[j].financialReport = this.monthlyReports[i].title;
+            }
+
           }
         }
+
+      if (!containsReport) {
+        let report = new CommitteeReport()
+        this.committeeReports.push(report);
+        report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
+        if (this.monthlyReports[i].title.endsWith('Minutes')) {
+          report.minLink = this.monthlyReports[i].url;
+          report.minutes = this.monthlyReports[i].title;
+        } else if (this.monthlyReports[i].title.endsWith('Report')) {
+          report.finLink = this.monthlyReports[i].url;
+          report.financialReport = this.monthlyReports[i].title;
+        }
       }
+    }
     });
   }
 
