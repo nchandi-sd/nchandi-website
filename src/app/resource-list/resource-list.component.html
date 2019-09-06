@@ -22,17 +22,16 @@
     <div *ngFor="let item of committeeReports">
       <div class="month-header">{{item.monthDate}}</div>
 
-      <div *ngIf="item.fin">
+      <div *ngIf="item.financialReport">
       <button  class="btn-delete">DELETE</button>
       Financial Report
       <br>
     </div>
-
     <div *ngIf="item.minutes">
       <button  class="btn-delete">DELETE</button>
       Committee Minutes
     </div>
-      <br><br>
+      <br>
     </div>
 
 </div>
