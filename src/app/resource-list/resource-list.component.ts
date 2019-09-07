@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { Resource } from '../model/Resource';
-import { GENERAL_RESOURCES } from '../model/General-Resources';
-import { MONTHLY_REPORTS } from '../model/Monthly-Reports';
 import { CommitteeReport } from '../model/CommitteeReport';
 import {ResourceService} from '../resources/resource.service';
 import {PanelMaterials} from '../model/Panel-Materials';
@@ -110,7 +107,7 @@ export class ResourceListComponent implements OnInit {
       this.resourceService.deleteItem("General Resources", id)
     }else if(type ===this.availableResources[2]){
       this.resourceService.deleteItem("Monthly Reports", id)
-      this.committeeReports.forEach(report => {
+      this.committeeReports.forEach(function(report, index) {
         if(report.finId === id){
           report.finId = null
           report.finLink = null
@@ -119,6 +116,11 @@ export class ResourceListComponent implements OnInit {
           report.minId = null
           report.minLink = null
           report.minutes = null
+        }
+
+        if(!report.finId && report.minId){
+          this.committeeReports.splice(index, 1)
+          index = index-1
         }
       })
     }
