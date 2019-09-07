@@ -62,6 +62,7 @@ export class UserComponent implements OnInit {
   uploadState: Subscription;
   panelMaterial: PanelMaterials = new PanelMaterials();
   monthlyReport: MonthlyReport = new MonthlyReport();
+  statusMessage: string;
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
@@ -101,52 +102,76 @@ export class UserComponent implements OnInit {
       });
   }
 
+  validateForm(): boolean{
+    if (this.panelMaterial )
+    if (this.title == null) {
+      this.statusMessage = 'Please add a title to your document.';
+      return false;
+    } else if (this.getMonth == null) {
+      this.statusMessage = 'Please select a month for your report.';
+      return false;
+    } else if (this.report == null) {
+      this.statusMessage = 'Please select report type to upload.';
+      return false;
+    } else if (this.basePath == null) {
+      this.statusMessage = 'Please select the month for when your report is.';
+      return false;
+    }
+      return true;
+  }
+
   onSubmit(event) {
+    // start form validations
+    this.validateForm();
     // const id = Math.random().toString(36).substring(2);
-    if (this.resource.toString() === this.resources[0]) {
-      this.ref = this.afStorage.ref('/Panel Materials/' + this.title.toString());
-      this.task = this.ref.put(this.fileData);
-      this.uploadProgress = this.task.percentageChanges();
-      this.uploadState = this.task.snapshotChanges().pipe(
-        finalize(() => {
-          this.ref.getDownloadURL().subscribe(url => {
-            this.panelMaterial.title = this.title.toString();
-            this.panelMaterial.url = url;
-            this.createPanelMaterial(this.panelMaterial);
-          });
-        })
-      ).subscribe();
-    } else if (this.resource.toString() === this.resources[1]) {
-      this.ref = this.afStorage.ref('/General Resources/' + this.title.toString());
-      this.task = this.ref.put(this.fileData);
-      this.uploadProgress = this.task.percentageChanges();
-      this.uploadState = this.task.snapshotChanges().pipe(
-        finalize(() => {
-          this.ref.getDownloadURL().subscribe(url => {
-            this.panelMaterial.title = this.title.toString();
-            this.panelMaterial.url = url;
-            this.createGeneralResource(this.panelMaterial);
-          });
-        })
-      ).subscribe();
+    if (this.validateForm()) {
+      if (this.resource.toString() === this.resources[0]) {
+        this.ref = this.afStorage.ref('/Panel Materials/' + this.title.toString());
+        this.task = this.ref.put(this.fileData);
+        this.uploadProgress = this.task.percentageChanges();
+        this.uploadState = this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe(url => {
+              this.panelMaterial.title = this.title.toString();
+              this.panelMaterial.url = url;
+              this.createPanelMaterial(this.panelMaterial);
+            });
+          })
+        ).subscribe();
+      } else if (this.resource.toString() === this.resources[1]) {
+        this.ref = this.afStorage.ref('/General Resources/' + this.title.toString());
+        this.task = this.ref.put(this.fileData);
+        this.uploadProgress = this.task.percentageChanges();
+        this.uploadState = this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe(url => {
+              this.panelMaterial.title = this.title.toString();
+              this.panelMaterial.url = url;
+              this.createGeneralResource(this.panelMaterial);
+            });
+          })
+        ).subscribe();
+      } else {
+        const year = new Date().getFullYear().toString();
+        this.title = this.basePath + '_' + this.report;
+        this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
+        this.task = this.ref.put(this.fileData);
+        this.uploadProgress = this.task.percentageChanges();
+        this.uploadState = this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe(url => {
+              this.monthlyReport.title = this.title.toString();
+              this.monthlyReport.url = url;
+              this.monthlyReport.month = this.getMonth(this.basePath);
+              this.monthlyReport.type = this.report;
+              this.monthlyReport.timestamp = new Date().getTime();
+              this.createMonthlyReport(this.monthlyReport);
+            });
+          })
+        ).subscribe();
+      }
     } else {
-      const year = new Date().getFullYear().toString();
-      this.title = this.basePath + '_' + this.report;
-      this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
-      this.task = this.ref.put(this.fileData);
-      this.uploadProgress = this.task.percentageChanges();
-      this.uploadState = this.task.snapshotChanges().pipe(
-        finalize(() => {
-          this.ref.getDownloadURL().subscribe(url => {
-            this.monthlyReport.title = this.title.toString();
-            this.monthlyReport.url = url;
-            this.monthlyReport.month = this.getMonth(this.basePath);
-            this.monthlyReport.type = this.report;
-            this.monthlyReport.timestamp = new Date().getTime();
-            this.createMonthlyReport(this.monthlyReport);
-          });
-        })
-      ).subscribe();
+      //invalid form, do not submit.
     }
   }
 

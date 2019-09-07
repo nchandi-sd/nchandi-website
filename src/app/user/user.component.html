@@ -36,6 +36,12 @@
 
             <div class="spacer"></div>
 
+            <div *ngIf="this.statusMessage">
+              <div class="alert alert-primary" role="alert">
+                {{this.statusMessage}}
+              </div>
+            </div>
+
             <div class="add-resource-title text-white">Resource Title</div>
             <div class ="container">
 
@@ -113,6 +119,15 @@
 
                 <div class="button-container flex-center">
                   <button type="submit" class="submit-button btn btn-block button">Submit</button>
+                </div>
+
+                <div class="spacer"></div>
+                <div class="status-container flex-center">
+                  <div *ngIf="this.statusMessage">
+                    <div class="alert alert-primary" role="alert">
+                      {{this.statusMessage}}
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>

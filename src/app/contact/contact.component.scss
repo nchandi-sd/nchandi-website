@@ -46,6 +46,7 @@
     color:red;
     font-weight: bold;
 }
+
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (max-width: 1200px) {
 }
@@ -59,9 +60,14 @@
     .submit-button{
         width: 100%;
     }
+  .img-fluid{
+    max-height:400px;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (max-width: 576px) {
-    
+  .img-fluid{
+    max-height:300px;
+  }
 }

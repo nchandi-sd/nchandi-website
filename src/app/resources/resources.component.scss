@@ -2,6 +2,7 @@
   background-color: #E5E5E5;
   width: 100%;
 }
+.container{width: 300px}
 .resources-main-container {
   margin: 0 auto;
   background-color: var(--primary-option);
@@ -14,9 +15,6 @@
 }
 .resources-container{
   min-height: 800px;
-}
-.resources-side-container{
-  margin-left: 96px;
 }
 .genLink{
   font-size: large;
@@ -118,6 +116,12 @@
     margin-left: 64px;
     font-size: 32px
   }
+  .resources-side-container{
+    margin-left: 96px;
+  }
+  .resources-side-container2{
+    margin-left: 96px;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -137,6 +141,12 @@
     margin-top: 64px;
     margin-left: 64px;
     font-size: 32px
+  }
+  .resources-side-container{
+    margin-left: 96px;
+  }
+  .resources-side-container2{
+    margin-left: 96px;
   }
 }
 
@@ -158,10 +168,20 @@
     margin-left: 24px;
     font-size: 26px
   }
+  .resources-side-container{
+    margin-left: 48px;
+  }
+  .resources-side-container2{
+    margin-left: -36px;
+  }
+  .container{
+    width:100%;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
+
   .title {
     font-weight: normal;
     font-size: 24px;
@@ -177,5 +197,11 @@
     margin-top: 48px;
     margin-left: 24px;
     font-size: 26px
+  }
+  .resources-side-container{
+    margin-left: 48px;
+  }
+  .resources-side-container2{
+    margin-left: 24px;
   }
 }
