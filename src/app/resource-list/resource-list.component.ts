@@ -107,7 +107,7 @@ export class ResourceListComponent implements OnInit {
       this.resourceService.deleteItem("General Resources", id)
     }else if(type ===this.availableResources[2]){
       this.resourceService.deleteItem("Monthly Reports", id)
-      this.committeeReports.forEach(function(report, index) {
+      this.committeeReports.forEach(function(report, index, obj) {
         if(report.finId === id){
           report.finId = null
           report.finLink = null
@@ -118,8 +118,8 @@ export class ResourceListComponent implements OnInit {
           report.minutes = null
         }
 
-        if(!report.finId && report.minId){
-          this.committeeReports.splice(index, 1)
+        if(!report.finId && !report.minId){
+          obj.splice(index, 1)
           index = index-1
         }
       })
