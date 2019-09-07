@@ -93,7 +93,7 @@ export class ResourcesComponent implements OnInit {
       for (let i = 0; i < this.monthlyReports.length; i++) {
         let containsReport: boolean = false
 
-        for(let j = 0; j < this.committeeReports.length; j++){
+        for (let j = 0; j < this.committeeReports.length; j++) {
           if(this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)){
             containsReport = true;
             if (this.monthlyReports[i].title.endsWith('Minutes')) {
@@ -161,9 +161,15 @@ export class ResourcesComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   changeStatus(event: any) {
     console.log(event.currentTarget.id);
     if (event.currentTarget.id === 'livingSoberId') {
+=======
+  changeStatus($event: Event) {
+    console.log(event.srcElement.getAttributeNode('id'));
+    if ($event.srcElement.attributes.id.nodeValue === 'livingSoberId') {
+>>>>>>> 6b7baa5a4662c7b734d9cc69fa29339cf1553258
       if (!this.livingSoberFlag) {
         this.livingSoberFlag = true;
       } else {
