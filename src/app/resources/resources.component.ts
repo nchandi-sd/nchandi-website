@@ -37,6 +37,9 @@ export class ResourcesComponent implements OnInit {
           this.facilities[this.index] = ent.gsx$facility.$t.toString();
           this.index++;
         });
+        this.facilities = this.facilities.filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+        });
       });
 
     this.resourceService.getPanelMaterials().subscribe(data => {
@@ -140,11 +143,5 @@ export class ResourcesComponent implements OnInit {
     }
   }
 
-  isUnique(arr: string[]): boolean{
-    let unique = arr.filter(function(elem, index, self) {
-      return index === self.indexOf(elem);
-    });
-    return unique;
-  }
 }
 
