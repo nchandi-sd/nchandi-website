@@ -161,15 +161,9 @@ export class ResourcesComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   changeStatus(event: any) {
     console.log(event.currentTarget.id);
     if (event.currentTarget.id === 'livingSoberId') {
-=======
-  changeStatus($event: Event) {
-    console.log(event.srcElement.getAttributeNode('id'));
-    if ($event.srcElement.attributes.id.nodeValue === 'livingSoberId') {
->>>>>>> 6b7baa5a4662c7b734d9cc69fa29339cf1553258
       if (!this.livingSoberFlag) {
         this.livingSoberFlag = true;
       } else {
