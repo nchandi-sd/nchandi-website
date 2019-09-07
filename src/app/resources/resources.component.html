@@ -90,18 +90,17 @@
                     <div class="row">
 
                       <label class="form-label" style="padding-left: 15px;">Name</label>
-
                       <div class="col-12 col-lg-6">
-                        <input type="text" class="form-control" placeholder="First">
+                        <input name="firstName" type="text" class="form-control" placeholder="First">
                       </div>
 
                       <div class="col-12 col-lg-6">
-                        <input type="text" class="form-control" placeholder="Last">
+                        <input name ="lastName" type="text" class="form-control" placeholder="Last">
                       </div>
 
                       <div class="col-12 col-lg-6">
                         <label class="form-label">H&I Commitments</label>
-                        <select class="browser-default custom-select">
+                        <select name="hiCommitments" class="browser-default custom-select">
                           <option selected>Open this select menu</option>
                           <option value="1">Panel Leader</option>
                           <option value="2">Panel Coordinator</option>
@@ -111,7 +110,7 @@
 
                       <div class="col-12 col-lg-6">
                         <label class="form-label">Facility</label>
-                        <select class="browser-default custom-select">
+                        <select name="facility" class="browser-default custom-select">
                           <option selected>Open this select menu</option>
                           <option *ngFor="let facility of facilities" value={{facility}}>
                             {{facility}}
@@ -121,13 +120,13 @@
 
                       <div class="col-9">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input name="email" type="email" class="form-control" placeholder="Email">
                       </div>
 
                       <div class="col-4">
                         <label class="form-label">Phone</label>
 
-                        <input type="phone" class="form-control" placeholder="Phone Number">
+                        <input name="phone" type="phone" class="form-control" placeholder="Phone Number">
                       </div>
 
                       <div class="col-12">
@@ -136,7 +135,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="livingSoberId" (change)=changeStatus($event)>
+                          <input name="livingSober" type="checkbox" class="custom-control-input" id="livingSoberId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="livingSoberId">Living Sober</label>
                           <div *ngIf="livingSoberFlag">
                             <input type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY">
@@ -146,7 +145,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="twelveId" (change)=changeStatus($event)>
+                          <input name="twelveTwelve" type="checkbox" class="custom-control-input" id="twelveId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="twelveId">12 Steps and 12 Traditions</label>
                           <div *ngIf="twelveNTwelve">
                             <input type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY">
@@ -156,7 +155,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="aaPaperId" (change)=changeStatus($event)>
+                          <input name="aaPaper" type="checkbox" class="custom-control-input" id="aaPaperId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="aaPaperId">Alcoholic Anonymous <i>paperback</i></label>
                           <div *ngIf="aaPaper">
                             <input type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY">
@@ -168,7 +167,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="aaPocketId" (change)=changeStatus($event)>
+                          <input name="aaPocket" type="checkbox" class="custom-control-input" id="aaPocketId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="aaPocketId">Alcoholic Anonymous <i>pocket size</i></label>
                           <div *ngIf="aaPocket">
                             <input type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY">
@@ -178,7 +177,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="grapeId" (change)=changeStatus($event)>
+                          <input name="grapevine" type="checkbox" class="custom-control-input" id="grapeId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="grapeId">Grapevines</label>
                           <div *ngIf="grapevine">
                             <input type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY">
@@ -189,7 +188,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="laVinaId" (change)=changeStatus($event)>
+                          <input name="laVina" type="checkbox" class="custom-control-input" id="laVinaId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="laVinaId">La Vina</label>
                           <div *ngIf="laVina">
                             <input type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY">
@@ -201,7 +200,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="newId" (change)=changeStatus($event)>
+                          <input name="newPacket" type="checkbox" class="custom-control-input" id="newId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="newId">Newcomer Packets</label>
                           <div *ngIf="newPacket">
                             <input type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY">
@@ -211,7 +210,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="litId" (change)=changeStatus($event)>
+                          <input name="litRack" type="checkbox" class="custom-control-input" id="litId" (change)=changeStatus($event)>
                           <label class="custom-control-label"for="litId">
                             Literature  Rack w/ Pamphlets</label>
                           <div *ngIf="litRack">
@@ -222,7 +221,7 @@
 
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="otherId" (change)=changeStatus($event)>
+                          <input name="other" type="checkbox" class="custom-control-input" id="otherId" (change)=changeStatus($event)>
                           <label class="custom-control-label"for="otherId">
                             Other </label>
                           <div *ngIf="other">
@@ -234,7 +233,7 @@
                       <div class="form-spacer"></div>
                       <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
                       <div class="col-12 col-lg-12">
-                        <textarea class="form-control" rows="3" id="comment"></textarea>
+                        <textarea name="comments" class="form-control" rows="3" id="comment"></textarea>
                       </div>
                     </div>
                   </form>
@@ -249,3 +248,4 @@
       <app-footer></app-footer>
     </div>
   </div>
+</div>
