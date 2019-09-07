@@ -23,6 +23,15 @@ export class ResourcesComponent implements OnInit {
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
   index = 0;
+  livingSoberFlag: boolean;
+  twelveNTwelve: boolean;
+  aaPaper: boolean;
+  aaPocket: boolean;
+  grapevine: boolean;
+  laVina: boolean;
+  newPacket: boolean;
+  litRack: boolean;
+  other: boolean;
 
 
   constructor(private storage: AngularFireStorage,
@@ -98,23 +107,32 @@ export class ResourcesComponent implements OnInit {
           }
         }
 
-      if (!containsReport) {
-        let report = new CommitteeReport()
-        this.committeeReports.push(report);
-        report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
-        if (this.monthlyReports[i].title.endsWith('Minutes')) {
-          report.minLink = this.monthlyReports[i].url;
-          report.minutes = this.monthlyReports[i].title;
-        } else if (this.monthlyReports[i].title.endsWith('Report')) {
-          report.finLink = this.monthlyReports[i].url;
-          report.financialReport = this.monthlyReports[i].title;
+        if (!containsReport) {
+          let report = new CommitteeReport()
+          this.committeeReports.push(report);
+          report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
+          if (this.monthlyReports[i].title.endsWith('Minutes')) {
+            report.minLink = this.monthlyReports[i].url;
+            report.minutes = this.monthlyReports[i].title;
+          } else if (this.monthlyReports[i].title.endsWith('Report')) {
+            report.finLink = this.monthlyReports[i].url;
+            report.financialReport = this.monthlyReports[i].title;
+          }
         }
       }
-    }
     });
+    this.livingSoberFlag = false;
+    this.twelveNTwelve = false;
+    this.aaPaper = false;
+    this.aaPocket = false;
+    this.grapevine= false;
+    this.laVina = false;
+    this.newPacket = false;
+    this.litRack = false;
+    this.other = false;
   }
 
- 
+
   getStringMonth(month: number): string {
     if (month === 1) {
       return 'January';
@@ -143,5 +161,63 @@ export class ResourcesComponent implements OnInit {
     }
   }
 
+  changeStatus($event: Event) {
+    console.log($event.srcElement.attributes.id.nodeValue);
+    if ($event.srcElement.attributes.id.nodeValue === 'livingSoberId') {
+      if (!this.livingSoberFlag) {
+        this.livingSoberFlag = true;
+      } else {
+        this.livingSoberFlag = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'aaPaperId') {
+      if (!this.aaPaper) {
+        this.aaPaper = true;
+      } else {
+        this.aaPaper = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'aaPocketId') {
+      if (!this.aaPocket) {
+        this.aaPocket = true;
+      } else {
+        this.aaPocket = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'twelveId') {
+      if (!this.twelveNTwelve) {
+        this.twelveNTwelve = true;
+      } else {
+        this.twelveNTwelve = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'grapeId') {
+      if (!this.grapevine) {
+        this.grapevine = true;
+      } else {
+        this.grapevine = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'laVinaId') {
+      if (!this.laVina) {
+        this.laVina = true;
+      } else {
+        this.laVina = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'newId') {
+      if (!this.newPacket) {
+        this.newPacket = true;
+      } else {
+        this.newPacket = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'litId') {
+      if (!this.litRack) {
+        this.litRack = true;
+      } else {
+        this.litRack = false;
+      }
+    } else if ($event.srcElement.attributes.id.nodeValue === 'otherId') {
+      if (!this.other) {
+        this.other = true;
+      } else {
+        this.other = false;
+      }
+    }
+  }
 }
 
