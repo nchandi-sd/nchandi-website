@@ -25,6 +25,7 @@ export class EventsComponent implements OnInit {
   }
 
   onClick(event: Event): void {
-    this.eventClicked.emit(event);
+    // Locking ability to click on dates and show those in Main Event component
+    // this.eventClicked.emit(event);
   }
 }

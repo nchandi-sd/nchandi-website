@@ -103,9 +103,9 @@
                         <label class="form-label">H&I Commitments</label>
                         <select class="browser-default custom-select">
                           <option selected>Open this select menu</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option value="1">Panel Leader</option>
+                          <option value="2">Panel Coordinator</option>
+                          <option value="3">Board Member</option>
                         </select>
                       </div>
 
@@ -113,9 +113,9 @@
                         <label class="form-label">Facility</label>
                         <select class="browser-default custom-select">
                           <option selected>Open this select menu</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option *ngFor="let facility of facilities" value={{facility}}>
+                            {{facility}}
+                          </option>
                         </select>
                       </div>
 
@@ -137,7 +137,8 @@
                       <div class="col-12 col-lg-4">
                         <div class="custom-control custom-checkbox">
                           <input type="checkbox" class="custom-control-input" id="check1" checked>
-                          <label class="custom-control-label" for="check1">Living Sober</label> <input type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY">
+                          <label class="custom-control-label" for="check1">Living Sober</label>
+                          <input type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY">
                         </div>
                       </div>
 

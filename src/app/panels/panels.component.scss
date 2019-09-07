@@ -69,7 +69,7 @@
 .panel-container3 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1120px;
+  max-width: 1160px;
   padding-left: 24px;
   background-color: white;
 }
@@ -88,7 +88,9 @@
 .contact-table{
   padding:0 15px 0 15px;
 }
-
+.ng-star-inserted td{
+  max-width: 370px;
+}
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   .intro-para {

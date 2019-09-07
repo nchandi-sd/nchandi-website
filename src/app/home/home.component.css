@@ -13,11 +13,46 @@
   font-size:large;
 }
 .sub-text {
-  font-family: Arial;
   font-size: 14px;
 }
 .img-container{
   margin-top: 50px
+}
+
+.btn-primary{
+  background: var(--primary) !important;
+  border: solid var(--primary) 1px;
+}
+.btn-secondary{
+  background-color: transparent !important;
+  border: solid var(--primary) 1px;
+}
+.btn-secondary:hover{
+  background-color: var(--primary) !important;
+  border: solid var(--primary) 1px;
+}
+.btn{
+  padding: 5px 35px;
+  font-size: .8rem;
+  transition: .3s;
+}
+.btn:hover{
+  transform: scale(1.1);
+}
+button:focus{
+  outline: none;
+}
+.panelsBtn{
+  border-radius: 17px;
+  color: white;
+  background: var(--primary) !important;
+  border-color: #E5E5E5;
+}
+.resourcesBtn{
+  border-radius: 17px;
+  color: white;
+  background: var(--primary) !important;
+  border-color: #E5E5E5;
 }
 
 /*Small devices (landscape phones, 576px and up)*/

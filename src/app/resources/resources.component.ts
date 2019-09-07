@@ -7,6 +7,8 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {ResourceService} from './resource.service';
 import {MonthlyReport} from '../model/MonthlyReport';
+import {PanelService} from '../panels/panel.service';
+import {Panels} from '../model/Panels';
 
 @Component({
   selector: 'app-resources',
@@ -15,21 +17,28 @@ import {MonthlyReport} from '../model/MonthlyReport';
 })
 export class ResourcesComponent implements OnInit {
 
+  facilities: Array<string> = [];
   monthlyReports: MonthlyReport[] = null;
-  firstTriReports: MonthlyReport[] = null;
-  secTriReports: MonthlyReport[] = null;
-  thirdTriReports: MonthlyReport[] = null;
   committeeReports: Array<CommitteeReport> = [];
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
-  counter: number;
+  index = 0;
 
 
   constructor(private storage: AngularFireStorage,
-              private resourceService: ResourceService) {
+              private resourceService: ResourceService,
+              private panelService: PanelService) {
   }
 
   ngOnInit() {
+    this.panelService.getCurrentPanels()
+      .subscribe((data: Panels) => {
+        data.feed.entry.forEach( ent => {
+          this.facilities[this.index] = ent.gsx$facility.$t.toString();
+          this.index++;
+        });
+      });
+
     this.resourceService.getPanelMaterials().subscribe(data => {
       this.panelMaterials = data.map(e => {
         console.log('retrieved from firestore');
@@ -58,7 +67,7 @@ export class ResourcesComponent implements OnInit {
           ...e.payload.doc.data()
         } as MonthlyReport;
       });
-      // sort reports by timestamp added
+      // sort reports by month
       this.monthlyReports.sort(function (a, b) {
         if (a.month < b.month) {
           return -1;
@@ -129,6 +138,13 @@ export class ResourcesComponent implements OnInit {
     } else if (month === 12) {
       return 'December';
     }
+  }
+
+  isUnique(arr: string[]): boolean{
+    let unique = arr.filter(function(elem, index, self) {
+      return index === self.indexOf(elem);
+    });
+    return unique;
   }
 }
 
