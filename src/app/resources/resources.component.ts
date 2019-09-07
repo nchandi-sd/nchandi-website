@@ -161,57 +161,57 @@ export class ResourcesComponent implements OnInit {
     }
   }
 
-  changeStatus($event: Event) {
-    console.log($event.srcElement.attributes.id.nodeValue);
-    if ($event.srcElement.attributes.id.nodeValue === 'livingSoberId') {
+  changeStatus(event: any) {
+    console.log(event.currentTarget.id);
+    if (event.currentTarget.id === 'livingSoberId') {
       if (!this.livingSoberFlag) {
         this.livingSoberFlag = true;
       } else {
         this.livingSoberFlag = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'aaPaperId') {
+    } else if (event.currentTarget.id === 'aaPaperId') {
       if (!this.aaPaper) {
         this.aaPaper = true;
       } else {
         this.aaPaper = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'aaPocketId') {
+    } else if (event.currentTarget.id === 'aaPocketId') {
       if (!this.aaPocket) {
         this.aaPocket = true;
       } else {
         this.aaPocket = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'twelveId') {
+    } else if (event.currentTarget.id === 'twelveId') {
       if (!this.twelveNTwelve) {
         this.twelveNTwelve = true;
       } else {
         this.twelveNTwelve = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'grapeId') {
+    } else if (event.currentTarget.id === 'grapeId') {
       if (!this.grapevine) {
         this.grapevine = true;
       } else {
         this.grapevine = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'laVinaId') {
+    } else if (event.currentTarget.id === 'laVinaId') {
       if (!this.laVina) {
         this.laVina = true;
       } else {
         this.laVina = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'newId') {
+    } else if (event.currentTarget.id === 'newId') {
       if (!this.newPacket) {
         this.newPacket = true;
       } else {
         this.newPacket = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'litId') {
+    } else if (event.currentTarget.id === 'litId') {
       if (!this.litRack) {
         this.litRack = true;
       } else {
         this.litRack = false;
       }
-    } else if ($event.srcElement.attributes.id.nodeValue === 'otherId') {
+    } else if (event.currentTarget.id === 'otherId') {
       if (!this.other) {
         this.other = true;
       } else {
