@@ -69,7 +69,7 @@ import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ReactiveFormsModule,
     AngularFireStorageModule,
-    NgbAlertModule
+    NgbAlertModule,
   ],
   providers: [
     PanelService,

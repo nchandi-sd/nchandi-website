@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -25,6 +25,8 @@ import {MonthlyReport} from '../model/MonthlyReport';
 export class UserComponent implements OnInit {
 
   // @ViewChild('alert', {static : true} )private alert: ElementRef;
+  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
+  @ViewChildren('resourceTitle') resourceTitle: ElementRef;
 
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
@@ -78,6 +80,7 @@ export class UserComponent implements OnInit {
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
+  inputTitle: any;
 
   constructor(
     public userService: UserService,
@@ -294,7 +297,12 @@ export class UserComponent implements OnInit {
   }
 
   clearForm(form: NgForm) {
+    console.log(this.resourceTitle.nativeElement.value.toString());
     form.reset();
+    this.checkboxes.forEach((element) => {
+      element.nativeElement.checked = false;
+    });
+    this.uploadProgress = this.task.percentageChanges();
   }
   // closeAlert() {
   //   this.alert.nativeElement.remove('alert');
