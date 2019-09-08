@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {MONTHLY_REPORTS} from '../model/Monthly-Reports';
 import {CommitteeReport} from '../model/CommitteeReport';
-import {GENERAL_RESOURCES} from '../model/General-Resources';
-import {Resource} from '../model/Resource';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {ResourceService} from './resource.service';
 import {MonthlyReport} from '../model/MonthlyReport';
 import {PanelService} from '../panels/panel.service';
 import {Panels} from '../model/Panels';
+import {ResourceSubmissionService} from './resource-submission.service'
+import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {ResourceSubmission} from '../model/ResourceSubmission';
 
 @Component({
   selector: 'app-resources',
@@ -24,7 +24,7 @@ export class ResourcesComponent implements OnInit {
   generalResources: PanelMaterials[] = null;
   index = 0;
   livingSoberFlag: boolean;
-  twelveNTwelve: boolean;
+  twelveTwelve: boolean;
   aaPaper: boolean;
   aaPocket: boolean;
   grapevine: boolean;
@@ -32,14 +32,41 @@ export class ResourcesComponent implements OnInit {
   newPacket: boolean;
   litRack: boolean;
   other: boolean;
+  submitted: boolean = false;
+  userForm: FormGroup;
+  resourceSubmission: ResourceSubmission
+  madeSelection: boolean =  false
 
 
   constructor(private storage: AngularFireStorage,
               private resourceService: ResourceService,
-              private panelService: PanelService) {
+              private panelService: PanelService,
+              private formBuilder: FormBuilder,
+              private resourceSubmissionService: ResourceSubmissionService) {
   }
 
   ngOnInit() {
+    this.resourceSubmission = new ResourceSubmission()
+    this.userForm = this.formBuilder.group({
+      firstName: [],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
+      hiCommitments: ['', Validators.required],
+      facility: ['', Validators.required],
+      livingSober: [],
+      twelveTwelve: [],
+      aaPaper:[],
+      aaPocket: [],
+      grapevine: [],
+      laVina: [],
+      newPacket: [],
+      litRack: [],
+      other: [],
+      comments: []
+    });
+
+
     this.panelService.getCurrentPanels()
       .subscribe((data: Panels) => {
         data.feed.entry.forEach( ent => {
@@ -122,7 +149,7 @@ export class ResourcesComponent implements OnInit {
       }
     });
     this.livingSoberFlag = false;
-    this.twelveNTwelve = false;
+    this.twelveTwelve = false;
     this.aaPaper = false;
     this.aaPocket = false;
     this.grapevine= false;
@@ -132,6 +159,54 @@ export class ResourcesComponent implements OnInit {
     this.other = false;
   }
 
+  showError(controlName: string){
+    if(this.userForm.get(controlName)){
+      return this.userForm.get(controlName).errors != null && this.submitted
+    }
+    return false
+    
+  }
+
+  checkMadeSelection(){
+    this.madeSelection = this.livingSoberFlag || this.twelveTwelve || this.aaPaper || this.aaPocket || 
+                          this.grapevine || this.laVina ||this.newPacket || this.litRack || this.other 
+  }
+
+  onSubmit(form: NgForm) {
+    console.log("initiate submission")
+    this.submitted = true;
+    this.checkMadeSelection()
+    if (this.userForm.invalid || !this.madeSelection) {
+      console.log('failed Submitting...')
+      return;
+    }
+
+    this.resourceSubmission.email = this.userForm.controls.email.value
+    this.resourceSubmission.firstName = this.userForm.controls.firstName.value
+    this.resourceSubmission.lastName = this.userForm.controls.lastName.value
+    this.resourceSubmission.hiCommitments = this.userForm.controls.hiCommitments.value
+    this.resourceSubmission.facility = this.userForm.controls.facility.value
+    this.resourceSubmission.phone = this.userForm.controls.phone.value
+    this.resourceSubmission.livingSober = this.userForm.controls.livingSober.value
+    this.resourceSubmission.twelveTwelve = this.userForm.controls.twelveTwelve.value
+    this.resourceSubmission.aaPaper = this.userForm.controls.aaPaper.value
+    this.resourceSubmission.aaPocket = this.userForm.controls.aaPocket.value
+    this.resourceSubmission.grapevine = this.userForm.controls.grapevine.value
+    this.resourceSubmission.laVina = this.userForm.controls.laVina.value
+    this.resourceSubmission.newPacket = this.userForm.controls.newPacket.value
+    this.resourceSubmission.litRack = this.userForm.controls.litRack.value
+    this.resourceSubmission.other = this.userForm.controls.other.value
+    this.resourceSubmission.comments = this.userForm.controls.comments.value
+ 
+    console.log(this.resourceSubmission)
+    this.postResourceForm(form.value)
+  }
+
+  postResourceForm(form: NgForm) {
+    console.log("resource: "+ this.resourceSubmission)
+     this.resourceSubmissionService.postResourceForm(this.resourceSubmission)
+       .subscribe(() => console.log("yay subscribe called"))
+  }
 
   getStringMonth(month: number): string {
     if (month === 1) {
@@ -162,7 +237,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   changeStatus(event: any) {
-    console.log(event.currentTarget.id);
+    
     if (event.currentTarget.id === 'livingSoberId') {
       if (!this.livingSoberFlag) {
         this.livingSoberFlag = true;
@@ -182,10 +257,10 @@ export class ResourcesComponent implements OnInit {
         this.aaPocket = false;
       }
     } else if (event.currentTarget.id === 'twelveId') {
-      if (!this.twelveNTwelve) {
-        this.twelveNTwelve = true;
+      if (!this.twelveTwelve) {
+        this.twelveTwelve = true;
       } else {
-        this.twelveNTwelve = false;
+        this.twelveTwelve = false;
       }
     } else if (event.currentTarget.id === 'grapeId') {
       if (!this.grapevine) {
@@ -218,6 +293,7 @@ export class ResourcesComponent implements OnInit {
         this.other = false;
       }
     }
+    this.checkMadeSelection()
   }
 }
 
