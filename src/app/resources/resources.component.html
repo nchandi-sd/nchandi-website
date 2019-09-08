@@ -87,47 +87,50 @@
               </div>
               <div class="md-row8">
                 <div class= form-container>
-                  <form>
+                  <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
                     <div class="row">
 
                       <label class="form-label" style="padding-left: 15px;">Name</label>
                       <div class="col-12 col-lg-6">
-                        <input name="firstName" type="text" class="form-control" placeholder="First">
+                        <input formControlName="firstName" name="firstName" type="text" class="form-control" placeholder="First" required>
+                        <p *ngIf="showError('firstName')" class="help-block">A name is required.</p>
                       </div>
 
                       <div class="col-12 col-lg-6">
-                        <input name ="lastName" type="text" class="form-control" placeholder="Last">
+                        <input formControlName="lastName" name ="lastName" type="text" class="form-control" placeholder="Last">
+                        <p *ngIf="showError('lastName')" class="help-block">A name required.</p>
                       </div>
 
                       <div class="col-12 col-lg-6">
                         <label class="form-label">H&I Commitments</label>
-                        <select name="hiCommitments" class="browser-default custom-select">
-                          <option selected>Open this select menu</option>
-                          <option value="1">Panel Leader</option>
-                          <option value="2">Panel Coordinator</option>
-                          <option value="3">Board Member</option>
+                        <select formControlName="hiCommitments" name="hiCommitments" class="browser-default custom-select">
+                          <option value="Panel Leader">Panel Leader</option>
+                          <option value="Panel Coordinator">Panel Coordinator</option>
+                          <option value="Board Member">Board Member</option>
                         </select>
+                        <p *ngIf="showError('hiCommitments')" class="help-block">A valid selection is required.</p>
                       </div>
 
                       <div class="col-12 col-lg-6">
                         <label class="form-label">Facility</label>
-                        <select name="facility" class="browser-default custom-select">
-                          <option selected>Open this select menu</option>
+                        <select formControlName="facility" name="facility" class="browser-default custom-select">
                           <option *ngFor="let facility of facilities" value={{facility}}>
                             {{facility}}
                           </option>
                         </select>
+                        <p *ngIf="showError('facility')" class="help-block">Select a facility.</p>
                       </div>
 
                       <div class="col-9">
                         <label class="form-label">Email</label>
-                        <input name="email" type="email" class="form-control" placeholder="Email">
+                        <input formControlName="email" name="email" type="email" class="form-control" placeholder="Email">
+                        <p *ngIf="showError('email')" class="help-block">A valid email is required.</p>
                       </div>
 
                       <div class="col-4">
                         <label class="form-label">Phone</label>
-
-                        <input name="phone" type="phone" class="form-control" placeholder="Phone Number">
+                        <input formControlName="phone" name="phone" type="phone" class="form-control" placeholder="Phone Number">
+                        <p *ngIf="showError('phobe')" class="help-block">A valid phone number is required.</p>
                       </div>
 
                       <div class="col-12">
@@ -139,7 +142,8 @@
                           <input name="livingSober" type="checkbox" class="custom-control-input" id="livingSoberId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="livingSoberId">Living Sober</label>
                           <div *ngIf="livingSoberFlag">
-                            <input type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY">
+                            <input formControlName="livingSober" type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY" required>
+                            <p *ngIf="showError('livingSober')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -148,8 +152,9 @@
                         <div class="custom-control custom-checkbox">
                           <input name="twelveTwelve" type="checkbox" class="custom-control-input" id="twelveId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="twelveId">12 Steps and 12 Traditions</label>
-                          <div *ngIf="twelveNTwelve">
-                            <input type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY">
+                          <div *ngIf="twelveTwelve">
+                            <input formControlName="twelveTwelve" type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY" required>
+                            <p *ngIf="showError('twelveTwelve')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -159,7 +164,8 @@
                           <input name="aaPaper" type="checkbox" class="custom-control-input" id="aaPaperId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="aaPaperId">Alcoholic Anonymous <i>paperback</i></label>
                           <div *ngIf="aaPaper">
-                            <input type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY">
+                            <input formControlName="aaPaper" type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY" required>
+                            <p *ngIf="showError('aaPaper')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -171,7 +177,8 @@
                           <input name="aaPocket" type="checkbox" class="custom-control-input" id="aaPocketId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="aaPocketId">Alcoholic Anonymous <i>pocket size</i></label>
                           <div *ngIf="aaPocket">
-                            <input type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY">
+                            <input formControlName="aaPocket" type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY" required>
+                            <p *ngIf="showError('aaPocket')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -181,7 +188,8 @@
                           <input name="grapevine" type="checkbox" class="custom-control-input" id="grapeId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="grapeId">Grapevines</label>
                           <div *ngIf="grapevine">
-                            <input type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY">
+                            <input formControlName="grapevine" type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY" required>
+                            <p *ngIf="showError('grapevine')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
 
@@ -192,7 +200,8 @@
                           <input name="laVina" type="checkbox" class="custom-control-input" id="laVinaId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="laVinaId">La Vina</label>
                           <div *ngIf="laVina">
-                            <input type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY">
+                            <input formControlName="laVina" type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY" required>
+                            <p *ngIf="showError('laVina')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -204,7 +213,8 @@
                           <input name="newPacket" type="checkbox" class="custom-control-input" id="newId" (change)=changeStatus($event)>
                           <label class="custom-control-label" for="newId">Newcomer Packets</label>
                           <div *ngIf="newPacket">
-                            <input type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY">
+                            <input formControlName="newPacket" type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY" required>
+                            <p *ngIf="showError('newPacket')"  class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -215,7 +225,8 @@
                           <label class="custom-control-label"for="litId">
                             Literature  Rack w/ Pamphlets</label>
                           <div *ngIf="litRack">
-                            <input type="number" class="form-control" placeholder="Literature Rack QTY"id="Rack_QTY">
+                            <input formControlName="litRack" type="number" class="form-control" placeholder="Literature Rack QTY"id="Rack_QTY" required>
+                            <p *ngIf="showError('litRack')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
@@ -226,21 +237,23 @@
                           <label class="custom-control-label"for="otherId">
                             Other </label>
                           <div *ngIf="other">
-                            <input type="number" class="form-control" placeholder="Other QTY"id="Other_QTY">
+                            <input formControlName="other" type="number" class="form-control" placeholder="Other QTY"id="Other_QTY" required>
+                            <p *ngIf="showError('other')" class="help-block">A quantity is required.</p>
                           </div>
                         </div>
                       </div>
+                      <p *ngIf="!madeSelection && submitted" class="help-block">You must request at least 1 resource.</p>
 
                       <div class="form-spacer"></div>
                       <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
                       <div class="col-12 col-lg-12">
-                        <textarea name="comments" class="form-control" rows="3" id="comment"></textarea>
+                        <textarea formControlName="comments" name="comments" class="form-control" rows="3" id="comment"></textarea>
                       </div>
                     </div>
+                    <button type="submit" class="btn submit-button align-self-end">Submit</button>
                   </form>
                 </div>
               </div>
-              <button class="btn submit-button align-self-end">Submit</button>
             </div>
           </div>
         </div>
