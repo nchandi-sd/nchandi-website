@@ -13,10 +13,7 @@
   max-width: 1920px;
   background-size: cover;
 }
-.literature-container{
-  margin-right: 12px;
-  margin-left: 12px;
-}
+
 .resources-container{
   min-height: 800px;
 }
@@ -30,8 +27,9 @@
   font-size: 16px;
 }
 .committeeReports {
-  text-align:left;
+  list-style: none;
   float: left;
+  margin: 0 auto
 }
 .report-title {
   font-size: 20px;
@@ -55,12 +53,45 @@
   color: lightgrey;
   -webkit-text-stroke-width: .3px;
 }
-.form-sheet{
+#sub-container{
+  overflow: hidden;
+  position: relative;
   margin: 0 auto;
   border-radius: 40px;
   padding: 30px 0;
   max-width: 1200px;
   background-color: white;
+  transition: max-height 1s ease-out
+}
+.hidden{
+  display: none;
+}
+.show{
+  opacity: 1 !important;
+}
+
+#thank-you-container{
+  opacity: 0;
+  color: white;
+  margin: 20px auto;
+  font-size: 1.3rem;
+  font-weight: bold;
+  transition: .5s
+}
+
+.loading-container{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(2, 0, 85, 0.288);
+  z-index: 100;
+}
+.spinner-container{
+  margin: auto 0;
+  width: 8rem;
+  height: 8rem;
 }
 .form-title{
   text-align: center;
@@ -70,7 +101,7 @@
   padding: 10px;
   background-color: var(--primary);
   color: white;
-  margin: 0 auto;
+  margin: 20px auto;
   width: 200px;
   border-radius: 30px;
 }
@@ -80,7 +111,7 @@
   color: var(--primary-dark);
   width: 100%;
 }
-.form-label 2{
+.form-label {
   font-weight: bold;
   color: var(--primary-dark);
   width: 100%;
@@ -97,9 +128,7 @@
   font-size: 24px;
   margin-left: -24px
 }
-.report-sheet2{
-  margin-left:72px;
-}
+
 
 
 /*Extra large devices (large desktops, 1200px and up)*/
@@ -111,9 +140,7 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
-  .report-sheet2{
-    margin-left:0;
-  }
+ 
   .quote-content{
     text-align: right;
     margin-top: 64px;
@@ -137,9 +164,7 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
-  .report-sheet2{
-    margin-left:0;
-  }
+ 
   .quote-content{
     text-align: right;
     margin-top: 64px;
@@ -163,9 +188,7 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
-  .report-sheet2{
-    margin-left:24px;
-  }
+ 
   .quote-content{
     text-align: right;
     margin-top: 48px;
@@ -181,6 +204,9 @@
   .container{
     width:100%;
   }
+  #thank-you-container{
+    font-size: 2rem;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up)*/
@@ -193,9 +219,7 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
-  .report-sheet2{
-    margin-left:48px;
-  }
+ 
   .quote-content{
     text-align: right;
     margin-top: 48px;

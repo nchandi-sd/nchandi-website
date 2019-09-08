@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,6 +19,9 @@ export class ResourceSubmissionService {
     let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'})
     let options = {headers: headers}
     return this.https.post<any>(this.submissionUrl, JSON.stringify(request), options)
+
+    //use for mocking of submission.  no post will be made
+    //return of(null).pipe(delay(2000))
     };
   
 

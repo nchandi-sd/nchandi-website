@@ -9,6 +9,7 @@ import {Panels} from '../model/Panels';
 import {ResourceSubmissionService} from './resource-submission.service'
 import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {ResourceSubmission} from '../model/ResourceSubmission';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-resources',
@@ -36,6 +37,8 @@ export class ResourcesComponent implements OnInit {
   userForm: FormGroup;
   resourceSubmission: ResourceSubmission
   madeSelection: boolean =  false
+
+  sendDisabled: boolean = false
 
 
   constructor(private storage: AngularFireStorage,
@@ -199,13 +202,23 @@ export class ResourcesComponent implements OnInit {
     this.resourceSubmission.comments = this.userForm.controls.comments.value
  
     console.log(this.resourceSubmission)
+    this.sendDisabled = true
     this.postResourceForm(form.value)
   }
 
   postResourceForm(form: NgForm) {
     console.log("resource: "+ this.resourceSubmission)
      this.resourceSubmissionService.postResourceForm(this.resourceSubmission)
-       .subscribe(() => console.log("yay subscribe called"))
+       .subscribe(() => {
+         this.sendDisabled = false
+        console.log("yay subscribe called")
+        //display success
+
+        //hide form
+        document.getElementById('sub-container').classList.add("hidden")
+        document.getElementById("thank-you-container").classList.add("show")
+
+       })
   }
 
   getStringMonth(month: number): string {

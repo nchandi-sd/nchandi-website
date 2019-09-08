@@ -48,16 +48,19 @@
               <div class="row">
 
                 <!-- add list of report resource here : 6 per col-->
-                <div class="col-md">
-                  <ul class="committeeReports" style="list-style: none;">
+                <div class="col-12">
+                  <div class="mx-auto h-100 d-flex">
+                  <ul class="committeeReports">
                     <li class="report-li" *ngFor="let report of committeeReports; let i = index">
                       <div *ngIf="report">
-                        <span class="report-title"><br>{{report.monthDate}}</span><br>
+                        <span class="report-title">{{report.monthDate}}</span><br>
                         <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
                         <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
+                        <br>
                       </div>
                     </li>
                   </ul>
+                </div>
                 </div>
 
               </div>
@@ -72,8 +75,11 @@
       </div>
       <div class="spacer"></div>
 
-      <div class="literature-container">
-        <div class="form-sheet">
+     
+        <div id="sub-container" class="form-sheet">
+          <div class="loading-container d-flex justify-content-center" *ngIf="sendDisabled" >
+              <div class="spinner-border text-primary spinner-container"></div>
+          </div>
           <div class="container">
             <div class="row">
               <div class="md-row4">
@@ -250,14 +256,17 @@
                         <textarea formControlName="comments" name="comments" class="form-control" rows="3" id="comment"></textarea>
                       </div>
                     </div>
-                    <button type="submit" class="btn submit-button align-self-end">Submit</button>
+                    <button [disabled]="sendDisabled" type="submit" class="btn submit-button align-self-end">Submit</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div id="thank-you-container" class="hide text-center">
+          Your form has been submitted.  Thank you.
+        </div>
+      
       <div class="spacer"></div>
       <app-footer></app-footer>
     </div>
