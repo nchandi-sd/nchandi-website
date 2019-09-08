@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
 import {HttpClient} from '@angular/common/http';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
@@ -23,6 +23,8 @@ import {MonthlyReport} from '../model/MonthlyReport';
   styleUrls: ['user.component.scss']
 })
 export class UserComponent implements OnInit {
+
+  // @ViewChild('alert', {static : true} )private alert: ElementRef;
 
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
@@ -62,7 +64,17 @@ export class UserComponent implements OnInit {
   uploadState: Subscription;
   panelMaterial: PanelMaterials = new PanelMaterials();
   monthlyReport: MonthlyReport = new MonthlyReport();
-  statusMessage: string;
+  resourceMessage: string;
+  fileErrorMessage: string;
+  titleMessage: string;
+  monthMessage: string;
+  reportTypeMessage: string;
+  resourceAlert: boolean;
+  uploadAlert: boolean;
+  reportTypeAlert: boolean;
+  monthAlert: boolean;
+  titleAlert: boolean;
+  uploaded: boolean;
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
@@ -85,8 +97,20 @@ export class UserComponent implements OnInit {
         this.createForm(this.user.name);
       }
     });
-  }
+    this.resourceAlert = false;
+    this.uploadAlert = false;
+    this.reportTypeAlert = false;
+    this.monthAlert = false;
+    this.titleAlert = false;
+    this.uploaded = false;
 
+    setTimeout(() => this.resourceAlert = false, 10000);
+    setTimeout(() => this.uploadAlert = false, 10000);
+    setTimeout(() => this.reportTypeAlert = false, 10000);
+    setTimeout(() => this.monthAlert = false, 10000);
+    setTimeout(() => this.titleAlert = false, 10000);
+
+  }
   createForm(name) {
     this.profileForm = this.fb.group({
       name: [name, Validators.required]
@@ -102,27 +126,43 @@ export class UserComponent implements OnInit {
       });
   }
 
-  validateForm(): boolean{
-    if (this.panelMaterial )
-    if (this.title == null) {
-      this.statusMessage = 'Please add a title to your document.';
-      return false;
-    } else if (this.getMonth == null) {
-      this.statusMessage = 'Please select a month for your report.';
-      return false;
-    } else if (this.report == null) {
-      this.statusMessage = 'Please select report type to upload.';
-      return false;
-    } else if (this.basePath == null) {
-      this.statusMessage = 'Please select the month for when your report is.';
+  validateForm(): boolean {
+    if (this.resource == null) {
+      this.resourceAlert = true;
+      this.resourceMessage = 'Please select a resource type';
       return false;
     }
+    if (this.resource === 'Panel Material' || this.resource === 'General Resource') {
+      if (this.title == null || this.title === '') {
+        this.titleAlert = true;
+        this.titleMessage = 'Please enter a document title';
+      }
+      if ((!this.uploaded && this.title != null) || (!this.uploaded && this.title === '')) {
+        this.uploadAlert = true;
+        this.fileErrorMessage = 'Please choose a file to upload';
+        return false;
+      }
+    }
+    if (this.resource === 'Monthly Report') {
+      if (this.report == null) {
+        this.reportTypeAlert = true;
+        this.reportTypeMessage = 'Choose a report type';
+      }
+      if (this.basePath == null) {
+        this.monthAlert = true;
+        this.monthMessage = 'Choose a month';
+      }
+      if (this.report != null && this.basePath != null && !this.uploaded) {
+        this.uploadAlert = true;
+        this.fileErrorMessage = 'Please choose a file to upload';
+        return false;
+      }
+    }
+
       return true;
   }
 
   onSubmit(event) {
-    // start form validations
-    this.validateForm();
     // const id = Math.random().toString(36).substring(2);
     if (this.validateForm()) {
       if (this.resource.toString() === this.resources[0]) {
@@ -132,6 +172,7 @@ export class UserComponent implements OnInit {
         this.uploadState = this.task.snapshotChanges().pipe(
           finalize(() => {
             this.ref.getDownloadURL().subscribe(url => {
+              this.uploaded = false;
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
               this.createPanelMaterial(this.panelMaterial);
@@ -145,6 +186,7 @@ export class UserComponent implements OnInit {
         this.uploadState = this.task.snapshotChanges().pipe(
           finalize(() => {
             this.ref.getDownloadURL().subscribe(url => {
+              this.uploaded = false;
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
               this.createGeneralResource(this.panelMaterial);
@@ -160,6 +202,7 @@ export class UserComponent implements OnInit {
         this.uploadState = this.task.snapshotChanges().pipe(
           finalize(() => {
             this.ref.getDownloadURL().subscribe(url => {
+              this.uploaded = false;
               this.monthlyReport.title = this.title.toString();
               this.monthlyReport.url = url;
               this.monthlyReport.month = this.getMonth(this.basePath);
@@ -171,7 +214,7 @@ export class UserComponent implements OnInit {
         ).subscribe();
       }
     } else {
-      //invalid form, do not submit.
+      // invalid form, do not submit.
     }
   }
 
@@ -227,23 +270,35 @@ export class UserComponent implements OnInit {
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
+    this.uploaded = true;
   }
 
   monthChangeHandler(event: any) {
     this.basePath = event.target.value;
+    this.monthAlert = false;
   }
 
   resourceChangeHandler(event: any) {
     this.resource = event.target.value;
+    this.resourceAlert = false;
   }
 
   reportChangeHandler(event: any) {
     this.report = event.target.value;
+    this.reportTypeAlert = false;
   }
 
   titleChangeHandler(event: any) {
     this.title = event.target.value;
+    this.titleAlert = false;
   }
+
+  clearForm(form: NgForm) {
+    form.reset();
+  }
+  // closeAlert() {
+  //   this.alert.nativeElement.remove('alert');
+  // }
 }
 
 

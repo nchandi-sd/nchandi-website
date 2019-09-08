@@ -15,9 +15,7 @@ export class ContactComponent implements OnInit {
   userForm: FormGroup;
   contact: Contact;
 
-  constructor(private formBuilder: FormBuilder, private contactService: ContactService) {
-
-  }
+  constructor(private formBuilder: FormBuilder, private contactService: ContactService) {}
 
   invalidFirstName() {
     return (this.submitted && this.userForm.controls.first_name.errors != null);
@@ -38,8 +36,6 @@ export class ContactComponent implements OnInit {
   invalidMessage() {
     return (this.submitted && this.userForm.controls.message.errors != null);
   }
-
- 
 
   ngOnInit() {
     this.contact = new Contact()

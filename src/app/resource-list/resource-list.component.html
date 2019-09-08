@@ -1,6 +1,8 @@
 <div *ngIf="selectedResouce == availableResources[0]" class="panel-material-container">
-  <h2>Current Panel Material</h2>
- 
+  <div class="reports-title"> Current Panel Material</div>
+
+  <div class="spacer"></div>
+
   <div *ngFor="let item of panelMaterials">
     <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">DELETE</button>
     <a href="{{item.url}}" target="_blank">{{item.title}}</a>
@@ -9,15 +11,19 @@
 
 </div>
 <div *ngIf="selectedResouce == availableResources[1]" class="general-resouces-container">
-    <h2>Current General Resouces</h2>
- 
-    <div *ngFor="let item of generalResources">
+  <div class="reports-title"> Current General Resources</div>
+
+  <div class="spacer"></div>
+
+  <div *ngFor="let item of generalResources">
       <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">DELETE</button>
       <a href="{{item.url}}" target="_blank">{{item.title}}</a>
     </div>
 </div>
 <div *ngIf="selectedResouce == availableResources[2]" class="monthly-reports-container">
-    <h2>Current Monthly Reports</h2>
+  <div class="reports-title"> Current Monthly Reports</div>
+
+  <div class="spacer"></div>
  
     <div *ngFor="let item of committeeReports">
       <div class="month-header">{{item.monthDate}}</div>

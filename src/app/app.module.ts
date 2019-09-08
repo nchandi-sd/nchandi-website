@@ -33,6 +33,7 @@ import {UserResolver} from './user/user.resolver';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import {ResourceService} from './resources/resource.service';
+import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {ResourceService} from './resources/resource.service';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ReactiveFormsModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgbAlertModule
   ],
   providers: [
     PanelService,
