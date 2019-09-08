@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { CommitteeReport } from '../model/CommitteeReport';
-import {ResourceService} from '../resources/resource.service';
-import {PanelMaterials} from '../model/Panel-Materials';
+import { ResourceService } from '../resources/resource.service';
+import { PanelMaterials } from '../model/Panel-Materials';
 import { MonthlyReport } from '../model/MonthlyReport';
 
 @Component({
@@ -19,7 +19,7 @@ export class ResourceListComponent implements OnInit {
   generalResources: PanelMaterials[] = null;
   committeeReports: Array<CommitteeReport> = [];
 
-  constructor(private resourceService: ResourceService) {}
+  constructor(private resourceService: ResourceService) { }
 
   ngOnInit() {
     this.resourceService.getPanelMaterials().subscribe(data => {
@@ -41,31 +41,36 @@ export class ResourceListComponent implements OnInit {
         } as PanelMaterials;
       });
     });
+   
     this.resourceService.getMonthlyReports().subscribe(data => {
+      
       this.monthlyReports = data.map(e => {
-        console.log('retrieved monthly reports from firestore: '+e.payload.doc.id);
-        return {
+        console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
+        
+        let item = {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
         } as MonthlyReport;
+        
+        return item
       });
 
-    // sort reports by timestamp added
-    this.monthlyReports.sort(function (a, b) {
-      if (a.month < b.month) {
-        return -1;
-      }
-      if (a.month > b.month) {
-        return 1;
-      }
-      return 0;
-    });
-
-    for (let i = 0; i < this.monthlyReports.length; i++) {
+      this.monthlyReports.sort(function (a, b) {
+        console.log("called here")
+        if (a.month < b.month) {
+          return -1;
+        }
+        if (a.month > b.month) {
+          return 1;
+        }
+        return 0;
+      })
+  
+      for (let i = 0; i < this.monthlyReports.length; i++) {
         let containsReport: boolean = false
 
-        for(let j = 0; j < this.committeeReports.length; j++){
-          if(this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)){
+        for (let j = 0; j < this.committeeReports.length; j++) {
+          if (this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)) {
             containsReport = true;
             if (this.monthlyReports[i].title.endsWith('Minutes')) {
               this.committeeReports[j].minId = this.monthlyReports[i].id;
@@ -80,51 +85,63 @@ export class ResourceListComponent implements OnInit {
           }
         }
 
-      if (!containsReport) {
-        let report = new CommitteeReport()
-        this.committeeReports.push(report);
-        report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
-        if (this.monthlyReports[i].title.endsWith('Minutes')) {
-          report.minId = this.monthlyReports[i].id;
-          report.minLink = this.monthlyReports[i].url;
-          report.minutes = this.monthlyReports[i].title;
-        } else if (this.monthlyReports[i].title.endsWith('Report')) {
-          report.finId = this.monthlyReports[i].id;
-          report.finLink = this.monthlyReports[i].url;
-          report.financialReport = this.monthlyReports[i].title;
+        if (!containsReport) {
+          let report = new CommitteeReport()
+          this.committeeReports.push(report);
+          report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
+          report.monthInt = this.monthlyReports[i].month
+          if (this.monthlyReports[i].title.endsWith('Minutes')) {
+            report.minId = this.monthlyReports[i].id;
+            report.minLink = this.monthlyReports[i].url;
+            report.minutes = this.monthlyReports[i].title;
+          } else if (this.monthlyReports[i].title.endsWith('Report')) {
+            report.finId = this.monthlyReports[i].id;
+            report.finLink = this.monthlyReports[i].url;
+            report.financialReport = this.monthlyReports[i].title;
+          }
         }
       }
-    }
-  });
+
+      this.committeeReports.sort(function (a, b) {
+        console.log("called here")
+        if (a.monthInt < b.monthInt) {
+          return -1;
+        }
+        if (a.monthInt > b.monthInt) {
+          return 1;
+        }
+        return 0;
+      })
+    });
   }
 
-  deleteItem(event: any){
+  deleteItem(event: any) {
     let id = event.target.getAttribute("id")
     let type = event.target.getAttribute("type")
-    if(type === this.availableResources[0]){
+    if (type === this.availableResources[0]) {
       this.resourceService.deleteItem("Panel Materials", id)
-    }else if(type ===this.availableResources[1]){
+    } else if (type === this.availableResources[1]) {
       this.resourceService.deleteItem("General Resources", id)
-    }else if(type ===this.availableResources[2]){
+    } else if (type === this.availableResources[2]) {
       this.resourceService.deleteItem("Monthly Reports", id)
-      this.committeeReports.forEach(function(report, index, obj) {
-        if(report.finId === id){
+      this.committeeReports.forEach(function (report, index, obj) {
+        if (report.finId === id) {
           report.finId = null
           report.finLink = null
           report.financialReport = null
-        }else if(report.minId === id){
+        } else if (report.minId === id) {
           report.minId = null
           report.minLink = null
           report.minutes = null
         }
 
-        if(!report.finId && !report.minId){
+        if (!report.finId && !report.minId) {
           obj.splice(index, 1)
-          index = index-1
+          index = index - 1
         }
       })
     }
-    
+
 
   }
 
@@ -156,6 +173,6 @@ export class ResourceListComponent implements OnInit {
       return 'December';
     }
   }
-  
+
 
 }
