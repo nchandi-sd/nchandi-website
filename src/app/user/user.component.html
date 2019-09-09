@@ -13,7 +13,7 @@
     <div class="spacer"></div>
     <div class="row">
       <div class="col-md-6">
-        <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); clearForm(submitForm)">
+        <form #submitForm="ngForm" (ngSubmit)="onSubmit($event)">
           <div class="container">
             <div class="add-resource-title text-white">
               What type of resource would you like to add?
@@ -45,10 +45,10 @@
 
                 <div class="col-12 col-lg-6">
                     <input
-                      #resourceTitle
                       type="text"
                       placeholder="Title"
-                      (change)="titleChangeHandler($event)">
+                      (change)="titleChangeHandler($event)"
+                      value="{{title}}">
                   </div>
               </div>
             </div>
@@ -62,12 +62,12 @@
 
                 <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
                   <input
+                    #checkboxes
                     type="radio"
                     name="reportType"
                     class="custom-control-input"
                     value="{{report}}"
                     id="{{report}}"
-                    [(ngModel)]="inputTitle"
                     (change)="reportChangeHandler($event)">
                   <label class="custom-control-label" for="{{report}}">{{report}}</label>
                 </div>
@@ -106,7 +106,7 @@
                 <p class="text-white"> Please upload the .pdf report here </p>
                 <div class="custom-file">
                   <input
-                    #uploadBar
+                    #myInput
                     type="file"
                     accept="application/pdf"
                     class="custom-file-input"
@@ -119,7 +119,7 @@
 
               <div *ngIf="!uploadAlert">
                 <div class="progress">
-                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+                  <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
                        [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>

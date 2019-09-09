@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
 
   // @ViewChild('alert', {static : true} )private alert: ElementRef;
   @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
-  @ViewChildren('resourceTitle') resourceTitle: ElementRef;
+  @ViewChild('progressBar') progressBar: ElementRef;
 
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
@@ -179,6 +179,7 @@ export class UserComponent implements OnInit {
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
               this.createPanelMaterial(this.panelMaterial);
+              this.clearForm();
             });
           })
         ).subscribe();
@@ -193,11 +194,13 @@ export class UserComponent implements OnInit {
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
               this.createGeneralResource(this.panelMaterial);
+              this.clearForm();
             });
           })
         ).subscribe();
       } else {
         const year = new Date().getFullYear().toString();
+        console.log(this.basePath.toString() + ' and ' + this.report.toString());
         this.title = this.basePath + '_' + this.report;
         this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
         this.task = this.ref.put(this.fileData);
@@ -212,6 +215,7 @@ export class UserComponent implements OnInit {
               this.monthlyReport.type = this.report;
               this.monthlyReport.timestamp = new Date().getTime();
               this.createMonthlyReport(this.monthlyReport);
+              this.clearForm();
             });
           })
         ).subscribe();
@@ -296,17 +300,14 @@ export class UserComponent implements OnInit {
     this.titleAlert = false;
   }
 
-  clearForm(form: NgForm) {
-    console.log(this.resourceTitle.nativeElement.value.toString());
-    form.reset();
+  clearForm() {
     this.checkboxes.forEach((element) => {
       element.nativeElement.checked = false;
     });
-    this.uploadProgress = this.task.percentageChanges();
+    this.name = '';
+    this.title = '';
+    this.uploadProgress = new Observable<number>();
   }
-  // closeAlert() {
-  //   this.alert.nativeElement.remove('alert');
-  // }
 }
 
 
