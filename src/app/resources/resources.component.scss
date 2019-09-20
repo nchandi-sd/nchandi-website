@@ -3,6 +3,9 @@
   width: 100%;
 }
 .container{width: 300px}
+.monthly-side-container{
+  margin-left: 50px;
+}
 .help-block{
   color:red;
   font-weight: bold;
@@ -28,10 +31,11 @@
 }
 .committeeReports {
   list-style: none;
-  float: left;
-  margin: 0 auto
+  padding: 0px;
+  text-align: center;
 }
 .report-title {
+  text-align: center;
   font-size: 20px;
   -webkit-text-stroke-width: .7px;
 }

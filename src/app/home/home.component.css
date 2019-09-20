@@ -39,6 +39,9 @@
 .btn:hover{
   transform: scale(1.1);
 }
+.btn:active:focus {
+  background-color: var(--primary) !important;
+}
 button:focus{
   outline: none;
 }

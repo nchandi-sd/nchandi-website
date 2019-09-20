@@ -8,11 +8,18 @@
 .footer-container {
   margin: 0px 24px 0 24px;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .address{
   text-align: right;
-  font-size: 12px;
+  font-size: 7pt;
+}
+
+.address-col {
+  max-width: 180px;
+  font-size: 7pt;
+  text-align: end;
 }
 
 /*Extra small devices (portrait phones, less than 576px)  */
@@ -32,9 +39,10 @@
     padding-top: 10px;
   }
 
-  .address{
-    text-align: right;
-    font-size: 14px;
+  .address-col {
+    max-width: 100%;
+    font-size: 10pt;
+    text-align: end;
   }
 }
 
@@ -51,10 +59,7 @@
     margin: 0px 50px 0 50px;
     padding-top: 10px;
   }
-  .address{
-    text-align: right;
-    font-size: 15px;
-  }
+
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -71,10 +76,6 @@
     padding-top: 10px;
   }
 
-  .address{
-    text-align: right;
-    font-size: 16px;
-  }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
@@ -89,11 +90,6 @@
   .footer-container {
     margin: 0px 50px 0 50px;
     padding-top: 10px;
-  }
-
-  .address{
-    text-align: right;
-    font-size: 16px;
   }
 }
 

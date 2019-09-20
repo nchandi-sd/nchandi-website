@@ -61,13 +61,13 @@
         width: 100%;
     }
   .img-fluid{
-    max-height:400px;
+    max-height:100px;
   }
 }
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (max-width: 576px) {
   .img-fluid{
-    max-height:300px;
+    max-height:100px;
   }
 }

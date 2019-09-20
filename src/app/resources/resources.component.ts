@@ -308,5 +308,6 @@ export class ResourcesComponent implements OnInit {
     }
     this.checkMadeSelection()
   }
+
 }
 

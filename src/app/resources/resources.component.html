@@ -6,18 +6,17 @@
     <div class="resources-container">
       <div class="row">
         <div class="col-md-3 flex-center">
-          <div class="resources-side-container">
+          <div class="row">
 
-            <div class="report-sheet report-content">
-              <h3 class="flex-center title"><u>Panel Materials</u></h3>
-              <div class="container">
-                <div class="row">
-                  <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let panel of panelMaterials">
-                      <strong><u><a class="genLink" href="{{panel.url}}" id="link" target="_blank">{{panel.title}}</a></u></strong>
-                    </li>
-                  </ul>
-                </div>
+            <div class="resources-side-container">
+
+              <div class="report-sheet report-content">
+                <h3 class="title flex-center"> <u>Panel Materials</u> </h3>
+                <ul class="committeeReports">
+                  <li class="report-li" *ngFor="let panel of panelMaterials">
+                    <strong><u><a class="genLink" href="{{panel.url}}" id="link" target="_blank">{{panel.title}}</a></u></strong>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -27,42 +26,88 @@
           <div class="resources-side-container">
 
             <div class="report-sheet report-content">
-              <h3 class="flex-center title"><u>General Resources</u></h3>
-              <div class="container">
-                <div class="row">
-                  <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let resource of generalResources">
-                      <strong><u><a class="genLink" href="{{resource.url}}" id="link2" target="_blank">{{resource.title}}</a></u></strong>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <h3 class="title"><u>General Resources</u></h3>
+              <ul class="committeeReports">
+                <li class="report-li" *ngFor="let resource of generalResources">
+                  <strong><u><a class="genLink" href="{{resource.url}}" id="link" target="_blank">{{resource.title}}</a></u></strong>
+                </li>
+              </ul>
+
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
-          <div class="report-sheet2 report-content">
-            <h3 class="flex-center title"><u>NCHANDI Monthly Reports</u></h3>
-            <div class="container">
-              <div class="row">
+          <div class="monthly-side-container">
+            <div class="report-sheet2 report-content">
+              <h3 class="title flex-center"><u>NCHANDI Monthly Reports</u></h3>
+              <div class="container">
+                <div class="row">
 
-                <!-- add list of report resource here : 6 per col-->
-                <div class="col-12">
-                  <div class="mx-auto h-100 d-flex">
-                  <ul class="committeeReports">
-                    <li class="report-li" *ngFor="let report of committeeReports; let i = index">
-                      <div *ngIf="report">
-                        <span class="report-title">{{report.monthDate}}</span><br>
-                        <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
-                        <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
-                        <br>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                </div>
+                  <!-- add list of report resource here : 6 per col-->
+                  <div class="col-md-4">
+                    <div class="mx-auto h-100 d-flex">
+                      <ul class="committeeReports">
+                        <li class="report-li" *ngFor="let report of committeeReports; let i = index">
+                          <div *ngIf="report">
+                            <div *ngIf="report.monthDate==='January' ||
+                                report.monthDate==='February' ||
+                                report.monthDate==='March' ||
+                                report.monthDate==='April'">
+                              <span class="report-title">{{report.monthDate}}</span><br>
+                              <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
+                              <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
+                              <br>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
+                  <div class="col-md-4">
+                    <div class="mx-auto h-100 d-flex">
+                      <ul class="committeeReports">
+                        <li class="report-li" *ngFor="let report of committeeReports; let i = index">
+                          <div *ngIf="report">
+                            <div
+                              *ngIf="report.monthDate==='May' ||
+                                report.monthDate==='June'||
+                                report.monthDate==='July' ||
+                                report.monthDate==='August'">
+                              <span class="report-title">{{report.monthDate}}</span><br>
+                              <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
+                              <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
+                              <br>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="mx-auto h-100 d-flex">
+                      <ul class="committeeReports">
+                        <li class="report-li" *ngFor="let report of committeeReports; let i = index">
+                          <div *ngIf="report">
+                            <div
+                              *ngIf="report.monthDate==='September' ||
+                                  report.monthDate==='October' ||
+                                  report.monthDate==='November' ||
+                                  report.monthDate==='December'">
+                              <span class="report-title">{{report.monthDate}}</span><br>
+                              <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
+                              <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
+                              <br>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -75,198 +120,198 @@
       </div>
       <div class="spacer"></div>
 
-     
-        <div id="sub-container" class="form-sheet">
-          <div class="loading-container d-flex justify-content-center" *ngIf="sendDisabled" >
-              <div class="spinner-border text-primary spinner-container"></div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="md-row4">
-                <h4 class="form-title">Literature Request Form</h4>
-                <div class="form-spacer"></div>
-                <div class="form-blurb">
-                  Thank you for your service bringing the message of AA to those who cannot get to a meeting.
-                  To order literature for the facility you are a panel member of, please complete the form below.
-                  Once we receive your order, we will contact you with delivery and/or pick-up information.
-                </div>
+
+      <div id="sub-container" class="form-sheet">
+        <div class="loading-container d-flex justify-content-center" *ngIf="sendDisabled" >
+          <div class="spinner-border text-primary spinner-container"></div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="md-row4">
+              <h4 class="form-title">Literature Request Form</h4>
+              <div class="form-spacer"></div>
+              <div class="form-blurb">
+                Thank you for your service bringing the message of AA to those who cannot get to a meeting.
+                To order literature for the facility you are a panel member of, please complete the form below.
+                Once we receive your order, we will contact you with delivery and/or pick-up information.
               </div>
-              <div class="md-row8">
-                <div class= form-container>
-                  <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
-                    <div class="row">
+            </div>
+            <div class="md-row8">
+              <div class= form-container>
+                <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
+                  <div class="row">
 
-                      <label class="form-label" style="padding-left: 15px;">Name</label>
-                      <div class="col-12 col-lg-6">
-                        <input formControlName="firstName" name="firstName" type="text" class="form-control" placeholder="First" required>
-                        <p *ngIf="showError('firstName')" class="help-block">A name is required.</p>
-                      </div>
+                    <label class="form-label" style="padding-left: 15px;">Name</label>
+                    <div class="col-12 col-lg-6">
+                      <input formControlName="firstName" name="firstName" type="text" class="form-control" placeholder="First" required>
+                      <p *ngIf="showError('firstName')" class="help-block">A name is required.</p>
+                    </div>
 
-                      <div class="col-12 col-lg-6">
-                        <input formControlName="lastName" name ="lastName" type="text" class="form-control" placeholder="Last">
-                        <p *ngIf="showError('lastName')" class="help-block">A name required.</p>
-                      </div>
+                    <div class="col-12 col-lg-6">
+                      <input formControlName="lastName" name ="lastName" type="text" class="form-control" placeholder="Last">
+                      <p *ngIf="showError('lastName')" class="help-block">A name required.</p>
+                    </div>
 
-                      <div class="col-12 col-lg-6">
-                        <label class="form-label">H&I Commitments</label>
-                        <select formControlName="hiCommitments" name="hiCommitments" class="browser-default custom-select">
-                          <option value="Panel Leader">Panel Leader</option>
-                          <option value="Panel Coordinator">Panel Coordinator</option>
-                          <option value="Board Member">Board Member</option>
-                        </select>
-                        <p *ngIf="showError('hiCommitments')" class="help-block">A valid selection is required.</p>
-                      </div>
+                    <div class="col-12 col-lg-6">
+                      <label class="form-label">H&I Commitments</label>
+                      <select formControlName="hiCommitments" name="hiCommitments" class="browser-default custom-select">
+                        <option value="Panel Leader">Panel Leader</option>
+                        <option value="Panel Coordinator">Panel Coordinator</option>
+                        <option value="Board Member">Board Member</option>
+                      </select>
+                      <p *ngIf="showError('hiCommitments')" class="help-block">A valid selection is required.</p>
+                    </div>
 
-                      <div class="col-12 col-lg-6">
-                        <label class="form-label">Facility</label>
-                        <select formControlName="facility" name="facility" class="browser-default custom-select">
-                          <option *ngFor="let facility of facilities" value={{facility}}>
-                            {{facility}}
-                          </option>
-                        </select>
-                        <p *ngIf="showError('facility')" class="help-block">Select a facility.</p>
-                      </div>
+                    <div class="col-12 col-lg-6">
+                      <label class="form-label">Facility</label>
+                      <select formControlName="facility" name="facility" class="browser-default custom-select">
+                        <option *ngFor="let facility of facilities" value={{facility}}>
+                          {{facility}}
+                        </option>
+                      </select>
+                      <p *ngIf="showError('facility')" class="help-block">Select a facility.</p>
+                    </div>
 
-                      <div class="col-9">
-                        <label class="form-label">Email</label>
-                        <input formControlName="email" name="email" type="email" class="form-control" placeholder="Email">
-                        <p *ngIf="showError('email')" class="help-block">A valid email is required.</p>
-                      </div>
+                    <div class="col-9">
+                      <label class="form-label">Email</label>
+                      <input formControlName="email" name="email" type="email" class="form-control" placeholder="Email">
+                      <p *ngIf="showError('email')" class="help-block">A valid email is required.</p>
+                    </div>
 
-                      <div class="col-4">
-                        <label class="form-label">Phone</label>
-                        <input formControlName="phone" name="phone" type="phone" class="form-control" placeholder="Phone Number">
-                        <p *ngIf="showError('phobe')" class="help-block">A valid phone number is required.</p>
-                      </div>
+                    <div class="col-4">
+                      <label class="form-label">Phone</label>
+                      <input formControlName="phone" name="phone" type="phone" class="form-control" placeholder="Phone Number">
+                      <p *ngIf="showError('phobe')" class="help-block">A valid phone number is required.</p>
+                    </div>
 
-                      <div class="col-12">
-                        <label class="form-label">Literature Request</label>
-                      </div>
+                    <div class="col-12">
+                      <label class="form-label">Literature Request</label>
+                    </div>
 
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="livingSober" type="checkbox" class="custom-control-input" id="livingSoberId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="livingSoberId">Living Sober</label>
-                          <div *ngIf="livingSoberFlag">
-                            <input formControlName="livingSober" type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY" required>
-                            <p *ngIf="showError('livingSober')" class="help-block">A quantity is required.</p>
-                          </div>
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="livingSober" type="checkbox" class="custom-control-input" id="livingSoberId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="livingSoberId">Living Sober</label>
+                        <div *ngIf="livingSoberFlag">
+                          <input formControlName="livingSober" type="number" class="form-control" placeholder="Living Sober QTY" id="LS_QTY" required>
+                          <p *ngIf="showError('livingSober')" class="help-block">A quantity is required.</p>
                         </div>
-                      </div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="twelveTwelve" type="checkbox" class="custom-control-input" id="twelveId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="twelveId">12 Steps and 12 Traditions</label>
-                          <div *ngIf="twelveTwelve">
-                            <input formControlName="twelveTwelve" type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY" required>
-                            <p *ngIf="showError('twelveTwelve')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="aaPaper" type="checkbox" class="custom-control-input" id="aaPaperId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="aaPaperId">Alcoholic Anonymous <i>paperback</i></label>
-                          <div *ngIf="aaPaper">
-                            <input formControlName="aaPaper" type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY" required>
-                            <p *ngIf="showError('aaPaper')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-spacer"></div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="aaPocket" type="checkbox" class="custom-control-input" id="aaPocketId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="aaPocketId">Alcoholic Anonymous <i>pocket size</i></label>
-                          <div *ngIf="aaPocket">
-                            <input formControlName="aaPocket" type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY" required>
-                            <p *ngIf="showError('aaPocket')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="grapevine" type="checkbox" class="custom-control-input" id="grapeId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="grapeId">Grapevines</label>
-                          <div *ngIf="grapevine">
-                            <input formControlName="grapevine" type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY" required>
-                            <p *ngIf="showError('grapevine')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-
-                      </div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="laVina" type="checkbox" class="custom-control-input" id="laVinaId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="laVinaId">La Vina</label>
-                          <div *ngIf="laVina">
-                            <input formControlName="laVina" type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY" required>
-                            <p *ngIf="showError('laVina')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-spacer"></div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="newPacket" type="checkbox" class="custom-control-input" id="newId" (change)=changeStatus($event)>
-                          <label class="custom-control-label" for="newId">Newcomer Packets</label>
-                          <div *ngIf="newPacket">
-                            <input formControlName="newPacket" type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY" required>
-                            <p *ngIf="showError('newPacket')"  class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="litRack" type="checkbox" class="custom-control-input" id="litId" (change)=changeStatus($event)>
-                          <label class="custom-control-label"for="litId">
-                            Literature  Rack w/ Pamphlets</label>
-                          <div *ngIf="litRack">
-                            <input formControlName="litRack" type="number" class="form-control" placeholder="Literature Rack QTY"id="Rack_QTY" required>
-                            <p *ngIf="showError('litRack')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-12 col-lg-4">
-                        <div class="custom-control custom-checkbox">
-                          <input name="other" type="checkbox" class="custom-control-input" id="otherId" (change)=changeStatus($event)>
-                          <label class="custom-control-label"for="otherId">
-                            Other </label>
-                          <div *ngIf="other">
-                            <input formControlName="other" type="number" class="form-control" placeholder="Other QTY"id="Other_QTY" required>
-                            <p *ngIf="showError('other')" class="help-block">A quantity is required.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <p *ngIf="!madeSelection && submitted" class="help-block">You must request at least 1 resource.</p>
-
-                      <div class="form-spacer"></div>
-                      <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
-                      <div class="col-12 col-lg-12">
-                        <textarea formControlName="comments" name="comments" class="form-control" rows="3" id="comment"></textarea>
                       </div>
                     </div>
-                    <button [disabled]="sendDisabled" type="submit" class="btn submit-button align-self-end">Submit</button>
-                  </form>
-                </div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="twelveTwelve" type="checkbox" class="custom-control-input" id="twelveId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="twelveId">12 Steps and 12 Traditions</label>
+                        <div *ngIf="twelveTwelve">
+                          <input formControlName="twelveTwelve" type="number" class="form-control" placeholder="12x12 QTY" id="12x12_QTY" required>
+                          <p *ngIf="showError('twelveTwelve')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="aaPaper" type="checkbox" class="custom-control-input" id="aaPaperId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="aaPaperId">Alcoholic Anonymous <i>paperback</i></label>
+                        <div *ngIf="aaPaper">
+                          <input formControlName="aaPaper" type="number" class="form-control" placeholder="Soft BB QTY" id="SoftBB_QTY" required>
+                          <p *ngIf="showError('aaPaper')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-spacer"></div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="aaPocket" type="checkbox" class="custom-control-input" id="aaPocketId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="aaPocketId">Alcoholic Anonymous <i>pocket size</i></label>
+                        <div *ngIf="aaPocket">
+                          <input formControlName="aaPocket" type="number" class="form-control" placeholder="Pocket BB QTY" id="Pocket_QTY" required>
+                          <p *ngIf="showError('aaPocket')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="grapevine" type="checkbox" class="custom-control-input" id="grapeId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="grapeId">Grapevines</label>
+                        <div *ngIf="grapevine">
+                          <input formControlName="grapevine" type="number" class="form-control" placeholder="Grapevine QTY" id="GV_QTY" required>
+                          <p *ngIf="showError('grapevine')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="laVina" type="checkbox" class="custom-control-input" id="laVinaId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="laVinaId">La Vina</label>
+                        <div *ngIf="laVina">
+                          <input formControlName="laVina" type="number" class="form-control" placeholder="La Vina QTY" id="LV_QTY" required>
+                          <p *ngIf="showError('laVina')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-spacer"></div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="newPacket" type="checkbox" class="custom-control-input" id="newId" (change)=changeStatus($event)>
+                        <label class="custom-control-label" for="newId">Newcomer Packets</label>
+                        <div *ngIf="newPacket">
+                          <input formControlName="newPacket" type="number" class="form-control" placeholder="New Comer QTY" id="NewComer_QTY" required>
+                          <p *ngIf="showError('newPacket')"  class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="litRack" type="checkbox" class="custom-control-input" id="litId" (change)=changeStatus($event)>
+                        <label class="custom-control-label"for="litId">
+                          Literature  Rack w/ Pamphlets</label>
+                        <div *ngIf="litRack">
+                          <input formControlName="litRack" type="number" class="form-control" placeholder="Literature Rack QTY"id="Rack_QTY" required>
+                          <p *ngIf="showError('litRack')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                      <div class="custom-control custom-checkbox">
+                        <input name="other" type="checkbox" class="custom-control-input" id="otherId" (change)=changeStatus($event)>
+                        <label class="custom-control-label"for="otherId">
+                          Other </label>
+                        <div *ngIf="other">
+                          <input formControlName="other" type="number" class="form-control" placeholder="Other QTY"id="Other_QTY" required>
+                          <p *ngIf="showError('other')" class="help-block">A quantity is required.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <p *ngIf="!madeSelection && submitted" class="help-block">You must request at least 1 resource.</p>
+
+                    <div class="form-spacer"></div>
+                    <label class="form-label" style="padding-left: 15px;">Special Instructions / Comments</label>
+                    <div class="col-12 col-lg-12">
+                      <textarea formControlName="comments" name="comments" class="form-control" rows="3" id="comment"></textarea>
+                    </div>
+                  </div>
+                  <button [disabled]="sendDisabled" type="submit" class="btn submit-button align-self-end">Submit</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
-        <div id="thank-you-container" class="hide text-center">
-          Your form has been submitted.  Thank you.
-        </div>
-      
+      </div>
+      <div id="thank-you-container" class="hide text-center">
+        Your form has been submitted.  Thank you.
+      </div>
+
       <div class="spacer"></div>
       <app-footer></app-footer>
     </div>

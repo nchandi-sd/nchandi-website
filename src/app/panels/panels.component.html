@@ -51,40 +51,40 @@
           <div class="spacer"></div>
 
           <div class="row justify-content-center mt-5">
+            <div class="container">
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header class="disable_ripple contactViewer">
+                    <mat-panel-title><h4 class="text-white"><strong>Treatment Center Contacts</strong></h4></mat-panel-title>
+                  </mat-expansion-panel-header>
 
+                  <table class="contact-table text-white tab-content">
+                    <tr *ngFor="let txChampion of txChampions">
+                      <td><h5 class="contact-content">{{txChampion?.name}}</h5></td>
+                      <td><h5 class="contact-content">{{txChampion?.email}}</h5></td>
+                      <td><h5 class="contact-content">{{txChampion?.phone}}</h5></td>
+                      <td><h5 class="contact-content">Contact method: {{txChampion?.contactMethod}}</h5></td>
+                    </tr>
+                  </table>
 
-            <mat-accordion>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header class="disable_ripple contactViewer">
-                  <mat-panel-title><h4 class="text-white"><strong>Treatment Center Contacts</strong></h4></mat-panel-title>
-                </mat-expansion-panel-header>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header class="disable_ripple contactViewer">
+                    <mat-panel-title><h4 class="text-white"><strong>Correction Center Contacts</strong></h4></mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <table class="contact-table text-white tab-content">
+                    <tr *ngFor="let inChampion of inChampions">
+                      <td><h5 class="contact-content">{{inChampion?.name}}</h5></td>
+                      <td><h5 class="contact-content">{{inChampion?.email}}</h5></td>
+                      <td><h5 class="contact-content">{{inChampion?.phone}}</h5></td>
+                      <td><h5 class="contact-content">Contact method: {{inChampion?.contactMethod}}</h5></td>
+                    </tr>
+                  </table>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
 
-                <table class="contact-table text-white tab-content">
-                  <tr *ngFor="let txChampion of txChampions">
-                    <td><h5 class="contact-content">{{txChampion?.name}}</h5></td>
-                    <td><h5 class="contact-content">{{txChampion?.email}}</h5></td>
-                    <td><h5 class="contact-content">{{txChampion?.phone}}</h5></td>
-                    <td><h5 class="contact-content">Contact method: {{txChampion?.contactMethod}}</h5></td>
-                  </tr>
-                </table>
-
-              </mat-expansion-panel>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header class="disable_ripple contactViewer">
-                  <mat-panel-title><h4 class="text-white"><strong>Correction Center Contacts</strong></h4></mat-panel-title>
-                </mat-expansion-panel-header>
-                <table class="contact-table text-white tab-content">
-                  <tr *ngFor="let inChampion of inChampions">
-                    <td><h5 class="contact-content">{{inChampion?.name}}</h5></td>
-                    <td><h5 class="contact-content">{{inChampion?.email}}</h5></td>
-                    <td><h5 class="contact-content">{{inChampion?.phone}}</h5></td>
-                    <td><h5 class="contact-content">Contact method: {{inChampion?.contactMethod}}</h5></td>
-                  </tr>
-                </table>
-              </mat-expansion-panel>
-            </mat-accordion>
           </div>
-
         </div>
 
         <div class="spacer"></div>
