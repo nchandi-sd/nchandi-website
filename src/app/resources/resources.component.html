@@ -40,7 +40,7 @@
         <div class="col-md-6">
           <div class="monthly-side-container">
             <div class="report-sheet2 report-content">
-              <h3 class="title flex-center"><u>NCHANDI Monthly Reports</u></h3>
+              <h3 class="month-title flex-center"><u>NCHANDI Monthly Reports</u></h3>
               <div class="container">
                 <div class="row">
 
@@ -172,13 +172,13 @@
                       <p *ngIf="showError('facility')" class="help-block">Select a facility.</p>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-9 col-lg-6">
                       <label class="form-label">Email</label>
                       <input formControlName="email" name="email" type="email" class="form-control" placeholder="Email">
                       <p *ngIf="showError('email')" class="help-block">A valid email is required.</p>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-9 col-lg-4">
                       <label class="form-label">Phone</label>
                       <input formControlName="phone" name="phone" type="phone" class="form-control" placeholder="Phone Number">
                       <p *ngIf="showError('phobe')" class="help-block">A valid phone number is required.</p>

@@ -46,6 +46,14 @@
     margin-bottom: 32px;
     -webkit-text-stroke-width: .7px;
 }
+.month-title{
+  font-weight: normal;
+  font-size: 24px;
+  font-family: "Segoe UI", sans-serif;
+  margin-bottom: 32px;
+  -webkit-text-stroke-width: .7px;
+  margin-right: 42px;
+}
 .flex-center ul{
   margin-bottom: 64px
 }
@@ -172,7 +180,7 @@
   .quote-content{
     text-align: right;
     margin-top: 64px;
-    margin-left: 64px;
+    margin-right: 144px;
     font-size: 32px
   }
   .resources-side-container{
@@ -196,7 +204,7 @@
   .quote-content{
     text-align: right;
     margin-top: 48px;
-    margin-left: 24px;
+    margin-right: 144px;
     font-size: 26px
   }
   .resources-side-container{
@@ -223,11 +231,15 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
+
+  .month-title{
+    margin-right: 0px;
+  }
  
   .quote-content{
     text-align: right;
     margin-top: 48px;
-    margin-left: 24px;
+    margin-right: 96px;
     font-size: 26px
   }
   .resources-side-container{
@@ -235,5 +247,7 @@
   }
   .resources-side-container2{
     margin-left: 24px;
+  }
+  .committeeReports {
   }
 }

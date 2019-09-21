@@ -9,12 +9,7 @@
   margin: 0 auto;
   min-height: 100vh;
 }
-.add-resource-title {
-  font-weight: normal;
-  font-size: 24px;
-  font-family: "Segoe UI", sans-serif;
-  -webkit-text-stroke-width: .5px
-}
+
 .custom-control-label{
   color: white;
   font-size: 16px
@@ -34,4 +29,31 @@
   margin: 0 auto;
   width: 400px;
   border-radius: 17px;
+}
+
+.section-header {
+  font-size: x-large;
+}
+
+
+.add-resource-title {
+  font-weight: normal;
+  font-size: 18px;
+  font-family: "Segoe UI", sans-serif;
+  -webkit-text-stroke-width: .5px
+}
+
+@media (min-width: 576px) {
+  .section-header {
+    text-shadow: .5rem .5rem 1rem rgba(0,6,6,.45);
+    font-family: Georgia;
+    font-size: 36px;
+    margin: 20px auto;
+  }
+  .add-resource-title {
+    font-weight: normal;
+    font-size: 24px;
+    font-family: "Segoe UI", sans-serif;
+    -webkit-text-stroke-width: .5px
+  }
 }

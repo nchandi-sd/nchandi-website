@@ -13,7 +13,7 @@
   font-size:large;
 }
 .sub-text {
-  font-size: 14px;
+  font-size: 11px;
 }
 .img-container{
   margin-top: 50px
@@ -74,7 +74,7 @@ button:focus{
   }
   .sub-text {
     font-family: Arial, serif;
-    font-size: large;
+    font-size: medium;
   }
   .img-container{
     margin-top: 50px

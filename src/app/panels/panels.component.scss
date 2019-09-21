@@ -16,7 +16,7 @@
 }
 .mat-expansion-panel-header{
   background: #7BA0C0;
-  font-size: 20px;
+  font-size: 17px;
   font-family: "Segoe UI", serif;
   outline: white;
   elevation: higher;
@@ -85,7 +85,7 @@
 
 .contact-content{
   padding:0 15px 0 15px;
-  font-size: 16px;
+  font-size: 10px;
 }
 .contact-table{
   padding:0 15px 0 15px;
@@ -133,6 +133,10 @@
     margin: 0 48px 0 48px;
     max-width: 1700px;
   }
+  .contact-content{
+    padding:0 15px 0 15px;
+    font-size: 16px;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up)*/
@@ -140,5 +144,16 @@
   .panels-container {
     margin: 0 24px 0 24px;
     max-width: 1700px;
+  }
+  .contact-content{
+    padding:0 15px 0 15px;
+    font-size: 14px;
+  }
+  .mat-expansion-panel-header{
+    background: #7BA0C0;
+    font-size: 20px;
+    font-family: "Segoe UI", serif;
+    outline: white;
+    elevation: higher;
   }
 }

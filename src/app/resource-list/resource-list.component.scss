@@ -4,7 +4,7 @@
 
 .reports-title{
     font-weight: normal;
-    font-size: 36px;
+    font-size: x-large;
     font-family: "Segoe UI", sans-serif;
     -webkit-text-stroke-width: .5px
 }
@@ -20,4 +20,10 @@
     background-color: transparent;
     border: none;
     margin-bottom: 5px;
+}
+
+@media (min-width: 576px) {
+  .reports-title{
+    font-size: 36px;
+  }
 }
