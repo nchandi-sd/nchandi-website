@@ -41,24 +41,18 @@ export class PanelsComponent implements OnInit {
 
   // This is all information that should be stored in a backend- not frontend
   getTxContact() {
+
     this.txChampions[0] = {
-      name: 'Jim R',
-      phone: '(619) 890-2299',
-      email: 'jimbosd619@hotmail.com',
-      contactMethod: 'Text',
-      type: 'tx'
-    };
-    this.txChampions[1] = {
       name: 'Brigette L',
       phone: '(714) 269-4476',
-      email: 'blabar@cox.net',
+      email: 'northcountyhandi@gmail.com',
       contactMethod: 'Any',
       type: 'tx'
     };
-    this.txChampions[2] = {
+    this.txChampions[1] = {
       name: 'Don C',
       phone: '(760) 212-9759',
-      email: 'donald.crites@yahoo.com',
+      email: 'northcountyhandi@gmail.com',
       contactMethod: 'Text',
       type: 'tx'
     };
