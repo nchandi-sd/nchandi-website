@@ -10,6 +10,7 @@ import {LoginComponent} from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
 import { AuthGuard } from './core/auth.guard';
+import {OrientationComponent} from './orientation/orientation.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'orientation',
+    component: OrientationComponent
   },
   {
     path: 'panels',
