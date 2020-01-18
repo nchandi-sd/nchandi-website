@@ -34,6 +34,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import {ResourceService} from './resources/resource.service';
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { OrientationComponent } from './orientation/orientation.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     UserComponent,
     RegisterComponent,
     ResourceListComponent,
+    OrientationComponent,
   ],
   imports: [
     AngularSvgIconModule,

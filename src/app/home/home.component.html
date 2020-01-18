@@ -1,42 +1,77 @@
 <div class="row">
   <div class="col-12 px-0">
     <div class="view">
-      <div class="home-main-container">
-      <div class="full-bg-img">
-        <div class="mask rgba-black-slight flex-start">
-          <div class="container text-center white-text">
-            <div class="text white-text text-center wow fadeInUp">
-                <h1 class="section-header text-white flex-center"> North County Hospitals & Institutions </h1>
-              <div class="sub-text">
-                <i> Sharing the AA message to those who cannot
-                  get to a meeting in North County San Diego </i>
+      <div class="row">
+        <div class="home-main-container">
+          <div class="full-bg-img">
+            <div class="mask rgba-black-slight flex-start">
+              <div class="container text-center white-text">
+                <div class="text white-text text-center wow fadeInUp">
+                  <h1 class="section-header text-white flex-center"> North County Hospitals & Institutions </h1>
+                  <div class="sub-text">
+                    <i> Sharing the AA message to those who cannot
+                      get to a meeting in North County San Diego </i>
+                  </div>
+                  <div class="spacer"></div>
+                  <h3 class="callToAction">
+                    Interested in joining North County H&I? <br> <br>
+                  </h3>
+                  <div class="callToAction">
+                    1. Attend Orientation
+                  </div>
+                  <div class="button-container flex-center">
+                    <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/orientation"
+                            routerLinkActive="active-link">Orientation
+                    </button>
+                  </div>
+                  <div class="callToAction">
+                    2. Consult our resources pages and find an open panel
+                  </div>
+                  <div class="button-container flex-center">
+                    <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/panels"
+                            routerLinkActive="active-link">Open Panels
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-round-lg btn-lg flex-center"
+                            routerLink="/resources" routerLinkActive="active-link">Resources
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="spacer"></div>
-              <div class="callToAction">
-                Find your panel or get more information
-              </div>
-              <div class="button-container flex-center">
-                <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/panels"  routerLinkActive="active-link">Panels</button>
-                <button type="button" class="btn btn-secondary btn-round-lg btn-lg flex-center" routerLink="/resources" routerLinkActive="active-link">Resources</button>
+              <div class="arrow-spacer"></div>
+              <div class="arrow-container">
+                <div class="round">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="container text-center white-text">
-
-          </div>
-          </div>
-        </div>
-        <div class="arrow-container">
-
-          <div class="round">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="mailing_list_view">
+  <div class="row justify-content center">
+    <div class="col-md-3">
+      <div class="img-mail-container">
+        <img src="./assets/svg/mail.svg" class="img-fluid" width="160" height="160" alt="Mailing List">
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="text-mail-container">
+        <h2 class="mailing-list-header text-white">Get Connected</h2>
+        <h5 class="mailing-list-content text-white ">Join our mailing list to receiving limited emails about orientation
+          dates, panel openings and special events.</h5>
+        <div class="button-mailing-container">
+          <button type="button" class="mailing-btn btn btn-primary btn-round-lg btn-lg flex-center"
+                  (click)="visitMailChimpForm()">Register
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
 </div>
