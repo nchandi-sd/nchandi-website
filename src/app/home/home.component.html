@@ -20,7 +20,8 @@
                     1. Attend an orientation meeting.
                   </div>
                   <div class="button-container flex-center">
-                    <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/orientation"
+                    <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center"
+                            routerLink="/orientation"
                             routerLinkActive="active-link">Orientation
                     </button>
                   </div>
@@ -35,14 +36,14 @@
                             routerLink="/resources" routerLinkActive="active-link">Resources
                     </button>
                   </div>
-<!--                  <div class="callToAction">-->
-<!--                    <br> 3. Talk to a facility champion who will get you assigned on panel.-->
-<!--                  </div>-->
-<!--                  <div class="button-container flex-center">-->
-<!--                    <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/orientation"-->
-<!--                            routerLinkActive="active-link">Facility Champions-->
-<!--                    </button>-->
-<!--                  </div>-->
+                  <!--                  <div class="callToAction">-->
+                  <!--                    <br> 3. Talk to a facility champion who will get you assigned on panel.-->
+                  <!--                  </div>-->
+                  <!--                  <div class="button-container flex-center">-->
+                  <!--                    <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/orientation"-->
+                  <!--                            routerLinkActive="active-link">Facility Champions-->
+                  <!--                    </button>-->
+                  <!--                  </div>-->
                 </div>
               </div>
               <div class="arrow-spacer"></div>
@@ -83,3 +84,65 @@
   </div>
   <div class="spacer"></div>
 </div>
+<div class="announcement-view">
+  <h1 class="section-header flex-center" id="annoucements-header"> Announcements </h1>
+  <div class="spacer"></div>
+  <div class="row">
+    <div class="column-buffer">
+    </div>
+    <div class="column">
+      <div class="card">
+        <div class="card-picture" id="card_pic_1">
+          <div class="card-title">
+            Card Title
+          </div>
+          <div class="card-subtitle">
+            12/20/2019
+          </div>
+        </div>
+        <div class="card-body">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex minis recusandae. Facere modi sunt,
+          quod quibusdam dignissimos neque rem nihil ratione est placeat vel, natus non quos laudantium veritatis
+          sequi.Ut enim ad minima veniam, quis nostrum...
+        </div>
+        <button class="card-primary-btn :inline-block" id="card-btn-1">
+          <div class="card-button-text" id="card-text-1" (click)="cardViewOneClicked()">Read more</div>
+        </button>
+
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <div class="card-picture" id="card_pic_2">
+          <div class="card-title">
+            Card Title
+          </div>
+          <div class="card-subtitle">
+            12/20/2019
+          </div>
+        </div>
+        <div class="card-body">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex minis recusandae. Facere modi sunt,
+          quod quibusdam dignissimos neque rem nihil ratione est placeat vel, natus non quos laudantium veritatis
+          sequi.Ut enim ad minima veniam, quis nostrum...
+        </div>
+        <button class="card-primary-btn :inline-block" id="card-btn-2">
+          <div class="card-button-text" id="card-text-2" (click)="cardViewTwoClicked()">Read more</div>
+        </button>
+      </div>
+    </div>
+    <div class="column-buffer">
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="row">
+    <div *ngIf="cardOneClicked">
+      <!--      add expanded article here for cardview-->
+    </div>
+    <div *ngIf="cardTwoClicked">
+      <!--      add expanded article here for cardview-->
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
