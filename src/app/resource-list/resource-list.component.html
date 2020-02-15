@@ -1,43 +1,109 @@
 <div *ngIf="selectedResouce == availableResources[0]" class="panel-material-container">
   <div class="reports-title"> Current Panel Material</div>
-
   <div class="spacer"></div>
-
   <div *ngFor="let item of panelMaterials">
-    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">DELETE</button>
+    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
+      DELETE
+    </button>
     <a href="{{item.url}}" target="_blank">{{item.title}}</a>
   </div>
- 
-
 </div>
+
+
 <div *ngIf="selectedResouce == availableResources[1]" class="general-resouces-container">
   <div class="reports-title"> Current General Resources</div>
-
   <div class="spacer"></div>
-
   <div *ngFor="let item of generalResources">
-      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">DELETE</button>
-      <a href="{{item.url}}" target="_blank">{{item.title}}</a>
-    </div>
+    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
+      DELETE
+    </button>
+    <a href="{{item.url}}" target="_blank">{{item.title}}</a>
+  </div>
 </div>
+
 <div *ngIf="selectedResouce == availableResources[2]" class="monthly-reports-container">
   <div class="reports-title"> Current Monthly Reports</div>
-
   <div class="spacer"></div>
- 
-    <div *ngFor="let item of committeeReports">
-      <div class="month-header">{{item.monthDate}}</div>
-
-      <div *ngIf="item.financialReport">
-      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.finId}}" data-type="{{selectedResouce}}">DELETE</button>
+  <div *ngFor="let item of committeeReports">
+    <div class="month-header">{{item.monthDate}}</div>
+    <div *ngIf="item.financialReport">
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.finId}}" data-type="{{selectedResouce}}">
+        DELETE
+      </button>
       <a href="{{item.finLink}}" target="_blank">Financial Report</a>
       <br>
     </div>
     <div *ngIf="item.minutes">
-      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.minId}}" data-type="{{selectedResouce}}">DELETE</button>
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.minId}}" data-type="{{selectedResouce}}">
+        DELETE
+      </button>
       <a href="{{item.minLink}}" target="_blank">Committee Minutes</a>
     </div>
-      <br>
-    </div>
+    <br>
+  </div>
+</div>
 
+<div *ngIf="selectedResouce == availableResources[3]" class="announcements-container">
+  <div class="reports-title">Current Announcements</div>
+  <div class="spacer"></div>
+  <!--    <div class="row">-->
+  <!--      </div>-->
+  <!--      <div class="column">-->
+  <!--        <div class="card">-->
+  <!--          <div class="card-picture" id="card_pic_1">-->
+  <!--            <div class="card-title">-->
+  <!--              {{item.title}}-->
+  <!--            </div>-->
+  <!--            <div class="card-subtitle">-->
+  <!--              12/20/2019-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--          <div *ngIf="!cardView">-->
+  <!--            <div class="card-body">-->
+  <!--              {{item.body}}-->
+  <!--            </div>-->
+  <!--            <button class="card-primary-btn :inline-block" id="card-btn-1">-->
+  <!--              <div class="card-button-text" id="card-text-1" (click)="cardViewClicked()">Read more</div>-->
+  <!--            </button>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">-->
+  <!--      DELETE-->
+  <!--    </button>-->
+  <!--    <a href="{{item.url}}" target="_blank">{{item.title}}</a>-->
+  <!-- BREAK -->
+  <!-- BREAK -->
+  <div *ngFor="let item of announcements">
+    <div *ngIf="item.title">
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
+        DELETE
+      </button>
+      <a (click)="openCard(item)" target="_blank" id="#announce_1">{{item.title}}</a>
+    </div>
+    <br>
+  </div>
+
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+
+  <div *ngIf="cardView">
+    <div class="column">
+      <div class="card">
+        <div class="card-picture" id="card_pic_1">
+          <div class="card-title">
+            {{currentAnnoucement.title}}
+          </div>
+          <div class="card-subtitle">
+            {{currentAnnoucement.date | date:'yyyy-MM-dd'}}
+            <!--            12/1/2019-->
+          </div>
+        </div>
+        <div class="card-body">
+          {{currentAnnoucement.body}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

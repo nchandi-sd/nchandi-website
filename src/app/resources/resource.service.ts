@@ -3,6 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {MonthlyReport} from '../model/MonthlyReport';
+import {Announcement} from '../model/Announcement';
 
 @Injectable()
 export class ResourceService {
@@ -18,6 +19,14 @@ export class ResourceService {
 
   getMonthlyReports() {
     return this.firestore.collection('Monthly Reports').snapshotChanges();
+  }
+
+  getAnnouncements() {
+    return this.firestore.collection('Announcements').snapshotChanges();
+  }
+
+  createAnnouncement(announcement: Announcement) {
+    return this.firestore.collection('Announcements').add({...announcement});
   }
 
   createPanelMaterial(resource: PanelMaterials) {
@@ -37,14 +46,19 @@ export class ResourceService {
 
     this.firestore.collection(reportType).doc(reportId).get().subscribe(resp =>{
       if(resp.exists){
+        console.log()
         let name = resp.data().title
         this.afStorage.ref('/'+reportType+'/'+name).delete().subscribe(_ => {
           this.firestore.collection(reportType).doc(reportId).delete()
         })
 
       }
-      
+
     })
+  }
+
+  deleteDatabaseItem(reportType: string, reportId: string) {
+    this.firestore.collection(reportType).doc(reportId).delete();
   }
   //
   // deletePolicy(policyId: string){

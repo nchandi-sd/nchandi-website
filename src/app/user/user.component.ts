@@ -1,3 +1,4 @@
+/* tslint:disable:no-trailing-whitespace */
 import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
@@ -15,6 +16,7 @@ import {finalize} from 'rxjs/operators';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {ResourceService} from '../resources/resource.service';
 import {MonthlyReport} from '../model/MonthlyReport';
+import {Announcement} from '../model/Announcement';
 
 
 @Component({
@@ -39,10 +41,13 @@ export class UserComponent implements OnInit {
   resource: string;
   report: string;
   title: string;
+  annoucementTitle: string;
+  annoucementBody: string;
   resources: any = [
     'Panel Material',
     'General Resource',
-    'Monthly Report'
+    'Monthly Report',
+    'Announcement'
   ];
   reports: any = [
     'Financial Report',
@@ -66,6 +71,7 @@ export class UserComponent implements OnInit {
   uploadState: Subscription;
   panelMaterial: PanelMaterials = new PanelMaterials();
   monthlyReport: MonthlyReport = new MonthlyReport();
+  announcement: Announcement = new Announcement();
   resourceMessage: string;
   fileErrorMessage: string;
   titleMessage: string;
@@ -76,6 +82,8 @@ export class UserComponent implements OnInit {
   reportTypeAlert: boolean;
   monthAlert: boolean;
   titleAlert: boolean;
+  announcementTitleAlert: boolean;
+  announcementBodyAlert: boolean;
   uploaded: boolean;
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
@@ -133,6 +141,7 @@ export class UserComponent implements OnInit {
     if (this.resource == null) {
       this.resourceAlert = true;
       this.resourceMessage = 'Please select a resource type';
+      console.log('Invalid form-- no resource');
       return false;
     }
     if (this.resource === 'Panel Material' || this.resource === 'General Resource') {
@@ -143,6 +152,7 @@ export class UserComponent implements OnInit {
       if ((!this.uploaded && this.title != null) || (!this.uploaded && this.title === '')) {
         this.uploadAlert = true;
         this.fileErrorMessage = 'Please choose a file to upload';
+        console.log('Invalid form-- no file chosen to upload');
         return false;
       }
     }
@@ -158,15 +168,19 @@ export class UserComponent implements OnInit {
       if (this.report != null && this.basePath != null && !this.uploaded) {
         this.uploadAlert = true;
         this.fileErrorMessage = 'Please choose a file to upload';
+        console.log('Invalid form-- no file chosen to upload');
         return false;
       }
     }
-
+    if (this.resource === 'Anouncement') {
+      console.log('Validating the announcement');
+    }
       return true;
   }
 
   onSubmit(event) {
     // const id = Math.random().toString(36).substring(2);
+    console.log('On Submit! Resource is ' + this.resource.toString());
     if (this.validateForm()) {
       if (this.resource.toString() === this.resources[0]) {
         this.ref = this.afStorage.ref('/Panel Materials/' + this.title.toString());
@@ -198,7 +212,7 @@ export class UserComponent implements OnInit {
             });
           })
         ).subscribe();
-      } else {
+      } else if (this.resource.toString() === this.resources[2]) {
         const year = new Date().getFullYear().toString();
         console.log(this.basePath.toString() + ' and ' + this.report.toString());
         this.title = this.basePath + '_' + this.report;
@@ -219,6 +233,17 @@ export class UserComponent implements OnInit {
             });
           })
         ).subscribe();
+      } else if (this.resource.toString() === this.resources[3]) {
+        console.log(this.annoucementTitle);
+        console.log(this.annoucementBody);
+        this.announcement.title = this.annoucementTitle.toString();
+        this.announcement.body = this.annoucementBody.toString().substring(0, 256);
+        this.announcement.fullBody = this.annoucementBody.toString();
+        this.announcement.date = new Date().toDateString();
+        this.announcement.isExpanded = false;
+        console.log(this.announcement.date.toString());
+        this.createAnnouncement(this.announcement);
+        this.clearForm();
       }
     } else {
       // invalid form, do not submit.
@@ -274,6 +299,13 @@ export class UserComponent implements OnInit {
       });
   }
 
+  createAnnouncement(announcement: Announcement) {
+    this.resourceService.createAnnouncement(announcement)
+      .then(res => {
+       // update UI
+    });
+  }
+
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -300,12 +332,24 @@ export class UserComponent implements OnInit {
     this.titleAlert = false;
   }
 
+  announcementTitleChangeHandler(event: any) {
+    this.annoucementTitle = event.target.value;
+    this.announcementTitleAlert = false;
+  }
+
+  announcementTextBodyChangeHandler(event: any) {
+    this.annoucementBody = event.target.value;
+    this.announcementBodyAlert = false;
+  }
+
   clearForm() {
     this.checkboxes.forEach((element) => {
       element.nativeElement.checked = false;
     });
     this.name = '';
     this.title = '';
+    this.annoucementTitle = '';
+    this.annoucementBody = '';
     this.uploadProgress = new Observable<number>();
   }
 }
