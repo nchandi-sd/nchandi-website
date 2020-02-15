@@ -18,6 +18,7 @@ export class ResourceListComponent implements OnInit {
   monthlyReports: MonthlyReport[] = null;
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
+  archiveReports: PanelMaterials[] = null;
   committeeReports: Array<CommitteeReport> = [];
   announcements: Announcement[] = null;
   currentAnnoucement: Announcement = new Announcement();
@@ -55,6 +56,16 @@ export class ResourceListComponent implements OnInit {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
         } as Announcement;
+      });
+    });
+
+    this.resourceService.getArchivedReports().subscribe(data => {
+      this.archiveReports = data.map(e => {
+        console.log('retrieved archive reports from firestore');
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as PanelMaterials;
       });
     });
 
@@ -159,6 +170,9 @@ export class ResourceListComponent implements OnInit {
     } else if (type === this.availableResources[3]) {
       console.log('Deleting annoucnement');
       this.resourceService.deleteDatabaseItem('Announcements', id);
+    } else if (type === this.availableResources[4]) {
+      console.log('Deleting archive report');
+      this.resourceService.deleteItem('Archive Report', id);
     }
 
 

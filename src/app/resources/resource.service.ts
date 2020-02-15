@@ -25,6 +25,10 @@ export class ResourceService {
     return this.firestore.collection('Announcements').snapshotChanges();
   }
 
+  getArchivedReports() {
+    return this.firestore.collection('Archived Reports').snapshotChanges();
+  }
+
   createAnnouncement(announcement: Announcement) {
     return this.firestore.collection('Announcements').add({...announcement});
   }
@@ -40,6 +44,10 @@ export class ResourceService {
 
   createMonthlyReport(report: MonthlyReport) {
     return this.firestore.collection('Monthly Reports').add({...report});
+  }
+
+  createArchiveReport(resource: PanelMaterials) {
+    return this.firestore.collection('Archived Reports').add({...resource});
   }
 
   deleteItem(reportType: string, reportId: string){

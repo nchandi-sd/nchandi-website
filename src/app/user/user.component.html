@@ -36,7 +36,7 @@
 
             <ngb-alert *ngIf="resourceAlert" (close)="resourceAlert= false">{{this.resourceMessage}}</ngb-alert>
 
-            <div *ngIf="resource === resources[0] || resource === resources[1]">
+            <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[4]">
 
               <div class="spacer"></div>
 
@@ -100,7 +100,7 @@
 
             </div>
 
-            <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[2]">
+            <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[2] || resource === resources[4]">
               <div class="add-resource-title text-white">Upload Your Document</div>
               <div class="col-12 col-lg-9">
                 <!--            <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); submitForm.reset()">-->

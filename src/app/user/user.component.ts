@@ -47,7 +47,8 @@ export class UserComponent implements OnInit {
     'Panel Material',
     'General Resource',
     'Monthly Report',
-    'Announcement'
+    'Announcement',
+    'Archived Report'
   ];
   reports: any = [
     'Financial Report',
@@ -244,6 +245,9 @@ export class UserComponent implements OnInit {
         console.log(this.announcement.date.toString());
         this.createAnnouncement(this.announcement);
         this.clearForm();
+      } else if (this.resource.toString() === this.resources[4]) {
+        console.log('Submitting archvived report');
+
       }
     } else {
       // invalid form, do not submit.
