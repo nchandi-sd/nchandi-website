@@ -10,6 +10,7 @@ import {ResourceSubmissionService} from './resource-submission.service'
 import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {ResourceSubmission} from '../model/ResourceSubmission';
 import { $ } from 'protractor';
+import {Announcement} from '../model/Announcement';
 
 @Component({
   selector: 'app-resources',
@@ -19,6 +20,7 @@ import { $ } from 'protractor';
 export class ResourcesComponent implements OnInit {
 
   facilities: Array<string> = [];
+  announcements: Announcement[] = null;
   monthlyReports: MonthlyReport[] = null;
   committeeReports: Array<CommitteeReport> = [];
   panelMaterials: PanelMaterials[] = null;
@@ -101,6 +103,16 @@ export class ResourcesComponent implements OnInit {
       });
     });
 
+    this.resourceService.getAnnouncements().subscribe(data => {
+      this.announcements = data.map(e => {
+        console.log('retrieved from firestore');
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Announcement;
+      });
+    });
+
     this.resourceService.getMonthlyReports().subscribe(data => {
       this.monthlyReports = data.map(e => {
         console.log('retrieved monthly reports from firestore');
@@ -167,12 +179,12 @@ export class ResourcesComponent implements OnInit {
       return this.userForm.get(controlName).errors != null && this.submitted
     }
     return false
-    
+
   }
 
   checkMadeSelection(){
-    this.madeSelection = this.livingSoberFlag || this.twelveTwelve || this.aaPaper || this.aaPocket || 
-                          this.grapevine || this.laVina ||this.newPacket || this.litRack || this.other 
+    this.madeSelection = this.livingSoberFlag || this.twelveTwelve || this.aaPaper || this.aaPocket ||
+                          this.grapevine || this.laVina ||this.newPacket || this.litRack || this.other
   }
 
   onSubmit(form: NgForm) {
@@ -200,7 +212,7 @@ export class ResourcesComponent implements OnInit {
     this.resourceSubmission.litRack = this.userForm.controls.litRack.value
     this.resourceSubmission.other = this.userForm.controls.other.value
     this.resourceSubmission.comments = this.userForm.controls.comments.value
- 
+
     console.log(this.resourceSubmission)
     this.sendDisabled = true
     this.postResourceForm(form.value)
@@ -250,7 +262,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   changeStatus(event: any) {
-    
+
     if (event.currentTarget.id === 'livingSoberId') {
       if (!this.livingSoberFlag) {
         this.livingSoberFlag = true;

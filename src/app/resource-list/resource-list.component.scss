@@ -22,6 +22,75 @@
     margin-bottom: 5px;
 }
 
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  margin-bottom: 64px;
+  margin-right: 96px;
+
+}
+
+#card_pic_1 {
+  background-image: linear-gradient(to bottom left, #EA6E68, #F8D77F);
+}
+
+.card-picture {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin: -32px;
+  height: 128px;
+}
+
+.card-title {
+  margin-top: 42px;
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: xx-large;
+  -webkit-text-stroke-width: .2px;
+}
+
+.card-subtitle {
+  margin-top: 12px;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.card-body {
+  margin-top: 48px;
+  color: var(--card-body-text)
+}
+
+.card-primary-btn {
+  padding: 8px 8px 8px 8px;
+  border: none;
+  margin-left: 16px;
+  margin-bottom: 8px;
+}
+
+#card-btn-1 {
+  background: #f0f0f0 url("src/assets/svg/ic_next.svg");
+  background-position: 90%;
+  background-repeat: no-repeat;
+}
+
+#card-text-1 {
+  color: #F19D38;
+}
+
+.card-button-text {
+  text-align: right;
+  margin-right: 96px;
+  font-size: x-large;
+}
+
+.card-footer {
+  margin-top: 12px;
+}
+
 @media (min-width: 576px) {
   .reports-title{
     font-size: 36px;

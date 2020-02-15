@@ -18,18 +18,18 @@
             <div class="add-resource-title text-white">
               What type of resource would you like to add?
             </div>
-            <div class ="container">
+            <div class="container">
 
               <div class="custom-control custom-radio custom-control-inline" *ngFor="let resource of resources">
-                  <input
-                    #checkboxes
-                    type="radio"
-                    name="resourceType"
-                    class="custom-control-input"
-                    value="{{resource}}"
-                    id="{{resource}}"
-                    (change)="resourceChangeHandler($event)"
-                    [checked]="idx === 0">
+                <input
+                  #checkboxes
+                  type="radio"
+                  name="resourceType"
+                  class="custom-control-input"
+                  value="{{resource}}"
+                  id="{{resource}}"
+                  (change)="resourceChangeHandler($event)"
+                  [checked]="idx === 0">
                 <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
               </div>
             </div>
@@ -41,15 +41,15 @@
               <div class="spacer"></div>
 
               <div class="add-resource-title text-white">Resource Title</div>
-              <div class ="container">
+              <div class="container">
 
                 <div class="col-12 col-lg-6">
-                    <input
-                      type="text"
-                      placeholder="Title"
-                      (change)="titleChangeHandler($event)"
-                      value="{{title}}">
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    (change)="titleChangeHandler($event)"
+                    value="{{title}}">
+                </div>
               </div>
             </div>
 
@@ -58,7 +58,7 @@
             <div class="spacer"></div>
             <div *ngIf="resource === resources[2]">
               <div class="add-resource-title text-white">Monthly Reports</div>
-              <div class ="container">
+              <div class="container">
 
                 <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
                   <input
@@ -73,11 +73,12 @@
                 </div>
               </div>
 
-              <ngb-alert *ngIf="reportTypeAlert" (close)="reportTypeAlert = false">{{this.reportTypeMessage}}</ngb-alert>
+              <ngb-alert *ngIf="reportTypeAlert"
+                         (close)="reportTypeAlert = false">{{this.reportTypeMessage}}</ngb-alert>
               <div class="spacer"></div>
 
               <div class="add-resource-title text-white">Current Month</div>
-              <div class ="container">
+              <div class="container">
 
                 <div class="col-12 col-lg-9">
                   <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
@@ -99,41 +100,76 @@
 
             </div>
 
-            <div class="add-resource-title text-white">Upload Your Document</div>
-            <div class="col-12 col-lg-9">
-              <!--            <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); submitForm.reset()">-->
-              <div class="form-group">
-                <p class="text-white"> Please upload the .pdf report here </p>
-                <div class="custom-file">
+            <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[2]">
+              <div class="add-resource-title text-white">Upload Your Document</div>
+              <div class="col-12 col-lg-9">
+                <!--            <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); submitForm.reset()">-->
+                <div class="form-group">
+                  <p class="text-white"> Please upload the .pdf report here </p>
+                  <div class="custom-file">
+                    <input
+                      #myInput
+                      type="file"
+                      accept="application/pdf"
+                      class="custom-file-input"
+                      id="inputGroupFile01"
+                      aria-describedby="inputGroupFileAddon01"
+                      (change)="onFileChange($event)">
+                    <label class="custom-file-label" for="inputGroupFile01">{{name}}</label>
+                  </div>
+                </div>
+
+                <div *ngIf="!uploadAlert">
+                  <div class="progress">
+                    <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                         [style.width]="(uploadProgress | async) + '%'"
+                         [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <ngb-alert *ngIf="uploadAlert" (close)="uploadAlert = false">{{this.fileErrorMessage}}</ngb-alert>
+
+                  <div class="spacer"></div>
+
+                  <div class="button-container flex-center">
+                    <button type="submit" class="submit-button btn btn-block button">Submit</button>
+                  </div>
+
+                  <div class="spacer"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Announcement Cards -->
+            <div *ngIf="resource === resources[3]">
+              <div class="add-resource-title text-white">Announcement Title</div>
+              <div class="container">
+                <div class="col-12 col-lg-6">
                   <input
-                    #myInput
-                    type="file"
-                    accept="application/pdf"
-                    class="custom-file-input"
-                    id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01"
-                    (change)="onFileChange($event)" >
-                  <label class="custom-file-label" for="inputGroupFile01" >{{name}}</label>
+                    type="text"
+                    placeholder="Title"
+                    (change)="announcementTitleChangeHandler($event)"
+                    value="{{annoucementTitle}}">
                 </div>
               </div>
-
-              <div *ngIf="!uploadAlert">
-                <div class="progress">
-                  <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
-                       [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="spacer"></div>
+              <div class="add-resource-title text-white">Announcement Body</div>
+              <div class="container">
+                <div class="col-12 col-lg-12">
+                  <textarea
+                    rows="10"
+                    cols="60"
+                    type="text"
+                    placeholder="Your announcement text..."
+                    (change)="announcementTextBodyChangeHandler($event)"
+                    value="{{annoucementBody}}">
+                  </textarea>
                 </div>
               </div>
-
-              <div class="form-group">
-                <ngb-alert *ngIf="uploadAlert" (close)="uploadAlert = false">{{this.fileErrorMessage}}</ngb-alert>
-
-                <div class="spacer"></div>
-
-                <div class="button-container flex-center">
-                  <button type="submit" class="submit-button btn btn-block button">Submit</button>
-                </div>
-
-                <div class="spacer"></div>
+              <div class="spacer"></div>
+              <div class="button-container flex-center">
+                <button type="submit" class="submit-button btn btn-block button">Submit</button>
               </div>
             </div>
 
@@ -145,7 +181,7 @@
 
       <div class="col-md-6">
         <div class="container">
-          <app-resource-list [selectedResouce]=resource [availableResources] = resources></app-resource-list>
+          <app-resource-list [selectedResouce]=resource [availableResources]=resources></app-resource-list>
         </div>
       </div>
     </div>
