@@ -47,11 +47,15 @@ export class UserComponent implements OnInit {
     'Panel Material',
     'General Resource',
     'Monthly Report',
-    'Announcement'
+    'Announcement',
+    'Archived Report'
   ];
   reports: any = [
     'Financial Report',
     'Committee Minutes'
+  ];
+  archives: any = [
+    'Create Archivable Record'
   ];
   months: any = [
     'January',
@@ -85,6 +89,7 @@ export class UserComponent implements OnInit {
   announcementTitleAlert: boolean;
   announcementBodyAlert: boolean;
   uploaded: boolean;
+  isArchive: boolean;
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
@@ -114,6 +119,7 @@ export class UserComponent implements OnInit {
     this.monthAlert = false;
     this.titleAlert = false;
     this.uploaded = false;
+    this.isArchive = false;
 
     setTimeout(() => this.resourceAlert = false, 10000);
     setTimeout(() => this.uploadAlert = false, 10000);
@@ -144,7 +150,7 @@ export class UserComponent implements OnInit {
       console.log('Invalid form-- no resource');
       return false;
     }
-    if (this.resource === 'Panel Material' || this.resource === 'General Resource') {
+    if (this.resource === 'Panel Material' || this.resource === 'General Resource' || this.resource === 'Archived Report') {
       if (this.title == null || this.title === '') {
         this.titleAlert = true;
         this.titleMessage = 'Please enter a document title';
@@ -228,6 +234,7 @@ export class UserComponent implements OnInit {
               this.monthlyReport.month = this.getMonth(this.basePath);
               this.monthlyReport.type = this.report;
               this.monthlyReport.timestamp = new Date().getTime();
+              this.monthlyReport.isArchive = this.isArchive;
               this.createMonthlyReport(this.monthlyReport);
               this.clearForm();
             });
@@ -244,6 +251,22 @@ export class UserComponent implements OnInit {
         console.log(this.announcement.date.toString());
         this.createAnnouncement(this.announcement);
         this.clearForm();
+      } else if (this.resource.toString() === this.resources[4]) {
+        console.log('Submitting archvived report ' + this.title.toString());
+        this.ref = this.afStorage.ref('/Archived Reports/' + this.title.toString());
+        this.task = this.ref.put(this.fileData);
+        this.uploadProgress = this.task.percentageChanges();
+        this.uploadState = this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe(url => {
+              this.uploaded = false;
+              this.panelMaterial.title = this.title.toString();
+              this.panelMaterial.url = url;
+              this.createArchiveReport(this.panelMaterial);
+              this.clearForm();
+            });
+          })
+        ).subscribe();
       }
     } else {
       // invalid form, do not submit.
@@ -306,6 +329,13 @@ export class UserComponent implements OnInit {
     });
   }
 
+  createArchiveReport(resource: PanelMaterials) {
+    this.resourceService.createArchiveReport(resource)
+      .then(res => {
+        // update UI
+      });
+  }
+
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -317,7 +347,13 @@ export class UserComponent implements OnInit {
     this.monthAlert = false;
   }
 
+  archiveChangeHandler(event: any) {
+    this.isArchive = !this.isArchive;
+    console.log('Archive status ' + this.isArchive);
+  }
+
   resourceChangeHandler(event: any) {
+    console.log('Resource changed to: ' + event.target.value);
     this.resource = event.target.value;
     this.resourceAlert = false;
   }

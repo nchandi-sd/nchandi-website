@@ -18,6 +18,7 @@ export class ResourceListComponent implements OnInit {
   monthlyReports: MonthlyReport[] = null;
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
+  archiveReports: PanelMaterials[] = null;
   committeeReports: Array<CommitteeReport> = [];
   announcements: Announcement[] = null;
   currentAnnoucement: Announcement = new Announcement();
@@ -58,11 +59,19 @@ export class ResourceListComponent implements OnInit {
       });
     });
 
-    this.resourceService.getMonthlyReports().subscribe(data => {
+    this.resourceService.getArchivedReports().subscribe(data => {
+      this.archiveReports = data.map(e => {
+        console.log('retrieved archive reports from firestore');
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as PanelMaterials;
+      });
+    });
 
+    this.resourceService.getMonthlyReports().subscribe(data => {
       this.monthlyReports = data.map(e => {
         console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
-
         const item = {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -159,6 +168,9 @@ export class ResourceListComponent implements OnInit {
     } else if (type === this.availableResources[3]) {
       console.log('Deleting annoucnement');
       this.resourceService.deleteDatabaseItem('Announcements', id);
+    } else if (type === this.availableResources[4]) {
+      console.log('Deleting archive report');
+      this.resourceService.deleteItem('Archived Report', id);
     }
 
 
