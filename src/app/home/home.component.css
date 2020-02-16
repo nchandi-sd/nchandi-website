@@ -1,9 +1,9 @@
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 .view {
-  background: url("src/assets/img_background_picture.webp") no-repeat center center fixed;
+  background: url("src/assets/Logo-background.svg") no-repeat center center fixed;
   height: 100vh;
-  background-size: cover;
+  background-size: auto;
 }
 .announcement-view {
   background-color: var(--secondary-light);
