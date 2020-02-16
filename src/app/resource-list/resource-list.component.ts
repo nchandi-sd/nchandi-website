@@ -70,10 +70,8 @@ export class ResourceListComponent implements OnInit {
     });
 
     this.resourceService.getMonthlyReports().subscribe(data => {
-
       this.monthlyReports = data.map(e => {
         console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
-
         const item = {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -172,7 +170,7 @@ export class ResourceListComponent implements OnInit {
       this.resourceService.deleteDatabaseItem('Announcements', id);
     } else if (type === this.availableResources[4]) {
       console.log('Deleting archive report');
-      this.resourceService.deleteItem('Archive Report', id);
+      this.resourceService.deleteItem('Archived Report', id);
     }
 
 

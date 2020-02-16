@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
     'General Resource',
     'Monthly Report',
     'Announcement',
-    'Archived Report'
+    'Archived Reports'
   ];
   reports: any = [
     'Financial Report',
@@ -139,6 +139,7 @@ export class UserComponent implements OnInit {
   }
 
   validateForm(): boolean {
+    console.log('Resource is ' + this.resource.toString());
     if (this.resource == null) {
       this.resourceAlert = true;
       this.resourceMessage = 'Please select a resource type';
@@ -246,8 +247,21 @@ export class UserComponent implements OnInit {
         this.createAnnouncement(this.announcement);
         this.clearForm();
       } else if (this.resource.toString() === this.resources[4]) {
-        console.log('Submitting archvived report');
-
+        console.log('Submitting archvived report ' + this.title.toString());
+        this.ref = this.afStorage.ref('/Archived Reports/' + this.title.toString());
+        this.task = this.ref.put(this.fileData);
+        this.uploadProgress = this.task.percentageChanges();
+        this.uploadState = this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe(url => {
+              this.uploaded = false;
+              this.panelMaterial.title = this.title.toString();
+              this.panelMaterial.url = url;
+              this.createArchiveReport(this.panelMaterial);
+              this.clearForm();
+            });
+          })
+        ).subscribe();
       }
     } else {
       // invalid form, do not submit.
@@ -310,6 +324,13 @@ export class UserComponent implements OnInit {
     });
   }
 
+  createArchiveReport(resource: PanelMaterials) {
+    this.resourceService.createArchiveReport(resource)
+      .then(res => {
+        // update UI
+      });
+  }
+
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -322,6 +343,7 @@ export class UserComponent implements OnInit {
   }
 
   resourceChangeHandler(event: any) {
+    console.log('Resource changed to: ' + event.target.value);
     this.resource = event.target.value;
     this.resourceAlert = false;
   }

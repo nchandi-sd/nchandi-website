@@ -46,35 +46,6 @@
 <div *ngIf="selectedResouce == availableResources[3]" class="announcements-container">
   <div class="reports-title">Current Announcements</div>
   <div class="spacer"></div>
-  <!--    <div class="row">-->
-  <!--      </div>-->
-  <!--      <div class="column">-->
-  <!--        <div class="card">-->
-  <!--          <div class="card-picture" id="card_pic_1">-->
-  <!--            <div class="card-title">-->
-  <!--              {{item.title}}-->
-  <!--            </div>-->
-  <!--            <div class="card-subtitle">-->
-  <!--              12/20/2019-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--          <div *ngIf="!cardView">-->
-  <!--            <div class="card-body">-->
-  <!--              {{item.body}}-->
-  <!--            </div>-->
-  <!--            <button class="card-primary-btn :inline-block" id="card-btn-1">-->
-  <!--              <div class="card-button-text" id="card-text-1" (click)="cardViewClicked()">Read more</div>-->
-  <!--            </button>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">-->
-  <!--      DELETE-->
-  <!--    </button>-->
-  <!--    <a href="{{item.url}}" target="_blank">{{item.title}}</a>-->
-  <!-- BREAK -->
-  <!-- BREAK -->
   <div *ngFor="let item of announcements">
     <div *ngIf="item.title">
       <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
@@ -83,6 +54,17 @@
       <a (click)="openCard(item)" target="_blank" id="#announce_1">{{item.title}}</a>
     </div>
     <br>
+  </div>
+
+  <div *ngIf="selectedResouce == availableResources[4]" class="archived-reports-container">
+    <div class="reports-title">Current Archived Reports</div>
+    <div class="spacer"></div>
+    <div *ngFor="let item of archiveReports">
+      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
+        DELETE
+      </button>
+      <a href="{{item.url}}" target="_blank">{{item.title}}</a>
+    </div>
   </div>
 
   <div class="spacer"></div>
