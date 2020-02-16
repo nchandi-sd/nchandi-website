@@ -12,6 +12,9 @@
 
               <div class="report-sheet report-content">
                 <h3 class="title flex-center"><u>Panel Materials</u></h3>
+                <div class="resource-para text-white">Panel materials include any information relevant to H&I panels.
+                  Please click on links below for PDF files for each piece of information.<br><br></div>
+
                 <ul class="committeeReports">
                   <li class="report-li" *ngFor="let panel of panelMaterials">
                     <strong><u><a class="genLink" href="{{panel.url}}" id="link" target="_blank">{{panel.title}}</a></u></strong>
@@ -27,6 +30,10 @@
 
             <div class="report-sheet report-content">
               <h3 class="title"><u>General Resources</u></h3>
+              <div class="resource-para text-white">General resources include information miscellaneous information
+                which you may find helpful. Please click on links below for PDF files for each piece of information.<br><br>
+              </div>
+
               <ul class="committeeReports">
                 <li class="report-li" *ngFor="let resource of generalResources">
                   <strong><u><a class="genLink" href="{{resource.url}}" id="link" target="_blank">{{resource.title}}</a></u></strong>
@@ -41,6 +48,10 @@
           <div class="monthly-side-container">
             <div class="report-sheet2 report-content">
               <h3 class="month-title flex-center"><u>North County H&I Monthly Reports</u></h3>
+              <div class="resource-para text-white">The links below are for each months (in the current year) committee
+                minutes and financial report. Committee minutes are approved the following months committee meeting, and
+                financial reports are generally made available a few weeks after a committee meeting.<br><br></div>
+
               <div class="container">
                 <div class="row">
 
@@ -112,16 +123,40 @@
           </div>
         </div>
       </div>
+      <div class="spacer"></div>
       <div class="row">
         <div class="spacer"></div>
-        <div class="col-md-6 quote-content text-white">
-          <i>"Be part of the solution, not the problem"</i> <br>
-          - AA Slogan
+
+        <div class="col-md-6">
+          <div class="monthly-side-container">
+            <div *ngIf="hasArchives">
+              <h3 class="text-white title flex-center"><u>Archived Records</u></h3>
+              <div *ngIf="hasFinancialArchive">
+                <div class="resource-para report-content">The previous years financial summary can be viewed by clicking on the link below. This is the December report for last year.<br><br></div>
+                <ul class="committeeReports">
+                  <li class="report-li">
+                    <strong><u><a href="{{financialArchive.url}}">{{financialArchive.title}}</a></u></strong>
+                  </li>
+                </ul>
+                <div class="spacer"></div>
+              </div>
+              <div class="resource-para report-content">Archived reports contain important information from past years and
+                can be a helpful place to look for older documents relevant to H&I.<br><br>
+              </div>
+              <ul class="committeeReports">
+                <li class="report-li" *ngFor="let resource of archiveReports">
+                  <strong><u><a class="genLink" href="{{resource.url}}" id="link" target="_blank">{{resource.title}}</a></u></strong>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4 flex-center title text-white">
-          <u>Archive</u>
+        <div class="col-md-6">
+          <div class="monthly-side-container quote-content text-white">
+            <i>"Be part of the solution, not the problem"</i> <br>
+            - AA Slogan
+          </div>
         </div>
-        <div class="col-md-2"></div>
       </div>
       <div class="spacer"></div>
 

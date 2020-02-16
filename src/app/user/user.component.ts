@@ -48,11 +48,14 @@ export class UserComponent implements OnInit {
     'General Resource',
     'Monthly Report',
     'Announcement',
-    'Archived Reports'
+    'Archived Report'
   ];
   reports: any = [
     'Financial Report',
     'Committee Minutes'
+  ];
+  archives: any = [
+    'Create Archivable Record'
   ];
   months: any = [
     'January',
@@ -86,6 +89,7 @@ export class UserComponent implements OnInit {
   announcementTitleAlert: boolean;
   announcementBodyAlert: boolean;
   uploaded: boolean;
+  isArchive: boolean;
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
@@ -115,6 +119,7 @@ export class UserComponent implements OnInit {
     this.monthAlert = false;
     this.titleAlert = false;
     this.uploaded = false;
+    this.isArchive = false;
 
     setTimeout(() => this.resourceAlert = false, 10000);
     setTimeout(() => this.uploadAlert = false, 10000);
@@ -139,14 +144,13 @@ export class UserComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    console.log('Resource is ' + this.resource.toString());
     if (this.resource == null) {
       this.resourceAlert = true;
       this.resourceMessage = 'Please select a resource type';
       console.log('Invalid form-- no resource');
       return false;
     }
-    if (this.resource === 'Panel Material' || this.resource === 'General Resource') {
+    if (this.resource === 'Panel Material' || this.resource === 'General Resource' || this.resource === 'Archived Report') {
       if (this.title == null || this.title === '') {
         this.titleAlert = true;
         this.titleMessage = 'Please enter a document title';
@@ -230,6 +234,7 @@ export class UserComponent implements OnInit {
               this.monthlyReport.month = this.getMonth(this.basePath);
               this.monthlyReport.type = this.report;
               this.monthlyReport.timestamp = new Date().getTime();
+              this.monthlyReport.isArchive = this.isArchive;
               this.createMonthlyReport(this.monthlyReport);
               this.clearForm();
             });
@@ -340,6 +345,11 @@ export class UserComponent implements OnInit {
   monthChangeHandler(event: any) {
     this.basePath = event.target.value;
     this.monthAlert = false;
+  }
+
+  archiveChangeHandler(event: any) {
+    this.isArchive = !this.isArchive;
+    console.log('Archive status ' + this.isArchive);
   }
 
   resourceChangeHandler(event: any) {

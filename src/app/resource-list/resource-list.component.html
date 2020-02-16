@@ -56,17 +56,6 @@
     <br>
   </div>
 
-  <div *ngIf="selectedResouce == availableResources[4]" class="archived-reports-container">
-    <div class="reports-title">Current Archived Reports</div>
-    <div class="spacer"></div>
-    <div *ngFor="let item of archiveReports">
-      <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
-        DELETE
-      </button>
-      <a href="{{item.url}}" target="_blank">{{item.title}}</a>
-    </div>
-  </div>
-
   <div class="spacer"></div>
   <div class="spacer"></div>
 
@@ -87,5 +76,16 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="selectedResouce == availableResources[4]" class="archived-reports-container">
+  <div class="reports-title">Current Archived Reports</div>
+  <div class="spacer"></div>
+  <div *ngFor="let item of archiveReports">
+    <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
+      DELETE
+    </button>
+    <a href="{{item.url}}" target="_blank">{{item.title}}</a>
   </div>
 </div>

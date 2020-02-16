@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommitteeReport} from '../model/CommitteeReport';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {PanelMaterials} from '../model/Panel-Materials';
@@ -6,10 +6,10 @@ import {ResourceService} from './resource.service';
 import {MonthlyReport} from '../model/MonthlyReport';
 import {PanelService} from '../panels/panel.service';
 import {Panels} from '../model/Panels';
-import {ResourceSubmissionService} from './resource-submission.service'
-import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {ResourceSubmissionService} from './resource-submission.service';
+import {NgForm, FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {ResourceSubmission} from '../model/ResourceSubmission';
-import { $ } from 'protractor';
+import {$} from 'protractor';
 import {Announcement} from '../model/Announcement';
 
 @Component({
@@ -25,6 +25,10 @@ export class ResourcesComponent implements OnInit {
   committeeReports: Array<CommitteeReport> = [];
   panelMaterials: PanelMaterials[] = null;
   generalResources: PanelMaterials[] = null;
+  financialArchive: MonthlyReport = new MonthlyReport();
+  archiveReports: any[] = null;
+  hasArchives: boolean;
+  hasFinancialArchive: boolean;
   index = 0;
   livingSoberFlag: boolean;
   twelveTwelve: boolean;
@@ -37,10 +41,10 @@ export class ResourcesComponent implements OnInit {
   other: boolean;
   submitted: boolean = false;
   userForm: FormGroup;
-  resourceSubmission: ResourceSubmission
-  madeSelection: boolean =  false
+  resourceSubmission: ResourceSubmission;
+  madeSelection: boolean = false;
 
-  sendDisabled: boolean = false
+  sendDisabled: boolean = false;
 
 
   constructor(private storage: AngularFireStorage,
@@ -51,7 +55,9 @@ export class ResourcesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resourceSubmission = new ResourceSubmission()
+    this.hasArchives = false;
+    this.hasFinancialArchive = false;
+    this.resourceSubmission = new ResourceSubmission();
     this.userForm = this.formBuilder.group({
       firstName: [],
       lastName: ['', Validators.required],
@@ -61,7 +67,7 @@ export class ResourcesComponent implements OnInit {
       facility: ['', Validators.required],
       livingSober: [],
       twelveTwelve: [],
-      aaPaper:[],
+      aaPaper: [],
       aaPocket: [],
       grapevine: [],
       laVina: [],
@@ -74,18 +80,18 @@ export class ResourcesComponent implements OnInit {
 
     this.panelService.getCurrentPanels()
       .subscribe((data: Panels) => {
-        data.feed.entry.forEach( ent => {
+        data.feed.entry.forEach(ent => {
           this.facilities[this.index] = ent.gsx$facility.$t.toString();
           this.index++;
         });
-        this.facilities = this.facilities.filter(function(elem, index, self) {
+        this.facilities = this.facilities.filter(function (elem, index, self) {
           return index === self.indexOf(elem);
         });
       });
 
     this.resourceService.getPanelMaterials().subscribe(data => {
       this.panelMaterials = data.map(e => {
-        console.log('retrieved from firestore');
+        console.log('retrieved panel materials from firestore');
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -93,9 +99,24 @@ export class ResourcesComponent implements OnInit {
       });
     });
 
+    this.resourceService.getArchivedReports().subscribe(data => {
+      this.archiveReports = data.map(e => {
+        console.log('retrieved archives from firestore');
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as PanelMaterials;
+      });
+      if (this.archiveReports.length > 0) {
+        this.hasArchives = true;
+      } else {
+        this.hasArchives = false;
+      }
+    });
+
     this.resourceService.getGeneralResources().subscribe(data => {
       this.generalResources = data.map(e => {
-        console.log('retrieved from firestore');
+        console.log('retrieved general resources from firestore');
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -105,7 +126,7 @@ export class ResourcesComponent implements OnInit {
 
     this.resourceService.getAnnouncements().subscribe(data => {
       this.announcements = data.map(e => {
-        console.log('retrieved from firestore');
+        console.log('retrieved announcements from firestore');
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -121,6 +142,7 @@ export class ResourcesComponent implements OnInit {
           ...e.payload.doc.data()
         } as MonthlyReport;
       });
+
       // sort reports by month
       this.monthlyReports.sort(function (a, b) {
         if (a.month < b.month) {
@@ -133,10 +155,16 @@ export class ResourcesComponent implements OnInit {
       });
 
       for (let i = 0; i < this.monthlyReports.length; i++) {
-        let containsReport: boolean = false
+        let containsReport: boolean = false;
+
+        if (this.monthlyReports[i].isArchive) {
+          this.hasFinancialArchive = true;
+          this.financialArchive = this.monthlyReports[i];
+          console.log('Archivable monthly report retrieved');
+        }
 
         for (let j = 0; j < this.committeeReports.length; j++) {
-          if(this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)){
+          if (this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)) {
             containsReport = true;
             if (this.monthlyReports[i].title.endsWith('Minutes')) {
               this.committeeReports[j].minLink = this.monthlyReports[i].url;
@@ -150,7 +178,7 @@ export class ResourcesComponent implements OnInit {
         }
 
         if (!containsReport) {
-          let report = new CommitteeReport()
+          let report = new CommitteeReport();
           this.committeeReports.push(report);
           report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
           if (this.monthlyReports[i].title.endsWith('Minutes')) {
@@ -162,75 +190,78 @@ export class ResourcesComponent implements OnInit {
           }
         }
       }
+
     });
+
+
     this.livingSoberFlag = false;
     this.twelveTwelve = false;
     this.aaPaper = false;
     this.aaPocket = false;
-    this.grapevine= false;
+    this.grapevine = false;
     this.laVina = false;
     this.newPacket = false;
     this.litRack = false;
     this.other = false;
   }
 
-  showError(controlName: string){
-    if(this.userForm.get(controlName)){
-      return this.userForm.get(controlName).errors != null && this.submitted
+  showError(controlName: string) {
+    if (this.userForm.get(controlName)) {
+      return this.userForm.get(controlName).errors != null && this.submitted;
     }
-    return false
+    return false;
 
   }
 
-  checkMadeSelection(){
+  checkMadeSelection() {
     this.madeSelection = this.livingSoberFlag || this.twelveTwelve || this.aaPaper || this.aaPocket ||
-                          this.grapevine || this.laVina ||this.newPacket || this.litRack || this.other
+      this.grapevine || this.laVina || this.newPacket || this.litRack || this.other;
   }
 
   onSubmit(form: NgForm) {
-    console.log("initiate submission")
+    console.log('initiate submission');
     this.submitted = true;
-    this.checkMadeSelection()
+    this.checkMadeSelection();
     if (this.userForm.invalid || !this.madeSelection) {
-      console.log('failed Submitting...')
+      console.log('failed Submitting...');
       return;
     }
 
-    this.resourceSubmission.email = this.userForm.controls.email.value
-    this.resourceSubmission.firstName = this.userForm.controls.firstName.value
-    this.resourceSubmission.lastName = this.userForm.controls.lastName.value
-    this.resourceSubmission.hiCommitments = this.userForm.controls.hiCommitments.value
-    this.resourceSubmission.facility = this.userForm.controls.facility.value
-    this.resourceSubmission.phone = this.userForm.controls.phone.value
-    this.resourceSubmission.livingSober = this.userForm.controls.livingSober.value
-    this.resourceSubmission.twelveTwelve = this.userForm.controls.twelveTwelve.value
-    this.resourceSubmission.aaPaper = this.userForm.controls.aaPaper.value
-    this.resourceSubmission.aaPocket = this.userForm.controls.aaPocket.value
-    this.resourceSubmission.grapevine = this.userForm.controls.grapevine.value
-    this.resourceSubmission.laVina = this.userForm.controls.laVina.value
-    this.resourceSubmission.newPacket = this.userForm.controls.newPacket.value
-    this.resourceSubmission.litRack = this.userForm.controls.litRack.value
-    this.resourceSubmission.other = this.userForm.controls.other.value
-    this.resourceSubmission.comments = this.userForm.controls.comments.value
+    this.resourceSubmission.email = this.userForm.controls.email.value;
+    this.resourceSubmission.firstName = this.userForm.controls.firstName.value;
+    this.resourceSubmission.lastName = this.userForm.controls.lastName.value;
+    this.resourceSubmission.hiCommitments = this.userForm.controls.hiCommitments.value;
+    this.resourceSubmission.facility = this.userForm.controls.facility.value;
+    this.resourceSubmission.phone = this.userForm.controls.phone.value;
+    this.resourceSubmission.livingSober = this.userForm.controls.livingSober.value;
+    this.resourceSubmission.twelveTwelve = this.userForm.controls.twelveTwelve.value;
+    this.resourceSubmission.aaPaper = this.userForm.controls.aaPaper.value;
+    this.resourceSubmission.aaPocket = this.userForm.controls.aaPocket.value;
+    this.resourceSubmission.grapevine = this.userForm.controls.grapevine.value;
+    this.resourceSubmission.laVina = this.userForm.controls.laVina.value;
+    this.resourceSubmission.newPacket = this.userForm.controls.newPacket.value;
+    this.resourceSubmission.litRack = this.userForm.controls.litRack.value;
+    this.resourceSubmission.other = this.userForm.controls.other.value;
+    this.resourceSubmission.comments = this.userForm.controls.comments.value;
 
-    console.log(this.resourceSubmission)
-    this.sendDisabled = true
-    this.postResourceForm(form.value)
+    console.log(this.resourceSubmission);
+    this.sendDisabled = true;
+    this.postResourceForm(form.value);
   }
 
   postResourceForm(form: NgForm) {
-    console.log("resource: "+ this.resourceSubmission)
-     this.resourceSubmissionService.postResourceForm(this.resourceSubmission)
-       .subscribe(() => {
-         this.sendDisabled = false
-        console.log("yay subscribe called")
+    console.log('resource: ' + this.resourceSubmission);
+    this.resourceSubmissionService.postResourceForm(this.resourceSubmission)
+      .subscribe(() => {
+        this.sendDisabled = false;
+        console.log('yay subscribe called');
         //display success
 
         //hide form
-        document.getElementById('sub-container').classList.add("hidden")
-        document.getElementById("thank-you-container").classList.add("show")
+        document.getElementById('sub-container').classList.add('hidden');
+        document.getElementById('thank-you-container').classList.add('show');
 
-       })
+      });
   }
 
   getStringMonth(month: number): string {
@@ -318,7 +349,7 @@ export class ResourcesComponent implements OnInit {
         this.other = false;
       }
     }
-    this.checkMadeSelection()
+    this.checkMadeSelection();
   }
 
 }
