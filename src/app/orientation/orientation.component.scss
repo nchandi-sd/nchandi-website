@@ -1,0 +1,207 @@
+orientation-main-view {
+  background-color: #E5E5E5;
+  width: 100%;
+}
+
+.row {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.orientation-location-view {
+  background-color: var(--primary-dark);
+  background-size: cover;
+}
+.orientation-main-container {
+  margin: 0 auto;
+  background-color: var(--primary-option);
+  max-width: 1920px;
+}
+.HowTo-para {
+  font-size: 18px;
+}
+.btn-round-lg{
+  border-radius: 17px;
+  color: white;
+  background: var(--primary) !important;
+}
+.HowTo-container{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.HowTo-header {
+  -webkit-text-stroke-width: .5px;
+  margin-top: 32px;
+}
+.container-2 {
+  margin-top:48px;
+  margin-bottom:0px;
+  padding-bottom: 0px;
+}
+.container-3{
+  margin-left: 24px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.spacer{
+  height: 24px;
+  position: relative;
+}
+.map-container{
+  overflow:hidden;
+  position:relative;
+  height:500px;
+  max-width: 800px;
+  width: 90%;
+}
+.map-container iframe{
+  width: 100%;
+  height: 500px;
+}
+
+.location-content{
+  color: white;
+  float: left;
+  text-align: left;
+  font-size: 18px;
+}
+#first_name_error{
+  color: darkred;
+}
+.sobriety-req{
+margin-top: 0px;
+padding-top: 0px;
+}
+
+/*Extra small devices (portrait phones, less than 576px)  */
+/*No media query since this is the default in Bootstrap*/
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+  .HowTo-container{
+    margin-left: 12px;
+    margin-right: 12px
+  }
+  .HowTo-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 19px;
+  }
+  .location-para {
+    font-size: 18px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+  }
+  .container-2 {
+    margin-top:48px;
+    margin-bottom:48px
+  }
+  .container-3{
+    margin-left: 96px;
+    margin-bottom: 48px
+  }
+  .spacer{
+    height: 24px;
+    position: relative;
+  }
+
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+
+  .HowTo-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 19px;
+  }
+  .location-para {
+    font-size: 18px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+  }
+  .container-1 {
+    padding-left: 64px;
+  }
+  .container-2 {
+    height: 100%;
+  }
+  .container-3{
+    margin-left:-48px
+  }
+
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .HowTo-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 19px;
+  }
+  .location-para {
+    font-size: 18px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 18px;
+  }
+  .container-1 {
+    padding-left: 64px;
+  }
+  .container-2 {
+    height: 100%;
+  }
+  .container-3{
+    margin-left:-64px
+  }
+
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  .HowTo-header {
+    -webkit-text-stroke-width: .5px;
+    margin-top: 16px;
+  }
+  .mission-para {
+    font-size: 20px;
+  }
+  .location-para {
+    font-size: 20px;
+  }
+  .location-content{
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 20px;
+  }
+  .container-1 {
+    padding-left: 64px;
+  }
+  .container-2 {
+    height: 100%;
+  }
+  .container-3{
+    margin-left:-64px
+  }
+
+}
+
+
