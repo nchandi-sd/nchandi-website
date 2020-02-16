@@ -1,5 +1,5 @@
 .login-main-view {
-  background-color: var(--secondary);
+  background-color: var(--primary-option);
 }
 
 .login-header{
@@ -24,7 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 .row{
@@ -48,7 +48,7 @@
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (max-width: 1200px) {
-  
+
 
 }
 

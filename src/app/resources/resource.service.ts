@@ -3,6 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {MonthlyReport} from '../model/MonthlyReport';
+import {Announcement} from '../model/Announcement';
 
 @Injectable()
 export class ResourceService {
@@ -20,6 +21,18 @@ export class ResourceService {
     return this.firestore.collection('Monthly Reports').snapshotChanges();
   }
 
+  getAnnouncements() {
+    return this.firestore.collection('Announcements').snapshotChanges();
+  }
+
+  getArchivedReports() {
+    return this.firestore.collection('Archived Reports').snapshotChanges();
+  }
+
+  createAnnouncement(announcement: Announcement) {
+    return this.firestore.collection('Announcements').add({...announcement});
+  }
+
   createPanelMaterial(resource: PanelMaterials) {
     return this.firestore.collection('Panel Materials').add({...resource});
   }
@@ -33,18 +46,27 @@ export class ResourceService {
     return this.firestore.collection('Monthly Reports').add({...report});
   }
 
+  createArchiveReport(resource: PanelMaterials) {
+    return this.firestore.collection('Archived Reports').add({...resource});
+  }
+
   deleteItem(reportType: string, reportId: string){
 
     this.firestore.collection(reportType).doc(reportId).get().subscribe(resp =>{
       if(resp.exists){
+        console.log()
         let name = resp.data().title
         this.afStorage.ref('/'+reportType+'/'+name).delete().subscribe(_ => {
           this.firestore.collection(reportType).doc(reportId).delete()
         })
 
       }
-      
+
     })
+  }
+
+  deleteDatabaseItem(reportType: string, reportId: string) {
+    this.firestore.collection(reportType).doc(reportId).delete();
   }
   //
   // deletePolicy(policyId: string){

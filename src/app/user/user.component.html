@@ -18,38 +18,38 @@
             <div class="add-resource-title text-white">
               What type of resource would you like to add?
             </div>
-            <div class ="container">
+            <div class="container">
 
               <div class="custom-control custom-radio custom-control-inline" *ngFor="let resource of resources">
-                  <input
-                    #checkboxes
-                    type="radio"
-                    name="resourceType"
-                    class="custom-control-input"
-                    value="{{resource}}"
-                    id="{{resource}}"
-                    (change)="resourceChangeHandler($event)"
-                    [checked]="idx === 0">
+                <input
+                  #checkboxes
+                  type="radio"
+                  name="resourceType"
+                  class="custom-control-input"
+                  value="{{resource}}"
+                  id="{{resource}}"
+                  (change)="resourceChangeHandler($event)"
+                  [checked]="idx === 0">
                 <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
               </div>
             </div>
 
             <ngb-alert *ngIf="resourceAlert" (close)="resourceAlert= false">{{this.resourceMessage}}</ngb-alert>
 
-            <div *ngIf="resource === resources[0] || resource === resources[1]">
+            <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[4]">
 
               <div class="spacer"></div>
 
               <div class="add-resource-title text-white">Resource Title</div>
-              <div class ="container">
+              <div class="container">
 
                 <div class="col-12 col-lg-6">
-                    <input
-                      type="text"
-                      placeholder="Title"
-                      (change)="titleChangeHandler($event)"
-                      value="{{title}}">
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    (change)="titleChangeHandler($event)"
+                    value="{{title}}">
+                </div>
               </div>
             </div>
 
@@ -58,7 +58,7 @@
             <div class="spacer"></div>
             <div *ngIf="resource === resources[2]">
               <div class="add-resource-title text-white">Monthly Reports</div>
-              <div class ="container">
+              <div class="container">
 
                 <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
                   <input
@@ -73,11 +73,12 @@
                 </div>
               </div>
 
-              <ngb-alert *ngIf="reportTypeAlert" (close)="reportTypeAlert = false">{{this.reportTypeMessage}}</ngb-alert>
+              <ngb-alert *ngIf="reportTypeAlert"
+                         (close)="reportTypeAlert = false">{{this.reportTypeMessage}}</ngb-alert>
               <div class="spacer"></div>
 
               <div class="add-resource-title text-white">Current Month</div>
-              <div class ="container">
+              <div class="container">
 
                 <div class="col-12 col-lg-9">
                   <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
@@ -94,11 +95,35 @@
                 </div>
               </div>
 
-              <ngb-alert *ngIf="monthAlert" (close)="monthAlert = false">{{this.monthMessage}}</ngb-alert>
-              <div class="spacer"></div>
+              <div *ngIf="basePath === months[11]">
+                <div class="spacer"></div>
+              <div class="add-resource-title text-white">Archive Report</div>
+              <div class="container">
 
+                <div class="col-12 col-lg-9">
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input
+                      #checkboxes
+                      type="radio"
+                      name="archiveReport"
+                      class="custom-control-input"
+                      value="Create Archivable Record"
+                      id="Create Archivable Record"
+                      (change)="archiveChangeHandler($event)">
+                    <label class="custom-control-label" for="Create Archivable Record">Create Archivable Record</label>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
+            <ngb-alert *ngIf="monthAlert" (close)="monthAlert = false">{{this.monthMessage}}</ngb-alert>
+            <div class="spacer"></div>
+
+          </div>
+
+          <div
+            *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[2] || resource === resources[4]">
             <div class="add-resource-title text-white">Upload Your Document</div>
             <div class="col-12 col-lg-9">
               <!--            <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); submitForm.reset()">-->
@@ -112,14 +137,15 @@
                     class="custom-file-input"
                     id="inputGroupFile01"
                     aria-describedby="inputGroupFileAddon01"
-                    (change)="onFileChange($event)" >
-                  <label class="custom-file-label" for="inputGroupFile01" >{{name}}</label>
+                    (change)="onFileChange($event)">
+                  <label class="custom-file-label" for="inputGroupFile01">{{name}}</label>
                 </div>
               </div>
 
               <div *ngIf="!uploadAlert">
                 <div class="progress">
-                  <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+                  <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                       [style.width]="(uploadProgress | async) + '%'"
                        [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div>
@@ -136,21 +162,54 @@
                 <div class="spacer"></div>
               </div>
             </div>
-
-            <div class="spacer"></div>
-
           </div>
-        </form>
-      </div>
 
-      <div class="col-md-6">
-        <div class="container">
-          <app-resource-list [selectedResouce]=resource [availableResources] = resources></app-resource-list>
-        </div>
+          <!-- Announcement Cards -->
+          <div *ngIf="resource === resources[3]">
+            <div class="add-resource-title text-white">Announcement Title</div>
+            <div class="container">
+              <div class="col-12 col-lg-6">
+                <input
+                  type="text"
+                  placeholder="Title"
+                  (change)="announcementTitleChangeHandler($event)"
+                  value="{{annoucementTitle}}">
+              </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="add-resource-title text-white">Announcement Body</div>
+            <div class="container">
+              <div class="col-12 col-lg-12">
+                  <textarea
+                    rows="10"
+                    cols="60"
+                    type="text"
+                    placeholder="Your announcement text..."
+                    (change)="announcementTextBodyChangeHandler($event)"
+                    value="{{annoucementBody}}">
+                  </textarea>
+              </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="button-container flex-center">
+              <button type="submit" class="submit-button btn btn-block button">Submit</button>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
       </div>
+      </form>
     </div>
 
-    <div class="spacer"></div>
-
+    <div class="col-md-6">
+      <div class="container">
+        <app-resource-list [selectedResouce]=resource [availableResources]=resources></app-resource-list>
+      </div>
+    </div>
   </div>
+
+  <div class="spacer"></div>
+
+</div>
 </div>

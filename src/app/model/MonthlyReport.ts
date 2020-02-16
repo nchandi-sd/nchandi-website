@@ -7,6 +7,7 @@ export class MonthlyReport {
   month: number;
   year: string;
   timestamp: number;
+  isArchive: boolean;
 }
 
 

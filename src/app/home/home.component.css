@@ -159,18 +159,6 @@ span:nth-child(4) {
   margin-left: 36%
 }
 
-.column-buffer {
-  float: left;
-  width: 0%;
-}
-
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 100%;
-  padding: 0 36px;
-}
-
 /* Remove extra left and right margins, due to padding in columns */
 .row {margin: 0 -5px;}
 
@@ -196,6 +184,10 @@ span:nth-child(4) {
 
 #card_pic_2 {
   background-image: linear-gradient(to bottom left, #34419B, #6DC6F6);
+}
+
+#card_pic_3 {
+  background-image: linear-gradient(to bottom left, #7873ED, #EC76C1);
 }
 
 .card-picture {
@@ -227,7 +219,7 @@ span:nth-child(4) {
 .card-primary-btn {
   padding: 8px 8px 8px 8px;
   border: none;
-
+  margin-left: 16px;
   margin-bottom: 8px;
 }
 
@@ -243,12 +235,22 @@ span:nth-child(4) {
   background-repeat: no-repeat;
 }
 
+#card-btn-3 {
+  background: #f0f0f0 url("src/assets/svg/ic_next_3.svg");
+  background-position: 90%;
+  background-repeat: no-repeat;
+}
+
 #card-text-1 {
   color: #F19D38;
 }
 
 #card-text-2 {
   color: #34419B;
+}
+
+#card-text-3 {
+  color: #7873ED;
 }
 
 .card-button-text {
@@ -262,9 +264,16 @@ span:nth-child(4) {
 }
 
 #annoucements-header {
-  color: var(--card-body-text);
+  color: var(--primary-option);
 }
 
+.column-buffer {
+  width: 10%;
+}
+
+.column {
+  width: 80%;
+}
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
@@ -300,16 +309,13 @@ span:nth-child(4) {
   .button-mailing-container {
     margin-left: 40%
   }
+
   .column-buffer {
-    float: left;
-    width: 0%;
+    width: 10%;
   }
 
-  /* Float four columns side by side */
   .column {
-    float: left;
-    width: 100%;
-    padding: 0 36px;
+    width: 80%;
   }
 
 }
@@ -350,16 +356,11 @@ span:nth-child(4) {
     margin-left: 0px
   }
   .column-buffer {
-    float: left;
-    width: 10%;
-    padding: 0 36px;
+    width: 15%;
   }
 
-  /* Float four columns side by side */
   .column {
-    float: left;
-    width: 40%;
-    padding: 0 36px;
+    width: 70%;
   }
 }
 
@@ -390,18 +391,12 @@ span:nth-child(4) {
   .mailing-list-content {
     margin-bottom: 24px;
   }
-
   .column-buffer {
-    float: left;
-    width: 10%;
-    padding: 0 36px;
+    width: 20%;
   }
 
-  /* Float four columns side by side */
   .column {
-    float: left;
-    width: 40%;
-    padding: 0 36px;
+    width: 60%;
   }
 
 }
@@ -436,18 +431,12 @@ span:nth-child(4) {
   .mailing-list-content {
     margin-bottom: 36px;
   }
-
   .column-buffer {
-    float: left;
     width: 20%;
-    padding: 0 36px;
   }
 
-  /* Float four columns side by side */
   .column {
-    float: left;
-    width: 30%;
-    padding: 0 36px;
+    width: 60%;
   }
 
 }

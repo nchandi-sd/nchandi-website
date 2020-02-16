@@ -5,6 +5,7 @@
 .container{width: 300px}
 .monthly-side-container{
   margin-left: 50px;
+  margin-right: 50px;
 }
 .help-block{
   color:red;
@@ -138,7 +139,9 @@
 .quote-content{
   text-align: right;
   font-size: 24px;
-  margin-left: -24px
+}
+.resource-para {
+  font-size: 18px;
 }
 
 
@@ -152,12 +155,10 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
- 
+
   .quote-content{
     text-align: right;
-    margin-top: 64px;
-    margin-left: 64px;
-    font-size: 32px
+    font-size: 32px;
   }
   .resources-side-container{
     margin-left: 96px;
@@ -176,11 +177,9 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
- 
+
   .quote-content{
     text-align: right;
-    margin-top: 64px;
-    margin-right: 144px;
     font-size: 32px
   }
   .resources-side-container{
@@ -200,11 +199,9 @@
     margin-bottom: 50px;
     -webkit-text-stroke-width: .7px;
   }
- 
+
   .quote-content{
     text-align: right;
-    margin-top: 48px;
-    margin-right: 144px;
     font-size: 26px
   }
   .resources-side-container{
@@ -235,11 +232,9 @@
   .month-title{
     margin-right: 0px;
   }
- 
+
   .quote-content{
     text-align: right;
-    margin-top: 48px;
-    margin-right: 96px;
     font-size: 26px
   }
   .resources-side-container{

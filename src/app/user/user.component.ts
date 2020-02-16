@@ -1,3 +1,4 @@
+/* tslint:disable:no-trailing-whitespace */
 import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
@@ -15,6 +16,7 @@ import {finalize} from 'rxjs/operators';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {ResourceService} from '../resources/resource.service';
 import {MonthlyReport} from '../model/MonthlyReport';
+import {Announcement} from '../model/Announcement';
 
 
 @Component({
@@ -39,14 +41,21 @@ export class UserComponent implements OnInit {
   resource: string;
   report: string;
   title: string;
+  annoucementTitle: string;
+  annoucementBody: string;
   resources: any = [
     'Panel Material',
     'General Resource',
-    'Monthly Report'
+    'Monthly Report',
+    'Announcement',
+    'Archived Report'
   ];
   reports: any = [
     'Financial Report',
     'Committee Minutes'
+  ];
+  archives: any = [
+    'Create Archivable Record'
   ];
   months: any = [
     'January',
@@ -66,6 +75,7 @@ export class UserComponent implements OnInit {
   uploadState: Subscription;
   panelMaterial: PanelMaterials = new PanelMaterials();
   monthlyReport: MonthlyReport = new MonthlyReport();
+  announcement: Announcement = new Announcement();
   resourceMessage: string;
   fileErrorMessage: string;
   titleMessage: string;
@@ -76,7 +86,10 @@ export class UserComponent implements OnInit {
   reportTypeAlert: boolean;
   monthAlert: boolean;
   titleAlert: boolean;
+  announcementTitleAlert: boolean;
+  announcementBodyAlert: boolean;
   uploaded: boolean;
+  isArchive: boolean;
 
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
@@ -106,6 +119,7 @@ export class UserComponent implements OnInit {
     this.monthAlert = false;
     this.titleAlert = false;
     this.uploaded = false;
+    this.isArchive = false;
 
     setTimeout(() => this.resourceAlert = false, 10000);
     setTimeout(() => this.uploadAlert = false, 10000);
@@ -133,9 +147,10 @@ export class UserComponent implements OnInit {
     if (this.resource == null) {
       this.resourceAlert = true;
       this.resourceMessage = 'Please select a resource type';
+      console.log('Invalid form-- no resource');
       return false;
     }
-    if (this.resource === 'Panel Material' || this.resource === 'General Resource') {
+    if (this.resource === 'Panel Material' || this.resource === 'General Resource' || this.resource === 'Archived Report') {
       if (this.title == null || this.title === '') {
         this.titleAlert = true;
         this.titleMessage = 'Please enter a document title';
@@ -143,6 +158,7 @@ export class UserComponent implements OnInit {
       if ((!this.uploaded && this.title != null) || (!this.uploaded && this.title === '')) {
         this.uploadAlert = true;
         this.fileErrorMessage = 'Please choose a file to upload';
+        console.log('Invalid form-- no file chosen to upload');
         return false;
       }
     }
@@ -158,15 +174,19 @@ export class UserComponent implements OnInit {
       if (this.report != null && this.basePath != null && !this.uploaded) {
         this.uploadAlert = true;
         this.fileErrorMessage = 'Please choose a file to upload';
+        console.log('Invalid form-- no file chosen to upload');
         return false;
       }
     }
-
+    if (this.resource === 'Anouncement') {
+      console.log('Validating the announcement');
+    }
       return true;
   }
 
   onSubmit(event) {
     // const id = Math.random().toString(36).substring(2);
+    console.log('On Submit! Resource is ' + this.resource.toString());
     if (this.validateForm()) {
       if (this.resource.toString() === this.resources[0]) {
         this.ref = this.afStorage.ref('/Panel Materials/' + this.title.toString());
@@ -198,7 +218,7 @@ export class UserComponent implements OnInit {
             });
           })
         ).subscribe();
-      } else {
+      } else if (this.resource.toString() === this.resources[2]) {
         const year = new Date().getFullYear().toString();
         console.log(this.basePath.toString() + ' and ' + this.report.toString());
         this.title = this.basePath + '_' + this.report;
@@ -214,7 +234,35 @@ export class UserComponent implements OnInit {
               this.monthlyReport.month = this.getMonth(this.basePath);
               this.monthlyReport.type = this.report;
               this.monthlyReport.timestamp = new Date().getTime();
+              this.monthlyReport.isArchive = this.isArchive;
               this.createMonthlyReport(this.monthlyReport);
+              this.clearForm();
+            });
+          })
+        ).subscribe();
+      } else if (this.resource.toString() === this.resources[3]) {
+        console.log(this.annoucementTitle);
+        console.log(this.annoucementBody);
+        this.announcement.title = this.annoucementTitle.toString();
+        this.announcement.body = this.annoucementBody.toString().substring(0, 256);
+        this.announcement.fullBody = this.annoucementBody.toString();
+        this.announcement.date = new Date().toDateString();
+        this.announcement.isExpanded = false;
+        console.log(this.announcement.date.toString());
+        this.createAnnouncement(this.announcement);
+        this.clearForm();
+      } else if (this.resource.toString() === this.resources[4]) {
+        console.log('Submitting archvived report ' + this.title.toString());
+        this.ref = this.afStorage.ref('/Archived Reports/' + this.title.toString());
+        this.task = this.ref.put(this.fileData);
+        this.uploadProgress = this.task.percentageChanges();
+        this.uploadState = this.task.snapshotChanges().pipe(
+          finalize(() => {
+            this.ref.getDownloadURL().subscribe(url => {
+              this.uploaded = false;
+              this.panelMaterial.title = this.title.toString();
+              this.panelMaterial.url = url;
+              this.createArchiveReport(this.panelMaterial);
               this.clearForm();
             });
           })
@@ -274,6 +322,20 @@ export class UserComponent implements OnInit {
       });
   }
 
+  createAnnouncement(announcement: Announcement) {
+    this.resourceService.createAnnouncement(announcement)
+      .then(res => {
+       // update UI
+    });
+  }
+
+  createArchiveReport(resource: PanelMaterials) {
+    this.resourceService.createArchiveReport(resource)
+      .then(res => {
+        // update UI
+      });
+  }
+
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -285,7 +347,13 @@ export class UserComponent implements OnInit {
     this.monthAlert = false;
   }
 
+  archiveChangeHandler(event: any) {
+    this.isArchive = !this.isArchive;
+    console.log('Archive status ' + this.isArchive);
+  }
+
   resourceChangeHandler(event: any) {
+    console.log('Resource changed to: ' + event.target.value);
     this.resource = event.target.value;
     this.resourceAlert = false;
   }
@@ -300,12 +368,24 @@ export class UserComponent implements OnInit {
     this.titleAlert = false;
   }
 
+  announcementTitleChangeHandler(event: any) {
+    this.annoucementTitle = event.target.value;
+    this.announcementTitleAlert = false;
+  }
+
+  announcementTextBodyChangeHandler(event: any) {
+    this.annoucementBody = event.target.value;
+    this.announcementBodyAlert = false;
+  }
+
   clearForm() {
     this.checkboxes.forEach((element) => {
       element.nativeElement.checked = false;
     });
     this.name = '';
     this.title = '';
+    this.annoucementTitle = '';
+    this.annoucementBody = '';
     this.uploadProgress = new Observable<number>();
   }
 }
