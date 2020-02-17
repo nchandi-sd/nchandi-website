@@ -26,6 +26,7 @@ export class PanelsComponent implements OnInit {
   txChampions: Array<FacilityChampion> = [];
   inChampions: Array<FacilityChampion> = [];
   champs: MatTableDataSource<FacilityChampion>;
+  isTableOpen: boolean;
 
   constructor(private panelService: PanelService) {
     this.champs = new MatTableDataSource<FacilityChampion>();
@@ -37,6 +38,7 @@ export class PanelsComponent implements OnInit {
     this.showCorrectionalFacilities();
     this.getTxContact();
     this.getInContact();
+    this.isTableOpen = false;
   }
 
   // This is all information that should be stored in a backend- not frontend
@@ -130,6 +132,11 @@ export class PanelsComponent implements OnInit {
         });
       });
   }
+
+  contactPanelClicked() {
+    this.isTableOpen = !this.isTableOpen;
+  }
+
 }
 
 
