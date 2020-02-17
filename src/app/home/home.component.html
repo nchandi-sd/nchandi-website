@@ -48,12 +48,14 @@
               </div>
               <div class="arrow-spacer"></div>
               <div class="arrow-container">
-                <div class="round">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+                <a (click)="scroll(announcementsId)">
+                  <div class="round">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -84,97 +86,108 @@
   </div>
   <div class="spacer"></div>
 </div>
-<div class="announcement-view">
-  <h1 class="section-header flex-center" id="annoucements-header"> Announcements </h1>
-  <div class="spacer"></div>
-  <div *ngFor="let item of announcements; let i = index">
-    <div class="row">
-      <div class="column-buffer">
+<section id="announcements">
+  <div class="announcement-view" #announcementsId>
+    <h1 class="section-header flex-center" id="annoucements-header"> Announcements </h1>
+    <div class="spacer"></div>
+    <div *ngFor="let item of announcements; let i = index">
+      <div class="row">
+        <div class="column-buffer">
+        </div>
+        <div class="column">
+          <div *ngIf="i % 3 === 0">
+            <div class="card">
+              <div class="card-picture" id="card_pic_1">
+                <div class="card-title">
+                  {{item.title}}
+                </div>
+                <div class="card-subtitle">
+                  {{item.date}}
+                </div>
+              </div>
+              <div *ngIf="item.hasLongSummary">
+                <div class="card-body">
+                  {{item.body}}
+                </div>
+                <button class="card-primary-btn :inline-block" id="card-btn-1">
+                  <div class="card-button-text" id="card-text-1" (click)="item.hasLongSummary = !item.hasLongSummary">
+                    Read
+                    more
+                  </div>
+                </button>
+              </div>
+              <div *ngIf="!item.hasLongSummary">
+                <div class="card-body">
+                  {{item.fullBody}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="i % 3 === 1">
+            <div class="card">
+              <div class="card-picture" id="card_pic_2">
+                <div class="card-title">
+                  {{item.title}}
+                </div>
+                <div class="card-subtitle">
+                  {{item.date}}
+                </div>
+              </div>
+              <div *ngIf="item.hasLongSummary">
+                <div class="card-body">
+                  {{item.body}}
+                </div>
+                <button class="card-primary-btn :inline-block" id="card-btn-2">
+                  <div class="card-button-text" id="card-text-2" (click)="item.hasLongSummary = !item.hasLongSummary">
+                    Read
+                    more
+                  </div>
+                </button>
+              </div>
+              <div *ngIf="!item.hasLongSummary">
+                <div class="card-body">
+                  {{item.fullBody}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="i % 3 === 2">
+            <div class="card">
+              <div class="card-picture" id="card_pic_3">
+                <div class="card-title">
+                  {{item.title}}
+                </div>
+                <div class="card-subtitle">
+                  {{item.date}}
+                </div>
+              </div>
+              <div *ngIf="item.hasLongSummary">
+                <div class="card-body">
+                  {{item.body}}
+                </div>
+                <button class="card-primary-btn :inline-block" id="card-btn-3">
+                  <div class="card-button-text" id="card-text-3" (click)="item.hasLongSummary = !item.hasLongSummary">
+                    Read
+                    more
+                  </div>
+                </button>
+              </div>
+              <div *ngIf="!item.hasLongSummary">
+                <div class="card-body">
+                  {{item.fullBody}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column-buffer">
+        </div>
       </div>
-      <div class="column">
-        <div *ngIf="i % 3 === 0">
-          <div class="card">
-            <div class="card-picture" id="card_pic_1">
-              <div class="card-title">
-                {{item.title}}
-              </div>
-              <div class="card-subtitle">
-                {{item.date}}
-              </div>
-            </div>
-            <div *ngIf="item.hasLongSummary">
-              <div class="card-body">
-                {{item.body}}
-              </div>
-              <button class="card-primary-btn :inline-block" id="card-btn-1">
-                <div class="card-button-text" id="card-text-1" (click)="item.hasLongSummary = !item.hasLongSummary">Read more</div>
-              </button>
-            </div>
-            <div *ngIf="!item.hasLongSummary">
-              <div class="card-body">
-                {{item.fullBody}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="i % 3 === 1">
-          <div class="card">
-            <div class="card-picture" id="card_pic_2">
-              <div class="card-title">
-                {{item.title}}
-              </div>
-              <div class="card-subtitle">
-                {{item.date}}
-              </div>
-            </div>
-            <div *ngIf="item.hasLongSummary">
-              <div class="card-body">
-                {{item.body}}
-              </div>
-              <button class="card-primary-btn :inline-block" id="card-btn-2">
-                <div class="card-button-text" id="card-text-2" (click)="item.hasLongSummary = !item.hasLongSummary">Read more</div>
-              </button>
-            </div>
-            <div *ngIf="!item.hasLongSummary">
-              <div class="card-body">
-                {{item.fullBody}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="i % 3 === 2">
-          <div class="card">
-            <div class="card-picture" id="card_pic_3">
-              <div class="card-title">
-                {{item.title}}
-              </div>
-              <div class="card-subtitle">
-                {{item.date}}
-              </div>
-            </div>
-            <div *ngIf="item.hasLongSummary">
-              <div class="card-body">
-                {{item.body}}
-              </div>
-              <button class="card-primary-btn :inline-block" id="card-btn-3">
-                <div class="card-button-text" id="card-text-3" (click)="item.hasLongSummary = !item.hasLongSummary">Read more</div>
-              </button>
-            </div>
-            <div *ngIf="!item.hasLongSummary">
-              <div class="card-body">
-                {{item.fullBody}}
-              </div>
-            </div>
-          </div>
-        </div>
     </div>
-    <div class="column-buffer">
+    <div class="spacer"></div>
+    <div class="row">
     </div>
   </div>
-</div>
-<div class="spacer"></div>
-<div class="row">
-</div>
-</div>
+</section>
 <app-footer></app-footer>
 
