@@ -20,13 +20,12 @@
   background: var(--primary) !important;
 }
 .mission-statement-container{
-  margin-left: 12px;
-  margin-right: 12px
+  margin-right: 50px
 }
 
 .board-meeting-container {
   margin-left: 0px;
-  margin-right: 0px;
+  margin-right: 50px;
   padding: 0px;
 }
 
@@ -73,14 +72,23 @@
 #first_name_error{
   color: darkred;
 }
+
+.organization-container {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.organization-pic {
+  margin-left: 50px;
+  margin-right: 50px;
+}
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
   .mission-statement-container{
-    margin-left: 12px;
-    margin-right: 12px
+    margin-right: 50px
   }
   .mission-statement-header {
     -webkit-text-stroke-width: .5px;
@@ -109,6 +117,10 @@
   .spacer{
     height: 24px;
     position: relative;
+  }
+  .organization-container {
+    margin-left: 50px;
+    margin-right: 50px;
   }
 
 }
@@ -142,6 +154,10 @@
     margin-left:-48px
   }
 
+  .organization-container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -170,6 +186,10 @@
   }
   .container-3{
     margin-left:-64px
+  }
+  .organization-container {
+    margin-left: 100px;
+    margin-right: 100px;
   }
 
 }
@@ -200,6 +220,10 @@
   }
   .container-3{
     margin-left:-64px
+  }
+  .organization-container {
+    margin-left: 150px;
+    margin-right: 150px;
   }
 
 }
