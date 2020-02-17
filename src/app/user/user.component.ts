@@ -221,7 +221,7 @@ export class UserComponent implements OnInit {
       } else if (this.resource.toString() === this.resources[2]) {
         const year = new Date().getFullYear().toString();
         console.log(this.basePath.toString() + ' and ' + this.report.toString());
-        this.title = this.basePath + '_' + this.report;
+        this.title = this.report;
         this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
         this.task = this.ref.put(this.fileData);
         this.uploadProgress = this.task.percentageChanges();
