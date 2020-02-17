@@ -6,12 +6,37 @@
       <div class="spacer"></div>
       <div class="panels-container">
         <div class="container">
+          <div class="panels-content flex-center">
+            Here you will find a list of all treatment panels for North County H&I. If you are interested in joining a particular
+            panel we strongly encourage you to attend an orientation meeting and reach out to one of the Panel Opening Contacts
+            below. If you have any questions or concerns regarding any of the panels below please visit our Contact section and
+            let us know.
+          </div>
+          <div class="spacer"></div>
+          <div class="button-container flex-center">
+            <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/orientation"
+                    routerLinkActive="active-link">Orientation
+            </button>
+            <button type="button" class="btn btn-secondary btn-round-lg btn-lg flex-center"
+                    routerLink="/contact" routerLinkActive="active-link">Contact Us
+            </button>
+          </div>
+          <div class="spacer"></div>
+          <div class="panels-content flex-center">
+          Please Note: Panel information is updated regularly, but that said, sometimes it can take up to a month for information
+            to be properly updated to this website.
+          </div>
           <div class="row justify-content-center mt-5">
             <div class="container">
               <mat-accordion>
                 <mat-expansion-panel>
                   <mat-expansion-panel-header class="disable_ripple contactViewer">
-                    <mat-panel-title><h4 class="text-white"><strong>Panel Opening Contacts (click here to contact someone to join a panel)</strong></h4></mat-panel-title>
+                    <div *ngIf="!isTableOpen">
+                      <mat-panel-title><h4 class="text-white" (click)="contactPanelClicked()"><strong>Panel Opening Contacts (click here to contact someone to join a panel)</strong></h4></mat-panel-title>
+                    </div>
+                    <div *ngIf="isTableOpen">
+                      <mat-panel-title><h4 class="text-white" (click)="contactPanelClicked()"><strong>Panel Opening Contacts</strong></h4></mat-panel-title>
+                    </div>
                   </mat-expansion-panel-header>
 
                   <table class="contact-table text-white tab-content">

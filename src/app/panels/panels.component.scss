@@ -58,21 +58,21 @@
 .panel-container1 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1180px;
+  max-width: 1110px;
   padding-left: 24px;
   background-color: white;
 }
 .panel-container2 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1324px;
+  max-width: 1185px;
   padding-left: 24px;
   background-color: white;
 }
 .panel-container3 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1160px;
+  max-width: 1020px;
   padding-left: 24px;
   background-color: white;
 }
@@ -82,7 +82,32 @@
 .section-header {
   text-align: center;
 }
-
+.btn-primary{
+  background: var(--primary) !important;
+  border: solid var(--primary) 1px;
+}
+.btn-secondary{
+  background-color: transparent !important;
+  border: solid var(--primary) 1px;
+}
+.btn-secondary:hover{
+  background-color: var(--primary) !important;
+  border: solid var(--primary) 1px;
+}
+.btn{
+  padding: 5px 35px;
+  font-size: .8rem;
+  transition: .3s;
+}
+.btn:hover{
+  transform: scale(1.1);
+}
+.btn:active:focus {
+  background-color: var(--primary) !important;
+}
+button:focus{
+  outline: none;
+}
 .contact-content{
   padding:0 15px 0 15px;
   font-size: 10px;
@@ -92,6 +117,11 @@
 }
 .ng-star-inserted td{
   max-width: 370px;
+}
+.panels-content{
+  color: white;
+  text-align: center;
+  font-size: 18px;
 }
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
@@ -115,7 +145,6 @@
   }
   .panels-container {
     margin: 0 96px 0 96px;
-    max-width: 1700px;
   }
 }
 
@@ -123,7 +152,6 @@
 @media (min-width: 992px) {
   .panels-container {
     margin: 0 64px 0 64px;
-    max-width: 1700px;
   }
 }
 
@@ -131,7 +159,6 @@
 @media (min-width: 768px) {
   .panels-container {
     margin: 0 48px 0 48px;
-    max-width: 1700px;
   }
   .contact-content{
     padding:0 15px 0 15px;
@@ -143,7 +170,6 @@
 @media (min-width: 576px) {
   .panels-container {
     margin: 0 24px 0 24px;
-    max-width: 1700px;
   }
   .contact-content{
     padding:0 15px 0 15px;
