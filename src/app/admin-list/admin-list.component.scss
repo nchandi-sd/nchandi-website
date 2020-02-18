@@ -1,0 +1,23 @@
+*{
+  color: white;
+}
+
+.reports-title{
+  font-weight: normal;
+  font-size: x-large;
+  font-family: "Segoe UI", sans-serif;
+  -webkit-text-stroke-width: .5px
+}
+.month-header{
+  font-weight: bold;
+}
+
+.btn-delete{
+  height: 100%;
+  font-weight: bold;
+  font-size: 8px;
+  color:red;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 5px;
+}

@@ -35,6 +35,7 @@ import { ResourceListComponent } from './resource-list/resource-list.component';
 import {ResourceService} from './resources/resource.service';
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrientationComponent } from './orientation/orientation.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { OrientationComponent } from './orientation/orientation.component';
     RegisterComponent,
     ResourceListComponent,
     OrientationComponent,
+    AdminListComponent,
   ],
   imports: [
     AngularSvgIconModule,

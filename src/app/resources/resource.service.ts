@@ -4,10 +4,15 @@ import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} 
 import {PanelMaterials} from '../model/Panel-Materials';
 import {MonthlyReport} from '../model/MonthlyReport';
 import {Announcement} from '../model/Announcement';
+import {AdminMember} from '../model/AdminMember';
 
 @Injectable()
 export class ResourceService {
   constructor(private firestore: AngularFirestore, private afStorage: AngularFireStorage,) {}
+
+  getAdminList() {
+    return this.firestore.collection('Admin').snapshotChanges();
+  }
 
   getPanelMaterials() {
     return this.firestore.collection('Panel Materials').snapshotChanges();
@@ -27,6 +32,10 @@ export class ResourceService {
 
   getArchivedReports() {
     return this.firestore.collection('Archived Reports').snapshotChanges();
+  }
+
+  addAdminMember(admin: AdminMember) {
+    return this.firestore.collection('Admin').add({...admin});
   }
 
   createAnnouncement(announcement: Announcement) {
