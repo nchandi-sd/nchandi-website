@@ -17,19 +17,33 @@ import {PanelMaterials} from '../model/Panel-Materials';
 import {ResourceService} from '../resources/resource.service';
 import {MonthlyReport} from '../model/MonthlyReport';
 import {Announcement} from '../model/Announcement';
+import {Contact} from '../model/Contact';
+import {AdminMember} from '../model/AdminMember';
 
+enum PageType {
+  HOME_PAGE = 0,
+  COMMITTEE_PAGE = 1
+}
 
 @Component({
   selector: 'app-user',
   templateUrl: 'user.component.html',
   styleUrls: ['user.component.scss']
 })
+
+
 export class UserComponent implements OnInit {
 
   // @ViewChild('alert', {static : true} )private alert: ElementRef;
   @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
   @ViewChild('progressBar') progressBar: ElementRef;
 
+  isHomeTabOpen = false;
+  admin: AdminMember = new AdminMember();
+  submitted = false;
+  userForm: FormGroup;
+  contact: Contact;
+  currentPage: PageType;
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
   fileData: File = null;
@@ -91,6 +105,7 @@ export class UserComponent implements OnInit {
   uploaded: boolean;
   isArchive: boolean;
 
+
   // panelMaterials: Array<Resource> = PANEL_MATERIALS;
   generalResources: Array<Resource> = GENERAL_RESOURCES;
   inputTitle: any;
@@ -102,7 +117,8 @@ export class UserComponent implements OnInit {
     private location: Location,
     private fb: FormBuilder,
     private afStorage: AngularFireStorage,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -121,6 +137,8 @@ export class UserComponent implements OnInit {
     this.uploaded = false;
     this.isArchive = false;
 
+    this.currentPage = 0;
+
     setTimeout(() => this.resourceAlert = false, 10000);
     setTimeout(() => this.uploadAlert = false, 10000);
     setTimeout(() => this.reportTypeAlert = false, 10000);
@@ -132,6 +150,17 @@ export class UserComponent implements OnInit {
     this.profileForm = this.fb.group({
       name: [name, Validators.required]
     });
+
+    this.contact = new Contact();
+
+    this.userForm = this.formBuilder.group({
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
+      commitments: ['',[Validators.required]]
+    });
+
   }
 
   logout() {
@@ -336,6 +365,13 @@ export class UserComponent implements OnInit {
       });
   }
 
+  addAdminMember(admin: AdminMember) {
+    this.resourceService.addAdminMember(admin)
+      .then(res => {
+        // update UI
+      });
+  }
+
   onFileChange(event) {
     this.fileData = event.target.files[0];
     this.name = this.fileData.name;
@@ -387,6 +423,57 @@ export class UserComponent implements OnInit {
     this.annoucementTitle = '';
     this.annoucementBody = '';
     this.uploadProgress = new Observable<number>();
+  }
+
+  viewCommitteePage() {
+    this.currentPage = 1;
+  }
+
+  viewHomePage() {
+    this.currentPage = 0;
+  }
+  invalidFirstName() {
+    return (this.submitted && this.userForm.controls.first_name.errors != null);
+  }
+
+  invalidLastName() {
+    return (this.submitted && this.userForm.controls.last_name.errors != null);
+  }
+
+  invalidEmail() {
+    return (this.submitted && this.userForm.controls.email.errors != null);
+  }
+
+  invalidPhone() {
+    return (this.submitted && this.userForm.controls.phone.errors != null);
+  }
+
+  firstNameChangeHandler(event: any) {
+    this.admin.firstName = event.target.value;
+  }
+
+  lastNameChangeHandler(event: any) {
+    this.admin.lastName = event.target.value;
+  }
+
+  emailChangeHandler(event: any) {
+    this.admin.email = event.target.value;
+  }
+
+  phoneChangeHandler(event: any) {
+    this.admin.phone = event.target.value;
+  }
+
+  commitmentChangeHandler(event: any) {
+    this.admin.commitment = event.target.value;
+  }
+
+  onAdminEntry(form: NgForm) {
+    this.addAdminMember(this.admin);
+  }
+
+  homeTabClicked() {
+    this.isHomeTabOpen = !this.isHomeTabOpen;
   }
 }
 

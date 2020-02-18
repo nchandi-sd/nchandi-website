@@ -2,184 +2,204 @@
   <div class="user-container">
     <div class="navbar-spacer"></div>
     <div class="row">
-      <div class="col-md-1">
-        <button class="btn logout-button" (click)="logout()">Logout</button>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="spacer"></div>
+          <div class="container">
+            <button class="btn admin-top-btn" (click)="viewHomePage(); homeTabClicked()">Home</button>
+            <button class="btn admin-top-btn" (click)="viewCommitteePage()">Committee Details</button>
+          </div>
+        </div>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-6">
+        <button class="btn admin-top-btn" (click)="logout()">Logout</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
         <h1 class="section-header text-white flex-center"> Content Management System </h1>
       </div>
-      <div class="col-md-1"></div>
+      <div class="col-md-2"></div>
     </div>
+
     <div class="spacer"></div>
-    <div class="row">
-      <div class="col-md-6">
-        <form #submitForm="ngForm" (ngSubmit)="onSubmit($event)">
-          <div class="container">
-            <div class="add-resource-title text-white">
-              What type of resource would you like to add?
-            </div>
+
+    <div *ngIf="currentPage == 0">
+      <div class="admin-content admin-container">
+        Welcome to the admin dashboard. Click on resources below to add or remove content on the main web page.
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <form #submitForm="ngForm" (ngSubmit)="onSubmit($event)">
             <div class="container">
-
-              <div class="custom-control custom-radio custom-control-inline" *ngFor="let resource of resources">
-                <input
-                  #checkboxes
-                  type="radio"
-                  name="resourceType"
-                  class="custom-control-input"
-                  value="{{resource}}"
-                  id="{{resource}}"
-                  (change)="resourceChangeHandler($event)"
-                  [checked]="idx === 0">
-                <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
+              <div class="add-resource-title text-white">
+                What type of resource would you like to add or remove?
               </div>
-            </div>
-
-            <ngb-alert *ngIf="resourceAlert" (close)="resourceAlert= false">{{this.resourceMessage}}</ngb-alert>
-
-            <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[4]">
-
-              <div class="spacer"></div>
-
-              <div class="add-resource-title text-white">Resource Title</div>
               <div class="container">
 
-                <div class="col-12 col-lg-6">
-                  <input
-                    type="text"
-                    placeholder="Title"
-                    (change)="titleChangeHandler($event)"
-                    value="{{title}}">
-                </div>
-              </div>
-            </div>
-
-            <ngb-alert *ngIf="titleAlert" (close)="titleAlert= false">{{this.titleMessage}}</ngb-alert>
-
-            <div class="spacer"></div>
-            <div *ngIf="resource === resources[2]">
-              <div class="add-resource-title text-white">Monthly Reports</div>
-              <div class="container">
-
-                <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
+                <div class="custom-control custom-radio custom-control-inline" *ngFor="let resource of resources">
                   <input
                     #checkboxes
                     type="radio"
-                    name="reportType"
+                    name="resourceType"
                     class="custom-control-input"
-                    value="{{report}}"
-                    id="{{report}}"
-                    (change)="reportChangeHandler($event)">
-                  <label class="custom-control-label" for="{{report}}">{{report}}</label>
+                    value="{{resource}}"
+                    id="{{resource}}"
+                    (change)="resourceChangeHandler($event)"
+                    [checked]="idx === 0">
+                  <label class="custom-control-label" for="{{resource}}">{{resource}}</label>
                 </div>
               </div>
 
-              <ngb-alert *ngIf="reportTypeAlert"
-                         (close)="reportTypeAlert = false">{{this.reportTypeMessage}}</ngb-alert>
+              <ngb-alert *ngIf="resourceAlert" (close)="resourceAlert= false">{{this.resourceMessage}}</ngb-alert>
+
+              <div *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[4]">
+
+                <div class="spacer"></div>
+
+                <div class="add-resource-title text-white">Resource Title</div>
+                <div class="container">
+
+                  <div class="col-12 col-lg-6">
+                    <input
+                      type="text"
+                      placeholder="Title"
+                      (change)="titleChangeHandler($event)"
+                      value="{{title}}">
+                  </div>
+                </div>
+              </div>
+
+              <ngb-alert *ngIf="titleAlert" (close)="titleAlert= false">{{this.titleMessage}}</ngb-alert>
+
               <div class="spacer"></div>
+              <div *ngIf="resource === resources[2]">
+                <div class="add-resource-title text-white">Monthly Reports</div>
+                <div class="container">
 
-              <div class="add-resource-title text-white">Current Month</div>
-              <div class="container">
-
-                <div class="col-12 col-lg-9">
-                  <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
+                  <div class="custom-control custom-radio custom-control-inline" *ngFor="let report of reports">
                     <input
                       #checkboxes
                       type="radio"
-                      name="monthOfYear"
+                      name="reportType"
                       class="custom-control-input"
-                      value="{{month}}"
-                      id="{{month}}"
-                      (change)="monthChangeHandler($event)">
-                    <label class="custom-control-label" for="{{month}}">{{month}}</label>
+                      value="{{report}}"
+                      id="{{report}}"
+                      (change)="reportChangeHandler($event)">
+                    <label class="custom-control-label" for="{{report}}">{{report}}</label>
+                  </div>
+                </div>
+
+                <ngb-alert *ngIf="reportTypeAlert"
+                           (close)="reportTypeAlert = false">{{this.reportTypeMessage}}</ngb-alert>
+                <div class="spacer"></div>
+
+                <div class="add-resource-title text-white">Current Month</div>
+                <div class="container">
+
+                  <div class="col-12 col-lg-9">
+                    <div class="custom-control custom-radio custom-control-inline" *ngFor="let month of months">
+                      <input
+                        #checkboxes
+                        type="radio"
+                        name="monthOfYear"
+                        class="custom-control-input"
+                        value="{{month}}"
+                        id="{{month}}"
+                        (change)="monthChangeHandler($event)">
+                      <label class="custom-control-label" for="{{month}}">{{month}}</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="basePath === months[11]">
+                  <div class="spacer"></div>
+                  <div class="add-resource-title text-white">Archive Report</div>
+                  <div class="container">
+
+                    <div class="col-12 col-lg-9">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input
+                          #checkboxes
+                          type="radio"
+                          name="archiveReport"
+                          class="custom-control-input"
+                          value="Create Archivable Record"
+                          id="Create Archivable Record"
+                          (change)="archiveChangeHandler($event)">
+                        <label class="custom-control-label" for="Create Archivable Record">Create Archivable
+                          Record</label>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <ngb-alert *ngIf="monthAlert" (close)="monthAlert = false">{{this.monthMessage}}</ngb-alert>
+                <div class="spacer"></div>
+
+              </div>
+
+              <div
+                *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[2] || resource === resources[4]">
+                <div class="add-resource-title text-white">Upload Your Document</div>
+                <div class="col-12 col-lg-9">
+                  <!--            <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); submitForm.reset()">-->
+                  <div class="form-group">
+                    <p class="text-white"> Please upload the .pdf report here </p>
+                    <div class="custom-file">
+                      <input
+                        #myInput
+                        type="file"
+                        accept="application/pdf"
+                        class="custom-file-input"
+                        id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01"
+                        (change)="onFileChange($event)">
+                      <label class="custom-file-label" for="inputGroupFile01">{{name}}</label>
+                    </div>
+                  </div>
+
+                  <div *ngIf="!uploadAlert">
+                    <div class="progress">
+                      <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                           [style.width]="(uploadProgress | async) + '%'"
+                           [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <ngb-alert *ngIf="uploadAlert" (close)="uploadAlert = false">{{this.fileErrorMessage}}</ngb-alert>
+
+                    <div class="spacer"></div>
+
+                    <div class="button-container flex-center">
+                      <button type="submit" class="submit-button btn btn-block button">Submit</button>
+                    </div>
+
+                    <div class="spacer"></div>
                   </div>
                 </div>
               </div>
 
-              <div *ngIf="basePath === months[11]">
-                <div class="spacer"></div>
-              <div class="add-resource-title text-white">Archive Report</div>
-              <div class="container">
-
-                <div class="col-12 col-lg-9">
-                  <div class="custom-control custom-radio custom-control-inline">
+              <!-- Announcement Cards -->
+              <div *ngIf="resource === resources[3]">
+                <div class="add-resource-title text-white">Announcement Title</div>
+                <div class="container">
+                  <div class="col-12 col-lg-6">
                     <input
-                      #checkboxes
-                      type="radio"
-                      name="archiveReport"
-                      class="custom-control-input"
-                      value="Create Archivable Record"
-                      id="Create Archivable Record"
-                      (change)="archiveChangeHandler($event)">
-                    <label class="custom-control-label" for="Create Archivable Record">Create Archivable Record</label>
+                      type="text"
+                      placeholder="Title"
+                      (change)="announcementTitleChangeHandler($event)"
+                      value="{{annoucementTitle}}">
                   </div>
                 </div>
-
-              </div>
-            </div>
-
-            <ngb-alert *ngIf="monthAlert" (close)="monthAlert = false">{{this.monthMessage}}</ngb-alert>
-            <div class="spacer"></div>
-
-          </div>
-
-          <div
-            *ngIf="resource === resources[0] || resource === resources[1] || resource === resources[2] || resource === resources[4]">
-            <div class="add-resource-title text-white">Upload Your Document</div>
-            <div class="col-12 col-lg-9">
-              <!--            <form #submitForm="ngForm" (ngSubmit)="onSubmit($event); submitForm.reset()">-->
-              <div class="form-group">
-                <p class="text-white"> Please upload the .pdf report here </p>
-                <div class="custom-file">
-                  <input
-                    #myInput
-                    type="file"
-                    accept="application/pdf"
-                    class="custom-file-input"
-                    id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01"
-                    (change)="onFileChange($event)">
-                  <label class="custom-file-label" for="inputGroupFile01">{{name}}</label>
-                </div>
-              </div>
-
-              <div *ngIf="!uploadAlert">
-                <div class="progress">
-                  <div #progressBar class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                       [style.width]="(uploadProgress | async) + '%'"
-                       [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <ngb-alert *ngIf="uploadAlert" (close)="uploadAlert = false">{{this.fileErrorMessage}}</ngb-alert>
-
                 <div class="spacer"></div>
-
-                <div class="button-container flex-center">
-                  <button type="submit" class="submit-button btn btn-block button">Submit</button>
-                </div>
-
-                <div class="spacer"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Announcement Cards -->
-          <div *ngIf="resource === resources[3]">
-            <div class="add-resource-title text-white">Announcement Title</div>
-            <div class="container">
-              <div class="col-12 col-lg-6">
-                <input
-                  type="text"
-                  placeholder="Title"
-                  (change)="announcementTitleChangeHandler($event)"
-                  value="{{annoucementTitle}}">
-              </div>
-            </div>
-            <div class="spacer"></div>
-            <div class="add-resource-title text-white">Announcement Body</div>
-            <div class="container">
-              <div class="col-12 col-lg-12">
+                <div class="add-resource-title text-white">Announcement Body</div>
+                <div class="container">
+                  <div class="col-12 col-lg-12">
                   <textarea
                     rows="10"
                     cols="60"
@@ -188,28 +208,125 @@
                     (change)="announcementTextBodyChangeHandler($event)"
                     value="{{annoucementBody}}">
                   </textarea>
+                  </div>
+                </div>
+                <div class="spacer"></div>
+                <div class="button-container flex-center">
+                  <button type="submit" class="submit-button btn btn-block button">Submit</button>
+                </div>
+              </div>
+
+              <div class="spacer"></div>
+
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-6">
+          <div class="container">
+            <app-resource-list [selectedResouce]=resource [availableResources]=resources></app-resource-list>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentPage == 1">
+      <div class="admin-content admin-container">
+        Committee details dashboard. This is a confidential area of the web site where committee details can be uploaded
+        and shared between other members. All fields are optional.
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onAdminEntry(cForm)">
+            <div class="container">
+              <div class="add-resource-title text-white">
+                Add a new member:
+              </div>
+              <div class="spacer"></div>
+              <div class="form-container">
+
+                <div class="row">
+                  <div class="col-12 col-md-8 order-2 order-md-1">
+                    <div class="row form-content">
+
+                      <div class="col-12 col-lg-6">
+                        <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }">
+                          <!-- First Name -->
+                          <label for="first_name" class="form-label">First Name</label>
+                          <input type="text" formControlName="first_name" class="form-control" id="first_name"
+                                 name="first_name" placeholder="First Name"
+                                 (change)="firstNameChangeHandler($event)"
+                                 require>
+                          <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-6">
+                        <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }">
+                          <!-- Last Name -->
+                          <label for="last_name" class="form-label">Last Name</label>
+                          <input type="text" formControlName="last_name" class="form-control" id="last_name"
+                                 name="last_name" placeholder="Last Name"
+                                 (change)="lastNameChangeHandler($event)">
+                          <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
+                        </div>
+                      </div>
+
+                      <div class="col-12">
+                        <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }">
+                          <!-- Email -->
+                          <label for="email" class="form-label">Email</label>
+                          <input type="text" formControlName="email" class="form-control" id="email" name="email"
+                                 placeholder="your@email.com"
+                                 (change)="emailChangeHandler($event)">
+                          <p *ngIf="invalidEmail()" id="email_error" class="help-block">Invalid email address.</p>
+                        </div>
+                      </div>
+
+                      <div class="col-12">
+                        <div class="form-group" [ngClass]="{ 'has-error': invalidPhone() }">
+                          <!-- Email -->
+                          <label for="phone" class="form-label">Phone</label>
+                          <input type="text" formControlName="phone" class="form-control" id="phone" name="phone"
+                                 placeholder="Phone"
+                                 (change)="phoneChangeHandler($event)">
+                          <p *ngIf="invalidPhone()" id="phone_error" class="help-block">Invalid phone number</p>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-6">
+                        <label class="form-label">Commitment</label>
+                        <select formControlName="commitments" name="commitments"
+                                class="browser-default custom-select"
+                                (change)="commitmentChangeHandler($event)">
+                          <option value="Chair">Chair</option>
+                          <option value="Co-Chair">Co-Chair</option>
+                          <option value="Librarian">Librarian</option>
+                          <option value="Technology">Technology</option>
+                          <option value="Treasurer">Treasurer</option>
+                          <option value="Facility">Facilities</option>
+                        </select>
+                      </div>
+
+                      <div class="col-12 flex-center">
+                        <div class="form-group">
+                          <button type="submit" class="btn admin-entry-button btn-primary mx-auto">Add member</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="spacer"></div>
-            <div class="button-container flex-center">
-              <button type="submit" class="submit-button btn btn-block button">Submit</button>
-            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="container">
+            <app-admin-list></app-admin-list>
           </div>
-
-          <div class="spacer"></div>
-
-      </div>
-      </form>
-    </div>
-
-    <div class="col-md-6">
-      <div class="container">
-        <app-resource-list [selectedResouce]=resource [availableResources]=resources></app-resource-list>
+        </div>
       </div>
     </div>
+    <div class="spacer"></div>
   </div>
-
-  <div class="spacer"></div>
-
-</div>
 </div>
