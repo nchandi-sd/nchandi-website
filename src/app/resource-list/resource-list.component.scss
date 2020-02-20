@@ -29,9 +29,7 @@
   padding: 16px;
   text-align: center;
   background-color: #f1f1f1;
-  margin-bottom: 64px;
-  margin-right: 96px;
-
+  width: 100%;
 }
 
 #card_pic_1 {
@@ -91,8 +89,16 @@
   margin-top: 12px;
 }
 
+.card-container {
+  margin: 0 24px 0 24px;
+}
+
 @media (min-width: 576px) {
   .reports-title{
     font-size: 36px;
+  }
+
+  .card-container {
+    margin: 0 50px 0 50px;
   }
 }
