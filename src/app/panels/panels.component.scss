@@ -39,13 +39,6 @@
   font-size: 20px;
   color: white;
 }
-.intro-container{
-  display:table-cell;
-  text-align: left;
-  margin-top: 16px;
-  padding-left: 24px;
-  padding-right: 24px
-}
 
 .disable_ripple:hover{
   background: #7BA0C0 !important;
@@ -123,6 +116,12 @@ button:focus{
   text-align: center;
   font-size: 18px;
 }
+.intro-container {
+  margin: 0 24px 0 24px;
+}
+.exp-content {
+  font-size: 14pt;
+}
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   .intro-para {
@@ -146,12 +145,18 @@ button:focus{
   .panels-container {
     margin: 0 96px 0 96px;
   }
+  .exp-content {
+    font-size: 18pt;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
   .panels-container {
     margin: 0 64px 0 64px;
+  }
+  .exp-content {
+    font-size: 16pt;
   }
 }
 
@@ -181,5 +186,8 @@ button:focus{
     font-family: "Segoe UI", serif;
     outline: white;
     elevation: higher;
+  }
+  .intro-container {
+    margin: 0 50px 0 50px;
   }
 }
