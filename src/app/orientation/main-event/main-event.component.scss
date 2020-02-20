@@ -1,70 +1,72 @@
-
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
-.event-title{
+.event-title {
   -webkit-text-stroke-width: .5px;
 }
-.event-content{
-  font-size: 20px;
+
+.event-content {
+  margin: 12px 0 12px 0;
+  font-size: 32px;
 }
+
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
-  .event-container{
+  .event-container {
     margin-bottom: 50px;
   }
 
-  .event-title{
+  .event-title {
     -webkit-text-stroke-width: .5px;
   }
-  .event-content{
+  .event-content {
     font-size: 20px;
   }
 }
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
-  .event-container{
+  .event-container {
     margin-bottom: 100px;
   }
 
-  .event-title{
+  .event-title {
     padding-top: 100px;
     margin-left: 1em;
     -webkit-text-stroke-width: .5px;
   }
-  .event-content{
+  .event-content {
     font-size: 20px;
   }
 }
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
-  .event-container{
+  .event-container {
     margin-bottom: 250px;
   }
 
-  .event-title{
+  .event-title {
     margin-left: 1em;
     -webkit-text-stroke-width: .5px;
   }
 
-  .event-content{
+  .event-content {
     font-size: 22px;
   }
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
-  .event-container{
+  .event-container {
     margin-bottom: 250px;
   }
 
-  .event-title{
+  .event-title {
     margin-left: -2em;
     -webkit-text-stroke-width: .7px;
   }
 
-  .event-content{
+  .event-content {
     font-size: 24px;
   }
 }

@@ -57,6 +57,10 @@ body{
 li.noStyle {
   list-style-type: none;
 }
+.header-container {
+  margin: 0 24px 0 24px;
+  text-align: center;
+}
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {

@@ -22,6 +22,7 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
     this.eventClicked.emit(this.currentEvent);
+    console.log('First Event is ' + this.currentEvent.name);
   }
 
   onClick(event: Event): void {

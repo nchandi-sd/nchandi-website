@@ -68,9 +68,27 @@ orientation-main-view {
 #first_name_error{
   color: darkred;
 }
-.sobriety-req{
-margin-top: 0px;
-padding-top: 0px;
+.intro-container {
+  margin: 0 24px 0 24px;
+}
+.HowTo-container {
+  margin: 0 24px 0 24px;
+}
+.req-container {
+  margin: 0 0 0 50px;
+}
+.sobriety-reqs {
+  font-size: 20pt;
+  margin: 0;
+}
+.img-container {
+  padding: 8px 0 8px 0;
+}
+.sobriety-blurb-container {
+  margin: 24px 0 0 0;
+}
+.req-container {
+  margin: 0 24px 0 24px;
 }
 
 /*Extra small devices (portrait phones, less than 576px)  */
@@ -78,9 +96,8 @@ padding-top: 0px;
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
-  .HowTo-container{
-    margin-left: 12px;
-    margin-right: 12px
+  .HowTo-container {
+    margin: 0 0 0 50px;
   }
   .HowTo-header {
     -webkit-text-stroke-width: .5px;
@@ -110,7 +127,19 @@ padding-top: 0px;
     height: 24px;
     position: relative;
   }
-
+  .intro-container {
+    margin: 0 50px 0 50px;
+  }
+  .HowTo-container {
+    margin: 0 0 0 50px;
+  }
+  .req-container {
+    margin: 0 0 0 0;
+  }
+  .sobriety-reqs {
+    font-size: 26pt;
+    margin: 0;
+  }
 }
 
 /*Medium devices (tablets, 768px and up)*/
@@ -141,7 +170,15 @@ padding-top: 0px;
   .container-3{
     margin-left:-48px
   }
-
+  .sobriety-reqs {
+    font-size: 22pt;
+    margin: 0 24px 0 0;
+    position: absolute;
+    top: 25%;
+  }
+  .sobriety-blurb-container {
+    margin: 24px 0 0 24px;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -200,6 +237,15 @@ padding-top: 0px;
   }
   .container-3{
     margin-left:-64px
+  }
+  .sobriety-reqs {
+    font-size: 26pt;
+    margin: 0 0 0 50px;
+    position: absolute;
+    top: 25%;
+  }
+  .sobriety-blurb-container {
+    margin: 24px 0 0 50px;
   }
 
 }
