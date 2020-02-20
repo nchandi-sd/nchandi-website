@@ -21,3 +21,18 @@
   border: none;
   margin-bottom: 5px;
 }
+
+.board-header {
+  margin: 50px 0 0 0;
+}
+
+@media (min-width: 576px) {
+  .board-header {
+    margin: 24px 0 0 0;
+  }
+}
+  @media (min-width: 576px) {
+    .board-header {
+      margin: 0 0 0 0;
+    }
+}
