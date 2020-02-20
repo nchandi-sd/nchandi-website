@@ -159,8 +159,11 @@
 }
 
 .quote-content {
-  text-align: right;
-  font-size: 20px;
+  font-size: 14px;
+}
+
+.month-content {
+  text-align: center;
 }
 
 .resource-title-container {
@@ -183,6 +186,11 @@
 
 .quote-container {
   text-align: center;
+  margin: 0 24px 0 24px;
+}
+
+.release-container {
+  margin: 50px 0 0 0;
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
@@ -262,6 +270,9 @@
   }
   .report-blurb {
     text-align: left;
+  }
+  .release-container {
+    margin: 0 0 0 0;
   }
 }
 
