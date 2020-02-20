@@ -12,8 +12,6 @@ import { PanelsComponent } from './panels/panels.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
-import { EventsComponent } from './about/events/events.component';
-import { MainEventComponent } from './about/main-event/main-event.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {HttpClientModule} from '@angular/common/http';
 import {PanelService} from './panels/panel.service';
@@ -36,6 +34,8 @@ import {ResourceService} from './resources/resource.service';
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrientationComponent } from './orientation/orientation.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import {MainEventComponent} from './orientation/main-event/main-event.component';
+import {EventsComponent} from './orientation/events/events.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,8 @@ import { AdminListComponent } from './admin-list/admin-list.component';
     ResourceListComponent,
     OrientationComponent,
     AdminListComponent,
+    MainEventComponent,
+    EventsComponent,
   ],
   imports: [
     AngularSvgIconModule,

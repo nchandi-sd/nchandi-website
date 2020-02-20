@@ -1,8 +1,9 @@
-<h3 class="list-title text-white">Orientation and Committee Board Meetings</h3>
+<div class="header-container flex-center">
+  <h3 class="event-title text-white flex-center"><b>Orientation and Committee Board Meetings</b></h3>
+</div>
 <div class="verticalLine">
 <ul class="events">
   <li *ngFor="let event of events" (click)="onClick(event)">
-
     <div class="event-wrapper">
         <img src="../../../assets/bullet.svg" class="svg-icon">
       <div class="event-content-container">
@@ -14,8 +15,6 @@
       </div>
     </div>
     </div>
-
-
   </li>
 </ul>
 </div>
