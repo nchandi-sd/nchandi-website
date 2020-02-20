@@ -8,16 +8,19 @@
         <div class="col-md-3 flex-center">
           <div class="row">
 
-            <div class="resources-side-container">
+            <div class="panels-container">
 
-              <div class="report-sheet report-content">
-                <h3 class="title flex-center"><u>Panel Materials</u></h3>
-                <div class="resource-para text-white">Panel materials include any information relevant to H&I panels.
+              <div class="report-sheet report-blurb">
+                <div class="resource-title-container flex-center">
+                  <h3 class="title flex-center"><u>Panel Materials</u></h3>
+                </div>
+                <div class="resource-para text-white ">Panel materials include any information relevant to H&I panels.
                   Please click on links below for PDF files for each piece of information.<br><br></div>
 
                 <ul class="committeeReports">
                   <li class="report-li" *ngFor="let panel of panelMaterials">
-                    <strong><u><a class="genLink" href="{{panel.url}}" id="link" target="_blank">{{panel.title}}</a></u></strong>
+                    <strong><u><a class="genLink report-content" href="{{panel.url}}" id="link"
+                                  target="_blank">{{panel.title}}</a></u></strong>
                   </li>
                 </ul>
               </div>
@@ -28,15 +31,18 @@
         <div class="col-md-3 flex-center">
           <div class="resources-side-container">
 
-            <div class="report-sheet report-content">
-              <h3 class="title"><u>General Resources</u></h3>
+            <div class="report-sheet report-blurb">
+              <div class="resource-title-container">
+                <h3 class="title"><u>General Resources</u></h3>
+              </div>
               <div class="resource-para text-white">General resources include information miscellaneous information
                 which you may find helpful. Please click on links below for PDF files for each piece of information.<br><br>
               </div>
 
               <ul class="committeeReports">
                 <li class="report-li" *ngFor="let resource of generalResources">
-                  <strong><u><a class="genLink" href="{{resource.url}}" id="link" target="_blank">{{resource.title}}</a></u></strong>
+                  <strong><u><a class="genLink report-content" href="{{resource.url}}" id="link"
+                                target="_blank">{{resource.title}}</a></u></strong>
                 </li>
               </ul>
 
@@ -46,8 +52,10 @@
 
         <div class="col-md-6">
           <div class="monthly-side-container">
-            <div class="report-sheet2 report-content">
-              <h3 class="month-title flex-center"><u>North County H&I Monthly Reports</u></h3>
+            <div class="report-sheet2 report-blurb">
+              <div class="resource-title-container">
+                <h3 class="title flex-center"><u>North County H&I Monthly Reports</u></h3>
+              </div>
               <div class="resource-para text-white">The links below are for each months (in the current year) committee
                 minutes and financial report. Committee minutes are approved the following months committee meeting, and
                 financial reports are generally made available a few weeks after a committee meeting.<br><br></div>
@@ -58,17 +66,17 @@
                   <!-- add list of report resource here : 6 per col-->
                   <div class="col-md-4">
                     <div class="mx-auto h-100 d-flex">
-                      <ul class="committeeReports">
+                      <ul class="committeeReports report-content">
                         <li class="report-li" *ngFor="let report of committeeReports; let i = index">
                           <div *ngIf="report">
                             <div *ngIf="report.monthDate==='January' ||
                                 report.monthDate==='February' ||
                                 report.monthDate==='March' ||
                                 report.monthDate==='April'">
-                              <span class="report-title">{{report.monthDate}}</span><br>
-                              <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
-                              <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
-                              <br>
+                              <span class="report-title month-header">{{report.monthDate}}</span><br>
+                              <strong><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong><br>
+                              <strong><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
+                              <br><br>
                             </div>
                           </div>
                         </li>
@@ -86,10 +94,10 @@
                                 report.monthDate==='June'||
                                 report.monthDate==='July' ||
                                 report.monthDate==='August'">
-                              <span class="report-title">{{report.monthDate}}</span><br>
-                              <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
-                              <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
-                              <br>
+                              <span class="report-title month-header">{{report.monthDate}}</span><br>
+                              <strong><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong><br>
+                              <strong><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
+                              <br><br>
                             </div>
                           </div>
                         </li>
@@ -107,10 +115,10 @@
                                   report.monthDate==='October' ||
                                   report.monthDate==='November' ||
                                   report.monthDate==='December'">
-                              <span class="report-title">{{report.monthDate}}</span><br>
-                              <strong><u><a href="{{report.minLink}}">{{report.minutes}}</a></u></strong><br>
-                              <strong><u><a href="{{report.finLink}}">{{report.financialReport}}</a></u></strong>
-                              <br>
+                              <span class="report-title month-header">{{report.monthDate}}</span><br>
+                              <strong><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong><br>
+                              <strong><u><a href="{{report.finLink}}" id="link">{{report.financialReport}}</a></u></strong>
+                              <br><br>
                             </div>
                           </div>
                         </li>
@@ -132,22 +140,21 @@
             <div *ngIf="hasArchives">
               <h3 class="text-white title flex-center"><u>Archived Records</u></h3>
               <div *ngIf="hasFinancialArchive">
-                <div class="resource-para report-content">The previous years financial summary can be viewed by clicking
+                <div class="resource-para report-blurb">The previous years financial summary can be viewed by clicking
                   on the link below. This is the December report for last year.<br><br></div>
                 <ul class="committeeReports">
-                  <li class="report-li">
-                    <strong><u><a href="{{financialArchive.url}}">{{financialArchive.title}}</a></u></strong>
+                  <li class="report-li report-content">
+                    <strong><u><a href="{{financialArchive.url}}" id="link">{{financialArchive.title}}</a></u></strong>
                   </li>
                 </ul>
                 <div class="spacer"></div>
               </div>
-              <div class="resource-para report-content">Archived reports contain important information from past years
-                and
-                can be a helpful place to look for older documents relevant to H&I.<br><br>
+              <div class="resource-para report-blurb">Archived reports contain important information from past years
+                and can be a helpful place to look for older documents relevant to H&I.<br><br>
               </div>
               <ul class="committeeReports">
                 <li class="report-li" *ngFor="let resource of archiveReports">
-                  <strong><u><a class="genLink" href="{{resource.url}}" id="link" target="_blank">{{resource.title}}</a></u></strong>
+                  <strong><u><a class="genLink report-content" href="{{resource.url}}" id="link" target="_blank">{{resource.title}}</a></u></strong>
                 </li>
               </ul>
             </div>
@@ -156,11 +163,13 @@
         <div class="col-md-6">
           <div class="monthly-side-container">
             <h3 class="text-white title flex-center"><u>Contact on Release</u></h3>
-            <div class="resource-para report-content">The primary purpose of AA Contact on Release is to introduce newly
-              released members to AA on the outside. Being alcoholics ourselves, we know that the people you will meet in
+            <div class="resource-para report-blurb">The primary purpose of AA Contact on Release is to introduce newly
+              released members to AA on the outside. Being alcoholics ourselves, we know that the people you will meet
+              in
               your first days out could make all the difference.<br><br>
               Many of us who have made the transition to sober and happy lives on the outside still remember the first
-              days on our own. It was hard to know what to do. Now, we see that we can help the new people getting out.<br><br>
+              days on our own. It was hard to know what to do. Now, we see that we can help the new people getting
+              out.<br><br>
               We hope that we will hear from you. If you are interested in an AA contact upon your release, fill out and
               mail this form to our PO Box address listed in the form. A member of AA will be in touch with you. Please
               note: AA Contact on Release does not provide rides from the facility.<br><br>
@@ -168,19 +177,24 @@
 
             <ul class="committeeReports">
               <li class="report-li">
-                <strong><u><a class="genLink" href="http://www.aasandiego.org/releaseform.pdf" id="link" target="_blank">Contact on Release Form</a></u></strong>
+                <strong><u><a class="genLink report-content" href="http://www.aasandiego.org/releaseform.pdf" id="link"
+                              target="_blank">Contact on Release Form</a></u></strong>
               </li>
             </ul>
-
             <div class="spacer"></div>
-            <div class="quote-content text-white">
-              <i>"Be part of the solution, not the problem"</i> <br>
-              - AA Slogan
-            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="quote-container quote-content text-white flex-center">
+            <i>"Be part of the solution, not the problem"</i> <br>
+            - AA Slogan
           </div>
         </div>
       </div>
       <div class="spacer"></div>
+
 
 
       <div id="sub-container" class="form-sheet">
