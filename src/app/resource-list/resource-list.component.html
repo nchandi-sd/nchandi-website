@@ -61,18 +61,19 @@
 
   <div *ngIf="cardView">
     <div class="column">
-      <div class="card">
-        <div class="card-picture" id="card_pic_1">
-          <div class="card-title">
-            {{currentAnnoucement.title}}
+      <div class="card-container flex-center">
+        <div class="card">
+          <div class="card-picture" id="card_pic_1">
+            <div class="card-title">
+              {{currentAnnoucement.title}}
+            </div>
+            <div class="card-subtitle">
+              {{currentAnnoucement.date | date:'yyyy-MM-dd'}}
+            </div>
           </div>
-          <div class="card-subtitle">
-            {{currentAnnoucement.date | date:'yyyy-MM-dd'}}
-            <!--            12/1/2019-->
+          <div class="card-body">
+            {{currentAnnoucement.body}}
           </div>
-        </div>
-        <div class="card-body">
-          {{currentAnnoucement.body}}
         </div>
       </div>
     </div>

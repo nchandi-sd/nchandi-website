@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Event} from '../model/Event';
 
 @Component({
   selector: 'app-orientation',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./orientation.component.scss']
 })
 export class OrientationComponent implements OnInit {
+  public clickedEvent: Event;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  childEventClicked(event: Event) {
+    this.clickedEvent = event;
+  }
 }

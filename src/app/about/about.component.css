@@ -20,19 +20,21 @@
   background: var(--primary) !important;
 }
 .mission-statement-container{
-  margin-left: 12px;
-  margin-right: 12px
+  margin-right: 50px
 }
 
 .board-meeting-container {
   margin-left: 0px;
-  margin-right: 0px;
+  margin-right: 50px;
   padding: 0px;
 }
 
 .mission-statement-header {
   -webkit-text-stroke-width: .5px;
   margin-top: 32px;
+}
+.container-1 {
+  margin: 0 24px 0 24px;
 }
 .container-2 {
   margin-top:48px;
@@ -73,14 +75,58 @@
 #first_name_error{
   color: darkred;
 }
+
+.organization-pic {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.btn-primary{
+  background: var(--primary) !important;
+  border: solid var(--primary) 1px;
+}
+.btn-secondary{
+  background-color: transparent !important;
+  border: solid var(--primary) 1px;
+}
+.btn-secondary:hover{
+  background-color: var(--primary) !important;
+  border: solid var(--primary) 1px;
+}
+.btn{
+  padding: 5px 35px;
+  font-size: .8rem;
+  transition: .3s;
+}
+.btn:hover{
+  transform: scale(1.1);
+}
+.btn:active:focus {
+  background-color: var(--primary) !important;
+}
+button:focus{
+  outline: none;
+}
+.img-container {
+  margin: 0 24px 24px 24px;
+}
+.mission-statement-container{
+  margin: 0 24px 0 24px;
+}
+.organization-container {
+  margin: 0 24px 0 24px;
+}
+.header-container {
+  margin: 0 24px 0 24px;
+  text-align: center;
+}
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
   .mission-statement-container{
-    margin-left: 12px;
-    margin-right: 12px
+    margin-right: 50px
   }
   .mission-statement-header {
     -webkit-text-stroke-width: .5px;
@@ -110,7 +156,25 @@
     height: 24px;
     position: relative;
   }
-
+  .organization-container {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .header-container {
+    margin: 0 50px 0 50px;
+  }
+  .page-separator {
+    width: 400px;
+  }
+  .mission-statement-container{
+    margin: 0 50px 0 50px;
+  }
+  .img-container {
+    margin: 0 50px 50px 50px;
+  }
+  .container-1 {
+    margin: 0 50px 0 50px;
+  }
 }
 
 /*Medium devices (tablets, 768px and up)*/
@@ -142,6 +206,20 @@
     margin-left:-48px
   }
 
+  .organization-container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  .page-separator {
+    width: 600px;
+  }
+  .mission-statement-container{
+    margin-right: 50px
+  }
+  .img-container {
+    margin: 0 0 0 24px;
+  }
 }
 
 /*Large devices (desktops, 992px and up)*/
@@ -170,6 +248,17 @@
   }
   .container-3{
     margin-left:-64px
+  }
+  .organization-container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  .page-separator {
+    width: 1000px;
+  }
+  .mission-statement-container{
+    margin-right: 50px
   }
 
 }
@@ -200,6 +289,16 @@
   }
   .container-3{
     margin-left:-64px
+  }
+  .organization-container {
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+  .page-separator {
+    width: 1200px;
+  }
+  .mission-statement-container{
+    margin-right: 50px
   }
 
 }

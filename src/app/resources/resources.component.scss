@@ -1,16 +1,21 @@
-.resources-view{
+.resources-view {
   background-color: #E5E5E5;
   width: 100%;
 }
-.container{width: 300px}
-.monthly-side-container{
-  margin-left: 50px;
-  margin-right: 50px;
+
+.container {
+  width: 300px
 }
-.help-block{
-  color:red;
+
+.monthly-side-container {
+  margin: 0 24px 0 24px;
+}
+
+.help-block {
+  color: red;
   font-weight: bold;
 }
+
 .resources-main-container {
   margin: 0 auto;
   background-color: var(--primary-option);
@@ -18,55 +23,62 @@
   background-size: cover;
 }
 
-.resources-container{
+.resources-container {
   min-height: 800px;
 }
-.genLink{
+
+.genLink {
   font-size: large;
 }
+
 .report-content {
   -webkit-text-stroke-width: .5px;
   color: white;
   font-family: "Segoe UI", serif;
-  font-size: 16px;
+  font-size: 14pt;
 }
+
+.report-blurb {
+  color: white;
+  font-size: 14pt;
+  text-align: center;
+}
+
 .committeeReports {
   list-style: none;
   padding: 0px;
   text-align: center;
 }
+
 .report-title {
   text-align: center;
   font-size: 20px;
   -webkit-text-stroke-width: .7px;
 }
+
 .title {
-    font-weight: normal;
-    font-size: 24px;
-    font-family: "Segoe UI", sans-serif;
-    margin-bottom: 32px;
-    -webkit-text-stroke-width: .7px;
-}
-.month-title{
   font-weight: normal;
   font-size: 24px;
   font-family: "Segoe UI", sans-serif;
   margin-bottom: 32px;
   -webkit-text-stroke-width: .7px;
-  margin-right: 42px;
 }
-.flex-center ul{
+
+.flex-center ul {
   margin-bottom: 64px
 }
-.form-blurb{
+
+.form-blurb {
   padding-left: 12px;
   padding-right: 12px;
 }
-#link{
+
+#link {
   color: lightgrey;
   -webkit-text-stroke-width: .3px;
 }
-#sub-container{
+
+#sub-container {
   overflow: hidden;
   position: relative;
   margin: 0 auto;
@@ -76,14 +88,16 @@
   background-color: white;
   transition: max-height 1s ease-out
 }
-.hidden{
+
+.hidden {
   display: none;
 }
-.show{
+
+.show {
   opacity: 1 !important;
 }
 
-#thank-you-container{
+#thank-you-container {
   opacity: 0;
   color: white;
   margin: 20px auto;
@@ -92,24 +106,27 @@
   transition: .5s
 }
 
-.loading-container{
+.loading-container {
   position: absolute;
-  top:0;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(2, 0, 85, 0.288);
   z-index: 100;
 }
-.spinner-container{
+
+.spinner-container {
   margin: auto 0;
   width: 8rem;
   height: 8rem;
 }
-.form-title{
+
+.form-title {
   text-align: center;
 }
-.submit-button{
+
+.submit-button {
   display: block;
   padding: 10px;
   background-color: var(--primary);
@@ -118,33 +135,63 @@
   width: 200px;
   border-radius: 30px;
 }
-.form-label{
+
+.form-label {
   margin-top: 10px;
   font-weight: bold;
   color: var(--primary-dark);
   width: 100%;
 }
+
 .form-label {
   font-weight: bold;
   color: var(--primary-dark);
   width: 100%;
 }
-.form-spacer{
+
+.form-spacer {
   position: relative;
   height: 32px;
 }
-.form-container{
-  padding:20px;
-}
-.quote-content{
-  text-align: right;
-  font-size: 24px;
-}
-.resource-para {
-  font-size: 18px;
+
+.form-container {
+  padding: 20px;
 }
 
+.quote-content {
+  font-size: 14px;
+}
 
+.month-content {
+  text-align: center;
+}
+
+.resource-title-container {
+  text-align: center;
+  margin: 0 0 0 0;
+}
+
+.month-header {
+  margin: 0 0 0 0;
+  font-size: 20pt;
+}
+
+.resources-side-container {
+  margin: 0 24px 0 24px;
+}
+
+.panels-container {
+  margin: 0 24px 0 24px;
+}
+
+.quote-container {
+  text-align: center;
+  margin: 0 24px 0 24px;
+}
+
+.release-container {
+  margin: 50px 0 0 0;
+}
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
@@ -156,14 +203,14 @@
     -webkit-text-stroke-width: .7px;
   }
 
-  .quote-content{
+  .quote-content {
     text-align: right;
     font-size: 32px;
   }
-  .resources-side-container{
-    margin-left: 96px;
+  .resources-side-container {
+    margin: 0 0 0 0;
   }
-  .resources-side-container2{
+  .resources-side-container2 {
     margin-left: 96px;
   }
 }
@@ -178,14 +225,14 @@
     -webkit-text-stroke-width: .7px;
   }
 
-  .quote-content{
+  .quote-content {
     text-align: right;
     font-size: 32px
   }
-  .resources-side-container{
-    margin-left: 96px;
+  .resources-side-container {
+    margin: 0 0 0 0;
   }
-  .resources-side-container2{
+  .resources-side-container2 {
     margin-left: 96px;
   }
 }
@@ -200,21 +247,32 @@
     -webkit-text-stroke-width: .7px;
   }
 
-  .quote-content{
+  .panels-container {
+    margin: 0 0 0 50px;
+  }
+
+  .quote-content {
     text-align: right;
     font-size: 26px
   }
-  .resources-side-container{
-    margin-left: 48px;
+
+  .resources-side-container {
+    margin: 0 12px 0 12px;
   }
-  .resources-side-container2{
+  .resources-side-container2 {
     margin-left: -36px;
   }
-  .container{
-    width:100%;
+  .container {
+    width: 100%;
   }
-  #thank-you-container{
+  #thank-you-container {
     font-size: 2rem;
+  }
+  .report-blurb {
+    text-align: left;
+  }
+  .release-container {
+    margin: 0 0 0 0;
   }
 }
 
@@ -229,18 +287,20 @@
     -webkit-text-stroke-width: .7px;
   }
 
-  .month-title{
+  .month-title {
     margin-right: 0px;
   }
 
-  .quote-content{
+  .quote-content {
     text-align: right;
     font-size: 26px
   }
-  .resources-side-container{
-    margin-left: 48px;
+
+  .resources-side-container {
+    margin: 0 24px 0 24px;
   }
-  .resources-side-container2{
+
+  .resources-side-container2 {
     margin-left: 24px;
   }
   .committeeReports {

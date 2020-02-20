@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ResourceService} from '../resources/resource.service';
 import {Announcement} from '../model/Announcement';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,9 @@ import {Announcement} from '../model/Announcement';
 })
 export class HomeComponent implements OnInit {
 
-  cardOneClicked = false;
-  cardTwoClicked = false;
-
   announcements: Announcement[] = null;
 
-  constructor(private resourceService: ResourceService) {
+  constructor(private resourceService: ResourceService, myElement: ElementRef) {
   }
 
   ngOnInit() {
@@ -44,13 +42,8 @@ export class HomeComponent implements OnInit {
     window.open('https://nchandi.us17.list-manage.com/subscribe?u=8b53d42bca70b30fb05bf82e0&id=3e792febdf');
   }
 
-  cardViewClicked(value: any, announcement: Announcement) {
-    console.log(value + ' clicked');
-    announcement.isExpanded = !announcement.isExpanded;
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
   }
-
-  // hasLongSummary(announcement: Announcement): boolean {
-  //   return (announcement.body.length > 255);
-  // }
 
 }
