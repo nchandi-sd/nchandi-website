@@ -11,6 +11,8 @@ import {NgForm, FormGroup, FormBuilder, Validators, FormControl} from '@angular/
 import {ResourceSubmission} from '../model/ResourceSubmission';
 import {$} from 'protractor';
 import {Announcement} from '../model/Announcement';
+import {Link} from '../model/Link';
+import {LINKS} from '../model/Local-Links';
 
 @Component({
   selector: 'app-resources',
@@ -19,6 +21,7 @@ import {Announcement} from '../model/Announcement';
 })
 export class ResourcesComponent implements OnInit {
 
+  localLinks: Link[] = null;
   facilities: Array<string> = [];
   announcements: Announcement[] = null;
   monthlyReports: MonthlyReport[] = null;
@@ -55,6 +58,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.localLinks = LINKS
     this.hasArchives = false;
     this.hasFinancialArchive = false;
     this.resourceSubmission = new ResourceSubmission();
@@ -160,6 +164,8 @@ export class ResourcesComponent implements OnInit {
         if (this.monthlyReports[i].isArchive) {
           this.hasFinancialArchive = true;
           this.financialArchive = this.monthlyReports[i];
+          this.financialArchive.title = 'Previous Year Financial Summary';
+          this.monthlyReports[i] = null;
           console.log('Archivable monthly report retrieved');
         }
 

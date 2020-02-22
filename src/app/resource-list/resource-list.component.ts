@@ -166,11 +166,11 @@ export class ResourceListComponent implements OnInit {
         }
       });
     } else if (type === this.availableResources[3]) {
-      console.log('Deleting annoucnement');
+      console.log('Deleting announcement');
       this.resourceService.deleteDatabaseItem('Announcements', id);
     } else if (type === this.availableResources[4]) {
       console.log('Deleting archive report');
-      this.resourceService.deleteItem('Archived Report', id);
+      this.resourceService.deleteItem('Archived Reports', id);
     }
 
 
