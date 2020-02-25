@@ -266,7 +266,6 @@ export class ResourcesComponent implements OnInit {
         //hide form
         document.getElementById('sub-container').classList.add('hidden');
         document.getElementById('thank-you-container').classList.add('show');
-
       });
   }
 
