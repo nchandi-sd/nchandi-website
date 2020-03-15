@@ -4,6 +4,9 @@
   background-color: #E5E5E5;
   width: 100%;
 }
+.hero-container{
+  background-color: var(--primary-option-faded);
+}
 .landing-view {
   background: url("src/assets/Logo-background.svg") no-repeat center center fixed;
   background-size: auto;
