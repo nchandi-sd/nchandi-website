@@ -20,6 +20,7 @@ import {Announcement} from '../model/Announcement';
 import {Contact} from '../model/Contact';
 import {AdminMember} from '../model/AdminMember';
 
+
 enum PageType {
   HOME_PAGE = 0,
   COMMITTEE_PAGE = 1

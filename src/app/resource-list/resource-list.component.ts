@@ -4,6 +4,8 @@ import {ResourceService} from '../resources/resource.service';
 import {PanelMaterials} from '../model/Panel-Materials';
 import {MonthlyReport} from '../model/MonthlyReport';
 import {Announcement} from '../model/Announcement';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { updateCommaList } from 'typescript';
 
 @Component({
   selector: 'app-resource-list',
@@ -28,6 +30,8 @@ export class ResourceListComponent implements OnInit {
   constructor(private resourceService: ResourceService) {
   }
 
+
+
   ngOnInit() {
     this.resourceService.getPanelMaterials().subscribe(data => {
       this.panelMaterials = data.map(e => {
@@ -36,7 +40,8 @@ export class ResourceListComponent implements OnInit {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
         } as PanelMaterials;
-      });
+      }).sort((a,b)=>a.order - b.order);
+
     });
 
     this.resourceService.getGeneralResources().subscribe(data => {
@@ -46,7 +51,7 @@ export class ResourceListComponent implements OnInit {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
         } as PanelMaterials;
-      });
+      }).sort((a,b)=>a.order - b.order);
     });
 
     this.resourceService.getAnnouncements().subscribe(data => {
@@ -139,6 +144,32 @@ export class ResourceListComponent implements OnInit {
       });
     });
   }
+
+  panelListItemDropped(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.panelMaterials, event.previousIndex, event.currentIndex);
+
+    for(let i=0; i<this.panelMaterials.length; i++){
+      if(this.panelMaterials[i].order != i)
+        this.panelMaterials[i].order = i;
+    }
+
+    this.resourceService.updatePanelMaterialsList(this.panelMaterials);
+
+  }
+
+  resourceItemDropped(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.generalResources, event.previousIndex, event.currentIndex);
+
+    for(let i=0; i<this.generalResources.length; i++){
+      if(this.generalResources[i].order != i)
+        this.generalResources[i].order = i;
+    }
+
+    this.resourceService.updateGeneralResourceList(this.generalResources);
+
+  }
+
+
 
   deleteItem(event: any) {
     const id = event.target.getAttribute('id');

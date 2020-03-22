@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ResourceService} from '../resources/resource.service';
 import {AdminMember} from '../model/AdminMember';
 
+
 @Component({
   selector: 'app-admin-list',
   templateUrl: './admin-list.component.html',
