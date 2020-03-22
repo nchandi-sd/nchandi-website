@@ -3,6 +3,7 @@
 .home-view {
   background-color: #E5E5E5;
   width: 100%;
+  overflow-x: hidden;
 }
 .hero-container{
   background-color: var(--primary-option-faded);

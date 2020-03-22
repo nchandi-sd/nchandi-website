@@ -1,6 +1,7 @@
 .about-main-view {
   background-color: #E5E5E5;
   width: 100%;
+  overflow-x: hidden;
 }
 .about-location-view {
   background-color: var(--primary-dark);

@@ -1,6 +1,7 @@
 .panel-main-view {
   background-color: #E5E5E5;
   width: 100%;
+  overflow-x: hidden;
 }
 .panel-main-container {
   background-color: var(--primary-option);
@@ -122,6 +123,9 @@ button:focus{
 .exp-content {
   font-size: 14pt;
 }
+.panel-title {
+  font-size: 11pt;
+}
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   .intro-para {
@@ -169,6 +173,9 @@ button:focus{
     padding:0 15px 0 15px;
     font-size: 16px;
   }
+  .panel-title {
+    font-size: 15pt;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up)*/
@@ -189,5 +196,8 @@ button:focus{
   }
   .intro-container {
     margin: 0 50px 0 50px;
+  }
+  .panel-title {
+    font-size: 13pt;
   }
 }

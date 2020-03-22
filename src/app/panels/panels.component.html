@@ -30,12 +30,12 @@
             <div class="container">
               <mat-accordion>
                 <mat-expansion-panel>
-                  <mat-expansion-panel-header class="disable_ripple contactViewer">
+                  <mat-expansion-panel-header class="disable_ripple contactViewer" (click)="contactPanelClicked()">
                     <div *ngIf="!isTableOpen">
-                      <mat-panel-title><h4 class="text-white exp-content" (click)="contactPanelClicked()"><strong>Panel Opening Contacts (click here to contact someone to join a panel)</strong></h4></mat-panel-title>
+                      <mat-panel-title><h4 class="panel-title text-white exp-content"><strong>Panel Opening Contacts (click here to contact someone to join a panel)</strong></h4></mat-panel-title>
                     </div>
                     <div *ngIf="isTableOpen">
-                      <mat-panel-title><h4 class="text-white exp-content" (click)="contactPanelClicked()"><strong>Panel Opening Contacts</strong></h4></mat-panel-title>
+                      <mat-panel-title><h4 class="text-white exp-content"><strong>Panel Opening Contacts</strong></h4></mat-panel-title>
                     </div>
                   </mat-expansion-panel-header>
 
