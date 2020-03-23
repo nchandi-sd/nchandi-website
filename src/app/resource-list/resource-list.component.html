@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="card-body">
-            {{currentAnnoucement.body}}
+            <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "currentAnnoucement.body"></p>
           </div>
         </div>
       </div>

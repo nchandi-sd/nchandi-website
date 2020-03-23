@@ -410,8 +410,13 @@ export class UserComponent implements OnInit {
   }
 
   announcementTextBodyChangeHandler(event: any) {
-    this.annoucementBody = event.target.value;
+    console.log(event.target.value);
+    this.annoucementBody = this.announcementTextBodyNewLineFormatter(event.target.value);
     this.announcementBodyAlert = false;
+  }
+
+  announcementTextBodyNewLineFormatter(body: string): string {
+    return body.replace(/\n\r?/g, '<br/>');
   }
 
   clearForm() {
