@@ -133,7 +133,6 @@ export class ResourceListComponent implements OnInit {
       }
 
       this.committeeReports.sort(function (a, b) {
-        console.log('called here');
         if (a.monthInt < b.monthInt) {
           return -1;
         }

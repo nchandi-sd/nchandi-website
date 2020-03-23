@@ -142,7 +142,7 @@ export class ResourcesComponent implements OnInit {
 
     this.resourceService.getMonthlyReports().subscribe(data => {
       this.monthlyReports = data.map(e => {
-        console.log('retrieved monthly reports from firestore');
+        console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
