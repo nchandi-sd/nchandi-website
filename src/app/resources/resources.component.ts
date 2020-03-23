@@ -101,6 +101,7 @@ export class ResourcesComponent implements OnInit {
           ...e.payload.doc.data()
         } as PanelMaterials;
       });
+      this.panelMaterials.sort((a,b)=>a.order - b.order)
     });
 
     this.resourceService.getArchivedReports().subscribe(data => {
@@ -126,6 +127,7 @@ export class ResourcesComponent implements OnInit {
           ...e.payload.doc.data()
         } as PanelMaterials;
       });
+      this.generalResources.sort((a,b)=>a.order - b.order)
     });
 
     this.resourceService.getAnnouncements().subscribe(data => {

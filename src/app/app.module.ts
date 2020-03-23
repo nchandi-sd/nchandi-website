@@ -36,6 +36,7 @@ import { OrientationComponent } from './orientation/orientation.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
 import {MainEventComponent} from './orientation/main-event/main-event.component';
 import {EventsComponent} from './orientation/events/events.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import {EventsComponent} from './orientation/events/events.component';
     OrientationComponent,
     AdminListComponent,
     MainEventComponent,
-    EventsComponent,
+    EventsComponent
   ],
   imports: [
     AngularSvgIconModule,
@@ -76,6 +77,7 @@ import {EventsComponent} from './orientation/events/events.component';
     ReactiveFormsModule,
     AngularFireStorageModule,
     NgbAlertModule,
+    DragDropModule
   ],
   providers: [
     PanelService,

@@ -20,6 +20,7 @@ import {Announcement} from '../model/Announcement';
 import {Contact} from '../model/Contact';
 import {AdminMember} from '../model/AdminMember';
 
+
 enum PageType {
   HOME_PAGE = 0,
   COMMITTEE_PAGE = 1
@@ -227,6 +228,7 @@ export class UserComponent implements OnInit {
               this.uploaded = false;
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
+              this.panelMaterial.order = -1;
               this.createPanelMaterial(this.panelMaterial);
               this.clearForm();
             });
@@ -242,6 +244,7 @@ export class UserComponent implements OnInit {
               this.uploaded = false;
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
+              this.panelMaterial.order = -1;
               this.createGeneralResource(this.panelMaterial);
               this.clearForm();
             });
