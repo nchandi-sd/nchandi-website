@@ -52,21 +52,21 @@
 .panel-container1 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1110px;
+  max-width: 1060px;
   padding-left: 24px;
   background-color: white;
 }
 .panel-container2 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1185px;
+  max-width: 1135px;
   padding-left: 24px;
   background-color: white;
 }
 .panel-container3 {
   margin: 0 auto;
   border-radius: 40px;
-  max-width: 1020px;
+  max-width: 955px;
   padding-left: 24px;
   background-color: white;
 }
@@ -125,6 +125,9 @@ button:focus{
 }
 .panel-title {
   font-size: 11pt;
+}
+.panel-header {
+  margin: 0 24px 0 24px;
 }
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {

@@ -23,8 +23,7 @@
   background-color: var(--primary-option);
 }
 .img-mail-container {
-  margin-top: 24px;
-  margin-left: 35%;
+  margin: 24px 0 0 32%;
 }
 .text-mail-container {
   margin-top: 32px;
