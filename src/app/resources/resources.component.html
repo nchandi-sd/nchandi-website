@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <div class="resources-view">
   <div class="resources-main-container">
     <div class="navbar-spacer"></div>
@@ -74,9 +75,12 @@
                                 report.monthDate==='March' ||
                                 report.monthDate==='April'">
                               <span class="report-title month-header">{{report.monthDate}}</span><br>
-                              <strong><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong><br>
-                              <strong><u><a href="{{report.finLink}}"
-                                            id="link">{{report.financialReport}}</a></u></strong>
+                              <div *ngIf="report.financialReport">
+                                <strong><u><a href="{{report.finLink}}" target="_blank" id="link">Financial Report</a></u></strong><br>
+                              </div>
+                              <div *ngIf="report.minutes">
+                                <strong><u><a href="{{report.minLink}}" target="_blank" id="link">Committee Minutes</a></u></strong>
+                              </div>
                               <br><br>
                             </div>
                           </div>
@@ -96,9 +100,12 @@
                                 report.monthDate==='July' ||
                                 report.monthDate==='August'">
                               <span class="report-title month-header">{{report.monthDate}}</span><br>
-                              <strong><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong><br>
-                              <strong><u><a href="{{report.finLink}}"
-                                            id="link">{{report.financialReport}}</a></u></strong>
+                              <div *ngIf="report.financialReport">
+                                <strong><u><a href="{{report.finLink}}" target="_blank" id="link">Financial Report</a></u></strong><br>
+                              </div>
+                              <div *ngIf="report.minutes">
+                                <strong><u><a href="{{report.minLink}}" target="_blank" id="link">Committee Minutes</a></u></strong>
+                              </div>
                               <br><br>
                             </div>
                           </div>
@@ -118,9 +125,12 @@
                                   report.monthDate==='November' ||
                                   report.monthDate==='December'">
                               <span class="report-title month-header">{{report.monthDate}}</span><br>
-                              <strong><u><a href="{{report.minLink}}" id="link">{{report.minutes}}</a></u></strong><br>
-                              <strong><u><a href="{{report.finLink}}"
-                                            id="link">{{report.financialReport}}</a></u></strong>
+                              <div *ngIf="report.financialReport">
+                                <strong><u><a href="{{report.finLink}}" target="_blank" id="link">Financial Report</a></u></strong><br>
+                              </div>
+                              <div *ngIf="report.minutes">
+                                <strong><u><a href="{{report.minLink}}" target="_blank" id="link">Committee Minutes</a></u></strong>
+                              </div>
                               <br><br>
                             </div>
                           </div>
