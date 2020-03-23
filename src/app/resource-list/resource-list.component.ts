@@ -239,7 +239,7 @@ export class ResourceListComponent implements OnInit {
   openCard(announcement: Announcement) {
     this.currentAnnoucement.title = announcement.title;
     this.currentAnnoucement.date = '12/2/2019';
-    this.currentAnnoucement.body = announcement.body;
+    this.currentAnnoucement.body = announcement.fullBody;
     this.cardView = true;
   }
 

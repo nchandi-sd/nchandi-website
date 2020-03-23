@@ -111,7 +111,7 @@
                 </div>
                 <div *ngIf="item.hasLongSummary">
                   <div class="card-body">
-                    {{item.body}}
+                    <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "item.body"></p>
                   </div>
                   <button class="card-primary-btn :inline-block" id="card-btn-1">
                     <div class="card-button-text" id="card-text-1" (click)="item.hasLongSummary = !item.hasLongSummary">
@@ -122,7 +122,7 @@
                 </div>
                 <div *ngIf="!item.hasLongSummary">
                   <div class="card-body">
-                    {{item.fullBody}}
+                    <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "item.fullBody"></p>
                   </div>
                 </div>
               </div>
@@ -139,7 +139,7 @@
                 </div>
                 <div *ngIf="item.hasLongSummary">
                   <div class="card-body">
-                    {{item.body}}
+                    <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "item.body"></p>
                   </div>
                   <button class="card-primary-btn :inline-block" id="card-btn-2">
                     <div class="card-button-text" id="card-text-2" (click)="item.hasLongSummary = !item.hasLongSummary">
@@ -150,7 +150,7 @@
                 </div>
                 <div *ngIf="!item.hasLongSummary">
                   <div class="card-body">
-                    {{item.fullBody}}
+                    <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "item.fullBody"></p>
                   </div>
                 </div>
               </div>
@@ -167,7 +167,7 @@
                 </div>
                 <div *ngIf="item.hasLongSummary">
                   <div class="card-body">
-                    {{item.body}}
+                    <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "item.body"></p>
                   </div>
                   <button class="card-primary-btn :inline-block" id="card-btn-3">
                     <div class="card-button-text" id="card-text-3" (click)="item.hasLongSummary = !item.hasLongSummary">
@@ -178,7 +178,7 @@
                 </div>
                 <div *ngIf="!item.hasLongSummary">
                   <div class="card-body">
-                    {{item.fullBody}}
+                    <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "item.fullBody"></p>
                   </div>
                 </div>
               </div>
