@@ -1,6 +1,7 @@
-orientation-main-view {
+.orientation-main-view {
   background-color: #E5E5E5;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .row {
@@ -75,7 +76,7 @@ orientation-main-view {
   margin: 0 24px 0 24px;
 }
 .req-container {
-  margin: 0 0 0 50px;
+  margin: 50px 0 0 50px;
 }
 .sobriety-reqs {
   font-size: 20pt;
@@ -90,12 +91,21 @@ orientation-main-view {
 .req-container {
   margin: 0 24px 0 24px;
 }
+.req-header {
+  margin: 24px 0 12px 0;
+}
 
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
+  .sobriety-blurb-container {
+    margin: 24px 50px 0 50px;
+  }
+  .req-header {
+    margin: 0 0 12px 0;
+  }
   .HowTo-container {
     margin: 0 0 0 50px;
   }
@@ -134,7 +144,7 @@ orientation-main-view {
     margin: 0 0 0 50px;
   }
   .req-container {
-    margin: 0 0 0 0;
+    margin: 0 24px 0 24px;
   }
   .sobriety-reqs {
     font-size: 26pt;

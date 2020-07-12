@@ -1,9 +1,20 @@
 /*Extra small devices (portrait phones, less than 576px)  */
 /*No media query since this is the default in Bootstrap*/
-.view {
+.home-view {
+  background-color: #E5E5E5;
+  width: 100%;
+  overflow-x: hidden;
+}
+.hero-container{
+  background-color: var(--primary-option-faded);
+}
+.landing-view {
   background: url("src/assets/Logo-background.svg") no-repeat center center fixed;
-  height: 100vh;
   background-size: auto;
+  text-align: center;
+}
+.home-main-container{
+  background-size: cover;
 }
 .announcement-view {
   background-color: var(--secondary-light);
@@ -12,14 +23,13 @@
   background-color: var(--primary-option);
 }
 .img-mail-container {
-  margin-top: 24px;
-  margin-left: 35%;
+  margin: 24px 0 0 32%;
 }
 .text-mail-container {
   margin-top: 32px;
 }
-.container {
-  margin-top: 100px;
+.home-container {
+  margin: 100px 24px 0 24px;
 }
 .text {
   font-family: Georgia;
@@ -144,7 +154,6 @@ span:nth-child(4) {
 
 .arrow-spacer {
   position: relative;
-  height: 64px;
 }
 
 .mailing-list-header {
@@ -277,9 +286,6 @@ span:nth-child(4) {
 
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
-  .container {
-    margin-top: 100px;
-  }
   .text {
     font-family: Georgia, serif;
     font-size:x-large;
@@ -292,8 +298,8 @@ span:nth-child(4) {
     margin-top: 50px
   }
   .arrow-container {
-    margin-top: 100px;
-    left: 45%
+    margin-top: 48px;
+    left: 43%
   }
   .img-mail-container {
     margin-top: 24px;
@@ -322,9 +328,6 @@ span:nth-child(4) {
 
 /*Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
-  .container {
-    margin-top: 100px;
-  }
   .text {
     font-family: Georgia;
     font-size:x-large;
@@ -332,9 +335,6 @@ span:nth-child(4) {
   .sub-text {
     font-family: Arial;
     font-size: large;
-  }
-  .arrow-container {
-    margin-top: 160px;
   }
   .arrow-spacer {
     position: relative;
@@ -358,7 +358,10 @@ span:nth-child(4) {
   .column-buffer {
     width: 15%;
   }
-
+  .arrow-container {
+    margin-top: 48px;
+    left: 44%
+  }
   .column {
     width: 70%;
   }
@@ -366,9 +369,6 @@ span:nth-child(4) {
 
 /*Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
-  .container {
-    margin-top: 100px;
-  }
   .text {
     font-family: Georgia;
     font-size:x-large;
@@ -394,7 +394,10 @@ span:nth-child(4) {
   .column-buffer {
     width: 20%;
   }
-
+  .arrow-container {
+    margin-top: 48px;
+    left: 45%
+  }
   .column {
     width: 60%;
   }
@@ -403,9 +406,6 @@ span:nth-child(4) {
 
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
-  .container {
-    margin-top: 100px;
-  }
   .text {
     font-family: Georgia;
     font-size:x-large;
@@ -422,7 +422,8 @@ span:nth-child(4) {
     height: 0px;
   }
   .arrow-container {
-    left: 47.5%;
+    margin-top: 48px;
+    left: 45%;
   }
   .img-mail-container {
     margin-top: 32px;

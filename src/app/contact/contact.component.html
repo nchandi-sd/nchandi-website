@@ -7,62 +7,63 @@
         <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
           <div class="row">
             <div class="col-12 col-md-8 order-2 order-md-1">
-                <div class="row">
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }">
-                      <!-- First Name -->
-                      <label for="first_name" class="form-label">First Name</label>
-                      <input type="text" formControlName="first_name" class="form-control" id="first_name"
-                        name="first_name" placeholder="First Name" require>
-                      <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-lg-6">
-                    <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }">
-                      <!-- Last Name -->
-                      <label for="last_name" class="form-label">Last Name</label>
-                      <input type="text" formControlName="last_name" class="form-control" id="last_name"
-                        name="last_name" placeholder="Last Name">
-                      <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }">
-                      <!-- Email -->
-                      <label for="email" class="form-label">Email</label>
-                      <input type="text" formControlName="email" class="form-control" id="email" name="email"
-                        placeholder="your@email.com">
-                      <p *ngIf="invalidEmail()" id="email_error" class="help-block">Invalid email address.</p>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                      <div class="form-group" [ngClass]="{ 'has-error': invalidPhone() }">
-                        <!-- Email -->
-                        <label for="phone" class="form-label" >Phone</label>
-                        <input type="text" formControlName="phone" class="form-control" id="phone" name="phone"
-                          placeholder="Phone">
-                          <p *ngIf="invalidPhone()" id="phone_error" class="help-block">Invalid phone number</p>
-                      </div>
-                    </div>
-
-                  <div class="col-12">
-                      <div class="form-group" [ngClass]="{ 'has-error': invalidMessage() }">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-control rounded-0 form-textarea form-group" formControlName="message" id="message" name="message"
-                      rows="10"></textarea>
-                      <p *ngIf="invalidMessage()" id="message_error" class="help-block">Please enter a message...</p>
-                      </div>
-                  </div>
-                  <div class="col-12">
-                  <div class="form-group">
-                      <!-- Register Button -->
-                      <button type="submit" class="btn submit-button mx-auto">Register</button>
-                    </div>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }">
+                    <!-- First Name -->
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" formControlName="first_name" class="form-control" id="first_name"
+                           name="first_name" placeholder="First Name" #text require>
+                    <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
                   </div>
                 </div>
+
+                <div class="col-12 col-lg-6">
+                  <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }">
+                    <!-- Last Name -->
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" formControlName="last_name" class="form-control" id="last_name"
+                           name="last_name" placeholder="Last Name" #text>
+                    <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }">
+                    <!-- Email -->
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" formControlName="email" class="form-control" id="email" name="email"
+                           placeholder="your@email.com" #text>
+                    <p *ngIf="invalidEmail()" id="email_error" class="help-block">Invalid email address.</p>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group" [ngClass]="{ 'has-error': invalidPhone() }">
+                    <!-- Email -->
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" formControlName="phone" class="form-control" id="phone" name="phone"
+                           placeholder="Phone" #text>
+                    <p *ngIf="invalidPhone()" id="phone_error" class="help-block" >Invalid phone number</p>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group" [ngClass]="{ 'has-error': invalidMessage() }">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-control rounded-0 form-textarea form-group" formControlName="message"
+                              id="message" name="message"
+                              rows="10" #text></textarea>
+                    <p *ngIf="invalidMessage()" id="message_error" class="help-block">Please enter a message...</p>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <!-- Register Button -->
+                    <button [disabled]="sendDisabled" type="submit" class="btn submit-button mx-auto">Register</button>
+                  </div>
+                </div>
+              </div>
 
             </div>
             <div class="col-12 col-md-4 order-1 order-md-2">
@@ -75,14 +76,16 @@
               <div class="spacer"></div>
               <h5 class="form-title">Volunteers Welcome</h5><br>
               <div class="form-blurb">
-               The hand of the fellowship is always extended to those interested
+                The hand of the fellowship is always extended to those interested
                 in volunteering. New volunteers are an essential part of the recovery
                 message North County H&I brings to hospitals and institutions. Please contact
                 us to get more information about joining!
               </div>
               <div class="spacer"></div>
+                <div class="thank-you-blurb" id="tyMessage" *ngIf="contactSubmitted">
+                  Your message has been sent!
+                </div>
             </div>
-
           </div>
         </form>
       </div>

@@ -20,6 +20,7 @@ import {Announcement} from '../model/Announcement';
 import {Contact} from '../model/Contact';
 import {AdminMember} from '../model/AdminMember';
 
+
 enum PageType {
   HOME_PAGE = 0,
   COMMITTEE_PAGE = 1
@@ -158,7 +159,7 @@ export class UserComponent implements OnInit {
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
-      commitments: ['',[Validators.required]]
+      commitments: ['', [Validators.required]]
     });
 
   }
@@ -227,6 +228,7 @@ export class UserComponent implements OnInit {
               this.uploaded = false;
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
+              this.panelMaterial.order = -1;
               this.createPanelMaterial(this.panelMaterial);
               this.clearForm();
             });
@@ -242,6 +244,7 @@ export class UserComponent implements OnInit {
               this.uploaded = false;
               this.panelMaterial.title = this.title.toString();
               this.panelMaterial.url = url;
+              this.panelMaterial.order = -1;
               this.createGeneralResource(this.panelMaterial);
               this.clearForm();
             });
@@ -250,7 +253,7 @@ export class UserComponent implements OnInit {
       } else if (this.resource.toString() === this.resources[2]) {
         const year = new Date().getFullYear().toString();
         console.log(this.basePath.toString() + ' and ' + this.report.toString());
-        this.title = this.report;
+        this.title = this.basePath + '_' + this.report;
         this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
         this.task = this.ref.put(this.fileData);
         this.uploadProgress = this.task.percentageChanges();
@@ -410,8 +413,13 @@ export class UserComponent implements OnInit {
   }
 
   announcementTextBodyChangeHandler(event: any) {
-    this.annoucementBody = event.target.value;
+    console.log(event.target.value);
+    this.annoucementBody = this.announcementTextBodyNewLineFormatter(event.target.value);
     this.announcementBodyAlert = false;
+  }
+
+  announcementTextBodyNewLineFormatter(body: string): string {
+    return body.replace(/\n\r?/g, '<br/>');
   }
 
   clearForm() {

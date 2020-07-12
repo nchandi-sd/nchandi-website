@@ -1,23 +1,27 @@
 <div *ngIf="selectedResouce == availableResources[0]" class="panel-material-container">
   <div class="reports-title"> Current Panel Material</div>
   <div class="spacer"></div>
-  <div *ngFor="let item of panelMaterials">
+  <div cdkDropList (cdkDropListDropped)="panelListItemDropped($event)">
+  <div *ngFor="let item of panelMaterials" cdkDrag>
     <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
       DELETE
     </button>
     <a href="{{item.url}}" target="_blank">{{item.title}}</a>
   </div>
 </div>
+</div>
 
 
 <div *ngIf="selectedResouce == availableResources[1]" class="general-resouces-container">
   <div class="reports-title"> Current General Resources</div>
   <div class="spacer"></div>
-  <div *ngFor="let item of generalResources">
+  <div cdkDropList (cdkDropListDropped)="resourceItemDropped($event)">
+  <div *ngFor="let item of generalResources" cdkDrag>
     <button (click)="deleteItem($event)" class="btn-delete" data-id="{{item.id}}" data-type="{{selectedResouce}}">
       DELETE
     </button>
     <a href="{{item.url}}" target="_blank">{{item.title}}</a>
+  </div>
   </div>
 </div>
 
@@ -72,7 +76,7 @@
             </div>
           </div>
           <div class="card-body">
-            {{currentAnnoucement.body}}
+            <p class="e2e-inner-html-bound" style="color: var(--card-body-text)" [innerHTML]= "currentAnnoucement.body"></p>
           </div>
         </div>
       </div>

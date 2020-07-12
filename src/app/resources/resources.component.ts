@@ -11,6 +11,8 @@ import {NgForm, FormGroup, FormBuilder, Validators, FormControl} from '@angular/
 import {ResourceSubmission} from '../model/ResourceSubmission';
 import {$} from 'protractor';
 import {Announcement} from '../model/Announcement';
+import {Link} from '../model/Link';
+import {LINKS} from '../model/Local-Links';
 
 @Component({
   selector: 'app-resources',
@@ -19,6 +21,7 @@ import {Announcement} from '../model/Announcement';
 })
 export class ResourcesComponent implements OnInit {
 
+  localLinks: Link[] = null;
   facilities: Array<string> = [];
   announcements: Announcement[] = null;
   monthlyReports: MonthlyReport[] = null;
@@ -55,6 +58,7 @@ export class ResourcesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.localLinks = LINKS
     this.hasArchives = false;
     this.hasFinancialArchive = false;
     this.resourceSubmission = new ResourceSubmission();
@@ -97,6 +101,7 @@ export class ResourcesComponent implements OnInit {
           ...e.payload.doc.data()
         } as PanelMaterials;
       });
+      this.panelMaterials.sort((a,b)=>a.order - b.order)
     });
 
     this.resourceService.getArchivedReports().subscribe(data => {
@@ -122,6 +127,7 @@ export class ResourcesComponent implements OnInit {
           ...e.payload.doc.data()
         } as PanelMaterials;
       });
+      this.generalResources.sort((a,b)=>a.order - b.order)
     });
 
     this.resourceService.getAnnouncements().subscribe(data => {
@@ -136,7 +142,7 @@ export class ResourcesComponent implements OnInit {
 
     this.resourceService.getMonthlyReports().subscribe(data => {
       this.monthlyReports = data.map(e => {
-        console.log('retrieved monthly reports from firestore');
+        console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
@@ -160,6 +166,8 @@ export class ResourcesComponent implements OnInit {
         if (this.monthlyReports[i].isArchive) {
           this.hasFinancialArchive = true;
           this.financialArchive = this.monthlyReports[i];
+          this.financialArchive.title = 'Previous Year Financial Summary';
+          this.monthlyReports[i] = null;
           console.log('Archivable monthly report retrieved');
         }
 
@@ -260,7 +268,6 @@ export class ResourcesComponent implements OnInit {
         //hide form
         document.getElementById('sub-container').classList.add('hidden');
         document.getElementById('thank-you-container').classList.add('show');
-
       });
   }
 

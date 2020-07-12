@@ -1,11 +1,18 @@
 .contact-main-view {
   background-color: #E5E5E5;
-  width: 100%;
+  height: 100vh;
+  background-size: auto;
+  overflow-x: hidden;
 }
 .contact-container{
     background-color: var(--primary-option);
     max-width: 1920px;
     margin: 0 auto;
+}
+.finished-container {
+  background-color: var(--primary-option);
+  max-width: 1920px;
+  margin: 0 auto;
 }
 .headline{
     text-align: center;
@@ -21,6 +28,11 @@
 }
 .form-title{
     text-align: center;
+}
+.thank-you-blurb {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 .submit-button{
     display: block;
@@ -45,6 +57,11 @@
     position: absolute;
     color:red;
     font-weight: bold;
+}
+.spinner-container {
+  margin: auto 0;
+  width: 8rem;
+  height: 8rem;
 }
 
 /*Extra large devices (large desktops, 1200px and up)*/
