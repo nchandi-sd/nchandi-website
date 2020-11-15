@@ -37,6 +37,9 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import {MainEventComponent} from './orientation/main-event/main-event.component';
 import {EventsComponent} from './orientation/events/events.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DemoMaterialModule } from './admin/material-module';
+import { TabGroupBasicExample } from './admin/tab-group-basic-example';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     OrientationComponent,
     AdminListComponent,
     MainEventComponent,
-    EventsComponent
+    EventsComponent,
+    TabGroupBasicExample
   ],
   imports: [
     AngularSvgIconModule,
@@ -77,7 +81,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     AngularFireStorageModule,
     NgbAlertModule,
-    DragDropModule
+    DragDropModule,
+    DemoMaterialModule
   ],
   providers: [
     PanelService,
