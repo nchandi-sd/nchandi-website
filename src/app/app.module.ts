@@ -38,7 +38,8 @@ import {MainEventComponent} from './orientation/main-event/main-event.component'
 import {EventsComponent} from './orientation/events/events.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoMaterialModule } from './admin/material-module';
-import { TabGroupBasicExample } from './admin/tab-group-basic-example';
+import { AdminComponent } from './admin/admin.component';
+import { AdminService } from './admin/admin.service';
 
 
 @NgModule({
@@ -61,7 +62,7 @@ import { TabGroupBasicExample } from './admin/tab-group-basic-example';
     AdminListComponent,
     MainEventComponent,
     EventsComponent,
-    TabGroupBasicExample
+    AdminComponent
   ],
   imports: [
     AngularSvgIconModule,
@@ -91,7 +92,8 @@ import { TabGroupBasicExample } from './admin/tab-group-basic-example';
     UserService,
     AuthService,
     UserResolver,
-    ResourceService
+    ResourceService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

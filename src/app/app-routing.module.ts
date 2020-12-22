@@ -11,7 +11,7 @@ import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
 import { AuthGuard } from './core/auth.guard';
 import {OrientationComponent} from './orientation/orientation.component';
-import { TabGroupBasicExample } from './admin/tab-group-basic-example';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: TabGroupBasicExample
+    component: AdminComponent
   },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
