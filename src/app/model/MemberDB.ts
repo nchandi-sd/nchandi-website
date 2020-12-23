@@ -1,5 +1,5 @@
-export class MembersDB {
-  id:string;
+export class MemberDB {
+  id: string;
   firstName: string;
   LastName: string;
   phone: string;

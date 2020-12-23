@@ -40,6 +40,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoMaterialModule } from './admin/material-module';
 import { AdminComponent } from './admin/admin.component';
 import { AdminService } from './admin/admin.service';
+import { FacilitiesDBComponent } from './facilities-db/facilities-db.component';
+import { PanelsDBComponent } from './panels-db/panels-db.component';
+import {MembersDBComponent} from './members-db/members-db.component';
+import {FacilitiesService} from './facilities-db/facilities-db.service';
+import {MembersDbService} from './members-db/members-db.service';
 
 
 @NgModule({
@@ -62,7 +67,10 @@ import { AdminService } from './admin/admin.service';
     AdminListComponent,
     MainEventComponent,
     EventsComponent,
-    AdminComponent
+    AdminComponent,
+    FacilitiesDBComponent,
+    MembersDBComponent,
+    PanelsDBComponent
   ],
   imports: [
     AngularSvgIconModule,
@@ -93,7 +101,9 @@ import { AdminService } from './admin/admin.service';
     AuthService,
     UserResolver,
     ResourceService,
-    AdminService
+    AdminService,
+    FacilitiesService,
+    MembersDbService
   ],
   bootstrap: [AppComponent]
 })

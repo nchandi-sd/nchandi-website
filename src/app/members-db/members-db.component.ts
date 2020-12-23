@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {Contact} from '../model/Contact';
-import { MembersDB } from '../Model/MembersDB';
-import { MembersDBService } from '../MembersDB/MembersDB.service';
+import { MemberDB } from '../model/MemberDB';
+import { MembersDbService } from './members-db.service';
+import {AdminService} from '../admin/admin.service';
 
 @Component({
-  selector: 'app-MembersDB',
-  templateUrl: 'MembersDB.component.html',
+  selector: 'app-members-DB',
+  templateUrl: 'members-db.component.html',
 })
 export class MembersDBComponent implements OnInit {
   userForm: FormGroup;
-  member: MembersDB;
-  savedMembers: MembersDB[];
+  member: MemberDB;
+  savedMembers: MemberDB[];
 
-  constructor(private formBuilder: FormBuilder, private MembersDBService: MembersDBService) {
+  constructor(private formBuilder: FormBuilder, private memberService: MembersDbService, private adminService: AdminService) {
   }
 
   ngOnInit() {
@@ -33,15 +33,15 @@ export class MembersDBComponent implements OnInit {
       alternateContactPhone: ['', Validators.required],
       active: [true, Validators.required],
     });
-    this.member = new MembersDB();
-    this.MembersDBService.getMembersDB().subscribe(data => {
+    this.member = new MemberDB();
+    this.memberService.getMembersDB().subscribe(data => {
       this.savedMembers = data.map(e => {
         console.log('retrieved admins from firestore');
         // @ts-ignore
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data()
-        } as MembersDB;
+        } as MemberDB;
       });
     });
   }
@@ -70,8 +70,8 @@ export class MembersDBComponent implements OnInit {
     this.resetUserForm(form.value);
   }
 
-  postMembersDBForm(member: MembersDB) {
-    this.MembersDBService.addMembersDB (member)
+  postMembersDBForm(member: MemberDB) {
+    this.memberService.addMembersDB (member)
       .then(res => {
         // update UI
       });
@@ -81,8 +81,9 @@ export class MembersDBComponent implements OnInit {
   }
 
   deleteFacility(event: any) {
-    const memberID = event.target.getAttribute('id')
-    this.MembersDBService.deleteDatabaseItem ('Members', memberID)
+    const memberID = event.target.getAttribute('id');
+    this.adminService.deleteDatabaseItem ('Members', memberID);
   }
 }
+
 

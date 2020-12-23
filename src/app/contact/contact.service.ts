@@ -21,7 +21,7 @@ export class ContactService {
     let options = {headers: headers}
     return this.https.post<Contact>(this.contactUrl, JSON.stringify(contact), options)
     };
-  
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

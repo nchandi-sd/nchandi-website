@@ -1,5 +1,5 @@
 export class Facility {
-  id:string;
+  id: string;
   facilityName: string;
   facilityType: string;
   address: string;

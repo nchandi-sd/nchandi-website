@@ -1,135 +1,14 @@
   <div class = "navbar-spacer"></div>
     <mat-tab-group>
-      <mat-tab label="Panels"> Content 1 </mat-tab>
-      <mat-tab label="Facilities">
-        <div class = "facilities-container">
-          <div class = "row">
-            <div class = "col-6">
-              <h1>Add New Facility</h1>
-              <div class = "spacer"></div>
-              <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
-                <label for="facility_name">Facility Name:</label>
-                <input type="text" formControlName="facility_name" class="form-control" id="facility_name"
-                       name="facility_name" placeholder="Facility Name"
-                       require>
-                <label for="facility_type">Facility Type:</label>
-                <input type="text" formControlName="facility_type" class="form-control" id="facility_type"
-                      name="facility_type" placeholder="Facility Type"
-                      require>
-
-                <label for="address">Address:</label>
-                <input type="text" formControlName="address" class="form-control" id="address"
-                      name="address" placeholder="Address"
-                      require>
-
-                <label for="city">City:</label>
-                <input type="text" formControlName="city" class="form-control" id="city"
-                      name="city" placeholder="City"
-                      require>
-
-                <label for="state">State:</label>
-                <input type="text" formControlName="state" class="form-control" id="state"
-                      name="state" placeholder="State"
-                      require>
-
-                <label for="zip">Zip:</label>
-                <input type="text" formControlName="zip" class="form-control" id="zip"
-                      name="zip" placeholder="Zip"
-                      require>
-
-                <label for="website">Website:</label>
-                <input type="text" formControlName="website" class="form-control" id="website"
-                      name="website" placeholder="Website"
-                      require>
-
-                <label for="mainContactName">Main Contact Name:</label>
-                <input type="text" formControlName="mainContactName" class="form-control" id="mainContactName"
-                      name="mainContactName" placeholder="Main Contact Name"
-                      require>
-
-                <label for="mainContactEmail">Main Contact Email:</label>
-                <input type="text" formControlName="mainContactEmail" class="form-control" id="mainContactEmail"
-                      name="mainContactEmail" placeholder="Main Contact Email"
-                      require>
-
-                <label for="mainContactPhone">Main Contact Phone:</label>
-                <input type="text" formControlName="mainContactPhone" class="form-control" id="mainContactPhone"
-                      name="mainContactPhone" placeholder="Main Contact Phone"
-                      require>
-
-                <label for="alternateContactName">Alternate Contact Name:</label>
-                <input type="text" formControlName="alternateContactName" class="form-control" id="alternateContactName"
-                      name="alternateContactName" placeholder="Alternate Contact Name"
-                      require>
-
-                <label for="alternateContactEmail">Alternate Contact Email:</label>
-                <input type="text" formControlName="alternateContactEmail" class="form-control" id="alternateContactEmail"
-                      name="alternateContactEmail" placeholder="Alternate Contact Email"
-                      require>
-
-                <label for="alternateContactPhone">Alternate Contact Phone:</label>
-                <input type="text" formControlName="alternateContactPhone" class="form-control" id="alternateContactPhone"
-                      name="alternateContactPhone" placeholder="Alternate Contact Phone"
-                      require>
-
-                <label for="active">Active:</label>
-                <input type="checkbox" formControlName="active" class="form-control" id="active"
-                      name="active">
-
-                <div class="form-group">
-                  <button type="submit" class="btn submit-button mx-auto">Add new facility</button>
-                </div>
-
-              </form>
-            </div>
-            <div class = "col-6">
-              <h1>Current Facilities List</h1>
-              <table class="table table bordered table-responsive text-nowrap table-striped" id="openingsTable">
-                <thead>
-                <tr>
-                  <th></th>
-                  <th>Facility Name</th>
-                  <th>Facility Type</th>
-                  <th>Address</th>
-                  <th>City</th>
-                  <th>State</th>
-                  <th>Zip</th>
-                  <th>Website</th>
-                  <th>Main Contact Name</th>
-                  <th>Main Contact Email</th>
-                  <th>Main Contact Phone</th>
-                  <th>Alternate Contact Name</th>
-                  <th>Alternate Contact Email</th>
-                  <th>Alternate Contact Phone</th>
-                  <th>Active</th>
-                </tr>
-                </thead>
-                <tbody id="openings-panel">
-                <tr *ngFor="let member of facilities">
-                  <button (click)="deleteFacility($event)" class="btn-delete" data-id="{{member.id}}">
-                    DELETE
-                  </button>
-                  <td>{{member?.facilityName}}</td>
-                  <td>{{member?.facilityType}}</td>
-                  <td>{{member?.address}}</td>
-                  <td>{{member?.city}}</td>
-                  <td>{{member?.state}}</td>
-                  <td>{{member?.zip}}</td>
-                  <td>{{member?.website}}</td>
-                  <td>{{member?.mainContactName}}</td>
-                  <td>{{member?.mainContactEmail}}</td>
-                  <td>{{member?.mainContactPhone}}</td>
-                  <td>{{member?.alternateContactName}}</td>
-                  <td>{{member?.alternateContactEmail}}</td>
-                  <td>{{member?.alternateContactPhone}}</td>
-                  <td>{{member?.active}}</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
+      <mat-tab label="Panels">
+        <app-panels-db></app-panels-db>
       </mat-tab>
-      <mat-tab label="Panel Members"> Content 3 </mat-tab>
+      <mat-tab label="Facilities">
+       <app-facilities-db></app-facilities-db>
+      </mat-tab>
+      <mat-tab label="Panel Members">
+        <app-members-DB></app-members-DB>
+      </mat-tab>
     </mat-tab-group>
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
