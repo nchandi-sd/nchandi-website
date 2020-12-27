@@ -1,5 +1,5 @@
-export class PanelsDB {
-  panelID:string;
+export class Panels {
+  id: string;
   dayOfWeek: string;
   time: string;
   coordinator: string;

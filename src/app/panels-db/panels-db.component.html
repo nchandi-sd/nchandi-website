@@ -5,9 +5,21 @@
       <div class="spacer"></div>
       <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
 
+        <label for="facility">Facility</label>
+        <select id="facility" class="form-control" name="facility">
+          <option *ngFor="let facility of facilities" value="{{facility.facilityName}}">{{facility.facilityName}}</option>
+        </select>
+
         <label for="dayOfWeek">Day of Week:</label>
-        <input type="text" formControlName="dayOfWeek" class="form-control" id="dayOfWeek" name="dayOfWeek"
-          placeholder="Day of Week" require>
+        <select id="dayOfWeek" formControlName="dayOfWeek" class="form-control" name="dayOfWeek">
+          <option value="monday">MONDAY</option>
+          <option value="tuesday">TUESDAY</option>
+          <option value="wednesday">WEDNESDAY</option>
+          <option value="thursday">THURSDAY</option>
+          <option value="friday">FRIDAY</option>
+          <option value="saturday">SATURDAY</option>
+          <option value="sunday">SUNDAY</option>
+        </select>
 
         <label for="time">Time:</label>
         <input type="text" formControlName="time" class="form-control" id="time" name="time"
@@ -67,8 +79,8 @@
           </tr>
         </thead>
         <tbody id="openings-panel">
-          <tr *ngFor="let member of panels">
-            <button (click)="deletePanel()($event)" class="btn-delete" data-id="{{panel.panelID}}">
+          <tr *ngFor="let panel of panels">
+            <button (click)="deletePanel($event)" class="btn-delete" data-id="{{panel.id}}">
               DELETE
             </button>
             <td>{{panel?.dayOfWeek}}</td>

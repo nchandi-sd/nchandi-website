@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import { PanelsDB } from '../Model/PanelsDB';
+import { Panels } from '../model/PanelsDB';
 import {AdminService} from '../admin/admin.service';
+import {Facility} from '../model/Facility';
 
 
 @Injectable()
@@ -13,12 +14,8 @@ export class PanelsDbService {
     return this.firestore.collection('Panels').snapshotChanges();
   }
 
-  addPanels(panels: PanelsDB) {
-    return this.firestore.collection('Panels').add({...panels});
-  }
-
-  deleteDatabaseItem(collectionType: string, id: string) {
-    this.firestore.collection(collectionType).doc(id).delete();
+  addPanels(panels: Panels) {
+    return this.firestore.collection('Facilities').add({...panels});
   }
 
   // updateFacility(facility: Facility){
