@@ -9,4 +9,5 @@ export class PanelsDB {
   member3: string;
   member4: string;
   member5: string;
+  active: boolean;
 }

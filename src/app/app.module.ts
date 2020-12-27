@@ -45,6 +45,7 @@ import { PanelsDBComponent } from './panels-db/panels-db.component';
 import {MembersDBComponent} from './members-db/members-db.component';
 import {FacilitiesService} from './facilities-db/facilities-db.service';
 import {MembersDbService} from './members-db/members-db.service';
+import {PanelsDbService} from './panels-db/panels-db.service';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import {MembersDbService} from './members-db/members-db.service';
     FacilitiesDBComponent,
     MembersDBComponent,
     PanelsDBComponent
+
   ],
   imports: [
     AngularSvgIconModule,
@@ -103,7 +105,8 @@ import {MembersDbService} from './members-db/members-db.service';
     ResourceService,
     AdminService,
     FacilitiesService,
-    MembersDbService
+    MembersDbService,
+    PanelsDbService
   ],
   bootstrap: [AppComponent]
 })

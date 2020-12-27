@@ -3,7 +3,7 @@ import {PanelService} from './panel.service';
 import {Panels} from '../model/Panels';
 import {TableData} from '../model/TableData';
 import {Opening} from '../model/Opening';
-import {Panel} from '../model/Panel';
+import {Panel} from '../Model/Panel';
 import {FacilityChampion} from '../model/FacilityChampion';
 import {MatTableDataSource} from '@angular/material';
 
