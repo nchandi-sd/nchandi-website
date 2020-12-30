@@ -6,7 +6,7 @@
       <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
 
         <label for="facility">Facility</label>
-        <select id="facility" class="form-control" name="facility">
+        <select id="facility" class="form-control" name="facility" (change)="onFacilityClick($event.target.value)">
           <option *ngFor="let facility of facilities" value="{{facility.facilityName}}">{{facility.facilityName}}</option>
         </select>
 

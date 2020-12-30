@@ -5,6 +5,7 @@ import {AdminService} from '../admin/admin.service';
 import {PanelsDbService} from '../panels-db/panels-db.service';
 import {FacilitiesService} from '../facilities-db/facilities-db.service';
 import {Facility} from '../model/Facility';
+import {consoleTestResultHandler} from 'tslint/lib/test';
 
 @Component({
   selector: 'app-panels-db',
@@ -16,6 +17,7 @@ export class PanelsDBComponent implements OnInit {
   panel: Panels;
   panels: Panels[];
   facilities: Facility[];
+  filteredFacilities: Facility[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,6 +28,7 @@ export class PanelsDBComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
+      facilityName: [''],
       dayOfWeek: ['', Validators.required],
       time: ['', Validators.required],
       coordinator: ['', Validators.required],
@@ -56,9 +59,6 @@ export class PanelsDBComponent implements OnInit {
           ...e.payload.doc.data()
         } as Facility;
       });
-      this.facilities.forEach(function (value) {
-        console.log(value);
-      });
     });
 
   }
@@ -77,6 +77,7 @@ export class PanelsDBComponent implements OnInit {
     this.panel.member4 = this.userForm.controls.member4.value;
     this.panel.member5 = this.userForm.controls.member5.value;
     this.panel.active = this.userForm.controls.active.value;
+    this.panel.facilityId = this.filteredFacilities[0].id;
 
     this.postPanelsForm(this.panel);
     this.resetUserForm(form.value);
@@ -97,6 +98,7 @@ export class PanelsDBComponent implements OnInit {
     this.adminService.deleteDatabaseItem('Panels', panelId);
   }
 
-
-
+  onFacilityClick(facilityName) {
+    this.filteredFacilities = this.facilities.filter(item => item.facilityName === facilityName);
+  }
 }
