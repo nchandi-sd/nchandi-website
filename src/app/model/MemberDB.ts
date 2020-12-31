@@ -1,7 +1,7 @@
 export class MemberDB {
   id: string;
   firstName: string;
-  LastName: string;
+  lastName: string;
   phone: string;
   email: string;
   sobrietyDate: Date;
