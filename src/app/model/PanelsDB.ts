@@ -1,5 +1,6 @@
 export class Panels {
   id: string;
+  facilityId: String;
   dayOfWeek: string;
   time: string;
   coordinator: string;

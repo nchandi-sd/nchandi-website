@@ -15,7 +15,7 @@ export class PanelsDbService {
   }
 
   addPanels(panels: Panels) {
-    return this.firestore.collection('Facilities').add({...panels});
+    return this.firestore.collection('Facilities').doc(panels.facilityId.toString()).collection('Panels').add({...panels});
   }
 
   // updateFacility(facility: Facility){
