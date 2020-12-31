@@ -1,3 +1,5 @@
+import {Panels} from './PanelsDB';
+
 export class Facility {
   id: string;
   facilityName: string;

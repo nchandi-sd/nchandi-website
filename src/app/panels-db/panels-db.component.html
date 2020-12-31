@@ -66,6 +66,7 @@
         <thead>
           <tr>
             <th></th>
+            <th>Facility</th>
             <th>Day of Week</th>
             <th>Time</th>
             <th>Coordinator</th>
@@ -80,9 +81,10 @@
         </thead>
         <tbody id="openings-panel">
           <tr *ngFor="let panel of panels">
-            <button (click)="deletePanel($event)" class="btn-delete" data-id="{{panel.id}}">
+            <button (click)="deletePanel($event, panel.facility.id)" class="btn-delete" data-id="{{panel.id}}">
               DELETE
             </button>
+            <td>{{panel?.facility.facilityName}}</td>
             <td>{{panel?.dayOfWeek}}</td>
             <td>{{panel?.time}}</td>
             <td>{{panel?.coordinator}}</td>

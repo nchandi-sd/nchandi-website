@@ -10,12 +10,12 @@ export class PanelsDbService {
   constructor(private firestore: AngularFirestore) {
   }
 
-  getPanels() {
-    return this.firestore.collection('Panels').snapshotChanges();
+  getPanels(id: string) {
+    return this.firestore.collection('Facilities').doc(id.toString()).collection('Panels').snapshotChanges();
   }
 
   addPanels(panels: Panels) {
-    return this.firestore.collection('Facilities').doc(panels.facilityId.toString()).collection('Panels').add({...panels});
+    return this.firestore.collection('Facilities').doc(panels.facility.id.toString()).collection('Panels').add({...panels});
   }
 
   // updateFacility(facility: Facility){

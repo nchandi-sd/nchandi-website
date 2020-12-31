@@ -1,6 +1,9 @@
+import {Facility} from './Facility';
+
 export class Panels {
   id: string;
-  facilityId: String;
+  selectedFacilityId: string;
+  facility: Facility;
   dayOfWeek: string;
   time: string;
   coordinator: string;

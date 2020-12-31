@@ -11,5 +11,9 @@ export class AdminService {
     this.firestore.collection(collectionType).doc(id).delete();
   }
 
+  deleteSubCollectionDatabaseItem(collectionType: string, subCollection: string, id: string, subId: string) {
+    this.firestore.collection(collectionType).doc(id).collection(subCollection).doc(subId).delete();
+  }
+
 }
 
