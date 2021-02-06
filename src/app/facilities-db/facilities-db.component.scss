@@ -1,0 +1,22 @@
+.facilities-container {
+  margin-left: 400 px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+.facilities-main-view {
+  background-color: var(--primary-option);
+  overflow-x: hidden;
+}
+
+.btn-delete{
+  height: 100%;
+  font-weight: bold;
+  font-size: 8px;
+  color:red;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 5px;
+}
