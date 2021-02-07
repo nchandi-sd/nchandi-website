@@ -7,6 +7,7 @@ import {AdminService} from '../admin/admin.service';
 @Component({
   selector: 'app-members-DB',
   templateUrl: 'members-db.component.html',
+  styleUrls: ['members-db.component.scss']
 })
 export class MembersDBComponent implements OnInit {
   userForm: FormGroup;

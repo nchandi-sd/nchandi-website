@@ -10,6 +10,7 @@ import { AdminService } from '../admin/admin.service';
 @Component({
   selector: 'app-admin-component',
   templateUrl: 'admin.component.html',
+  styleUrls: ['admin.component.scss']
 })
 export class AdminComponent implements OnInit {
 
