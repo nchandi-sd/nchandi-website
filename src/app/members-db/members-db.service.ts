@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AdminMember } from '../model/AdminMember';
 import { MemberDB } from '../model/MemberDB';
 
 
@@ -11,7 +12,7 @@ export class MembersDbService {
     return this.firestore.collection('Members').snapshotChanges();
   }
   addMembersDB(member: MemberDB) {
-    return this.firestore.collection('Members').add({ ...MemberDB });
+    return this.firestore.collection('Members').add({ ...member });
   }
 
   // updateFacility(member: MembersDB){

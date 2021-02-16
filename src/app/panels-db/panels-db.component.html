@@ -13,13 +13,13 @@
 
         <label for="dayOfWeek">Day of Week:</label>
         <select id="dayOfWeek" formControlName="dayOfWeek" class="form-control" name="dayOfWeek">
-          <option value="monday">MONDAY</option>
-          <option value="tuesday">TUESDAY</option>
-          <option value="wednesday">WEDNESDAY</option>
-          <option value="thursday">THURSDAY</option>
-          <option value="friday">FRIDAY</option>
-          <option value="saturday">SATURDAY</option>
-          <option value="sunday">SUNDAY</option>
+          <option value="Monday">MONDAY</option>
+          <option value="Tuesday">TUESDAY</option>
+          <option value="Wednesday">WEDNESDAY</option>
+          <option value="Thursday">THURSDAY</option>
+          <option value="Friday">FRIDAY</option>
+          <option value="Saturday">SATURDAY</option>
+          <option value="Sunday">SUNDAY</option>
         </select>
 
         <label for="time">Time:</label>
@@ -29,6 +29,11 @@
         <label for="coordinator">Coordinator:</label>
         <input type="text" formControlName="coordinator" class="form-control" id="coordinator" name="coordinator"
           placeholder="Coordinator" require>
+
+<!--  <label for="coordinator">Coordinator:</label>
+ <select id="coordinator" class="form-control" name="coordinator" (change)="onMemberClick($event.target.value)">
+  <option *ngFor="let member of member" value="{{member.firstName}}">{{member.firstName}}</option>
+</select> -->
 
         <label for="leader">Leader:</label>
         <input type="text" formControlName="leader" class="form-control" id="leader" name="leader" placeholder="Leader" require>

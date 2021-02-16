@@ -5,6 +5,8 @@ import {AdminService} from '../admin/admin.service';
 import {PanelsDbService} from '../panels-db/panels-db.service';
 import {FacilitiesService} from '../facilities-db/facilities-db.service';
 import {Facility} from '../model/Facility';
+import {MemberDB} from '../model/MemberDB';
+import {MembersDbService} from '../members-db/members-db.service';
 import {consoleTestResultHandler, consoleTestResultsHandler} from 'tslint/lib/test';
 
 @Component({
@@ -19,6 +21,8 @@ export class PanelsDBComponent implements OnInit {
   localPanels: Panels[];
   facilities: Facility[];
   filteredFacilities: Facility[];
+  member: MemberDB [];
+  filteredMembers: MemberDB [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -107,5 +111,9 @@ export class PanelsDBComponent implements OnInit {
 
   onFacilityClick(facilityName) {
     this.filteredFacilities = this.facilities.filter(item => item.facilityName === facilityName);
+  }
+
+  onMemberClick(coordinator) {
+    this.filteredMembers = this.member.filter(item => item.firstName === coordinator);
   }
 }

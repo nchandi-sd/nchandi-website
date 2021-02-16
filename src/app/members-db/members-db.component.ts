@@ -6,8 +6,8 @@ import {AdminService} from '../admin/admin.service';
 
 @Component({
   selector: 'app-members-DB',
-  templateUrl: 'members-db.component.html',
-  styleUrls: ['members-db.component.scss']
+  templateUrl: './members-db.component.html',
+  styleUrls: ['./members-db.component.scss']
 })
 export class MembersDBComponent implements OnInit {
   userForm: FormGroup;
@@ -25,7 +25,7 @@ export class MembersDBComponent implements OnInit {
       email: ['', Validators.required],
       sobrietyDate: ['', Validators.required],
       joinedDate: ['', Validators.required],
-      lastLogin: ['', Validators.required],
+      //lastLogin: ['', Validators.required],
     });
     this.member = new MemberDB();
     this.memberService.getMembersDB().subscribe(data => {
@@ -50,7 +50,7 @@ export class MembersDBComponent implements OnInit {
     this.member.email = this.userForm.controls.email.value;
     this.member.sobrietyDate = this.userForm.controls.sobrietyDate.value;
     this.member.joinedDate = this.userForm.controls.joinedDate.value;
-    this.member.lastLogin = this.userForm.controls.lastLogin.value;
+    //this.member.lastLogin = this.userForm.controls.lastLogin.value;
 
     this.postMembersDBForm(this.member);
     this.resetUserForm(form.value);
