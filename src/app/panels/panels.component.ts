@@ -44,13 +44,13 @@ export class PanelsComponent implements OnInit {
   // This is all information that should be stored in a backend- not frontend
   getTxContact() {
 
-    this.txChampions[0] = {
+/*     this.txChampions[0] = {
       name: 'Brigette L',
       phone: '(714) 269-4476',
       email: 'northcountyhandi@gmail.com',
       contactMethod: 'Any',
       type: 'tx'
-    };
+    }; */
     this.txChampions[1] = {
       name: 'Don C',
       phone: '(760) 212-9759',
