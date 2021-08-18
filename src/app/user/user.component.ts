@@ -1,96 +1,91 @@
-/* tslint:disable:no-trailing-whitespace */
-import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../core/user.model';
-import {HttpClient} from '@angular/common/http';
-import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
-import {Observable, Subscription} from 'rxjs';
-import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
-import {GENERAL_RESOURCES} from '../model/General-Resources';
-import {Resource} from '../model/Resource';
-import {finalize} from 'rxjs/operators';
-import {PanelMaterials} from '../model/Panel-Materials';
-import {ResourceService} from '../resources/resource.service';
-import {MonthlyReport} from '../model/MonthlyReport';
-import {Announcement} from '../model/Announcement';
-import {Contact} from '../model/Contact';
-import {AdminMember} from '../model/AdminMember';
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { finalize, map } from 'rxjs/operators';
+import { OnDestroy } from '@angular/core';
 
+import { GENERAL_RESOURCES } from '../model/General-Resources';
+import { Resource } from '../model/Resource';
+import { PanelMaterials } from '../model/Panel-Materials';
+import { ResourceService } from '../resources/resource.service';
+import { MonthlyReport } from '../model/MonthlyReport';
+import { Announcement } from '../model/Announcement';
+import { Contact } from '../model/Contact';
+import { AdminMember } from '../model/AdminMember';
+import { PanelMemberService } from '../shared/services/panel-member.service';
+import { AdminService } from '../shared/services/admin.service';
 
 enum PageType {
-  HOME_PAGE = 0,
-  COMMITTEE_PAGE = 1
+  HomePage = 1,
+  CommitteePage = 2,
+  PanelMemberPage = 3,
 }
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const RESOURCES = [
+  'Panel Material',
+  'General Resource',
+  'Monthly Report',
+  'Announcement',
+  'Archived Report',
+];
+
+const REPORTS = ['Financial Report', 'Committee Minutes'];
+const ARCHIVES = ['Create Archivable Record'];
 
 @Component({
   selector: 'app-user',
   templateUrl: 'user.component.html',
-  styleUrls: ['user.component.scss']
+  styleUrls: ['user.component.scss'],
 })
+export class UserComponent implements OnInit, OnDestroy {
+  @ViewChildren('checkboxes')
+  checkboxes: QueryList<ElementRef>;
 
+  @ViewChild('progressBar')
+  progressBar: ElementRef;
 
-export class UserComponent implements OnInit {
-
-  // @ViewChild('alert', {static : true} )private alert: ElementRef;
-  @ViewChildren('checkboxes') checkboxes: QueryList<ElementRef>;
-  @ViewChild('progressBar') progressBar: ElementRef;
-
-  isHomeTabOpen = false;
-  admin: AdminMember = new AdminMember();
-  submitted = false;
-  userForm: FormGroup;
-  contact: Contact;
-  currentPage: PageType;
-  user: FirebaseUserModel = new FirebaseUserModel();
-  profileForm: FormGroup;
-  fileData: File = null;
-  public name: any = 'Choose file';
-  public str: any;
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
+  resources = RESOURCES;
+  reports = REPORTS;
+  archives = ARCHIVES;
+  months = MONTHS;
+  name: any = 'Choose file';
   basePath: string;
   resource: string;
-  report: string;
   title: string;
   annoucementTitle: string;
   annoucementBody: string;
-  resources: any = [
-    'Panel Material',
-    'General Resource',
-    'Monthly Report',
-    'Announcement',
-    'Archived Report'
-  ];
-  reports: any = [
-    'Financial Report',
-    'Committee Minutes'
-  ];
-  archives: any = [
-    'Create Archivable Record'
-  ];
-  months: any = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
   uploadProgress: Observable<number>;
-  uploadState: Subscription;
-  panelMaterial: PanelMaterials = new PanelMaterials();
-  monthlyReport: MonthlyReport = new MonthlyReport();
-  announcement: Announcement = new Announcement();
   resourceMessage: string;
   fileErrorMessage: string;
   titleMessage: string;
@@ -101,35 +96,34 @@ export class UserComponent implements OnInit {
   reportTypeAlert: boolean;
   monthAlert: boolean;
   titleAlert: boolean;
-  announcementTitleAlert: boolean;
-  announcementBodyAlert: boolean;
-  uploaded: boolean;
-  isArchive: boolean;
+  currentPage$ = new BehaviorSubject<number>(PageType.HomePage);
 
-
-  // panelMaterials: Array<Resource> = PANEL_MATERIALS;
-  generalResources: Array<Resource> = GENERAL_RESOURCES;
-  inputTitle: any;
+  private subscription = new Subscription();
+  private ref: AngularFireStorageReference;
+  private task: AngularFireUploadTask;
+  private fileData: File = null;
+  private report: string;
+  private announcementTitleAlert: boolean;
+  private announcementBodyAlert: boolean;
+  private uploaded: boolean;
+  private isArchive: boolean;
+  private uploadState: Subscription;
+  private panelMaterial: PanelMaterials = new PanelMaterials();
+  private monthlyReport: MonthlyReport = new MonthlyReport();
+  private announcement: Announcement = new Announcement();
 
   constructor(
     public userService: UserService,
     public authService: AuthService,
+    private panelMemberService: PanelMemberService,
+    private adminMemberService: AdminService,
     private route: ActivatedRoute,
-    private location: Location,
-    private fb: FormBuilder,
+    private router: Router,
     private afStorage: AngularFireStorage,
-    private resourceService: ResourceService,
-    private formBuilder: FormBuilder
+    private resourceService: ResourceService
   ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(routeData => {
-      const data = routeData['data'];
-      if (data) {
-        this.user = data;
-        this.createForm(this.user.name);
-      }
-    });
     this.resourceAlert = false;
     this.uploadAlert = false;
     this.reportTypeAlert = false;
@@ -138,80 +132,37 @@ export class UserComponent implements OnInit {
     this.uploaded = false;
     this.isArchive = false;
 
-    this.currentPage = 0;
+    setTimeout(() => (this.resourceAlert = false), 10000);
+    setTimeout(() => (this.uploadAlert = false), 10000);
+    setTimeout(() => (this.reportTypeAlert = false), 10000);
+    setTimeout(() => (this.monthAlert = false), 10000);
+    setTimeout(() => (this.titleAlert = false), 10000);
 
-    setTimeout(() => this.resourceAlert = false, 10000);
-    setTimeout(() => this.uploadAlert = false, 10000);
-    setTimeout(() => this.reportTypeAlert = false, 10000);
-    setTimeout(() => this.monthAlert = false, 10000);
-    setTimeout(() => this.titleAlert = false, 10000);
+    const pageId$ = this.route.params.pipe(map((params) => params.id));
 
+    this.subscription.add(
+      pageId$.subscribe((pageId) => {
+        if (!pageId) {
+          pageId = PageType.HomePage;
+        }
+        this.currentPage$.next(pageId);
+      })
+    );
   }
-  createForm(name) {
-    this.profileForm = this.fb.group({
-      name: [name, Validators.required]
-    });
 
-    this.contact = new Contact();
-
-    this.userForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
-      commitments: ['', [Validators.required]]
-    });
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   logout() {
-    this.authService.doLogout()
-      .then((res) => {
-        this.location.back();
-      }, (error) => {
+    this.authService.doLogout().then(
+      () => {
+        this.router.navigate(['/home']);
+      },
+      (error) => {
         console.log('Logout error', error);
-      });
-  }
-
-  validateForm(): boolean {
-    if (this.resource == null) {
-      this.resourceAlert = true;
-      this.resourceMessage = 'Please select a resource type';
-      console.log('Invalid form-- no resource');
-      return false;
-    }
-    if (this.resource === 'Panel Material' || this.resource === 'General Resource' || this.resource === 'Archived Report') {
-      if (this.title == null || this.title === '') {
-        this.titleAlert = true;
-        this.titleMessage = 'Please enter a document title';
       }
-      if ((!this.uploaded && this.title != null) || (!this.uploaded && this.title === '')) {
-        this.uploadAlert = true;
-        this.fileErrorMessage = 'Please choose a file to upload';
-        console.log('Invalid form-- no file chosen to upload');
-        return false;
-      }
-    }
-    if (this.resource === 'Monthly Report') {
-      if (this.report == null) {
-        this.reportTypeAlert = true;
-        this.reportTypeMessage = 'Choose a report type';
-      }
-      if (this.basePath == null) {
-        this.monthAlert = true;
-        this.monthMessage = 'Choose a month';
-      }
-      if (this.report != null && this.basePath != null && !this.uploaded) {
-        this.uploadAlert = true;
-        this.fileErrorMessage = 'Please choose a file to upload';
-        console.log('Invalid form-- no file chosen to upload');
-        return false;
-      }
-    }
-    if (this.resource === 'Anouncement') {
-      console.log('Validating the announcement');
-    }
-      return true;
+    );
   }
 
   onSubmit(event) {
@@ -219,64 +170,83 @@ export class UserComponent implements OnInit {
     console.log('On Submit! Resource is ' + this.resource.toString());
     if (this.validateForm()) {
       if (this.resource.toString() === this.resources[0]) {
-        this.ref = this.afStorage.ref('/Panel Materials/' + this.title.toString());
+        this.ref = this.afStorage.ref(
+          '/Panel Materials/' + this.title.toString()
+        );
         this.task = this.ref.put(this.fileData);
         this.uploadProgress = this.task.percentageChanges();
-        this.uploadState = this.task.snapshotChanges().pipe(
-          finalize(() => {
-            this.ref.getDownloadURL().subscribe(url => {
-              this.uploaded = false;
-              this.panelMaterial.title = this.title.toString();
-              this.panelMaterial.url = url;
-              this.panelMaterial.order = -1;
-              this.createPanelMaterial(this.panelMaterial);
-              this.clearForm();
-            });
-          })
-        ).subscribe();
+        this.uploadState = this.task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.ref.getDownloadURL().subscribe((url) => {
+                this.uploaded = false;
+                this.panelMaterial.title = this.title.toString();
+                this.panelMaterial.url = url;
+                this.panelMaterial.order = -1;
+                this.createPanelMaterial(this.panelMaterial);
+                this.clearForm();
+              });
+            })
+          )
+          .subscribe();
       } else if (this.resource.toString() === this.resources[1]) {
-        this.ref = this.afStorage.ref('/General Resources/' + this.title.toString());
+        this.ref = this.afStorage.ref(
+          '/General Resources/' + this.title.toString()
+        );
         this.task = this.ref.put(this.fileData);
         this.uploadProgress = this.task.percentageChanges();
-        this.uploadState = this.task.snapshotChanges().pipe(
-          finalize(() => {
-            this.ref.getDownloadURL().subscribe(url => {
-              this.uploaded = false;
-              this.panelMaterial.title = this.title.toString();
-              this.panelMaterial.url = url;
-              this.panelMaterial.order = -1;
-              this.createGeneralResource(this.panelMaterial);
-              this.clearForm();
-            });
-          })
-        ).subscribe();
+        this.uploadState = this.task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.ref.getDownloadURL().subscribe((url) => {
+                this.uploaded = false;
+                this.panelMaterial.title = this.title.toString();
+                this.panelMaterial.url = url;
+                this.panelMaterial.order = -1;
+                this.createGeneralResource(this.panelMaterial);
+                this.clearForm();
+              });
+            })
+          )
+          .subscribe();
       } else if (this.resource.toString() === this.resources[2]) {
         const year = new Date().getFullYear().toString();
-        console.log(this.basePath.toString() + ' and ' + this.report.toString());
+        console.log(
+          this.basePath.toString() + ' and ' + this.report.toString()
+        );
         this.title = this.basePath + '_' + this.report;
-        this.ref = this.afStorage.ref('/Monthly Reports/' + this.title.toString());
+        this.ref = this.afStorage.ref(
+          '/Monthly Reports/' + this.title.toString()
+        );
         this.task = this.ref.put(this.fileData);
         this.uploadProgress = this.task.percentageChanges();
-        this.uploadState = this.task.snapshotChanges().pipe(
-          finalize(() => {
-            this.ref.getDownloadURL().subscribe(url => {
-              this.uploaded = false;
-              this.monthlyReport.title = this.title.toString();
-              this.monthlyReport.url = url;
-              this.monthlyReport.month = this.getMonth(this.basePath);
-              this.monthlyReport.type = this.report;
-              this.monthlyReport.timestamp = new Date().getTime();
-              this.monthlyReport.isArchive = this.isArchive;
-              this.createMonthlyReport(this.monthlyReport);
-              this.clearForm();
-            });
-          })
-        ).subscribe();
+        this.uploadState = this.task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.ref.getDownloadURL().subscribe((url) => {
+                this.uploaded = false;
+                this.monthlyReport.title = this.title.toString();
+                this.monthlyReport.url = url;
+                this.monthlyReport.month = this.getMonth(this.basePath);
+                this.monthlyReport.type = this.report;
+                this.monthlyReport.timestamp = new Date().getTime();
+                this.monthlyReport.isArchive = this.isArchive;
+                this.createMonthlyReport(this.monthlyReport);
+                this.clearForm();
+              });
+            })
+          )
+          .subscribe();
       } else if (this.resource.toString() === this.resources[3]) {
         console.log(this.annoucementTitle);
         console.log(this.annoucementBody);
         this.announcement.title = this.annoucementTitle.toString();
-        this.announcement.body = this.annoucementBody.toString().substring(0, 256);
+        this.announcement.body = this.annoucementBody
+          .toString()
+          .substring(0, 256);
         this.announcement.fullBody = this.annoucementBody.toString();
         this.announcement.date = new Date().toDateString();
         this.announcement.isExpanded = false;
@@ -285,94 +255,29 @@ export class UserComponent implements OnInit {
         this.clearForm();
       } else if (this.resource.toString() === this.resources[4]) {
         console.log('Submitting archvived report ' + this.title.toString());
-        this.ref = this.afStorage.ref('/Archived Reports/' + this.title.toString());
+        this.ref = this.afStorage.ref(
+          '/Archived Reports/' + this.title.toString()
+        );
         this.task = this.ref.put(this.fileData);
         this.uploadProgress = this.task.percentageChanges();
-        this.uploadState = this.task.snapshotChanges().pipe(
-          finalize(() => {
-            this.ref.getDownloadURL().subscribe(url => {
-              this.uploaded = false;
-              this.panelMaterial.title = this.title.toString();
-              this.panelMaterial.url = url;
-              this.createArchiveReport(this.panelMaterial);
-              this.clearForm();
-            });
-          })
-        ).subscribe();
+        this.uploadState = this.task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.ref.getDownloadURL().subscribe((url) => {
+                this.uploaded = false;
+                this.panelMaterial.title = this.title.toString();
+                this.panelMaterial.url = url;
+                this.createArchiveReport(this.panelMaterial);
+                this.clearForm();
+              });
+            })
+          )
+          .subscribe();
       }
     } else {
       // invalid form, do not submit.
     }
-  }
-
-  getMonth(month: string): number {
-    if (month === 'January') {
-      return 1;
-    } else if (month === 'February') {
-      return 2;
-    } else if (month === 'March') {
-      return 3;
-    } else if (month === 'April') {
-      return 4;
-    } else if (month === 'May') {
-      return 5;
-    } else if (month === 'June') {
-      return 6;
-    } else if (month === 'July') {
-      return 7;
-    } else if (month === 'August') {
-      return 8;
-    } else if (month === 'September') {
-      return 9;
-    } else if (month === 'October') {
-      return 10;
-    } else if (month === 'November') {
-      return 11;
-    } else if (month === 'December') {
-      return 12;
-    }
-
-  }
-  createPanelMaterial(resource: PanelMaterials) {
-    this.resourceService.createPanelMaterial(resource)
-      .then(res => {
-        // update UI
-      });
-  }
-
-  createGeneralResource(resource: PanelMaterials) {
-    this.resourceService.createGeneralResource(resource)
-      .then(res => {
-        // update UI
-      });
-  }
-
-  createMonthlyReport(report: MonthlyReport) {
-    this.resourceService.createMonthlyReport(report)
-      .then(res => {
-        // update UI
-      });
-  }
-
-  createAnnouncement(announcement: Announcement) {
-    this.resourceService.createAnnouncement(announcement)
-      .then(res => {
-       // update UI
-    });
-  }
-
-  createArchiveReport(resource: PanelMaterials) {
-    this.resourceService.createArchiveReport(resource)
-      .then(res => {
-        // update UI
-      });
-  }
-
-  addAdminMember(admin: AdminMember) {
-    this.resourceService.addAdminMember(admin)
-      .then(res => {
-        // update UI
-      });
   }
 
   onFileChange(event) {
@@ -413,16 +318,37 @@ export class UserComponent implements OnInit {
   }
 
   announcementTextBodyChangeHandler(event: any) {
-    console.log(event.target.value);
-    this.annoucementBody = this.announcementTextBodyNewLineFormatter(event.target.value);
+    this.annoucementBody = this.announcementTextBodyNewLineFormatter(
+      event.target.value
+    );
     this.announcementBodyAlert = false;
   }
 
-  announcementTextBodyNewLineFormatter(body: string): string {
+  viewCommitteePage() {
+    this.router.navigate(['/user', PageType.CommitteePage]);
+  }
+
+  viewHomePage() {
+    this.router.navigate(['/user', PageType.HomePage]);
+  }
+
+  viewPanelMembersPage() {
+    this.router.navigate(['/user', PageType.PanelMemberPage]);
+  }
+
+  onAdminEntry(member: AdminMember) {
+    this.addAdminMember(member);
+  }
+
+  onPanelMemberAdd(member: AdminMember) {
+    this.addPanelMember(member);
+  }
+
+  private announcementTextBodyNewLineFormatter(body: string): string {
     return body.replace(/\n\r?/g, '<br/>');
   }
 
-  clearForm() {
+  private clearForm() {
     this.checkboxes.forEach((element) => {
       element.nativeElement.checked = false;
     });
@@ -430,60 +356,114 @@ export class UserComponent implements OnInit {
     this.title = '';
     this.annoucementTitle = '';
     this.annoucementBody = '';
-    this.uploadProgress = new Observable<number>();
+    this.uploadProgress = of(0);
   }
 
-  viewCommitteePage() {
-    this.currentPage = 1;
+  private validateForm(): boolean {
+    if (this.resource == null) {
+      this.resourceAlert = true;
+      this.resourceMessage = 'Please select a resource type';
+      console.log('Invalid form-- no resource');
+      return false;
+    }
+    if (
+      this.resource === 'Panel Material' ||
+      this.resource === 'General Resource' ||
+      this.resource === 'Archived Report'
+    ) {
+      if (this.title == null || this.title === '') {
+        this.titleAlert = true;
+        this.titleMessage = 'Please enter a document title';
+      }
+      if (
+        (!this.uploaded && this.title != null) ||
+        (!this.uploaded && this.title === '')
+      ) {
+        this.uploadAlert = true;
+        this.fileErrorMessage = 'Please choose a file to upload';
+        console.log('Invalid form-- no file chosen to upload');
+        return false;
+      }
+    }
+    if (this.resource === 'Monthly Report') {
+      if (this.report == null) {
+        this.reportTypeAlert = true;
+        this.reportTypeMessage = 'Choose a report type';
+      }
+      if (this.basePath == null) {
+        this.monthAlert = true;
+        this.monthMessage = 'Choose a month';
+      }
+      if (this.report != null && this.basePath != null && !this.uploaded) {
+        this.uploadAlert = true;
+        this.fileErrorMessage = 'Please choose a file to upload';
+        console.log('Invalid form-- no file chosen to upload');
+        return false;
+      }
+    }
+    if (this.resource === 'Anouncement') {
+      console.log('Validating the announcement');
+    }
+    return true;
   }
 
-  viewHomePage() {
-    this.currentPage = 0;
+  private getMonth(month: string): number {
+    if (month === 'January') {
+      return 1;
+    } else if (month === 'February') {
+      return 2;
+    } else if (month === 'March') {
+      return 3;
+    } else if (month === 'April') {
+      return 4;
+    } else if (month === 'May') {
+      return 5;
+    } else if (month === 'June') {
+      return 6;
+    } else if (month === 'July') {
+      return 7;
+    } else if (month === 'August') {
+      return 8;
+    } else if (month === 'September') {
+      return 9;
+    } else if (month === 'October') {
+      return 10;
+    } else if (month === 'November') {
+      return 11;
+    } else if (month === 'December') {
+      return 12;
+    }
   }
 
-  invalidFirstName() {
-    return (this.submitted && this.userForm.controls.first_name.errors != null);
+  private async createPanelMaterial(resource: PanelMaterials) {
+    await this.resourceService.createPanelMaterial(resource);
   }
 
-  invalidLastName() {
-    return (this.submitted && this.userForm.controls.last_name.errors != null);
+  private async createGeneralResource(resource: PanelMaterials) {
+    await this.resourceService.createGeneralResource(resource);
   }
 
-  invalidEmail() {
-    return (this.submitted && this.userForm.controls.email.errors != null);
+  private async createMonthlyReport(report: MonthlyReport) {
+    await this.resourceService.createMonthlyReport(report);
   }
 
-  invalidPhone() {
-    return (this.submitted && this.userForm.controls.phone.errors != null);
+  private async createAnnouncement(announcement: Announcement) {
+    await this.resourceService.createAnnouncement(announcement);
   }
 
-  firstNameChangeHandler(event: any) {
-    this.admin.firstName = event.target.value;
+  private async createArchiveReport(resource: PanelMaterials) {
+    await this.resourceService.createArchiveReport(resource);
   }
 
-  lastNameChangeHandler(event: any) {
-    this.admin.lastName = event.target.value;
+  private addAdminMember(admin: AdminMember) {
+    this.subscription.add(
+      this.adminMemberService.addAdminMember(admin).subscribe()
+    );
   }
 
-  emailChangeHandler(event: any) {
-    this.admin.email = event.target.value;
-  }
-
-  phoneChangeHandler(event: any) {
-    this.admin.phone = event.target.value;
-  }
-
-  commitmentChangeHandler(event: any) {
-    this.admin.commitment = event.target.value;
-  }
-
-  onAdminEntry(form: NgForm) {
-    this.addAdminMember(this.admin);
-  }
-
-  homeTabClicked() {
-    this.isHomeTabOpen = !this.isHomeTabOpen;
+  private addPanelMember(admin: AdminMember) {
+    this.subscription.add(
+      this.panelMemberService.addPanelMember(admin).subscribe()
+    );
   }
 }
-
-

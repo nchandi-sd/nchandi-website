@@ -33,7 +33,6 @@ import { ResourceListComponent } from './resource-list/resource-list.component';
 import {ResourceService} from './resources/resource.service';
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrientationComponent } from './orientation/orientation.component';
-import { AdminListComponent } from './admin-list/admin-list.component';
 import {MainEventComponent} from './orientation/main-event/main-event.component';
 import {EventsComponent} from './orientation/events/events.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -47,6 +46,10 @@ import {FacilitiesService} from './facilities-db/facilities-db.service';
 import {MembersDbService} from './members-db/members-db.service';
 import {PanelsDbService} from './panels-db/panels-db.service';
 
+import { MemberInputComponent } from './shared/components/member-input/member-input.component';
+import { MemberListComponent } from './shared/components/member-list/member-list.component';
+import { PanelMemberListComponent } from './user/components/panel-member-list/panel-member-list.component';
+import { AdminListComponent } from './user/components/admin-list/admin-list.component';
 
 @NgModule({
   declarations: [
@@ -71,8 +74,10 @@ import {PanelsDbService} from './panels-db/panels-db.service';
     AdminComponent,
     FacilitiesDBComponent,
     MembersDBComponent,
-    PanelsDBComponent
-
+    PanelsDBComponent,
+    MemberInputComponent,
+    MemberListComponent,
+    PanelMemberListComponent
   ],
   imports: [
     AngularSvgIconModule,

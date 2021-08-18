@@ -1,38 +1,40 @@
-*{
+* {
   color: white;
 }
 
-.reports-title{
+.member-list {
+  height: 100%;
+}
+
+.title {
   font-weight: normal;
   font-size: x-large;
   font-family: "Segoe UI", sans-serif;
-  -webkit-text-stroke-width: .5px
-}
-.month-header{
-  font-weight: bold;
+  -webkit-text-stroke-width: 0.5px;
 }
 
-.btn-delete{
+.btn-delete {
   height: 100%;
   font-weight: bold;
   font-size: 8px;
-  color:red;
+  color: red;
   background-color: transparent;
   border: none;
   margin-bottom: 5px;
+  text-transform: uppercase;
 }
 
-.board-header {
+.header {
   margin: 50px 0 0 0;
 }
 
 @media (min-width: 576px) {
-  .board-header {
+  .header {
     margin: 24px 0 0 0;
   }
 }
-  @media (min-width: 576px) {
-    .board-header {
-      margin: 0 0 0 0;
-    }
+@media (min-width: 576px) {
+  .header {
+    margin: 0 0 0 0;
+  }
 }

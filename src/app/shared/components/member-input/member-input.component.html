@@ -1,0 +1,125 @@
+<form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onFormSubmit(cForm)">
+  <div class="container">
+    <div class="add-resource-title text-white">Add a new member:</div>
+    <div class="spacer"></div>
+    <div class="form-container">
+      <div class="row">
+        <div class="col-12 col-md-8 order-2 order-md-1">
+          <div class="row form-content">
+            <div class="col-12 col-lg-6">
+              <div
+                class="form-group"
+                [ngClass]="{ 'has-error': hasInvalidFirstName() }"
+              >
+                <!-- First Name -->
+                <label for="first_name" class="form-label">First Name</label>
+                <input
+                  type="text"
+                  formControlName="firstName"
+                  class="form-control"
+                  placeholder="First Name"
+                  require
+                />
+                <p
+                  *ngIf="hasInvalidFirstName()"
+                  id="first_name_error"
+                  class="help-block"
+                >
+                  Invalid first name.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+              <div
+                class="form-group"
+                [ngClass]="{ 'has-error': hasInvalidLastName() }"
+              >
+                <!-- Last Name -->
+                <label for="last_name" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  class="form-control"
+                  placeholder="Last Name"
+                />
+                <p
+                  *ngIf="hasInvalidLastName()"
+                  id="last_name_error"
+                  class="help-block"
+                >
+                  Invalid last name.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div
+                class="form-group"
+                [ngClass]="{ 'has-error': hasInvalidEmail() }"
+              >
+                <!-- Email -->
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="text"
+                  formControlName="email"
+                  class="form-control"
+                  placeholder="your@email.com"
+                />
+                <p *ngIf="hasInvalidEmail()" id="email_error" class="help-block">
+                  Invalid email address.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div
+                class="form-group"
+                [ngClass]="{ 'has-error': hasInvalidPhone() }"
+              >
+                <!-- Email -->
+                <label for="phone" class="form-label">Phone</label>
+                <input
+                  type="text"
+                  formControlName="phone"
+                  class="form-control"
+                  placeholder="Phone"
+                />
+                <p *ngIf="hasInvalidPhone()" id="phone_error" class="help-block">
+                  Invalid phone number
+                </p>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6" *ngIf="hasCommitment">
+              <label class="form-label">Commitment</label>
+              <select
+                formControlName="commitment"
+                class="browser-default custom-select"
+              >
+                <option value="Chair">Chair</option>
+                <option value="Co-Chair">Co-Chair</option>
+                <option value="Librarian">Librarian</option>
+                <option value="Technology">Technology</option>
+                <option value="Treasurer">Treasurer</option>
+                <option value="Facility">Facilities</option>
+              </select>
+            </div>
+
+            <div class="col-12 flex-center">
+              <div class="form-group">
+                <button
+                  type="submit"
+                  class="btn admin-entry-button btn-primary mx-auto"
+                  [disabled]="!userForm.valid"
+                >
+                  Add member
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,42 @@
+<div class="member-list">
+  <div class="header flex-center">
+    <div class="title">{{ title }}</div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="flex-center">
+    <table
+      class="table table bordered table-responsive text-nowrap table-striped"
+    >
+      <thead>
+        <tr>
+          <th></th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th *ngIf="hasCommitment">Commitment</th>
+        </tr>
+      </thead>
+      <tbody id="openings-panel">
+        <tr *ngFor="let member of members">
+          <td>
+            <button
+              (click)="onDeleteItem(member)"
+              class="btn-delete"
+              data-id="{{ member.id }}"
+            >
+              Delete
+            </button>
+          </td>
+          <td>{{ member?.firstName }}</td>
+          <td>{{ member?.lastName }}</td>
+          <td>{{ member?.email }}</td>
+          <td>{{ member?.phone }}</td>
+          <td>{{ member?.commitment }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

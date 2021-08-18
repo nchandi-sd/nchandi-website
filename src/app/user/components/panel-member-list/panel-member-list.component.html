@@ -1,0 +1,6 @@
+<app-member-list
+  title="Current Panel Members"
+  [members]="members$ | async"
+  (deleteItem)="deleteItem($event)"
+  [hasCommitment]="false"
+></app-member-list>
