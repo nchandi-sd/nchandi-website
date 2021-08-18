@@ -34,7 +34,7 @@
           <td>{{ member?.lastName }}</td>
           <td>{{ member?.email }}</td>
           <td>{{ member?.phone }}</td>
-          <td>{{ member?.commitment }}</td>
+          <td *ngIf="hasCommitment">{{ member?.commitment }}</td>
         </tr>
       </tbody>
     </table>
