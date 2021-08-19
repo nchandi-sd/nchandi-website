@@ -9,8 +9,6 @@ import {
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { FirebaseUserModel } from '../core/user.model';
 import {
   AngularFireStorage,
   AngularFireStorageReference,
@@ -20,13 +18,10 @@ import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core';
 
-import { GENERAL_RESOURCES } from '../model/General-Resources';
-import { Resource } from '../model/Resource';
 import { PanelMaterials } from '../model/Panel-Materials';
 import { ResourceService } from '../resources/resource.service';
 import { MonthlyReport } from '../model/MonthlyReport';
 import { Announcement } from '../model/Announcement';
-import { Contact } from '../model/Contact';
 import { AdminMember } from '../model/AdminMember';
 import { PanelMemberService } from '../shared/services/panel-member.service';
 import { AdminService } from '../shared/services/admin.service';
@@ -35,6 +30,8 @@ enum PageType {
   HomePage = 1,
   CommitteePage = 2,
   PanelMemberPage = 3,
+  PanelsPage = 4,
+  FacilitiesPage = 5,
 }
 
 const MONTHS = [
@@ -334,6 +331,14 @@ export class UserComponent implements OnInit, OnDestroy {
 
   viewPanelMembersPage() {
     this.router.navigate(['/user', PageType.PanelMemberPage]);
+  }
+
+  viewPanelsPage() {
+    this.router.navigate(['/user', PageType.PanelsPage]);
+  }
+
+  viewFacilitiesPage() {
+    this.router.navigate(['/user', PageType.FacilitiesPage]);
   }
 
   onAdminEntry(member: AdminMember) {

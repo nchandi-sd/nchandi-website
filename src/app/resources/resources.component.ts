@@ -1,26 +1,29 @@
-import {Component, OnInit} from '@angular/core';
-import {CommitteeReport} from '../model/CommitteeReport';
-import {AngularFireStorage} from '@angular/fire/storage';
-import {PanelMaterials} from '../model/Panel-Materials';
-import {ResourceService} from './resource.service';
-import {MonthlyReport} from '../model/MonthlyReport';
-import {PanelService} from '../panels/panel.service';
-import {Panels} from '../model/Panels';
-import {ResourceSubmissionService} from './resource-submission.service';
-import {NgForm, FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {ResourceSubmission} from '../model/ResourceSubmission';
-import {$} from 'protractor';
-import {Announcement} from '../model/Announcement';
-import {Link} from '../model/Link';
-import {LINKS} from '../model/Local-Links';
+import { Component, OnInit } from '@angular/core';
+import { CommitteeReport } from '../model/CommitteeReport';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { PanelMaterials } from '../model/Panel-Materials';
+import { ResourceService } from './resource.service';
+import { MonthlyReport } from '../model/MonthlyReport';
+import { ResourceSubmissionService } from './resource-submission.service';
+import {
+  NgForm,
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
+import { ResourceSubmission } from '../model/ResourceSubmission';
+import { Announcement } from '../model/Announcement';
+import { Link } from '../model/Link';
+import { LINKS } from '../model/Local-Links';
+import { PanelService } from '../shared/services/panel.service';
 
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.scss']
+  styleUrls: ['./resources.component.scss'],
 })
 export class ResourcesComponent implements OnInit {
-
   localLinks: Link[] = null;
   facilities: Array<string> = [];
   announcements: Announcement[] = null;
@@ -42,23 +45,22 @@ export class ResourcesComponent implements OnInit {
   newPacket: boolean;
   litRack: boolean;
   other: boolean;
-  submitted: boolean = false;
+  submitted = false;
   userForm: FormGroup;
   resourceSubmission: ResourceSubmission;
-  madeSelection: boolean = false;
+  madeSelection = false;
 
-  sendDisabled: boolean = false;
+  sendDisabled = false;
 
-
-  constructor(private storage: AngularFireStorage,
-              private resourceService: ResourceService,
-              private panelService: PanelService,
-              private formBuilder: FormBuilder,
-              private resourceSubmissionService: ResourceSubmissionService) {
-  }
+  constructor(
+    private resourceService: ResourceService,
+    private panelService: PanelService,
+    private formBuilder: FormBuilder,
+    private resourceSubmissionService: ResourceSubmissionService
+  ) {}
 
   ngOnInit() {
-    this.localLinks = LINKS
+    this.localLinks = LINKS;
     this.hasArchives = false;
     this.hasFinancialArchive = false;
     this.resourceSubmission = new ResourceSubmission();
@@ -66,7 +68,13 @@ export class ResourcesComponent implements OnInit {
       firstName: [],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$')]],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$'),
+        ],
+      ],
       hiCommitments: ['', Validators.required],
       facility: ['', Validators.required],
       livingSober: [],
@@ -78,40 +86,29 @@ export class ResourcesComponent implements OnInit {
       newPacket: [],
       litRack: [],
       other: [],
-      comments: []
+      comments: [],
     });
 
-
-    this.panelService.getCurrentPanels()
-      .subscribe((data: Panels) => {
-        data.feed.entry.forEach(ent => {
-          this.facilities[this.index] = ent.gsx$facility.$t.toString();
-          this.index++;
-        });
-        this.facilities = this.facilities.filter(function (elem, index, self) {
-          return index === self.indexOf(elem);
-        });
+    // TODO
+    /*
+    this.panelService.getCurrentPanels().subscribe((data: Panel) => {
+      data.feed.entry.forEach((ent) => {
+        this.facilities[this.index] = ent.gsx$facility.$t.toString();
+        this.index++;
       });
-
-    this.resourceService.getPanelMaterials().subscribe(data => {
-      this.panelMaterials = data.map(e => {
-        console.log('retrieved panel materials from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as PanelMaterials;
+      this.facilities = this.facilities.filter(function (elem, index, self) {
+        return index === self.indexOf(elem);
       });
-      this.panelMaterials.sort((a,b)=>a.order - b.order)
+    });
+    */
+
+    this.resourceService.getPanelMaterials().subscribe((data) => {
+      this.panelMaterials = data;
+      this.panelMaterials.sort((a, b) => a.order - b.order);
     });
 
-    this.resourceService.getArchivedReports().subscribe(data => {
-      this.archiveReports = data.map(e => {
-        console.log('retrieved archives from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as PanelMaterials;
-      });
+    this.resourceService.getArchivedReports().subscribe((data) => {
+      this.archiveReports = data;
       if (this.archiveReports.length > 0) {
         this.hasArchives = true;
       } else {
@@ -119,35 +116,17 @@ export class ResourcesComponent implements OnInit {
       }
     });
 
-    this.resourceService.getGeneralResources().subscribe(data => {
-      this.generalResources = data.map(e => {
-        console.log('retrieved general resources from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as PanelMaterials;
-      });
-      this.generalResources.sort((a,b)=>a.order - b.order)
+    this.resourceService.getGeneralResources().subscribe((data) => {
+      this.generalResources = data;
+      this.generalResources.sort((a, b) => a.order - b.order);
     });
 
-    this.resourceService.getAnnouncements().subscribe(data => {
-      this.announcements = data.map(e => {
-        console.log('retrieved announcements from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Announcement;
-      });
+    this.resourceService.getAnnouncements().subscribe((data) => {
+      this.announcements = data;
     });
 
-    this.resourceService.getMonthlyReports().subscribe(data => {
-      this.monthlyReports = data.map(e => {
-        console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as MonthlyReport;
-      });
+    this.resourceService.getMonthlyReports().subscribe((data) => {
+      this.monthlyReports = data;
 
       // sort reports by month
       this.monthlyReports.sort(function (a, b) {
@@ -161,7 +140,7 @@ export class ResourcesComponent implements OnInit {
       });
 
       for (let i = 0; i < this.monthlyReports.length; i++) {
-        let containsReport: boolean = false;
+        let containsReport = false;
 
         if (this.monthlyReports[i].isArchive) {
           this.hasFinancialArchive = true;
@@ -172,21 +151,24 @@ export class ResourcesComponent implements OnInit {
         }
 
         for (let j = 0; j < this.committeeReports.length; j++) {
-          if (this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)) {
+          if (
+            this.committeeReports[j].monthDate ===
+            this.getStringMonth(this.monthlyReports[i].month)
+          ) {
             containsReport = true;
             if (this.monthlyReports[i].title.endsWith('Minutes')) {
               this.committeeReports[j].minLink = this.monthlyReports[i].url;
               this.committeeReports[j].minutes = this.monthlyReports[i].title;
             } else if (this.monthlyReports[i].title.endsWith('Report')) {
               this.committeeReports[j].finLink = this.monthlyReports[i].url;
-              this.committeeReports[j].financialReport = this.monthlyReports[i].title;
+              this.committeeReports[j].financialReport =
+                this.monthlyReports[i].title;
             }
-
           }
         }
 
         if (!containsReport) {
-          let report = new CommitteeReport();
+          const report = new CommitteeReport();
           this.committeeReports.push(report);
           report.monthDate = this.getStringMonth(this.monthlyReports[i].month);
           if (this.monthlyReports[i].title.endsWith('Minutes')) {
@@ -198,9 +180,7 @@ export class ResourcesComponent implements OnInit {
           }
         }
       }
-
     });
-
 
     this.livingSoberFlag = false;
     this.twelveTwelve = false;
@@ -218,12 +198,19 @@ export class ResourcesComponent implements OnInit {
       return this.userForm.get(controlName).errors != null && this.submitted;
     }
     return false;
-
   }
 
   checkMadeSelection() {
-    this.madeSelection = this.livingSoberFlag || this.twelveTwelve || this.aaPaper || this.aaPocket ||
-      this.grapevine || this.laVina || this.newPacket || this.litRack || this.other;
+    this.madeSelection =
+      this.livingSoberFlag ||
+      this.twelveTwelve ||
+      this.aaPaper ||
+      this.aaPocket ||
+      this.grapevine ||
+      this.laVina ||
+      this.newPacket ||
+      this.litRack ||
+      this.other;
   }
 
   onSubmit(form: NgForm) {
@@ -238,11 +225,14 @@ export class ResourcesComponent implements OnInit {
     this.resourceSubmission.email = this.userForm.controls.email.value;
     this.resourceSubmission.firstName = this.userForm.controls.firstName.value;
     this.resourceSubmission.lastName = this.userForm.controls.lastName.value;
-    this.resourceSubmission.hiCommitments = this.userForm.controls.hiCommitments.value;
+    this.resourceSubmission.hiCommitments =
+      this.userForm.controls.hiCommitments.value;
     this.resourceSubmission.facility = this.userForm.controls.facility.value;
     this.resourceSubmission.phone = this.userForm.controls.phone.value;
-    this.resourceSubmission.livingSober = this.userForm.controls.livingSober.value;
-    this.resourceSubmission.twelveTwelve = this.userForm.controls.twelveTwelve.value;
+    this.resourceSubmission.livingSober =
+      this.userForm.controls.livingSober.value;
+    this.resourceSubmission.twelveTwelve =
+      this.userForm.controls.twelveTwelve.value;
     this.resourceSubmission.aaPaper = this.userForm.controls.aaPaper.value;
     this.resourceSubmission.aaPocket = this.userForm.controls.aaPocket.value;
     this.resourceSubmission.grapevine = this.userForm.controls.grapevine.value;
@@ -259,13 +249,13 @@ export class ResourcesComponent implements OnInit {
 
   postResourceForm(form: NgForm) {
     console.log('resource: ' + this.resourceSubmission);
-    this.resourceSubmissionService.postResourceForm(this.resourceSubmission)
+    this.resourceSubmissionService
+      .postResourceForm(this.resourceSubmission)
       .subscribe(() => {
         this.sendDisabled = false;
-        console.log('yay subscribe called');
-        //display success
+        // display success
 
-        //hide form
+        // hide form
         document.getElementById('sub-container').classList.add('hidden');
         document.getElementById('thank-you-container').classList.add('show');
       });
@@ -300,7 +290,6 @@ export class ResourcesComponent implements OnInit {
   }
 
   changeStatus(event: any) {
-
     if (event.currentTarget.id === 'livingSoberId') {
       if (!this.livingSoberFlag) {
         this.livingSoberFlag = true;
@@ -358,6 +347,4 @@ export class ResourcesComponent implements OnInit {
     }
     this.checkMadeSelection();
   }
-
 }
-

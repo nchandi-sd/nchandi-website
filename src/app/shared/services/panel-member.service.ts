@@ -52,9 +52,9 @@ export class PanelMemberService {
       .pipe(
         map((data) => {
           return data.map((e) => {
-            // @ts-ignore
             return {
               id: e.payload.doc.id,
+              // @ts-ignore
               ...e.payload.doc.data(),
             } as AdminMember;
           });

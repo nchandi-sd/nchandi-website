@@ -18,6 +18,12 @@
             <button class="btn admin-top-btn" (click)="viewPanelMembersPage()">
               Panel Member Details
             </button>
+            <button class="btn admin-top-btn" (click)="viewPanelsPage()">
+              Panel Details
+            </button>
+            <button class="btn admin-top-btn" (click)="viewFacilitiesPage()">
+              Facilities
+            </button>
           </div>
         </div>
       </div>
@@ -381,6 +387,14 @@
               </div>
             </div>
           </div>
+        </div>
+        <div *ngSwitchCase="4">
+          <!-- Panels -->
+          <app-panel-dashboard></app-panel-dashboard>
+        </div>
+        <div *ngSwitchCase="5">
+          <!-- Facilities -->
+          <app-facilities-dashboard></app-facilities-dashboard>
         </div>
       </ng-container>
     </ng-container>

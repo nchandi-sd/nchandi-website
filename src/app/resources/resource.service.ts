@@ -21,7 +21,14 @@ export class ResourceService {
    */
 
   getPanelMaterials() {
-    return this.firestore.collection('Panel Materials').snapshotChanges();
+    return this.firestore
+      .collection('Panel Materials')
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          return this.getMappedData(data) as PanelMaterials[];
+        })
+      );
   }
 
   createPanelMaterial(resource: PanelMaterials) {
@@ -33,7 +40,14 @@ export class ResourceService {
    */
 
   getGeneralResources() {
-    return this.firestore.collection('General Resources').snapshotChanges();
+    return this.firestore
+      .collection('General Resources')
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          return this.getMappedData(data) as PanelMaterials[];
+        })
+      );
   }
 
   createGeneralResource(resource: PanelMaterials) {
@@ -45,7 +59,14 @@ export class ResourceService {
    */
 
   getMonthlyReports() {
-    return this.firestore.collection('Monthly Reports').snapshotChanges();
+    return this.firestore
+      .collection('Monthly Reports')
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          return this.getMappedData(data) as MonthlyReport[];
+        })
+      );
   }
 
   createMonthlyReport(report: MonthlyReport) {
@@ -57,7 +78,14 @@ export class ResourceService {
    */
 
   getAnnouncements() {
-    return this.firestore.collection('Announcements').snapshotChanges();
+    return this.firestore
+      .collection('Announcements')
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          return this.getMappedData(data) as Announcement[];
+        })
+      );
   }
 
   createAnnouncement(announcement: Announcement) {
@@ -69,7 +97,14 @@ export class ResourceService {
    */
 
   getArchivedReports() {
-    return this.firestore.collection('Archived Reports').snapshotChanges();
+    return this.firestore
+      .collection('Archived Reports')
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          return this.getMappedData(data) as any[];
+        })
+      );
   }
 
   createArchiveReport(resource: PanelMaterials) {
@@ -108,9 +143,12 @@ export class ResourceService {
     const resp = this.getPanelMaterials().subscribe((data) => {
       data.map((e) => {
         const newPM = {
+          // @ts-ignore
           id: e.payload.doc.id,
+          // @ts-ignore
           ...e.payload.doc.data(),
         } as PanelMaterials;
+          // @ts-ignore
         pmDictionary[e.payload.doc.id] = newPM;
       });
 
@@ -118,9 +156,8 @@ export class ResourceService {
         if (
           pmDictionary[material.id] &&
           (pmDictionary[material.id] as PanelMaterials) != null &&
-          pmDictionary[material.id].order != material.order
+          pmDictionary[material.id].order !== material.order
         ) {
-          console.log('should change');
           this.firestore.collection('Panel Materials').doc(material.id).update({
             order: material.order,
           });
@@ -136,10 +173,13 @@ export class ResourceService {
 
     const resp = this.getGeneralResources().subscribe((data) => {
       data.map((e) => {
-        let newPM = {
+        const newPM = {
+          // @ts-ignore
           id: e.payload.doc.id,
+          // @ts-ignore
           ...e.payload.doc.data(),
         } as PanelMaterials;
+        // @ts-ignore
         resourceDictionary[e.payload.doc.id] = newPM;
       });
 
@@ -147,9 +187,8 @@ export class ResourceService {
         if (
           resourceDictionary[material.id] &&
           (resourceDictionary[material.id] as PanelMaterials) != null &&
-          resourceDictionary[material.id].order != material.order
+          resourceDictionary[material.id].order !== material.order
         ) {
-          console.log('should change');
           this.firestore
             .collection('General Resources')
             .doc(material.id)
@@ -160,6 +199,16 @@ export class ResourceService {
       });
 
       resp.unsubscribe();
+    });
+  }
+
+  private getMappedData(data: any) {
+    return data.map((e) => {
+      return {
+        id: e.payload.doc.id,
+        // @ts-ignore
+        ...e.payload.doc.data(),
+      } as any;
     });
   }
 }

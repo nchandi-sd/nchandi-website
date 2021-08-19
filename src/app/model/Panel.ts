@@ -1,9 +1,12 @@
 export class Panel {
+  eventTime: Date;
   facility: string;
   location: string;
-  day: string;
-  time: string;
   gender: string;
-  panelCoordinator: string;
+  numberNeeded: number;
+  panelMemberCount: number;
   boardChampion: string;
+  panelCoordinator: string;
+
+  panelMembers: string[];
 }
