@@ -3,6 +3,7 @@ import { Panel } from '../model/Panel';
 import { PanelService } from '../shared/services/panel.service';
 import { Observable } from 'rxjs';
 import { Facility } from '../model/Facility';
+import { FacilitiesService } from '../shared/services/facilities.service';
 
 const PANEL_OPENING_CONTACTS = [
   /*
@@ -35,12 +36,14 @@ export class PanelsComponent implements OnInit {
   panelOpeningContacts = PANEL_OPENING_CONTACTS;
   isTableOpen = false;
 
-  constructor(private panelService: PanelService) {
-  }
+  constructor(
+    private panelService: PanelService,
+    private facilitiesService: FacilitiesService
+  ) {}
 
   ngOnInit() {
     this.currentPanels$ = this.panelService.getCurrentPanels();
     this.openPanels$ = this.panelService.getOpenPanels();
-    this.correctionalFacilities$ = this.panelService.getFacilities();
+    this.correctionalFacilities$ = this.facilitiesService.getFacilities();
   }
 }

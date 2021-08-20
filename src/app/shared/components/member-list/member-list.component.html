@@ -3,8 +3,6 @@
     <div class="title">{{ title }}</div>
   </div>
 
-  <div class="spacer"></div>
-
   <div class="flex-center">
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
@@ -23,11 +21,20 @@
         <tr *ngFor="let member of members">
           <td>
             <button
-              (click)="onDeleteItem(member)"
+              mat-icon-button
               class="btn-delete"
-              data-id="{{ member.id }}"
+              aria-label="Delete Item"
+              (click)="onDeleteItem(member)"
             >
-              Delete
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="accent"
+              aria-label="Edit Item"
+              (click)="onEditItem(member)"
+            >
+              <mat-icon>edit</mat-icon>
             </button>
           </td>
           <td>{{ member?.firstName }}</td>

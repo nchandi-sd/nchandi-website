@@ -1,0 +1,28 @@
+<div class="dialog">
+  <h1 class="dialog__header" mat-dialog-title>Editing Member</h1>
+  <div mat-dialog-content class="dialog__content">
+    <app-member-input
+      #memberInput
+      [hasCommitment]="isAdmin"
+      (formSubmit)="onSaveButtonClick($event)"
+      [member]="member"
+    ></app-member-input>
+  </div>
+  <div mat-dialog-actions class="dialog__actions">
+    <button
+      class="member-dialog__button"
+      mat-button
+      (click)="onCancelButtonClick()"
+    >
+      Cancel
+    </button>
+    <button
+      class="member-dialog__button"
+      mat-button
+      [disabled]="!memberInput.valid"
+      (click)="onSaveButtonClick(memberInput.value)"
+    >
+      Save
+    </button>
+  </div>
+</div>

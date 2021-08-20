@@ -1,0 +1,20 @@
+.member-input {
+  padding: 10px;
+}
+
+.member-input__header {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.help-block,
+label {
+  color: white;
+}
+
+@media (min-width: 576px) {
+  .member-input__header {
+    font-size: 24px;
+  }
+}

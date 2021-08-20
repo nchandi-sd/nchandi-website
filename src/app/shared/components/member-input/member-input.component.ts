@@ -9,10 +9,33 @@ import { AdminMember } from 'src/app/model/AdminMember';
 })
 export class MemberInputComponent implements OnInit {
   @Input()
+  get member() {
+    return this.userForm.getRawValue();
+  }
+  set member(val: AdminMember) {
+    this.userForm.setValue({
+      firstName: val.firstName,
+      lastName: val.lastName,
+      email: val.email,
+      phone: val.phone,
+      commitment: val.commitment,
+      preferredContactMethod: val.preferredContactMethod ? val.preferredContactMethod : 'text',
+    });
+  }
+
+  @Input()
   hasCommitment = true;
 
   @Output()
   formSubmit = new EventEmitter<AdminMember>();
+
+  get valid() {
+    return this.userForm.valid;
+  }
+
+  get value() {
+    return this.userForm.getRawValue();
+  }
 
   userForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -23,9 +46,8 @@ export class MemberInputComponent implements OnInit {
       Validators.pattern('^(1?-?[(]?(-?\\d{3})[)]?-?)?(\\d{3})(-?\\d{4})$'),
     ]),
     commitment: new FormControl('', Validators.required),
+    preferredContactMethod: new FormControl('text'),
   });
-
-  private submitted = false;
 
   constructor() {}
 
@@ -36,25 +58,42 @@ export class MemberInputComponent implements OnInit {
   }
 
   hasInvalidFirstName() {
-    return this.submitted && this.userForm.controls.firstName.errors != null;
+    const ctrl = this.userForm.get('firstName');
+    if (ctrl && ctrl.dirty) {
+      return ctrl.errors !== null;
+    }
+    return false;
   }
 
   hasInvalidLastName() {
-    return this.submitted && this.userForm.controls.lastName.errors != null;
+    const ctrl = this.userForm.get('lastName');
+    if (ctrl && ctrl.dirty) {
+      return ctrl.errors !== null;
+    }
+    return false;
   }
 
   hasInvalidEmail() {
-    return this.submitted && this.userForm.controls.email.errors != null;
+    const ctrl = this.userForm.get('email');
+    if (ctrl && ctrl.dirty) {
+      return ctrl.errors !== null;
+    }
+    return false;
   }
 
   hasInvalidPhone() {
-    return this.submitted && this.userForm.controls.phone.errors != null;
+    const ctrl = this.userForm.get('phone');
+    if (ctrl && ctrl.dirty) {
+      return ctrl.errors !== null;
+    }
+    return false;
   }
 
   onFormSubmit() {
     if (this.userForm.valid) {
-      this.submitted = true;
-      this.formSubmit.emit(this.userForm.getRawValue());
+      this.formSubmit.emit(this.value);
+      this.userForm.reset();
+      this.userForm.markAsPristine();
     }
   }
 }

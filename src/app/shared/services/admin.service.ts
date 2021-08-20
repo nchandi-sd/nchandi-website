@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, of } from 'rxjs';
-import { first, map, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { AdminMember } from 'src/app/model/AdminMember';
 import * as firebase from 'firebase/app';
 
@@ -39,7 +39,6 @@ export class AdminService {
 
   addAdminMember(admin: AdminMember) {
     return this.isAdmin.pipe(
-      first(),
       switchMap((isAdmin) => {
         if (isAdmin) {
           return from(this.firestore.collection('Admin').add({ ...admin }));
@@ -49,9 +48,19 @@ export class AdminService {
     );
   }
 
+  updateAdminMember(id: string, member: AdminMember) {
+    return this.isAdmin.pipe(
+      switchMap((isAdmin) => {
+        if (isAdmin) {
+          return from(this.firestore.collection('Admin').doc(id).update(member));
+        }
+        return of(undefined);
+      })
+    );
+  }
+
   deleteAdminMember(id: string) {
     return this.isAdmin.pipe(
-      first(),
       switchMap((isAdmin) => {
         if (isAdmin) {
           return from(this.firestore.collection('Admin').doc(id).delete());
@@ -68,9 +77,9 @@ export class AdminService {
       .pipe(
         map((data) => {
           return data.map((e) => {
-            // @ts-ignore
             return {
               id: e.payload.doc.id,
+              // @ts-ignore
               ...e.payload.doc.data(),
             } as AdminMember;
           });

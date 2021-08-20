@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Facility } from 'src/app/model/Facility';
-import { PanelService } from 'src/app/shared/services/panel.service';
+import { FacilitiesService } from 'src/app/shared/services/facilities.service';
 
 @Component({
   selector: 'app-facilities-dashboard',
@@ -11,9 +11,9 @@ import { PanelService } from 'src/app/shared/services/panel.service';
 export class FacilitiesDashboardComponent implements OnInit {
   correctionalFacilities$: Observable<Facility[]>;
 
-  constructor(private panelService: PanelService) {}
+  constructor(private facilities: FacilitiesService) {}
 
   ngOnInit() {
-    this.correctionalFacilities$ = this.panelService.getFacilities();
+    this.correctionalFacilities$ = this.facilities.getFacilities();
   }
 }

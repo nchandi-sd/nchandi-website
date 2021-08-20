@@ -6,10 +6,7 @@
         <div class="row">
           <div class="spacer"></div>
           <div class="container">
-            <button
-              class="btn admin-top-btn"
-              (click)="viewHomePage();"
-            >
+            <button class="btn admin-top-btn" (click)="viewHomePage()">
               Home
             </button>
             <button class="btn admin-top-btn" (click)="viewCommitteePage()">
@@ -363,7 +360,7 @@
             </div>
             <div class="col-md-6">
               <div class="container">
-                <app-admin-list></app-admin-list>
+                <app-admin-list (edit)="onAdminEdit($event)"></app-admin-list>
               </div>
             </div>
           </div>
@@ -383,7 +380,9 @@
             </div>
             <div class="col-md-6">
               <div class="container">
-                <app-panel-member-list></app-panel-member-list>
+                <app-panel-member-list
+                  (edit)="onMemberEdit($event)"
+                ></app-panel-member-list>
               </div>
             </div>
           </div>

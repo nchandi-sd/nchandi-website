@@ -25,6 +25,8 @@ import { Announcement } from '../model/Announcement';
 import { AdminMember } from '../model/AdminMember';
 import { PanelMemberService } from '../shared/services/panel-member.service';
 import { AdminService } from '../shared/services/admin.service';
+import { MatDialog } from '@angular/material';
+import { MemberDialogComponent } from '../shared/components/member-dialog/member-dialog.component';
 
 enum PageType {
   HomePage = 1,
@@ -117,7 +119,8 @@ export class UserComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private afStorage: AngularFireStorage,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -275,6 +278,22 @@ export class UserComponent implements OnInit, OnDestroy {
     } else {
       // invalid form, do not submit.
     }
+  }
+
+  onAdminEdit(member: AdminMember) {
+    this.editMember$(member, true).subscribe(result => {
+      if (result) {
+        this.updateAdminMember(result);
+      }
+    });
+  }
+
+  onMemberEdit(member: AdminMember) {
+    this.editMember$(member, false).subscribe(result => {
+      if (result) {
+        this.updatePanelMember(result);
+      }
+    });
   }
 
   onFileChange(event) {
@@ -470,5 +489,30 @@ export class UserComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.panelMemberService.addPanelMember(admin).subscribe()
     );
+  }
+
+  private updateAdminMember(admin: AdminMember) {
+    this.subscription.add(
+      this.adminMemberService.updateAdminMember(admin.id, admin).subscribe()
+    );
+  }
+
+  private updatePanelMember(admin: AdminMember) {
+    this.subscription.add(
+      this.panelMemberService.updatePanelMember(admin.id, admin).subscribe()
+    );
+  }
+
+  private editMember$(member: AdminMember, isAdmin: boolean) {
+    const dialogRef = this.dialog.open(MemberDialogComponent, {
+      width: '400px',
+      height: '650px',
+      data: {
+        member,
+        isAdmin,
+      }
+    });
+
+    return dialogRef.afterClosed();
   }
 }

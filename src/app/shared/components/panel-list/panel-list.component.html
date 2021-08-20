@@ -1,0 +1,57 @@
+<div class="member-list">
+  <div class="header flex-center">
+    <div class="title">Current Panels</div>
+  </div>
+
+  <div class="flex-center" *ngIf="panels$ | async as panels">
+    <table
+      class="table table bordered table-responsive text-nowrap table-striped"
+    >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Day of Week</th>
+          <th>Week of Month</th>
+          <th>Time</th>
+          <th>Facility</th>
+          <th>Location</th>
+          <th>Men/Women</th>
+          <th># Needed</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody id="openings-panel">
+        <tr *ngFor="let panel of panels">
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              aria-label="Delete Item"
+              (click)="onDeleteItem(panel)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="accent"
+              aria-label="Edit Item"
+              (click)="onEditItem(panel)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>{{ panel.eventTime | date:'E' }}</td>
+          <td>{{ panel.eventTime | date:'W' }}</td>
+          <td>{{ panel.eventTime | date:'shortTime' }}</td>
+          <td style="word-wrap: normal">{{ panel.facility }}</td>
+          <td>{{ panel.location }}</td>
+          <td>{{ panel.gender }}</td>
+          <td style="word-wrap: break-word">
+            {{ panel.numberNeeded }}
+          </td>
+          <td>{{ panel.boardChampion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

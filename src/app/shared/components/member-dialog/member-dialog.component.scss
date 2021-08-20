@@ -1,0 +1,33 @@
+.member-dialog__button {
+  text-transform: uppercase;
+}
+
+app-member-input ::ng-deep .btn-container {
+  display: none !important;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dialog app-member-input ::ng-deep {
+  .help-block,
+  label {
+  color: black !important;
+  }
+
+  .add-resource-title,
+  .spacer {
+    display: none !important;
+  }
+}
+
+.dialog__content {
+  flex: 1 1 auto;
+}
+
+.dialog__actions {
+  justify-content: right;
+}

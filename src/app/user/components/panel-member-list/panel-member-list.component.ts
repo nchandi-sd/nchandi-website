@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { AdminMember } from 'src/app/model/AdminMember';
@@ -10,6 +10,9 @@ import { PanelMemberService } from 'src/app/shared/services/panel-member.service
   styleUrls: ['./panel-member-list.component.scss'],
 })
 export class PanelMemberListComponent implements OnInit, OnDestroy {
+  @Output()
+  edit = new EventEmitter<AdminMember>();
+
   members$: Observable<AdminMember[]>;
 
   private subscriptions = new Subscription();
@@ -28,5 +31,9 @@ export class PanelMemberListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.resourceService.deletePanelMember(member.id).subscribe()
     );
+  }
+
+  editItem(member: AdminMember) {
+    this.edit.emit(member);
   }
 }

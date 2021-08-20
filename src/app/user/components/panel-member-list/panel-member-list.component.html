@@ -2,5 +2,6 @@
   title="Current Panel Members"
   [members]="members$ | async"
   (deleteItem)="deleteItem($event)"
+  (editItem)="editItem($event)"
   [hasCommitment]="false"
 ></app-member-list>

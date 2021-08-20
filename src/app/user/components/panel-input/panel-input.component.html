@@ -1,3 +1,92 @@
-<p>
-  panel-input works!
-</p>
+<form class="panel-input" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div class="panel-input__header">Add a new panel</div>
+
+  <div class="form-group">
+    <!-- Event Date -->
+    <label for="eventDate" class="form-label">Event Date</label>
+    <input
+      type="text"
+      id="eventDate"
+      formControlName="eventDate"
+      class="form-control"
+      placeholder="Event Date"
+      require
+    />
+  </div>
+
+  <div class="form-group">
+    <!-- Event Time -->
+    <label for="eventTime" class="form-label">Event Time</label>
+
+    <select id="eventTime" formControlName="eventTime" class="custom-select">
+      <option *ngFor="let timeOption of timeOptions" [value]="timeOption">
+        {{ timeOption }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <!-- Location -->
+    <label for="location" class="form-label">Location</label>
+    <input
+      type="text"
+      id="location"
+      formControlName="location"
+      class="form-control"
+      placeholder="Location"
+      require
+    />
+  </div>
+
+  <div class="form-group">
+    <!-- Gender -->
+    <label for="gender" class="form-label">Gender</label>
+    <input
+      type="text"
+      id="gender"
+      formControlName="gender"
+      class="form-control"
+      placeholder="Gender"
+      require
+    />
+  </div>
+
+  <div class="form-group">
+    <!-- Number Needed -->
+    <label for="numberNeeded" class="form-label">Number Needed</label>
+    <input
+      type="number"
+      id="numberNeeded"
+      formControlName="numberNeeded"
+      class="form-control"
+      placeholder="Number Needed"
+      require
+    />
+  </div>
+
+  <div class="form-group">
+    <!--Board Champion-->
+    <label for="boardChampion" class="form-label">Board Champion</label>
+    <select
+      id="boardChampion"
+      formControlName="boardChampion"
+      class="custom-select"
+    >
+      <ng-container *ngIf="boardMembers$ | async as boardMembers">
+        <option *ngFor="let member of boardMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </option>
+      </ng-container>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <button
+      type="submit"
+      class="btn admin-entry-button btn-primary mx-auto"
+      [disabled]="!userForm.valid"
+    >
+      Add Panel
+    </button>
+  </div>
+</form>

@@ -1,4 +1,6 @@
 export class Panel {
+  id: string;
+
   eventTime: Date;
   facility: string;
   location: string;

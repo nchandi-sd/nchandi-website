@@ -20,6 +20,9 @@ export class MemberListComponent implements OnInit {
   @Output()
   deleteItem = new EventEmitter<AdminMember>();
 
+  @Output()
+  editItem = new EventEmitter<AdminMember>();
+
   constructor() { }
 
   ngOnInit() {
@@ -27,5 +30,9 @@ export class MemberListComponent implements OnInit {
 
   onDeleteItem(member: AdminMember) {
     this.deleteItem.emit(member);
+  }
+
+  onEditItem(member: AdminMember) {
+    this.editItem.emit(member);
   }
 }

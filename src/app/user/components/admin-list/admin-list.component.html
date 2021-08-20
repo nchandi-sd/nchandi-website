@@ -2,4 +2,5 @@
   title="Current H&I Board Members"
   [members]="members$ | async"
   (deleteItem)="deleteItem($event)"
+  (editItem)="editItem($event)"
 ></app-member-list>

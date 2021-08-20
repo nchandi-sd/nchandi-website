@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Facility } from 'src/app/model/Facility';
 import { Panel } from 'src/app/model/Panel';
 
@@ -54,27 +54,37 @@ export class PanelService {
       );
   }
 
-  /**
-   * Gets list of facilities that have openings in the future.
-   * @returns List of facilities
-   */
-  getFacilities(): Observable<Facility[]> {
-    return this.firestore
-      .collection('Facilities', (ref) =>
-        ref.where('eventTime', '>', new Date())
-      )
-      .snapshotChanges()
-      .pipe(
-        map((data) => {
-          return data.map((e) => {
-            return {
-              id: e.payload.doc.id,
-              // @ts-ignore
-              ...e.payload.doc.data(),
-            } as Facility;
-          });
-        })
-      );
+  addPanel(admin: Panel) {
+    return this.isAdmin.pipe(
+      switchMap((isAdmin) => {
+        if (isAdmin) {
+          return from(this.firestore.collection('Panels').add({ ...admin }));
+        }
+        return of(undefined);
+      })
+    );
+  }
+
+  updatePanel(id: string, member: Panel) {
+    return this.isAdmin.pipe(
+      switchMap((isAdmin) => {
+        if (isAdmin) {
+          return from(this.firestore.collection('Panels').doc(id).update(member));
+        }
+        return of(undefined);
+      })
+    );
+  }
+
+  deletePanel(id: string) {
+    return this.isAdmin.pipe(
+      switchMap((isAdmin) => {
+        if (isAdmin) {
+          return from(this.firestore.collection('Panels').doc(id).delete());
+        }
+        return of(undefined);
+      })
+    );
   }
 
   private getMappedData(data: any) {

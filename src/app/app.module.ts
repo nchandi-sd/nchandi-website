@@ -18,7 +18,13 @@ import { LoginComponent } from './login/login.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
-import { MatExpansionModule, MatTableModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatTableModule,
+} from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -55,6 +61,9 @@ import { AdminListComponent } from './user/components/admin-list/admin-list.comp
 import { PanelDashboardComponent } from './user/components/panel-dashboard/panel-dashboard.component';
 import { FacilitiesDashboardComponent } from './user/components/facilities-dashboard/facilities-dashboard.component';
 import { PanelInputComponent } from './user/components/panel-input/panel-input.component';
+import { MemberDialogComponent } from './shared/components/member-dialog/member-dialog.component';
+import { PanelListComponent } from './shared/components/panel-list/panel-list.component';
+import { PanelDialogComponent } from './shared/components/panel-dialog/panel-dialog.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +95,9 @@ import { PanelInputComponent } from './user/components/panel-input/panel-input.c
     PanelDashboardComponent,
     FacilitiesDashboardComponent,
     PanelInputComponent,
+    MemberDialogComponent,
+    PanelListComponent,
+    PanelDialogComponent,
   ],
   imports: [
     AngularSvgIconModule,
@@ -96,13 +108,15 @@ import { PanelInputComponent } from './user/components/panel-input/panel-input.c
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatButtonModule,
     MatExpansionModule,
+    MatIconModule,
     NoopAnimationsModule,
+    MatDialogModule,
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    ReactiveFormsModule,
     AngularFireStorageModule,
     NgbAlertModule,
     DragDropModule,
@@ -121,5 +135,6 @@ import { PanelInputComponent } from './user/components/panel-input/panel-input.c
     PanelsDbService
   ],
   bootstrap: [AppComponent],
+  entryComponents: [MemberDialogComponent],
 })
 export class AppModule {}

@@ -3,13 +3,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { AdminMember } from 'src/app/model/AdminMember';
+import { Facility } from 'src/app/model/Facility';
 import { AdminService } from './admin.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class PanelMemberService {
+export class FacilitiesService {
   private get isAdmin() {
     return this.adminService.isAdmin;
   }
@@ -19,44 +19,44 @@ export class PanelMemberService {
     private firestore: AngularFirestore
   ) {}
 
-  getPanelMembers() {
-    return this.getMembers('Panel');
+  getFacilities() {
+    return this.getFacilitiesFromStore('Facilities');
   }
 
-  addPanelMember(admin: AdminMember) {
+  addFacility(admin: Facility) {
     return this.isAdmin.pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
-          return from(this.firestore.collection('Panel').add({ ...admin }));
+          return from(this.firestore.collection('Facilities').add({ ...admin }));
         }
         return of(undefined);
       })
     );
   }
 
-  updatePanelMember(id: string, member: AdminMember) {
+  updateFacility(id: string, member: Facility) {
     return this.isAdmin.pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
-          return from(this.firestore.collection('Panel').doc(id).update(member));
+          return from(this.firestore.collection('Facilities').doc(id).update(member));
         }
         return of(undefined);
       })
     );
   }
 
-  deletePanelMember(id: string) {
+  deleteFacility(id: string) {
     return this.isAdmin.pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
-          return from(this.firestore.collection('Panel').doc(id).delete());
+          return from(this.firestore.collection('Facilities').doc(id).delete());
         }
         return of(undefined);
       })
     );
   }
 
-  private getMembers(resourceType: string) {
+  private getFacilitiesFromStore(resourceType: string) {
     return this.firestore
       .collection(resourceType)
       .snapshotChanges()
@@ -67,7 +67,7 @@ export class PanelMemberService {
               id: e.payload.doc.id,
               // @ts-ignore
               ...e.payload.doc.data(),
-            } as AdminMember;
+            } as Facility;
           });
         })
       );
