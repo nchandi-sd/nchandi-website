@@ -1,0 +1,67 @@
+<div class="membersDB-main-view">
+<div class="members-container">
+  <div class="row">
+    <div class="col-6">
+      <h1>Add New Member</h1>
+      <div class="spacer"></div>
+      <form #cForm="ngForm" [formGroup]="userForm" (ngSubmit)="onSubmit(cForm)">
+
+        <label for="firstName">First Name:</label>
+        <input type="text" formControlName="firstName" class="form-control" id="firstName" name="firstName"
+          placeholder="First Name" require>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" formControlName="lastName" class="form-control" id="lastName" name="lastName"
+          placeholder="Last Name" require>
+
+        <label for="phone">Phone:</label>
+        <input type="text" formControlName="phone" class="form-control" id="phone" name="phone"
+          placeholder="Phone" require>
+
+        <label for="email">Email:</label>
+        <input type="text" formControlName="email" class="form-control" id="email" name="email" placeholder="Email" require>
+
+        <label for="sobrietyDate">Sobriety Date:</label>
+        <input type="date" formControlName="sobrietyDate" class="form-control" id="sobrietyDate" name="sobrietyDate" placeholder="Sobriety Date"
+          require>
+
+        <label for="joinedDate">Date Joined:</label>
+        <input type="date" formControlName="joinedDate" class="form-control" id="joinedDate" name="joinedDate" placeholder="Date Joined" require>
+
+        <div class="form-group">
+          <button type="submit" class="btn submit-button mx-auto">Add new member</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-6">
+      <h1>Current Members List</h1>
+      <table class="table table bordered table-responsive text-nowrap table-striped text-white" id="openingsTable">
+        <thead>
+          <tr>
+            <th></th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Sobriety Date</th>
+            <th>Joined Date</th>
+          </tr>
+        </thead>
+        <tbody id="openings-panel">
+          <tr *ngFor="let member of savedMembers">
+            <button (click)="deleteMember($event)" class="btn-delete" data-id="{{member.id}}">
+              DELETE
+            </button>
+            <td>{{member?.firstName}}</td>
+            <td>{{member?.lastName}}</td>
+            <td>{{member?.phone}}</td>
+            <td>{{member?.email}}</td>
+            <td>{{member?.sobrietyDate}}</td>
+            <td>{{member?.joinedDate}}</td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

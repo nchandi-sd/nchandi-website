@@ -1,0 +1,52 @@
+.facilitiesDB-container {
+ margin-left: 100px;
+ margin-right: 200px;
+ color: white;
+}
+.facilities-main-view {
+  background-color: var(--primary-option);
+  overflow-x: hidden;
+}
+
+.btn-delete{
+  height: 100%;
+  font-weight: bold;
+  font-size: 8px;
+  color:red;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 5px;
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (max-width: 1200px) {
+
+
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (max-width: 992px) {
+  .facilitiesDB-container{
+    width: 600px;
+
+  }
+
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) {
+
+  .facilitiesDB-container{
+    width: 500px;
+
+  }
+}
+
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) {
+  .facilitiesDB-container{
+    font-size: 1.5rem;
+  }
+
+}

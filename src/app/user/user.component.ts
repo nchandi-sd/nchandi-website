@@ -440,6 +440,7 @@ export class UserComponent implements OnInit {
   viewHomePage() {
     this.currentPage = 0;
   }
+
   invalidFirstName() {
     return (this.submitted && this.userForm.controls.first_name.errors != null);
   }

@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
-        <h1 class="section-header text-white flex-center"> Content Management System </h1>
+        <h1 class="section-header text-white flex-center"> Admin Dashboard </h1>
       </div>
       <div class="col-md-2"></div>
     </div>
@@ -27,7 +27,13 @@
 
     <div *ngIf="currentPage == 0">
       <div class="admin-content admin-container">
-        Welcome to the admin dashboard. Click on resources below to add or remove content on the main web page.
+        Welcome to the admin dashboard. Click on resources below to add or remove content on the main web page.<br><br>To add or remove facilities, panels or members, click on the Database Functions button.
+      </div>
+      <div class="spacer"></div>
+      <div class="button-container flex-center">
+        <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/admin"
+                routerLinkActive="active-link">Database Functions
+        </button>
       </div>
       <div class="spacer"></div>
       <div class="row">
