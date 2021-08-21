@@ -101,7 +101,7 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Open Panels</h2>
-        <div class="panel-container1 flex-center">
+        <div class="panel-container1 panel flex-center">
           <table
             class="
               table table
@@ -126,9 +126,9 @@
             </thead>
             <tbody id="openings-panel" *ngIf="openPanels$ | async as openings">
               <tr *ngFor="let opening of openings">
-                <td>{{ opening?.eventTime | date:'E' }}</td>
-                <td>{{ opening?.eventTime | date:'W' }}</td>
-                <td>{{ opening?.eventTime | date:'shortTime' }}</td>
+                <td>{{ opening?.eventDate | date: "E" }}</td>
+                <td>{{ opening?.eventDate | date: "W" }}</td>
+                <td>{{ opening?.eventDate | date: "shortTime" }}</td>
                 <td style="word-wrap: normal">{{ opening?.facility }}</td>
                 <td>{{ opening?.location }}</td>
                 <td>{{ opening?.gender }}</td>
@@ -144,7 +144,7 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Current Panels</h2>
-        <div class="panel-container2 flex-center">
+        <div class="panel-container2 panel flex-center">
           <table
             class="
               table table
@@ -170,14 +170,12 @@
               *ngIf="currentPanels$ | async as currentPanels"
             >
               <tr *ngFor="let facilityPanel of currentPanels">
-                <td style="word-wrap: normal">
-                  {{ facilityPanel?.facility }}
-                </td>
+                <td style="word-wrap: normal">{{ facilityPanel.facility ? facilityPanel.facility.facilityName : '' }}</td>
                 <td>{{ facilityPanel?.location }}</td>
-                <td>{{ facilityPanel?.eventTime | date:'shortDate' }}</td>
-                <td>{{ facilityPanel?.eventTime | date:'shortTime' }}</td>
+                <td>{{ facilityPanel?.eventDate | date: "shortDate" }}</td>
+                <td>{{ facilityPanel?.eventDate | date: "shortTime" }}</td>
                 <td>{{ facilityPanel?.gender }}</td>
-                <td>{{ facilityPanel?.boardChampion }}</td>
+                <td>{{ facilityPanel.boardChampion ? facilityPanel.boardChampion.firstName + ' ' + facilityPanel.boardChampion.lastName : '' }}</td>
               </tr>
             </tbody>
           </table>
@@ -188,7 +186,7 @@
         <h2 class="section-header text-white flex-center">
           Correctional Facilities
         </h2>
-        <div class="panel-container3 flex-center">
+        <div class="panel-container3 panel flex-center">
           <table
             class="
               table table
@@ -202,24 +200,33 @@
             <thead>
               <tr>
                 <th>Facility</th>
-                <th>Location</th>
-                <th>Day</th>
-                <th>Time</th>
-                <th>Gender</th>
-                <th>Contact</th>
+                <th>Type</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Primary Contact</th>
+                <th>Primary Email</th>
+                <th>Primary Phone</th>
+                <th>Website</th>
               </tr>
             </thead>
-            <tbody id="correctional-facilities" *ngIf="correctionalFacilities$ | async as correctionalPanels">
-              <tr *ngFor="let correctionalPanel of correctionalPanels">
-                <td style="word-wrap: normal">
-                  {{ correctionalPanel?.name }}
-                </td>
-                <td>{{ correctionalPanel?.location }}</td>
-                <td>{{ correctionalPanel?.eventTime | date:'shortDate' }}</td>
-                <td>{{ correctionalPanel?.eventTime | date:'shortTime' }}</td>
-                <td>{{ correctionalPanel?.gender }}</td>
-                <td>{{ correctionalPanel?.boardChampion }}</td>
-              </tr>
+            <tbody
+              id="facility-panels"
+              *ngIf="correctionalFacilities$ | async as facilities"
+            >
+              <ng-container *ngFor="let facility of facilities">
+                <tr>
+                  <td>{{ facility.facilityName }}</td>
+                  <td>{{ facility.facilityType }}</td>
+                  <td>{{ facility.address }}</td>
+                  <td>{{ facility.city }}</td>
+                  <td>{{ facility.state }}</td>
+                  <td>{{ facility.mainContactName }}</td>
+                  <td>{{ facility.mainContactEmail }}</td>
+                  <td>{{ facility.mainContactPhone }}</td>
+                  <td>{{ facility.website }}</td>
+                </tr>
+              </ng-container>
             </tbody>
           </table>
         </div>

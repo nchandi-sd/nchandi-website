@@ -14,27 +14,52 @@ import { PanelMemberService } from 'src/app/shared/services/panel-member.service
   styleUrls: ['./panel-input.component.scss'],
 })
 export class PanelInputComponent implements OnInit {
+  // TODO: Add members
   @Input()
   get panel() {
     return this.userForm.getRawValue();
   }
   set panel(val: Panel) {
     this.userForm.setValue({
-      eventDate: val.eventTime.toLocaleDateString('en-US'),
-      eventTime: val.eventTime.toLocaleTimeString('en-US'),
-      facility: val.facility,
+      eventDate: val.eventDate.toLocaleDateString('en-US'),
+      eventTime: val.eventDate.toLocaleTimeString('en-US'),
+      facility: val.facility.id,
       location: val.location,
       gender: val.gender,
       numberNeeded: val.numberNeeded,
       panelMemberCount: val.panelMemberCount,
-      boardChampion: val.boardChampion,
-      panelCoordinator: val.panelCoordinator,
+      boardChampion: val.boardChampion.id,
+      panelCoordinator: val.panelCoordinator.id,
       panelMembers: val.panelMembers,
     });
   }
 
   @Output()
   formSubmit = new EventEmitter<Panel>();
+
+  get valid() {
+    return this.userForm.valid;
+  }
+
+  get value() {
+    const value = this.userForm.getRawValue();
+    const eventDate = this.getDateFromString(value.eventDate, value.eventTime);
+    delete value.eventTime;
+    value.eventDate = eventDate;
+    value.panelMemberCount = value.panelMembers.length;
+    value.facilityId = value.facility;
+    value.boardChampionId = value.boardChampion;
+    value.panelCoordinatorId = value.panelCoordinator;
+    return value;
+  }
+
+  get eventDateError() {
+    const ctrl = this.userForm.get('eventDate');
+    if (!ctrl.pristine && ctrl.errors !== null) {
+      return 'Date must be in DD/MM/YYYY Format.';
+    }
+    return '';
+  }
 
   facilities$: Observable<Facility[]>;
   panelMembers$: Observable<AdminMember[]>;
@@ -46,7 +71,7 @@ export class PanelInputComponent implements OnInit {
     eventDate: new FormControl('', [
       Validators.required,
       Validators.pattern(
-        '^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)dd$'
+        /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/
       ),
     ]),
     eventTime: new FormControl('', Validators.required),
@@ -74,23 +99,18 @@ export class PanelInputComponent implements OnInit {
 
   onFormSubmit() {
     if (this.userForm.valid) {
-      const value = this.userForm.getRawValue();
-      const eventDate = this.getDateFromString(value.eventDate, value.eventTime);
-      delete value.eventTime;
-      value.eventDate = eventDate;
-      value.panelMemberCount = value.panelMembers.length;
-
-      this.formSubmit.emit(this.userForm.getRawValue());
+      this.formSubmit.emit(this.value);
     }
   }
 
-  private getDateFromString(date: Date, timeStr: string) {
+  private getDateFromString(dateStr: string, timeStr: string) {
     const parts = timeStr.match(/(\d+)\:(\d+) (\w+)/);
     const hours = /am/i.test(parts[3])
       ? parseInt(parts[1], 10)
       : parseInt(parts[1], 10) + 12;
     const minutes = parseInt(parts[2], 10);
 
+    const date = new Date(dateStr);
     date.setHours(hours);
     date.setMinutes(minutes);
 

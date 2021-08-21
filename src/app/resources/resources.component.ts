@@ -89,18 +89,6 @@ export class ResourcesComponent implements OnInit {
       comments: [],
     });
 
-    // TODO
-    /*
-    this.panelService.getCurrentPanels().subscribe((data: Panel) => {
-      data.feed.entry.forEach((ent) => {
-        this.facilities[this.index] = ent.gsx$facility.$t.toString();
-        this.index++;
-      });
-      this.facilities = this.facilities.filter(function (elem, index, self) {
-        return index === self.indexOf(elem);
-      });
-    });
-    */
 
     this.resourceService.getPanelMaterials().subscribe((data) => {
       this.panelMaterials = data;

@@ -1,17 +1,16 @@
 export class Facility {
   id: string;
+  active: boolean;
   facilityName: string;
   facilityType: string;
   address: string;
   city: string;
   state: string;
-  zip: string;
-  website: string;
-  mainContactName: string;
   mainContactEmail: string;
+  mainContactName: string;
   mainContactPhone: string;
-  alternateContactName: string;
   alternateContactEmail: string;
+  alternateContactName: string;
   alternateContactPhone: string;
-  active: boolean;
+  website: string;
 }

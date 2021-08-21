@@ -1,8 +1,8 @@
-.member-dialog__button {
+.facility-dialog__button {
   text-transform: uppercase;
 }
 
-app-member-input ::ng-deep .btn-container {
+app-facility-input ::ng-deep .btn-container {
   display: none !important;
 }
 
@@ -12,8 +12,8 @@ app-member-input ::ng-deep .btn-container {
   height: 100%;
 }
 
-.dialog app-member-input ::ng-deep {
-  .member-input__header,
+.dialog app-facility-input ::ng-deep {
+  .facility-input__header,
   .btn-primary {
     display: none !important;
   }

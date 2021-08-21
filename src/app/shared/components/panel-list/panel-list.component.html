@@ -1,9 +1,9 @@
-<div class="member-list">
-  <div class="header flex-center">
+<div class="panel-list">
+  <div class="header">
     <div class="title">Current Panels</div>
   </div>
 
-  <div class="flex-center" *ngIf="panels$ | async as panels">
+  <div *ngIf="panels$ | async as panels">
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
     >
@@ -15,9 +15,10 @@
           <th>Time</th>
           <th>Facility</th>
           <th>Location</th>
-          <th>Men/Women</th>
+          <th>Gender</th>
           <th># Needed</th>
           <th>Contact</th>
+          <th>Panel Coordinator</th>
         </tr>
       </thead>
       <tbody id="openings-panel">
@@ -26,6 +27,7 @@
             <button
               mat-icon-button
               class="btn-delete"
+              color="warn"
               aria-label="Delete Item"
               (click)="onDeleteItem(panel)"
             >
@@ -33,23 +35,24 @@
             </button>
             <button
               mat-icon-button
-              color="accent"
+              color="primary"
               aria-label="Edit Item"
               (click)="onEditItem(panel)"
             >
               <mat-icon>edit</mat-icon>
             </button>
           </td>
-          <td>{{ panel.eventTime | date:'E' }}</td>
-          <td>{{ panel.eventTime | date:'W' }}</td>
-          <td>{{ panel.eventTime | date:'shortTime' }}</td>
-          <td style="word-wrap: normal">{{ panel.facility }}</td>
+          <td>{{ panel.eventDate | date:'E' }}</td>
+          <td>{{ panel.eventDate | date:'W' }}</td>
+          <td>{{ panel.eventDate | date:'shortTime' }}</td>
+          <td style="word-wrap: normal">{{ panel.facility ? panel.facility.facilityName : '' }}</td>
           <td>{{ panel.location }}</td>
           <td>{{ panel.gender }}</td>
           <td style="word-wrap: break-word">
             {{ panel.numberNeeded }}
           </td>
-          <td>{{ panel.boardChampion }}</td>
+          <td>{{ panel.boardChampion ? panel.boardChampion.firstName + ' ' + panel.boardChampion.lastName : '' }}</td>
+          <td>{{ panel.panelCoordinator ? panel.panelCoordinator.firstName + ' ' + panel.panelCoordinator.lastName : '' }}</td>
         </tr>
       </tbody>
     </table>

@@ -64,6 +64,9 @@ import { PanelInputComponent } from './user/components/panel-input/panel-input.c
 import { MemberDialogComponent } from './shared/components/member-dialog/member-dialog.component';
 import { PanelListComponent } from './shared/components/panel-list/panel-list.component';
 import { PanelDialogComponent } from './shared/components/panel-dialog/panel-dialog.component';
+import { FacilityDialogComponent } from './shared/components/facility-dialog/facility-dialog.component';
+import { FacilityListComponent } from './shared/components/facility-list/facility-list.component';
+import { FacilityInputComponent } from './shared/components/facility-input/facility-input.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +101,9 @@ import { PanelDialogComponent } from './shared/components/panel-dialog/panel-dia
     MemberDialogComponent,
     PanelListComponent,
     PanelDialogComponent,
+    FacilityDialogComponent,
+    FacilityListComponent,
+    FacilityInputComponent,
   ],
   imports: [
     AngularSvgIconModule,
@@ -135,6 +141,11 @@ import { PanelDialogComponent } from './shared/components/panel-dialog/panel-dia
     PanelsDbService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MemberDialogComponent],
+  entryComponents: [
+    MemberDialogComponent,
+    MemberDialogComponent,
+    PanelDialogComponent,
+    FacilityDialogComponent,
+  ],
 })
 export class AppModule {}

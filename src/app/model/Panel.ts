@@ -1,14 +1,20 @@
+import { AdminMember } from './AdminMember';
+import { Facility } from './Facility';
+
 export class Panel {
   id: string;
 
-  eventTime: Date;
-  facility: string;
+  eventDate: Date;
   location: string;
   gender: string;
   numberNeeded: number;
   panelMemberCount: number;
-  boardChampion: string;
-  panelCoordinator: string;
+  facility: Facility;
+  boardChampion: AdminMember;
+  panelCoordinator: AdminMember;
+  panelMembers: AdminMember[];
 
-  panelMembers: string[];
+  facilityId: string;
+  boardChampionId: string;
+  panelCoordinatorId: string;
 }

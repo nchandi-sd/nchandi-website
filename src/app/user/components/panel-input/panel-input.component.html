@@ -12,6 +12,9 @@
       placeholder="Event Date"
       require
     />
+    <p *ngIf="eventDateError as error" class="help-block">
+      {{ error }}
+    </p>
   </div>
 
   <div class="form-group">
@@ -22,6 +25,22 @@
       <option *ngFor="let timeOption of timeOptions" [value]="timeOption">
         {{ timeOption }}
       </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <!--Facility-->
+    <label for="facility" class="form-label">Facility</label>
+    <select
+      id="facility"
+      formControlName="facility"
+      class="custom-select"
+    >
+      <ng-container *ngIf="facilities$ | async as facilities">
+        <option *ngFor="let facility of facilities" [value]="facility.id">
+          {{ facility.facilityName }}
+        </option>
+      </ng-container>
     </select>
   </div>
 
@@ -74,6 +93,22 @@
     >
       <ng-container *ngIf="boardMembers$ | async as boardMembers">
         <option *ngFor="let member of boardMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </option>
+      </ng-container>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <!--Panel Coordinator-->
+    <label for="panelCoordinator" class="form-label">Panel Coordinator</label>
+    <select
+      id="panelCoordinator"
+      formControlName="panelCoordinator"
+      class="custom-select"
+    >
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <option *ngFor="let member of panelMembers" [value]="member.id">
           {{ member.firstName }} {{ member.lastName }}
         </option>
       </ng-container>
