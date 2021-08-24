@@ -2,7 +2,7 @@ export class Facility {
   id: string;
   active: boolean;
   facilityName: string;
-  facilityType: string;
+  facilityType: 'Correctional' | 'Treatment';
   address: string;
   city: string;
   state: string;

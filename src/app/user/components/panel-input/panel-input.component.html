@@ -1,125 +1,180 @@
 <form class="panel-input" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
   <div class="panel-input__header">Add a new panel</div>
 
-  <div class="form-group">
-    <!-- Event Date -->
-    <label for="eventDate" class="form-label">Event Date</label>
-    <input
-      type="text"
-      id="eventDate"
-      formControlName="eventDate"
-      class="form-control"
-      placeholder="Event Date"
-      require
-    />
-    <p *ngIf="eventDateError as error" class="help-block">
-      {{ error }}
-    </p>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Day of the Week</mat-label>
+    <mat-select formControlName="dayOfWeek">
+      <mat-option *ngFor="let dayOfWeek of daysOfWeek" [value]="dayOfWeek">{{
+        dayOfWeek
+      }}</mat-option>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <!-- Event Time -->
-    <label for="eventTime" class="form-label">Event Time</label>
+  <mat-form-field appearance="outline">
+    <mat-label>Week of Month</mat-label>
+    <mat-select formControlName="weekOfMonth">
+      <mat-option [value]="1">1</mat-option>
+      <mat-option [value]="2">2</mat-option>
+      <mat-option [value]="3">3</mat-option>
+      <mat-option [value]="4">4</mat-option>
+      <mat-option [value]="5">5</mat-option>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-    <select id="eventTime" formControlName="eventTime" class="custom-select">
-      <option *ngFor="let timeOption of timeOptions" [value]="timeOption">
+  <mat-form-field appearance="outline">
+    <mat-label>Event Time</mat-label>
+    <mat-select formControlName="eventTime">
+      <mat-option *ngFor="let timeOption of timeOptions" [value]="timeOption">
         {{ timeOption }}
-      </option>
-    </select>
-  </div>
+      </mat-option>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <!--Facility-->
-    <label for="facility" class="form-label">Facility</label>
-    <select
-      id="facility"
-      formControlName="facility"
-      class="custom-select"
-    >
+  <mat-form-field appearance="outline">
+    <mat-label>Facility</mat-label>
+    <mat-select formControlName="facility">
       <ng-container *ngIf="facilities$ | async as facilities">
-        <option *ngFor="let facility of facilities" [value]="facility.id">
+        <mat-option *ngFor="let facility of facilities" [value]="facility.id">
           {{ facility.facilityName }}
-        </option>
+        </mat-option>
       </ng-container>
-    </select>
-  </div>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <!-- Location -->
-    <label for="location" class="form-label">Location</label>
-    <input
-      type="text"
-      id="location"
-      formControlName="location"
-      class="form-control"
-      placeholder="Location"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <!-- Gender -->
-    <label for="gender" class="form-label">Gender</label>
-    <input
-      type="text"
-      id="gender"
-      formControlName="gender"
-      class="form-control"
-      placeholder="Gender"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="gender">
+      <mat-option value="Male">Male</mat-option>
+      <mat-option value="Female">Female</mat-option>
+      <mat-option value="Male/Female">Male/Female</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div class="form-group">
-    <!-- Number Needed -->
-    <label for="numberNeeded" class="form-label">Number Needed</label>
-    <input
-      type="number"
-      id="numberNeeded"
-      formControlName="numberNeeded"
-      class="form-control"
-      placeholder="Number Needed"
-      require
-    />
-  </div>
+  <mat-checkbox
+    formControlName="markAsMembersNeeded"
+    (change)="onMarkAsNeededChange($event.checked)"
+    >Mark as members needed?</mat-checkbox
+  >
 
-  <div class="form-group">
-    <!--Board Champion-->
-    <label for="boardChampion" class="form-label">Board Champion</label>
-    <select
-      id="boardChampion"
-      formControlName="boardChampion"
-      class="custom-select"
-    >
-      <ng-container *ngIf="boardMembers$ | async as boardMembers">
-        <option *ngFor="let member of boardMembers" [value]="member.id">
-          {{ member.firstName }} {{ member.lastName }}
-        </option>
-      </ng-container>
-    </select>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Number Needed</mat-label>
+    <input type="number" matInput formControlName="numberNeeded" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <!--Panel Coordinator-->
-    <label for="panelCoordinator" class="form-label">Panel Coordinator</label>
-    <select
-      id="panelCoordinator"
-      formControlName="panelCoordinator"
-      class="custom-select"
-    >
+  <mat-form-field appearance="outline">
+    <mat-label>Board Champion</mat-label>
+    <mat-select formControlName="boardChampion">
       <ng-container *ngIf="panelMembers$ | async as panelMembers">
-        <option *ngFor="let member of panelMembers" [value]="member.id">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
           {{ member.firstName }} {{ member.lastName }}
-        </option>
+        </mat-option>
       </ng-container>
-    </select>
-  </div>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Coordinator</mat-label>
+    <mat-select formControlName="panelCoordinator">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Leader</mat-label>
+    <mat-select formControlName="panelLeader">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 1</mat-label>
+    <mat-select formControlName="panelMember1">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 2</mat-label>
+    <mat-select formControlName="panelMember2">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 3</mat-label>
+    <mat-select formControlName="panelMember3">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 4</mat-label>
+    <mat-select formControlName="panelMember4">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 5</mat-label>
+    <mat-select formControlName="panelMember5">
+      <ng-container *ngIf="panelMembers$ | async as panelMembers">
+        <mat-option *ngFor="let member of panelMembers" [value]="member.id">
+          {{ member.firstName }} {{ member.lastName }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
   <div class="form-group">
     <button
       type="submit"
       class="btn admin-entry-button btn-primary mx-auto"
-      [disabled]="!userForm.valid"
+      [disabled]="!valid"
+      mat-raised-button
+      color="primary"
     >
       Add Panel
     </button>

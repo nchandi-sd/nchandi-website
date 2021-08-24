@@ -20,17 +20,17 @@ export class PanelService {
   ) {}
 
   /**
-   * Gets list of panels that take place in the future.
+   * Gets list of panels.
    * @returns List of panels
    */
-  getCurrentPanels(): Observable<Panel[]> {
+  getPanels(): Observable<Panel[]> {
     return this.firestore
-      .collection('Panels', (ref) => ref.where('eventDate', '>', new Date()))
+      .collection('Panels')
       .snapshotChanges()
       .pipe(
         switchMap((data) => {
           return this.getMappedData$(data);
-        }),
+        })
       );
   }
 
@@ -39,11 +39,17 @@ export class PanelService {
    * @returns List of panels
    */
   getOpenPanels(): Observable<Panel[]> {
-    return this.getCurrentPanels().pipe(
-      map((panels) => {
-        return panels.filter((p) => p.numberNeeded < p.panelMembers.length);
-      })
-    );
+    return this.firestore
+      .collection('Panels')
+      .snapshotChanges()
+      .pipe(
+        switchMap((data) => {
+          return this.getMappedData$(data);
+        }),
+        map((panels) => {
+          return panels.filter((p) => p.markAsMembersNeeded);
+        })
+      );
   }
 
   addPanel(panel: Panel) {
@@ -87,19 +93,62 @@ export class PanelService {
       .collection('Facilities')
       .doc(data.facilityId);
     const boardChampion = this.firestore
-      .collection('Admin')
+      .collection('Panel Members')
       .doc(data.boardChampionId);
     const panelCoordinator = this.firestore
-      .collection('Panel')
+      .collection('Panel Members')
       .doc(data.panelCoordinatorId);
+
+    let panelLeader;
+    if (data.panelLeaderId && data.panelLeaderId.length > 0) {
+      panelLeader = this.firestore
+        .collection('Panel Members')
+        .doc(data.panelLeaderId);
+    }
+    let panelMember1;
+    if (data.panelMember1Id && data.panelMember1Id.length > 0) {
+      panelMember1 = this.firestore
+        .collection('Panel Members')
+        .doc(data.panelMember1Id);
+    }
+    let panelMember2;
+    if (data.panelMember2Id && data.panelMember2Id.length > 0) {
+      panelMember2 = this.firestore
+        .collection('Panel Members')
+        .doc(data.panelMember2Id);
+    }
+    let panelMember3;
+    if (data.panelMember3Id && data.panelMember3Id.length > 0) {
+      panelMember3 = this.firestore
+        .collection('Panel Members')
+        .doc(data.panelMember3Id);
+    }
+    let panelMember4;
+    if (data.panelMember4Id && data.panelMember4Id.length > 0) {
+      panelMember4 = this.firestore
+        .collection('Panel Members')
+        .doc(data.panelMember4Id);
+    }
+    let panelMember5;
+    if (data.panelMember5Id && data.panelMember5Id.length > 0) {
+      panelMember5 = this.firestore
+        .collection('Panel Members')
+        .doc(data.panelMember5Id);
+    }
     data.facility = facility ? facility.ref : undefined;
     data.boardChampion = boardChampion ? boardChampion.ref : undefined;
     data.panelCoordinator = panelCoordinator ? panelCoordinator.ref : undefined;
+    data.panelLeader = panelLeader ? panelLeader.ref : undefined;
+    data.panelMember1 = panelMember1 ? panelMember1.ref : undefined;
+    data.panelMember2 = panelMember2 ? panelMember2.ref : undefined;
+    data.panelMember3 = panelMember3 ? panelMember3.ref : undefined;
+    data.panelMember4 = panelMember4 ? panelMember4.ref : undefined;
+    data.panelMember5 = panelMember5 ? panelMember5.ref : undefined;
     return data;
   }
 
   private getMappedData$(data: any[]) {
-    const panels$ = data.map(d => this.getMappedDataItem$(d));
+    const panels$ = data.map((d) => this.getMappedDataItem$(d));
     return forkJoin(panels$);
   }
 
@@ -118,44 +167,151 @@ export class PanelService {
     let facility$ = of(undefined);
     let admin$ = of(undefined);
     let member$ = of(undefined);
+    let panelLeader$ = of(undefined);
+    let panelMember1$ = of(undefined);
+    let panelMember2$ = of(undefined);
+    let panelMember3$ = of(undefined);
+    let panelMember4$ = of(undefined);
+    let panelMember5$ = of(undefined);
 
-    if (panel.facility) {
+    if (panel.facility && panel.facility.id) {
       facility$ = this.firestore
         .collection('Facilities')
         .doc(panel.facility.id)
         .get();
     }
 
-    if (panel.boardChampion) {
+    if (panel.boardChampion && panel.boardChampion.id) {
       admin$ = this.firestore
-        .collection('Admin')
+        .collection('Panel Members')
         .doc(panel.boardChampion.id)
         .get();
     }
 
-    if (panel.panelCoordinator) {
+    if (panel.panelCoordinator && panel.panelCoordinator.id) {
       member$ = this.firestore
-        .collection('Panel')
+        .collection('Panel Members')
         .doc(panel.panelCoordinator.id)
         .get();
     }
 
-    return combineLatest([facility$, admin$, member$]).pipe(
-      map(([facility, admin, member]) => {
-        panel.facility = {
-          ...facility.data(),
-          id: facility.id,
-        };
-        panel.boardChampion = {
-          ...admin.data(),
-          id: admin.id,
-        };
-        panel.panelCoordinator = {
-          ...member.data(),
-          id: member.id,
-        };
-        return panel as Panel;
-      })
+    if (panel.panelLeader && panel.panelLeader.id) {
+      panelLeader$ = this.firestore
+        .collection('Panel Members')
+        .doc(panel.panelLeader.id)
+        .get();
+    }
+    if (panel.panelMember1 && panel.panelMember1.id) {
+      panelMember1$ = this.firestore
+        .collection('Panel Members')
+        .doc(panel.panelMember1.id)
+        .get();
+    }
+    if (panel.panelMember2 && panel.panelMember2.id) {
+      panelMember2$ = this.firestore
+        .collection('Panel Members')
+        .doc(panel.panelMember2.id)
+        .get();
+    }
+    if (panel.panelMember3 && panel.panelMember3.id) {
+      panelMember3$ = this.firestore
+        .collection('Panel Members')
+        .doc(panel.panelMember3.id)
+        .get();
+    }
+    if (panel.panelMember4 && panel.panelMember4.id) {
+      panelMember4$ = this.firestore
+        .collection('Panel Members')
+        .doc(panel.panelMember4.id)
+        .get();
+    }
+    if (panel.panelMember5 && panel.panelMember5.id) {
+      panelMember5$ = this.firestore
+        .collection('Panel Members')
+        .doc(panel.panelMember5.id)
+        .get();
+    }
+
+    return combineLatest([
+      facility$,
+      admin$,
+      member$,
+      panelLeader$,
+      panelMember1$,
+      panelMember2$,
+      panelMember3$,
+      panelMember4$,
+      panelMember5$,
+    ]).pipe(
+      map(
+        ([
+          facility,
+          boardChampion,
+          panelCoordinator,
+          panelLeader,
+          panelMember1,
+          panelMember2,
+          panelMember3,
+          panelMember4,
+          panelMember5,
+        ]) => {
+          if (facility) {
+            panel.facility = {
+              ...facility.data(),
+              id: facility.id,
+            };
+          }
+          if (boardChampion) {
+            panel.boardChampion = {
+              ...boardChampion.data(),
+              id: boardChampion.id,
+            };
+          }
+          if (panelCoordinator) {
+            panel.panelCoordinator = {
+              ...panelCoordinator.data(),
+              id: panelCoordinator.id,
+            };
+          }
+          if (panelLeader) {
+            panel.panelLeader = {
+              ...panelLeader.data(),
+              id: panelLeader.id,
+            };
+          }
+          if (panelMember1) {
+            panel.panelMember1 = {
+              ...panelMember1.data(),
+              id: panelMember1.id,
+            };
+          }
+          if (panelMember2) {
+            panel.panelMember2 = {
+              ...panelMember2.data(),
+              id: panelMember2.id,
+            };
+          }
+          if (panelMember3) {
+            panel.panelMember3 = {
+              ...panelMember3.data(),
+              id: panelMember3.id,
+            };
+          }
+          if (panelMember4) {
+            panel.panelMember4 = {
+              ...panelMember4.data(),
+              id: panelMember4.id,
+            };
+          }
+          if (panelMember5) {
+            panel.panelMember5 = {
+              ...panelMember5.data(),
+              id: panelMember5.id,
+            };
+          }
+          return panel as Panel;
+        }
+      )
     );
   }
 }

@@ -57,43 +57,10 @@ export class MemberInputComponent implements OnInit {
     }
   }
 
-  hasInvalidFirstName() {
-    const ctrl = this.userForm.get('firstName');
-    if (ctrl && ctrl.dirty) {
-      return ctrl.errors !== null;
-    }
-    return false;
-  }
-
-  hasInvalidLastName() {
-    const ctrl = this.userForm.get('lastName');
-    if (ctrl && ctrl.dirty) {
-      return ctrl.errors !== null;
-    }
-    return false;
-  }
-
-  hasInvalidEmail() {
-    const ctrl = this.userForm.get('email');
-    if (ctrl && ctrl.dirty) {
-      return ctrl.errors !== null;
-    }
-    return false;
-  }
-
-  hasInvalidPhone() {
-    const ctrl = this.userForm.get('phone');
-    if (ctrl && ctrl.dirty) {
-      return ctrl.errors !== null;
-    }
-    return false;
-  }
-
   onFormSubmit() {
-    if (this.userForm.valid) {
+    if (this.valid) {
       this.formSubmit.emit(this.value);
       this.userForm.reset();
-      this.userForm.markAsPristine();
     }
   }
 }

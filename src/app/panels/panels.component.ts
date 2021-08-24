@@ -4,6 +4,7 @@ import { PanelService } from '../shared/services/panel.service';
 import { Observable } from 'rxjs';
 import { Facility } from '../model/Facility';
 import { FacilitiesService } from '../shared/services/facilities.service';
+import { AdminMember } from '../model/AdminMember';
 
 const PANEL_OPENING_CONTACTS = [
   /*
@@ -30,9 +31,9 @@ const PANEL_OPENING_CONTACTS = [
   styleUrls: ['./panels.component.scss'],
 })
 export class PanelsComponent implements OnInit {
-  currentPanels$: Observable<Panel[]>;
   openPanels$: Observable<Panel[]>;
   correctionalFacilities$: Observable<Facility[]>;
+  treatmentFacilities$: Observable<Facility[]>;
   panelOpeningContacts = PANEL_OPENING_CONTACTS;
   isTableOpen = false;
 
@@ -42,8 +43,16 @@ export class PanelsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentPanels$ = this.panelService.getCurrentPanels();
     this.openPanels$ = this.panelService.getOpenPanels();
-    this.correctionalFacilities$ = this.facilitiesService.getFacilities();
+    this.treatmentFacilities$ = this.facilitiesService.getFacilities();
+    this.correctionalFacilities$ =
+      this.facilitiesService.getCorrectionalFacilities();
+  }
+
+  getMemberName(user: AdminMember) {
+    if (user) {
+      return `${user.firstName} ${user.lastName}`;
+    }
+    return '';
   }
 }

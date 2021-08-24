@@ -11,6 +11,11 @@
   margin-bottom: 15px;
 }
 
+mat-checkbox,
+mat-form-field {
+  display: block;
+}
+
 @media (min-width: 576px) {
   .panel-input__header {
     font-size: 24px;

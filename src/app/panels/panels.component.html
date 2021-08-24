@@ -119,23 +119,43 @@
                 <th>Time</th>
                 <th>Facility</th>
                 <th>Location</th>
-                <th>Men/Women</th>
+                <th>Gender</th>
+                <th>Mark as Number Needed?</th>
                 <th># Needed</th>
-                <th>Contact</th>
+                <th>Board Champion</th>
+                <th>Panel Coordinator</th>
+                <th>Panel Leader</th>
+                <th>Panel Member 1</th>
+                <th>Panel Member 2</th>
+                <th>Panel Member 3</th>
+                <th>Panel Member 4</th>
+                <th>Panel Member 5</th>
               </tr>
             </thead>
-            <tbody id="openings-panel" *ngIf="openPanels$ | async as openings">
-              <tr *ngFor="let opening of openings">
-                <td>{{ opening?.eventDate | date: "E" }}</td>
-                <td>{{ opening?.eventDate | date: "W" }}</td>
-                <td>{{ opening?.eventDate | date: "shortTime" }}</td>
-                <td style="word-wrap: normal">{{ opening?.facility }}</td>
-                <td>{{ opening?.location }}</td>
-                <td>{{ opening?.gender }}</td>
-                <td style="word-wrap: break-word">
-                  {{ opening?.numberNeeded }}
+            <tbody id="openings-panel" *ngIf="openPanels$ | async as panels">
+              <tr *ngFor="let panel of panels">
+                <td>{{ panel.dayOfWeek }}</td>
+                <td>{{ panel.weekOfMonth | number }}</td>
+                <td>{{ panel.eventTime }}</td>
+                <td style="word-wrap: normal">
+                  {{ panel.facility ? panel.facility.facilityName : "" }}
                 </td>
-                <td>{{ opening?.boardChampion }}</td>
+                <td>{{ panel.location }}</td>
+                <td>{{ panel.gender }}</td>
+                <td>
+                  {{ panel.markAsMembersNeeded }}
+                </td>
+                <td>
+                  {{ panel.numberNeeded ? panel.numberNeeded : "" }}
+                </td>
+                <td>{{ getMemberName(panel.boardChampion) }}</td>
+                <td>{{ getMemberName(panel.panelCoordinator) }}</td>
+                <td>{{ getMemberName(panel.panelLeader) }}</td>
+                <td>{{ getMemberName(panel.panelMember1) }}</td>
+                <td>{{ getMemberName(panel.panelMember2) }}</td>
+                <td>{{ getMemberName(panel.panelMember3) }}</td>
+                <td>{{ getMemberName(panel.panelMember4) }}</td>
+                <td>{{ getMemberName(panel.panelMember5) }}</td>
               </tr>
             </tbody>
           </table>
@@ -158,25 +178,31 @@
             <thead>
               <tr>
                 <th>Facility</th>
-                <th>Location</th>
-                <th>Day</th>
-                <th>Time</th>
-                <th>Gender</th>
-                <th>Contact</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Primary Contact</th>
+                <th>Primary Email</th>
+                <th>Primary Phone</th>
+                <th>Website</th>
               </tr>
             </thead>
             <tbody
               id="facility-panels"
-              *ngIf="currentPanels$ | async as currentPanels"
+              *ngIf="treatmentFacilities$ | async as facilities"
             >
-              <tr *ngFor="let facilityPanel of currentPanels">
-                <td style="word-wrap: normal">{{ facilityPanel.facility ? facilityPanel.facility.facilityName : '' }}</td>
-                <td>{{ facilityPanel?.location }}</td>
-                <td>{{ facilityPanel?.eventDate | date: "shortDate" }}</td>
-                <td>{{ facilityPanel?.eventDate | date: "shortTime" }}</td>
-                <td>{{ facilityPanel?.gender }}</td>
-                <td>{{ facilityPanel.boardChampion ? facilityPanel.boardChampion.firstName + ' ' + facilityPanel.boardChampion.lastName : '' }}</td>
-              </tr>
+              <ng-container *ngFor="let facility of facilities">
+                <tr>
+                  <td>{{ facility.facilityName }}</td>
+                  <td>{{ facility.address }}</td>
+                  <td>{{ facility.city }}</td>
+                  <td>{{ facility.state }}</td>
+                  <td>{{ facility.mainContactName }}</td>
+                  <td>{{ facility.mainContactEmail }}</td>
+                  <td>{{ facility.mainContactPhone }}</td>
+                  <td>{{ facility.website }}</td>
+                </tr>
+              </ng-container>
             </tbody>
           </table>
         </div>
@@ -200,7 +226,6 @@
             <thead>
               <tr>
                 <th>Facility</th>
-                <th>Type</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>State</th>
@@ -217,7 +242,6 @@
               <ng-container *ngFor="let facility of facilities">
                 <tr>
                   <td>{{ facility.facilityName }}</td>
-                  <td>{{ facility.facilityType }}</td>
                   <td>{{ facility.address }}</td>
                   <td>{{ facility.city }}</td>
                   <td>{{ facility.state }}</td>

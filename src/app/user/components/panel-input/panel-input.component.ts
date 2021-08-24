@@ -4,9 +4,18 @@ import { Observable } from 'rxjs';
 import { AdminMember } from 'src/app/model/AdminMember';
 import { Facility } from 'src/app/model/Facility';
 import { Panel } from 'src/app/model/Panel';
-import { AdminService } from 'src/app/shared/services/admin.service';
 import { FacilitiesService } from 'src/app/shared/services/facilities.service';
 import { PanelMemberService } from 'src/app/shared/services/panel-member.service';
+
+const DAYS_OF_WEEK = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
 
 @Component({
   selector: 'app-panel-input',
@@ -14,24 +23,31 @@ import { PanelMemberService } from 'src/app/shared/services/panel-member.service
   styleUrls: ['./panel-input.component.scss'],
 })
 export class PanelInputComponent implements OnInit {
-  // TODO: Add members
   @Input()
   get panel() {
     return this.userForm.getRawValue();
   }
   set panel(val: Panel) {
     this.userForm.setValue({
-      eventDate: val.eventDate.toLocaleDateString('en-US'),
-      eventTime: val.eventDate.toLocaleTimeString('en-US'),
+      dayOfWeek: val.dayOfWeek,
+      weekOfMonth: val.weekOfMonth,
+      eventTime: val.eventTime,
       facility: val.facility.id,
       location: val.location,
       gender: val.gender,
       numberNeeded: val.numberNeeded,
-      panelMemberCount: val.panelMemberCount,
+      markAsMembersNeeded: val.markAsMembersNeeded,
       boardChampion: val.boardChampion.id,
       panelCoordinator: val.panelCoordinator.id,
-      panelMembers: val.panelMembers,
+      panelLeader: val.panelLeader.id,
+      panelMember1: val.panelMember1.id,
+      panelMember2: val.panelMember2.id,
+      panelMember3: val.panelMember3.id,
+      panelMember4: val.panelMember4.id,
+      panelMember5: val.panelMember5.id,
     });
+
+    this.toggleMembersNeeded();
   }
 
   @Output()
@@ -43,78 +59,75 @@ export class PanelInputComponent implements OnInit {
 
   get value() {
     const value = this.userForm.getRawValue();
-    const eventDate = this.getDateFromString(value.eventDate, value.eventTime);
-    delete value.eventTime;
-    value.eventDate = eventDate;
-    value.panelMemberCount = value.panelMembers.length;
     value.facilityId = value.facility;
     value.boardChampionId = value.boardChampion;
     value.panelCoordinatorId = value.panelCoordinator;
+    value.panelLeaderId = value.panelLeader;
+    value.panelMember1Id = value.panelMember1;
+    value.panelMember2Id = value.panelMember2;
+    value.panelMember3Id = value.panelMember3;
+    value.panelMember4Id = value.panelMember4;
+    value.panelMember5Id = value.panelMember5;
     return value;
-  }
-
-  get eventDateError() {
-    const ctrl = this.userForm.get('eventDate');
-    if (!ctrl.pristine && ctrl.errors !== null) {
-      return 'Date must be in DD/MM/YYYY Format.';
-    }
-    return '';
   }
 
   facilities$: Observable<Facility[]>;
   panelMembers$: Observable<AdminMember[]>;
-  boardMembers$: Observable<AdminMember[]>;
+  daysOfWeek = DAYS_OF_WEEK;
   timeOptions = this.getTimeOptions();
 
   userForm = new FormGroup({
-    // tslint:disable-next-line: max-line-length
-    eventDate: new FormControl('', [
-      Validators.required,
-      Validators.pattern(
-        /[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/
-      ),
-    ]),
+    dayOfWeek: new FormControl('', Validators.required),
+    weekOfMonth: new FormControl('', Validators.required),
     eventTime: new FormControl('', Validators.required),
     facility: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
-    gender: new FormControl('', Validators.required),
-    numberNeeded: new FormControl('', Validators.required),
-    panelMemberCount: new FormControl(0, Validators.required),
+    gender: new FormControl(''),
+    numberNeeded: new FormControl(''),
+    markAsMembersNeeded: new FormControl(false),
     boardChampion: new FormControl('', Validators.required),
     panelCoordinator: new FormControl('', Validators.required),
+    panelLeader: new FormControl(''),
+    panelMember1: new FormControl(''),
+    panelMember2: new FormControl(''),
+    panelMember3: new FormControl(''),
+    panelMember4: new FormControl(''),
+    panelMember5: new FormControl(''),
     panelMembers: new FormControl([]),
   });
 
   constructor(
     private members: PanelMemberService,
-    private admins: AdminService,
     private facilities: FacilitiesService
   ) {}
 
   ngOnInit() {
     this.panelMembers$ = this.members.getPanelMembers();
-    this.boardMembers$ = this.admins.getAdminList();
     this.facilities$ = this.facilities.getFacilities();
+    this.toggleMembersNeeded();
+  }
+
+  onMarkAsNeededChange(checked: boolean) {
+    this.toggleMembersNeeded();
   }
 
   onFormSubmit() {
-    if (this.userForm.valid) {
+    if (this.valid) {
       this.formSubmit.emit(this.value);
+      this.userForm.reset();
     }
   }
 
-  private getDateFromString(dateStr: string, timeStr: string) {
-    const parts = timeStr.match(/(\d+)\:(\d+) (\w+)/);
-    const hours = /am/i.test(parts[3])
-      ? parseInt(parts[1], 10)
-      : parseInt(parts[1], 10) + 12;
-    const minutes = parseInt(parts[2], 10);
-
-    const date = new Date(dateStr);
-    date.setHours(hours);
-    date.setMinutes(minutes);
-
-    return date;
+  private toggleMembersNeeded() {
+    const neededCtrl = this.userForm.get('markAsMembersNeeded');
+    const neededCountCtrl = this.userForm.get('numberNeeded');
+    const markedAsNeeded = neededCtrl.value;
+    if (markedAsNeeded) {
+      neededCountCtrl.enable();
+    } else {
+      neededCountCtrl.disable();
+      neededCountCtrl.reset();
+    }
   }
 
   private getTimeOptions() {

@@ -1,95 +1,56 @@
 <form class="member-input" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
   <div class="member-input__header">Add a new member</div>
-  <div class="form-group" [ngClass]="{ 'has-error': hasInvalidFirstName() }">
-    <!-- First Name -->
-    <label for="firstName" class="form-label">First Name</label>
-    <input
-      type="text"
-      id="firstName"
-      formControlName="firstName"
-      class="form-control"
-      placeholder="First Name"
-      require
-    />
-    <p *ngIf="hasInvalidFirstName()" id="first_name_error" class="help-block">
-      Invalid first name.
-    </p>
-  </div>
 
-  <div class="form-group" [ngClass]="{ 'has-error': hasInvalidLastName() }">
-    <!-- Last Name -->
-    <label for="lastName" class="form-label">Last Name</label>
-    <input
-      type="text"
-      id="lastName"
-      formControlName="lastName"
-      class="form-control"
-      placeholder="Last Name"
-    />
-    <p *ngIf="hasInvalidLastName()" id="last_name_error" class="help-block">
-      Invalid last name.
-    </p>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group" [ngClass]="{ 'has-error': hasInvalidEmail() }">
-    <!-- Email -->
-    <label for="email" class="form-label">Email</label>
-    <input
-      type="text"
-      id="email"
-      formControlName="email"
-      class="form-control"
-      placeholder="your@email.com"
-    />
-    <p *ngIf="hasInvalidEmail()" id="email_error" class="help-block">
-      Invalid email address.
-    </p>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group" [ngClass]="{ 'has-error': hasInvalidPhone() }">
-    <!-- Email -->
-    <label for="phone" class="form-label">Phone</label>
-    <input
-      type="text"
-      id="phone"
-      formControlName="phone"
-      class="form-control"
-      placeholder="Phone"
-    />
-    <p *ngIf="hasInvalidPhone()" id="phone_error" class="help-block">
-      Invalid phone number
-    </p>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+    <mat-error>Valid email is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="preferredContactMethod" class="form-label">Contact Method</label>
-    <select
-      id="preferredContactMethod"
-      formControlName="preferredContactMethod"
-      class="custom-select"
-    >
-      <option value="text">Text</option>
-      <option value="email">Email</option>
-    </select>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Phone Number</mat-label>
+    <input matInput formControlName="phone" />
+    <mat-error>Valid phone number is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group" *ngIf="hasCommitment">
-    <label for="commitment" class="form-label">Commitment</label>
-    <select id="commitment" formControlName="commitment" class="custom-select">
-      <option value="Chair">Chair</option>
-      <option value="Co-Chair">Co-Chair</option>
-      <option value="Librarian">Librarian</option>
-      <option value="Technology">Technology</option>
-      <option value="Treasurer">Treasurer</option>
-      <option value="Facility">Facilities</option>
-    </select>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Contact Method</mat-label>
+    <mat-select formControlName="preferredContactMethod">
+      <mat-option value="text">Text</mat-option>
+      <mat-option value="email">Email</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" *ngIf="hasCommitment">
+    <mat-label>Commitment</mat-label>
+    <mat-select formControlName="commitment">
+      <mat-option value="Chair">Chair</mat-option>
+      <mat-option value="Co-Chair">Co-Chair</mat-option>
+      <mat-option value="Librarian">Librarian</mat-option>
+      <mat-option value="Technology">Technology</mat-option>
+      <mat-option value="Treasurer">Treasurer</mat-option>
+      <mat-option value="Facility">Facilities</mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <div class="form-group">
     <button
       type="submit"
       class="btn admin-entry-button btn-primary mx-auto"
       [disabled]="!userForm.valid"
+      mat-raised-button color="primary"
     >
       Add member
     </button>

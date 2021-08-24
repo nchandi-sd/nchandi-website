@@ -22,7 +22,7 @@ export class PanelDashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.panels$ = this.panels.getCurrentPanels();
+    this.panels$ = this.panels.getPanels();
   }
 
   ngOnDestroy() {

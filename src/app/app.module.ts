@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,10 +17,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import {
   MatButtonModule,
+  MatCheckboxModule,
   MatDialogModule,
   MatExpansionModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
+  MatSelectModule,
   MatTableModule,
+  MatTabsModule,
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -116,10 +118,14 @@ import { FacilityInputComponent } from './shared/components/facility-input/facil
     AppRoutingModule,
     MatButtonModule,
     MatExpansionModule,
+    MatFormFieldModule,
     MatIconModule,
-    NoopAnimationsModule,
+    MatInputModule,
     MatDialogModule,
+    MatSelectModule,
+    MatTabsModule,
     MatTableModule,
+    MatCheckboxModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features

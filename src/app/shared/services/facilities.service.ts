@@ -20,7 +20,19 @@ export class FacilitiesService {
   ) {}
 
   getFacilities() {
-    return this.getFacilitiesFromStore('Facilities');
+    return this.getFacilitiesFromStore('Facilities').pipe(
+      map(facilities => {
+        return facilities.filter(f => f.facilityType === 'Treatment');
+      })
+    );
+  }
+
+  getCorrectionalFacilities() {
+    return this.getFacilitiesFromStore('Facilities').pipe(
+      map(facilities => {
+        return facilities.filter(f => f.facilityType === 'Correctional');
+      })
+    );
   }
 
   addFacility(admin: Facility) {
