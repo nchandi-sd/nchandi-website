@@ -20,6 +20,10 @@ export class FacilitiesService {
   ) {}
 
   getFacilities() {
+    return this.getFacilitiesFromStore('Facilities');
+  }
+
+  getTreatmentFacilities() {
     return this.getFacilitiesFromStore('Facilities').pipe(
       map(facilities => {
         return facilities.filter(f => f.facilityType === 'Treatment');

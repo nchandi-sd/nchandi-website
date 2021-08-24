@@ -1,160 +1,87 @@
 <form class="facility-input" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
   <div class="facility-input__header">Add a new facility</div>
 
-  <div class="form-group">
-    <!-- Name -->
-    <label for="facilityName" class="form-label">Name</label>
-    <input
-      type="text"
-      id="facilityName"
-      formControlName="facilityName"
-      class="form-control"
-      placeholder="Facility Name"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Facility Name</mat-label>
+    <input matInput formControlName="facilityName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="facilityType" class="form-label">Facility Type</label>
-    <input
-      type="text"
-      id="facilityType"
-      formControlName="facilityType"
-      class="form-control"
-      placeholder="Facility Type"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Facility Type</mat-label>
+    <mat-select formControlName="facilityType">
+      <mat-option value="Treatment">Treatment</mat-option>
+      <mat-option value="Correctional">Correctional</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="address" class="form-label">Address</label>
-    <input
-      type="text"
-      id="address"
-      formControlName="address"
-      class="form-control"
-      placeholder="Address"
-      require
-    />
-  </div>
 
-  <div class="form-group">
-    <label for="city" class="form-label">City</label>
-    <input
-      type="text"
-      id="city"
-      formControlName="city"
-      class="form-control"
-      placeholder="City"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="state" class="form-label">State</label>
-    <input
-      type="text"
-      id="state"
-      formControlName="state"
-      class="form-control"
-      placeholder="State"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>City</mat-label>
+    <input matInput formControlName="city" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="website" class="form-label">Website</label>
-    <input
-      type="text"
-      id="website"
-      formControlName="website"
-      class="form-control"
-      placeholder="Website"
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>State</mat-label>
+    <input matInput formControlName="state" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="mainContactName" class="form-label">Primary Contact</label>
-    <input
-      type="text"
-      id="mainContactName"
-      formControlName="mainContactName"
-      class="form-control"
-      placeholder="Primary Contact Name"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Website</mat-label>
+    <input matInput formControlName="website" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="mainContactEmail" class="form-label"
-      >Primary Contact Email</label
-    >
-    <input
-      type="text"
-      id="mainContactEmail"
-      formControlName="mainContactEmail"
-      class="form-control"
-      placeholder="Primary Contact Email"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Primary Contact Name</mat-label>
+    <input matInput formControlName="mainContactName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="mainContactPhone" class="form-label"
-      >Primary Contact Phone</label
-    >
-    <input
-      type="text"
-      id="mainContactPhone"
-      formControlName="mainContactPhone"
-      class="form-control"
-      placeholder="Primary Contact Phone"
-      require
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Primary Contact Email</mat-label>
+    <input matInput formControlName="mainContactEmail" type="email" />
+    <mat-error>Valid email is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="alternateContactName" class="form-label">Alt. Contact</label>
-    <input
-      type="text"
-      id="alternateContactName"
-      formControlName="alternateContactName"
-      class="form-control"
-      placeholder="Alternate Contact Name"
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Primary Phone Number</mat-label>
+    <input matInput formControlName="mainContactPhone" />
+    <mat-error>Valid phone number is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="alternateContactEmail" class="form-label"
-      >Alt. Contact Email</label
-    >
-    <input
-      type="text"
-      id="alternateContactEmail"
-      formControlName="alternateContactEmail"
-      class="form-control"
-      placeholder="Alternate Contact Email"
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Alt. Contact Name</mat-label>
+    <input matInput formControlName="alternateContactName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="alternateContactPhone" class="form-label"
-      >Alt. Contact Phone</label
-    >
-    <input
-      type="text"
-      id="alternateContactPhone"
-      formControlName="alternateContactPhone"
-      class="form-control"
-      placeholder="Alternate Contact Phone"
-    />
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Alt. Contact Email</mat-label>
+    <input matInput formControlName="alternateContactEmail" type="email" />
+    <mat-error>Valid email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Alt. Phone Number</mat-label>
+    <input matInput formControlName="alternateContactPhone" />
+    <mat-error>Valid phone number is required</mat-error>
+  </mat-form-field>
 
   <div class="form-group">
     <button
       type="submit"
       class="btn admin-entry-button btn-primary mx-auto"
-      [disabled]="!userForm.valid"
+      [disabled]="!valid"
+      mat-raised-button color="primary"
     >
       Add Faciity
     </button>

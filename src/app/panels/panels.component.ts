@@ -44,7 +44,7 @@ export class PanelsComponent implements OnInit {
 
   ngOnInit() {
     this.openPanels$ = this.panelService.getOpenPanels();
-    this.treatmentFacilities$ = this.facilitiesService.getFacilities();
+    this.treatmentFacilities$ = this.facilitiesService.getTreatmentFacilities();
     this.correctionalFacilities$ =
       this.facilitiesService.getCorrectionalFacilities();
   }
