@@ -46,15 +46,6 @@ import { OrientationComponent } from './orientation/orientation.component';
 import { MainEventComponent } from './orientation/main-event/main-event.component';
 import { EventsComponent } from './orientation/events/events.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DemoMaterialModule } from './admin/material-module';
-import { AdminComponent } from './admin/admin.component';
-import { AdminService } from './admin/admin.service';
-import { FacilitiesDBComponent } from './facilities-db/facilities-db.component';
-import { PanelsDBComponent } from './panels-db/panels-db.component';
-import {MembersDBComponent} from './members-db/members-db.component';
-import {FacilitiesService} from './facilities-db/facilities-db.service';
-import {MembersDbService} from './members-db/members-db.service';
-import {PanelsDbService} from './panels-db/panels-db.service';
 
 import { MemberInputComponent } from './shared/components/member-input/member-input.component';
 import { MemberListComponent } from './shared/components/member-list/member-list.component';
@@ -90,10 +81,6 @@ import { FacilityInputComponent } from './shared/components/facility-input/facil
     AdminListComponent,
     MainEventComponent,
     EventsComponent,
-    AdminComponent,
-    FacilitiesDBComponent,
-    MembersDBComponent,
-    PanelsDBComponent,
     MemberInputComponent,
     MemberListComponent,
     PanelMemberListComponent,
@@ -132,7 +119,6 @@ import { FacilityInputComponent } from './shared/components/facility-input/facil
     AngularFireStorageModule,
     NgbAlertModule,
     DragDropModule,
-    DemoMaterialModule
   ],
   providers: [
     ContactService,
@@ -141,10 +127,6 @@ import { FacilityInputComponent } from './shared/components/facility-input/facil
     AuthService,
     UserResolver,
     ResourceService,
-    AdminService,
-    FacilitiesService,
-    MembersDbService,
-    PanelsDbService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

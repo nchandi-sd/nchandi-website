@@ -11,7 +11,6 @@ import { UserComponent } from './user/user.component';
 import { UserResolver } from './user/user.resolver';
 import { AuthGuard } from './core/auth.guard';
 import {OrientationComponent} from './orientation/orientation.component';
-import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
@@ -55,10 +54,6 @@ const routes: Routes = [
     resolve: {
       data: UserResolver
     }
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
   },
   {
     path: 'user/:id',
