@@ -12,6 +12,7 @@ import { UserResolver } from './user/user.resolver';
 import { AuthGuard } from './core/auth.guard';
 import {OrientationComponent} from './orientation/orientation.component';
 import { AdminComponent } from './admin/admin.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,11 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [AuthGuard]
   },
-
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'user',
     component: UserComponent,
@@ -53,7 +58,14 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+  },
+  {
+    path: 'user/:id',
+    component: UserComponent,
+    resolve: {
+      data: UserResolver
+    }
   },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },

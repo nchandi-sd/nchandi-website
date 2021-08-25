@@ -1,161 +1,261 @@
-<div class="panel-main-view"><
+<div class="panel-main-view">
+  <
   <div class="panel-main-container">
     <div class="container2">
       <div class="navbar-spacer"></div>
-      <h2 class="section-header text-white flex-center headline panel-header"> North County H&I Panels </h2>
+      <h2 class="section-header text-white flex-center headline panel-header">
+        North County H&I Panels
+      </h2>
       <div class="spacer"></div>
       <div class="panels-container">
         <div class="intro-container">
           <div class="panels-content flex-center">
-            Here you will find a list of all treatment panels for North County H&I. If you are interested in joining a particular
-            panel we strongly encourage you to attend an orientation meeting and reach out to one of the Panel Opening Contacts
-            below. If you have any questions or concerns regarding any of the panels below please visit our Contact section and
-            let us know.
+            Here you will find a list of all treatment panels for North County
+            H&I. If you are interested in joining a particular panel we strongly
+            encourage you to attend an orientation meeting and reach out to one
+            of the Panel Opening Contacts below. If you have any questions or
+            concerns regarding any of the panels below please visit our Contact
+            section and let us know.
           </div>
           <div class="spacer"></div>
           <div class="button-container flex-center">
-            <button type="button" class="btn btn-primary btn-round-lg btn-lg flex-center" routerLink="/orientation"
-                    routerLinkActive="active-link">Orientation
+            <button
+              type="button"
+              class="btn btn-primary btn-round-lg btn-lg flex-center"
+              routerLink="/orientation"
+              routerLinkActive="active-link"
+            >
+              Orientation
             </button>
-            <button type="button" class="btn btn-secondary btn-round-lg btn-lg flex-center"
-                    routerLink="/contact" routerLinkActive="active-link">Contact Us
+            <button
+              type="button"
+              class="btn btn-secondary btn-round-lg btn-lg flex-center"
+              routerLink="/contact"
+              routerLinkActive="active-link"
+            >
+              Contact Us
             </button>
           </div>
           <div class="spacer"></div>
           <div class="panels-content flex-center">
-          Please Note: Panel information is updated regularly, but that said, sometimes it can take up to a month for information
-            to be properly updated to this website.
+            Please Note: Panel information is updated regularly, but that said,
+            sometimes it can take up to a month for information to be properly
+            updated to this website.
           </div>
           <div class="row justify-content-center mt-5">
             <div class="container">
               <mat-accordion>
-                <mat-expansion-panel>
-                  <mat-expansion-panel-header class="disable_ripple contactViewer" (click)="contactPanelClicked()">
-                    <div *ngIf="!isTableOpen">
-                      <mat-panel-title><h4 class="panel-title text-white exp-content"><strong>Panel Opening Contacts (click here to contact someone to join a panel)</strong></h4></mat-panel-title>
-                    </div>
-                    <div *ngIf="isTableOpen">
-                      <mat-panel-title><h4 class="text-white exp-content"><strong>Panel Opening Contacts</strong></h4></mat-panel-title>
+                <mat-expansion-panel #panel>
+                  <mat-expansion-panel-header
+                    class="disable_ripple contactViewer"
+                    (click)="isTableOpen = !isTableOpen"
+                  >
+                    <div>
+                      <mat-panel-title
+                        ><h4 class="panel-title text-white exp-content">
+                          <strong
+                            >Panel Opening Contacts
+                            <ng-container *ngIf="!isTableOpen"
+                              >(click here to contact someone to join a
+                              panel)</ng-container
+                            ></strong
+                          >
+                        </h4></mat-panel-title
+                      >
                     </div>
                   </mat-expansion-panel-header>
 
                   <table class="contact-table text-white tab-content">
-                    <tr *ngFor="let txChampion of txChampions">
-                      <td><h5 class="contact-content">{{txChampion?.name}}</h5></td>
-                      <td><h5 class="contact-content">{{txChampion?.email}}</h5></td>
-                      <td><h5 class="contact-content">{{txChampion?.phone}}</h5></td>
-                      <td><h5 class="contact-content">Contact method: {{txChampion?.contactMethod}}</h5></td>
+                    <tr
+                      *ngFor="let panelOpeningContact of panelOpeningContacts"
+                    >
+                      <td>
+                        <h5 class="contact-content">
+                          {{ panelOpeningContact?.name }}
+                        </h5>
+                      </td>
+                      <td>
+                        <h5 class="contact-content">
+                          {{ panelOpeningContact?.email }}
+                        </h5>
+                      </td>
+                      <td>
+                        <h5 class="contact-content">
+                          {{ panelOpeningContact?.phone }}
+                        </h5>
+                      </td>
+                      <td>
+                        <h5 class="contact-content">
+                          Contact method:
+                          {{ panelOpeningContact?.contactMethod }}
+                        </h5>
+                      </td>
                     </tr>
                   </table>
-
                 </mat-expansion-panel>
-                <!-- <mat-expansion-panel>
-                  <mat-expansion-panel-header class="disable_ripple contactViewer">
-                    <mat-panel-title><h4 class="text-white"><strong>Correction Center Contacts</strong></h4></mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <table class="contact-table text-white tab-content">
-                    <tr *ngFor="let inChampion of inChampions">
-                      <td><h5 class="contact-content">{{inChampion?.name}}</h5></td>
-                      <td><h5 class="contact-content">{{inChampion?.email}}</h5></td>
-                      <td><h5 class="contact-content">{{inChampion?.phone}}</h5></td>
-                      <td><h5 class="contact-content">Contact method: {{inChampion?.contactMethod}}</h5></td>
-                    </tr>
-                  </table>
-                </mat-expansion-panel> -->
               </mat-accordion>
             </div>
-
           </div>
         </div>
 
         <div class="spacer"></div>
 
+        <h2 class="section-header text-white flex-center">Open Panels</h2>
+        <div class="panel-container1 panel flex-center">
+          <table
+            class="
+              table table
+              bordered
+              table-responsive
+              text-nowrap
+              table-striped
+            "
+            id="openingsTable"
+          >
+            <thead>
+              <tr>
+                <th>Day of Week</th>
+                <th>Week of Month</th>
+                <th>Time</th>
+                <th>Facility</th>
+                <th>Location</th>
+                <th>Gender</th>
+                <th>Mark as Number Needed?</th>
+                <th># Needed</th>
+                <th>Board Champion</th>
+                <th>Panel Coordinator</th>
+                <th>Panel Leader</th>
+                <th>Panel Member 1</th>
+                <th>Panel Member 2</th>
+                <th>Panel Member 3</th>
+                <th>Panel Member 4</th>
+                <th>Panel Member 5</th>
+              </tr>
+            </thead>
+            <tbody id="openings-panel" *ngIf="openPanels$ | async as panels">
+              <tr *ngFor="let panel of panels">
+                <td>{{ panel.dayOfWeek }}</td>
+                <td>{{ panel.weekOfMonth | number }}</td>
+                <td>{{ panel.eventTime }}</td>
+                <td style="word-wrap: normal">
+                  {{ panel.facility ? panel.facility.facilityName : "" }}
+                </td>
+                <td>{{ panel.location }}</td>
+                <td>{{ panel.gender }}</td>
+                <td>
+                  {{ panel.markAsMembersNeeded }}
+                </td>
+                <td>
+                  {{ panel.numberNeeded ? panel.numberNeeded : "" }}
+                </td>
+                <td>{{ getMemberName(panel.boardChampion) }}</td>
+                <td>{{ getMemberName(panel.panelCoordinator) }}</td>
+                <td>{{ getMemberName(panel.panelLeader) }}</td>
+                <td>{{ getMemberName(panel.panelMember1) }}</td>
+                <td>{{ getMemberName(panel.panelMember2) }}</td>
+                <td>{{ getMemberName(panel.panelMember3) }}</td>
+                <td>{{ getMemberName(panel.panelMember4) }}</td>
+                <td>{{ getMemberName(panel.panelMember5) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
+        <div class="spacer"></div>
 
-        <h2 class="section-header text-white flex-center"> Open Panels </h2>
-        <div class="panel-container1 flex-center">
-          <table class="table table bordered table-responsive text-nowrap table-striped" id="openingsTable">
+        <h2 class="section-header text-white flex-center">Current Panels</h2>
+        <div class="panel-container2 panel flex-center">
+          <table
+            class="
+              table table
+              bordered
+              table-responsive
+              text-nowrap
+              table-striped
+            "
+            id="treatmentPanels"
+          >
             <thead>
-            <tr>
-              <th>Day of Week</th>
-              <th>Week of Month</th>
-              <th>Time</th>
-              <th>Facility</th>
-              <th>Location</th>
-              <th>Men/Women</th>
-              <th># Needed</th>
-              <th>Contact</th>
-            </tr>
+              <tr>
+                <th>Facility</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Primary Contact</th>
+                <th>Primary Email</th>
+                <th>Primary Phone</th>
+                <th>Website</th>
+              </tr>
             </thead>
-            <tbody id="openings-panel">
-            <tr *ngFor="let opening of openings">
-              <td>{{opening?.dayOfWeek}}</td>
-              <td>{{opening?.weekOfMonth}}</td>
-              <td>{{opening?.time}}</td>
-              <td style="word-wrap: normal">{{opening?.facility}}</td>
-              <td>{{opening?.location}}</td>
-              <td>{{opening?.gender}}</td>
-              <td style="word-wrap: break-word">{{opening?.positionsAvailable}}</td>
-              <td>{{opening?.boardChampion}}</td>
-            </tr>
+            <tbody
+              id="facility-panels"
+              *ngIf="treatmentFacilities$ | async as facilities"
+            >
+              <ng-container *ngFor="let facility of facilities">
+                <tr>
+                  <td>{{ facility.facilityName }}</td>
+                  <td>{{ facility.address }}</td>
+                  <td>{{ facility.city }}</td>
+                  <td>{{ facility.state }}</td>
+                  <td>{{ facility.mainContactName }}</td>
+                  <td>{{ facility.mainContactEmail }}</td>
+                  <td>{{ facility.mainContactPhone }}</td>
+                  <td>{{ facility.website }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
           </table>
         </div>
-        <div class="spacer">
-        </div>
-        <h2 class="section-header text-white flex-center"> Current Panels </h2>
-        <div class="panel-container2 flex-center">
-          <table class="table table bordered table-responsive text-nowrap table-striped" id="treatmentPanels">
+
+        <div class="spacer"></div>
+
+        <h2 class="section-header text-white flex-center">
+          Correctional Facilities
+        </h2>
+        <div class="panel-container3 panel flex-center">
+          <table
+            class="
+              table table
+              bordered
+              table-responsive
+              text-nowrap
+              table-striped
+            "
+            id="correctionalPanels"
+          >
             <thead>
-            <tr>
-              <th>Facility</th>
-              <th>Location</th>
-              <th>Day</th>
-              <th>Time</th>
-              <th>Gender</th>
-              <th>Contact</th>
-            </tr>
+              <tr>
+                <th>Facility</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Primary Contact</th>
+                <th>Primary Email</th>
+                <th>Primary Phone</th>
+                <th>Website</th>
+              </tr>
             </thead>
-            <tbody id="facility-panels">
-            <tr *ngFor="let facilityPanel of currentPanels">
-              <td style="word-wrap: normal">{{facilityPanel?.facility}}</td>
-              <td>{{facilityPanel?.location}}</td>
-              <td>{{facilityPanel?.day}}</td>
-              <td>{{facilityPanel?.time}}</td>
-              <td>{{facilityPanel?.gender}}</td>
-              <td>{{facilityPanel?.boardChampion}}</td>
-            </tr>
+            <tbody
+              id="facility-panels"
+              *ngIf="correctionalFacilities$ | async as facilities"
+            >
+              <ng-container *ngFor="let facility of facilities">
+                <tr>
+                  <td>{{ facility.facilityName }}</td>
+                  <td>{{ facility.address }}</td>
+                  <td>{{ facility.city }}</td>
+                  <td>{{ facility.state }}</td>
+                  <td>{{ facility.mainContactName }}</td>
+                  <td>{{ facility.mainContactEmail }}</td>
+                  <td>{{ facility.mainContactPhone }}</td>
+                  <td>{{ facility.website }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
           </table>
         </div>
-        <div class="spacer">
-        </div>
-        <h2 class="section-header text-white flex-center"> Correctional Facilities </h2>
-        <div class="panel-container3 flex-center">
-          <table class="table table bordered table-responsive text-nowrap table-striped" id="correctionalPanels">
-            <thead>
-            <tr>
-              <th>Facility</th>
-              <th>Location</th>
-              <th>Day</th>
-              <th>Time</th>
-              <th>Gender</th>
-              <th>Contact</th>
-            </tr>
-            </thead>
-            <tbody id="correctional-facilities">
-            <tr *ngFor="let correctionalPanel of correctionalPanels">
-              <td style="word-wrap: normal">{{correctionalPanel?.facility}}</td>
-              <td>{{correctionalPanel?.location}}</td>
-              <td>{{correctionalPanel?.day}}</td>
-              <td>{{correctionalPanel?.time}}</td>
-              <td>{{correctionalPanel?.gender}}</td>
-              <td>{{correctionalPanel?.boardChampion}}</td>
-            </tr>
-          </table>
-        </div>
-        <div class="spacer">
-        </div>
-        <div class="about-location-view section">
-        </div>
+        <div class="spacer"></div>
+        <div class="about-location-view section"></div>
       </div>
     </div>
     <app-footer></app-footer>

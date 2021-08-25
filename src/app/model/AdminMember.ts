@@ -7,4 +7,5 @@ export class AdminMember {
   phone: string;
   email: string;
   id: string;
+  preferredContactMethod: 'text' | 'email';
 }

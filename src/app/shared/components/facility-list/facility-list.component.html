@@ -1,0 +1,64 @@
+<div class="panel facility-list">
+  <div class="header">
+    <div class="title">Current Facilities</div>
+  </div>
+
+  <div *ngIf="facilities$ | async as facilities">
+    <table
+      class="table table bordered table-responsive text-nowrap table-striped"
+    >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Facility</th>
+          <th>Type</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Primary Contact</th>
+          <th>Primary Email</th>
+          <th>Primary Phone</th>
+          <th>Alt. Contact</th>
+          <th>Alt. Email</th>
+          <th>Alt. Phone</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody id="openings-panel">
+        <tr *ngFor="let facility of facilities">
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Delete Item"
+              (click)="onDeleteItem(facility)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Edit Item"
+              (click)="onEditItem(facility)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>{{ facility.facilityName }}</td>
+          <td>{{ facility.facilityType }}</td>
+          <td>{{ facility.address }}</td>
+          <td>{{ facility.city }}</td>
+          <td>{{ facility.state }}</td>
+          <td>{{ facility.mainContactName }}</td>
+          <td>{{ facility.mainContactEmail }}</td>
+          <td>{{ facility.mainContactPhone }}</td>
+          <td>{{ facility.alternateContactName }}</td>
+          <td>{{ facility.alternateContactEmail }}</td>
+          <td>{{ facility.alternateContactPhone }}</td>
+          <td>{{ facility.website }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

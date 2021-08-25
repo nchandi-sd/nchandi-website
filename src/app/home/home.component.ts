@@ -17,13 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.resourceService.getAnnouncements().subscribe(data => {
-      this.announcements = data.map(e => {
-        console.log('started retreiving announcements from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Announcement;
-      });
+      this.announcements = data;
       this.announcements.forEach(value => {
         console.log(value.body.length + ' for ' + value.title);
         if (value.body.length > 255) {

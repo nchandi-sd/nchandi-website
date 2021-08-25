@@ -1,0 +1,78 @@
+<div class="panel-list">
+  <div class="header">
+    <div class="title">Current Panels</div>
+  </div>
+
+  <div *ngIf="panels$ | async as panels">
+    <table
+      class="table table bordered table-responsive text-nowrap table-striped"
+    >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Day of Week</th>
+          <th>Week of Month</th>
+          <th>Time</th>
+          <th>Facility</th>
+          <th>Location</th>
+          <th>Gender</th>
+          <th>Mark as Number Needed?</th>
+          <th># Needed</th>
+          <th>Board Champion</th>
+          <th>Panel Coordinator</th>
+          <th>Panel Leader</th>
+          <th>Panel Member 1</th>
+          <th>Panel Member 2</th>
+          <th>Panel Member 3</th>
+          <th>Panel Member 4</th>
+          <th>Panel Member 5</th>
+        </tr>
+      </thead>
+      <tbody id="openings-panel">
+        <tr *ngFor="let panel of panels">
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Delete Item"
+              (click)="onDeleteItem(panel)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Edit Item"
+              (click)="onEditItem(panel)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>{{ panel.dayOfWeek }}</td>
+          <td>{{ panel.weekOfMonth | number }}</td>
+          <td>{{ panel.eventTime }}</td>
+          <td style="word-wrap: normal">
+            {{ panel.facility ? panel.facility.facilityName : "" }}
+          </td>
+          <td>{{ panel.location }}</td>
+          <td>{{ panel.gender }}</td>
+          <td>
+            {{ panel.markAsMembersNeeded }}
+          </td>
+          <td>
+            {{ panel.numberNeeded ? panel.numberNeeded : "" }}
+          </td>
+          <td>{{ getMemberName(panel.boardChampion) }}</td>
+          <td>{{ getMemberName(panel.panelCoordinator) }}</td>
+          <td>{{ getMemberName(panel.panelLeader) }}</td>
+          <td>{{ getMemberName(panel.panelMember1) }}</td>
+          <td>{{ getMemberName(panel.panelMember2) }}</td>
+          <td>{{ getMemberName(panel.panelMember3) }}</td>
+          <td>{{ getMemberName(panel.panelMember4) }}</td>
+          <td>{{ getMemberName(panel.panelMember5) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

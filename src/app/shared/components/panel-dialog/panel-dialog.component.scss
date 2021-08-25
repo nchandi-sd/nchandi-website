@@ -1,0 +1,28 @@
+.panel-dialog__button {
+  text-transform: uppercase;
+}
+
+app-panel-input ::ng-deep .btn-container {
+  display: none !important;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dialog app-panel-input ::ng-deep {
+  .panel-input__header,
+  .btn-primary {
+    display: none !important;
+  }
+}
+
+.dialog__content {
+  flex: 1 1 auto;
+}
+
+.dialog__actions {
+  justify-content: right;
+}

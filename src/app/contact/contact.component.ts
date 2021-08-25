@@ -93,22 +93,6 @@ export class ContactComponent implements OnInit {
   }
 
   postContactForm(form: NgForm) {
-    console.log('contact: ' + this.contact);
-
-    // let contactUrl = 'https://script.google.com/macros/s/AKfycbzezNitOBOTReBZ7kvtV8fzTEiW-bA8mGOnJDQl7orAr65gvRd8/exec';
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', contactUrl);
-    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // xhr.onload = function() {
-
-    //   console.log("yay subscribe called")
-    //     if (xhr.status === 200) {
-    //       console.log("got 200");
-    //         //var userInfo = JSON.parse(xhr.responseText);
-    //     }
-    // };
-    // xhr.send(JSON.stringify(form));
-
     this.contactService.postContactForm(this.contact)
       .subscribe(() => {
         this.sendDisabled = false;

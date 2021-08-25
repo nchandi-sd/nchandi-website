@@ -1,0 +1,27 @@
+<div class="dialog">
+  <h1 class="dialog__header" mat-dialog-title>Editing facility</h1>
+  <div mat-dialog-content class="dialog__content">
+    <app-facility-input
+      #facilityInput
+      (formSubmit)="onSaveButtonClick($event)"
+      [facility]="facility"
+    ></app-facility-input>
+  </div>
+  <div mat-dialog-actions class="dialog__actions">
+    <button
+      class="facility-dialog__button"
+      mat-button
+      (click)="onCancelButtonClick()"
+    >
+      Cancel
+    </button>
+    <button
+      class="facility-dialog__button"
+      mat-button
+      [disabled]="!facilityInput.valid"
+      (click)="onSaveButtonClick(facilityInput.value)"
+    >
+      Save
+    </button>
+  </div>
+</div>

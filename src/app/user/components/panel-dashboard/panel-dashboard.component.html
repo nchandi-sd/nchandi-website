@@ -1,0 +1,17 @@
+<div>
+  <div class="admin-content admin-container">
+    Panel Dashboard. This is a confidential area of the web site where panel
+    details can be set.
+  </div>
+  <div class="spacer"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-panel-input (formSubmit)="onPanelSubmit($event)"></app-panel-input>
+    </div>
+    <div class="col-md-6">
+      <div class="container">
+        <app-panel-list (edit)="onPanelEdit($event)"></app-panel-list>
+      </div>
+    </div>
+  </div>
+</div>

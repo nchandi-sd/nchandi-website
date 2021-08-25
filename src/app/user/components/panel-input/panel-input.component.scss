@@ -1,0 +1,23 @@
+.panel-input {
+  padding: 10px;
+  border-radius: 3px;
+  padding: 15px;
+  background-color: white;
+  margin: 10px;
+}
+
+.panel-input__header {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+mat-checkbox,
+mat-form-field {
+  display: block;
+}
+
+@media (min-width: 576px) {
+  .panel-input__header {
+    font-size: 24px;
+  }
+}

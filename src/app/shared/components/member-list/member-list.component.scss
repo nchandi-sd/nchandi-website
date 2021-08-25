@@ -1,0 +1,30 @@
+.member-list {
+  height: 100%;
+  border-radius: 3px;
+  padding: 15px;
+  background-color: white;
+  margin: 10px;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.header {
+  margin: 50px 0 0 0;
+}
+
+@media (min-width: 576px) {
+  .header {
+    margin: 24px 0 0 0;
+  }
+  .title {
+    font-size: 24px;
+  }
+}
+@media (min-width: 576px) {
+  .header {
+    margin: 0 0 0 0;
+  }
+}

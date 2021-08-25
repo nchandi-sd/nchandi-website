@@ -1,0 +1,22 @@
+.facility-input {
+  padding: 10px;
+  border-radius: 3px;
+  padding: 15px;
+  background-color: white;
+  margin: 10px;
+}
+
+.facility-input__header {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+@media (min-width: 576px) {
+  .facility-input__header {
+    font-size: 24px;
+  }
+}

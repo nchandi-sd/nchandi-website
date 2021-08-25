@@ -1,0 +1,50 @@
+<div class="member-list">
+  <div class="header">
+    <div class="title">{{ title }}</div>
+  </div>
+
+  <div>
+    <table
+      class="table table bordered table-responsive text-nowrap table-striped"
+    >
+      <thead>
+        <tr>
+          <th></th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th *ngIf="hasCommitment">Commitment</th>
+        </tr>
+      </thead>
+      <tbody id="openings-panel">
+        <tr *ngFor="let member of members">
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Delete Item"
+              (click)="onDeleteItem(member)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Edit Item"
+              (click)="onEditItem(member)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>{{ member?.firstName }}</td>
+          <td>{{ member?.lastName }}</td>
+          <td>{{ member?.email }}</td>
+          <td>{{ member?.phone }}</td>
+          <td *ngIf="hasCommitment">{{ member?.commitment }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

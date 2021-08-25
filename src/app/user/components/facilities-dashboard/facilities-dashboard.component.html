@@ -1,0 +1,17 @@
+<div>
+  <div class="admin-content admin-container">
+    Facilities Dashboard. This is a confidential area of the web site where
+    facility details can be set.
+  </div>
+  <div class="spacer"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-facility-input (formSubmit)="onFacilitySubmit($event)"></app-facility-input>
+    </div>
+    <div class="col-md-6">
+      <div class="container">
+        <app-facility-list (edit)="onFacilityEdit($event)"></app-facility-list>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.facility-dialog__button {
+  text-transform: uppercase;
+}
+
+app-facility-input ::ng-deep .btn-container {
+  display: none !important;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dialog app-facility-input ::ng-deep {
+  .facility-input__header,
+  .btn-primary {
+    display: none !important;
+  }
+}
+
+.dialog__content {
+  flex: 1 1 auto;
+}
+
+.dialog__actions {
+  justify-content: right;
+}

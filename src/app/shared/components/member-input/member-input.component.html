@@ -1,0 +1,58 @@
+<form class="member-input" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div class="member-input__header">Add a new member</div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" />
+    <mat-error>Value is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+    <mat-error>Valid email is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Phone Number</mat-label>
+    <input matInput formControlName="phone" />
+    <mat-error>Valid phone number is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Contact Method</mat-label>
+    <mat-select formControlName="preferredContactMethod">
+      <mat-option value="text">Text</mat-option>
+      <mat-option value="email">Email</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" *ngIf="hasCommitment">
+    <mat-label>Commitment</mat-label>
+    <mat-select formControlName="commitment">
+      <mat-option value="Chair">Chair</mat-option>
+      <mat-option value="Co-Chair">Co-Chair</mat-option>
+      <mat-option value="Librarian">Librarian</mat-option>
+      <mat-option value="Technology">Technology</mat-option>
+      <mat-option value="Treasurer">Treasurer</mat-option>
+      <mat-option value="Facility">Facilities</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form-group">
+    <button
+      type="submit"
+      class="btn admin-entry-button btn-primary mx-auto"
+      [disabled]="!userForm.valid"
+      mat-raised-button color="primary"
+    >
+      Add member
+    </button>
+  </div>
+</form>

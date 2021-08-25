@@ -1,19 +1,17 @@
-import {Component, OnInit, Input, SimpleChanges} from '@angular/core';
-import {CommitteeReport} from '../model/CommitteeReport';
-import {ResourceService} from '../resources/resource.service';
-import {PanelMaterials} from '../model/Panel-Materials';
-import {MonthlyReport} from '../model/MonthlyReport';
-import {Announcement} from '../model/Announcement';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { updateCommaList } from 'typescript';
+import { Component, OnInit, Input } from '@angular/core';
+import { CommitteeReport } from '../model/CommitteeReport';
+import { ResourceService } from '../resources/resource.service';
+import { PanelMaterials } from '../model/Panel-Materials';
+import { MonthlyReport } from '../model/MonthlyReport';
+import { Announcement } from '../model/Announcement';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-resource-list',
   templateUrl: './resource-list.component.html',
-  styleUrls: ['./resource-list.component.scss']
+  styleUrls: ['./resource-list.component.scss'],
 })
 export class ResourceListComponent implements OnInit {
-
   @Input() selectedResouce: string;
   @Input() availableResources: string[];
 
@@ -27,66 +25,29 @@ export class ResourceListComponent implements OnInit {
 
   cardView = false;
 
-  constructor(private resourceService: ResourceService) {
-  }
-
-
+  constructor(private resourceService: ResourceService) {}
 
   ngOnInit() {
-    this.resourceService.getPanelMaterials().subscribe(data => {
-      this.panelMaterials = data.map(e => {
-        console.log('retrieved panel materials from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as PanelMaterials;
-      }).sort((a,b)=>a.order - b.order);
-
+    this.resourceService.getPanelMaterials().subscribe((data) => {
+      this.panelMaterials = data.sort((a, b) => a.order - b.order);
     });
 
-    this.resourceService.getGeneralResources().subscribe(data => {
-      this.generalResources = data.map(e => {
-        console.log('retrieved general resources from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as PanelMaterials;
-      }).sort((a,b)=>a.order - b.order);
+    this.resourceService.getGeneralResources().subscribe((data) => {
+      this.generalResources = data.sort((a, b) => a.order - b.order);
     });
 
-    this.resourceService.getAnnouncements().subscribe(data => {
-      this.announcements = data.map(e => {
-        console.log('retrieved announcements from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Announcement;
-      });
+    this.resourceService.getAnnouncements().subscribe((data) => {
+      this.announcements = data;
     });
 
-    this.resourceService.getArchivedReports().subscribe(data => {
-      this.archiveReports = data.map(e => {
-        console.log('retrieved archive reports from firestore');
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as PanelMaterials;
-      });
+    this.resourceService.getArchivedReports().subscribe((data) => {
+      this.archiveReports = data;
     });
 
-    this.resourceService.getMonthlyReports().subscribe(data => {
-      this.monthlyReports = data.map(e => {
-        console.log('retrieved monthly reports from firestore: ' + e.payload.doc.id);
-        const item = {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as MonthlyReport;
-
-        return item;
-      });
+    this.resourceService.getMonthlyReports().subscribe((data) => {
+      this.monthlyReports = data;
 
       this.monthlyReports.sort(function (a, b) {
-        console.log('called here');
         if (a.month < b.month) {
           return -1;
         }
@@ -100,7 +61,10 @@ export class ResourceListComponent implements OnInit {
         let containsReport = false;
 
         for (let j = 0; j < this.committeeReports.length; j++) {
-          if (this.committeeReports[j].monthDate === this.getStringMonth(this.monthlyReports[i].month)) {
+          if (
+            this.committeeReports[j].monthDate ===
+            this.getStringMonth(this.monthlyReports[i].month)
+          ) {
             containsReport = true;
             if (this.monthlyReports[i].title.endsWith('Minutes')) {
               this.committeeReports[j].minId = this.monthlyReports[i].id;
@@ -109,9 +73,9 @@ export class ResourceListComponent implements OnInit {
             } else if (this.monthlyReports[i].title.endsWith('Report')) {
               this.committeeReports[j].finId = this.monthlyReports[i].id;
               this.committeeReports[j].finLink = this.monthlyReports[i].url;
-              this.committeeReports[j].financialReport = this.monthlyReports[i].title;
+              this.committeeReports[j].financialReport =
+                this.monthlyReports[i].title;
             }
-
           }
         }
 
@@ -145,30 +109,33 @@ export class ResourceListComponent implements OnInit {
   }
 
   panelListItemDropped(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.panelMaterials, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.panelMaterials,
+      event.previousIndex,
+      event.currentIndex
+    );
 
-    for(let i=0; i<this.panelMaterials.length; i++){
-      if(this.panelMaterials[i].order != i)
-        this.panelMaterials[i].order = i;
+    for (let i = 0; i < this.panelMaterials.length; i++) {
+      if (this.panelMaterials[i].order != i) this.panelMaterials[i].order = i;
     }
 
     this.resourceService.updatePanelMaterialsList(this.panelMaterials);
-
   }
 
   resourceItemDropped(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.generalResources, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.generalResources,
+      event.previousIndex,
+      event.currentIndex
+    );
 
-    for(let i=0; i<this.generalResources.length; i++){
-      if(this.generalResources[i].order != i)
+    for (let i = 0; i < this.generalResources.length; i++) {
+      if (this.generalResources[i].order != i)
         this.generalResources[i].order = i;
     }
 
     this.resourceService.updateGeneralResourceList(this.generalResources);
-
   }
-
-
 
   deleteItem(event: any) {
     const id = event.target.getAttribute('id');
@@ -202,10 +169,7 @@ export class ResourceListComponent implements OnInit {
       console.log('Deleting archive report');
       this.resourceService.deleteItem('Archived Reports', id);
     }
-
-
   }
-
 
   getStringMonth(month: number): string {
     if (month === 1) {
@@ -241,5 +205,4 @@ export class ResourceListComponent implements OnInit {
     this.currentAnnoucement.body = announcement.fullBody;
     this.cardView = true;
   }
-
 }

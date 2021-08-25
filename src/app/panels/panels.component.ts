@@ -1,146 +1,58 @@
-import {Component, OnInit} from '@angular/core';
-import {PanelService} from './panel.service';
-import {Panels} from '../model/Panels';
-import {TableData} from '../model/TableData';
-import {Opening} from '../model/Opening';
-import {Panel} from '../Model/Panel';
-import {FacilityChampion} from '../model/FacilityChampion';
-import {MatTableDataSource} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { Panel } from '../model/Panel';
+import { PanelService } from '../shared/services/panel.service';
+import { Observable } from 'rxjs';
+import { Facility } from '../model/Facility';
+import { FacilitiesService } from '../shared/services/facilities.service';
+import { AdminMember } from '../model/AdminMember';
 
+const PANEL_OPENING_CONTACTS = [
+  /*
+  {
+    name: 'Brigette L',
+    phone: '(714) 269-4476',
+    email: 'northcountyhandi@gmail.com',
+    contactMethod: 'Any',
+    type: 'tx',
+  },
+  */
+  {
+    name: 'Don C',
+    phone: '(760) 212-9759',
+    email: 'northcountyhandi@gmail.com',
+    contactMethod: 'Text',
+    type: 'tx',
+  },
+];
 
 @Component({
   selector: 'app-panels',
   templateUrl: './panels.component.html',
-  styleUrls: ['./panels.component.scss']
+  styleUrls: ['./panels.component.scss'],
 })
-
 export class PanelsComponent implements OnInit {
-  error: any;
-  entries: TableData[];
-  opening: Opening;
-  openings: Array<Opening> = [];
-  currentPanel: Panel;
-  currentPanels: Array<Panel> = [];
-  correctionalPanel: Panel;
-  correctionalPanels: Array<Panel> = [];
-  txChampions: Array<FacilityChampion> = [];
-  inChampions: Array<FacilityChampion> = [];
-  champs: MatTableDataSource<FacilityChampion>;
-  isTableOpen: boolean;
+  openPanels$: Observable<Panel[]>;
+  correctionalFacilities$: Observable<Facility[]>;
+  treatmentFacilities$: Observable<Facility[]>;
+  panelOpeningContacts = PANEL_OPENING_CONTACTS;
+  isTableOpen = false;
 
-  constructor(private panelService: PanelService) {
-    this.champs = new MatTableDataSource<FacilityChampion>();
-  }
+  constructor(
+    private panelService: PanelService,
+    private facilitiesService: FacilitiesService
+  ) {}
 
   ngOnInit() {
-    this.showOpenings();
-    this.showCurrentPanels();
-    this.showCorrectionalFacilities();
-    this.getTxContact();
-    this.getInContact();
-    this.isTableOpen = false;
+    this.openPanels$ = this.panelService.getOpenPanels();
+    this.treatmentFacilities$ = this.facilitiesService.getTreatmentFacilities();
+    this.correctionalFacilities$ =
+      this.facilitiesService.getCorrectionalFacilities();
   }
 
-  // This is all information that should be stored in a backend- not frontend
-  getTxContact() {
-
-/*     this.txChampions[0] = {
-      name: 'Brigette L',
-      phone: '(714) 269-4476',
-      email: 'northcountyhandi@gmail.com',
-      contactMethod: 'Any',
-      type: 'tx'
-    }; */
-    this.txChampions[1] = {
-      name: 'Don C',
-      phone: '(760) 212-9759',
-      email: 'northcountyhandi@gmail.com',
-      contactMethod: 'Text',
-      type: 'tx'
-    };
-  }
-
-  getInContact() {
-    this.inChampions[0] = {
-      name: 'Matthew C',
-      phone: '(760) 803-2182',
-      email: 'thatguymattewc@gmail.com',
-      contactMethod: 'Text',
-      type: 'in'
-    };
-    this.inChampions[1] = {
-      name: 'Dan H',
-      phone: '(760) 822-6601',
-      email: 'dhowardx@yahoo.com',
-      contactMethod: 'Any',
-      type: 'in'
-    };
-  }
-
-  showOpenings() {
-    this.panelService.getOpenings()
-      .subscribe((data: TableData) => {
-        data.feed.entry.forEach( ent => {
-          this.opening = {
-            dayOfWeek: ent.gsx$dayofweek.$t,
-            weekOfMonth: ent.gsx$weekofmonth.$t,
-            time: ent.gsx$time.$t,
-            facility: ent.gsx$facility.$t,
-            location: ent.gsx$location.$t,
-            positionsAvailable: ent.gsx$needed.$t,
-            gender: ent.gsx$menwomen.$t,
-            panelCoordinator: ent.gsx$panelcoordinator.$t,
-            boardChampion: ent.gsx$boardchampion.$t
-          };
-          this.openings.push(this.opening);
-        });
-      });
+  getMemberName(user: AdminMember) {
+    if (user) {
+      return `${user.firstName} ${user.lastName}`;
     }
-
-  showCurrentPanels() {
-    this.panelService.getCurrentPanels()
-      .subscribe((data: Panels) => {
-        data.feed.entry.forEach( ent => {
-          this.currentPanel = {
-            facility: ent.gsx$facility.$t,
-            location: ent.gsx$location.$t,
-            day: ent.gsx$day.$t,
-            time: ent.gsx$time.$t,
-            gender: ent.gsx$gender.$t,
-            panelCoordinator: ent.gsx$panelcoordinator.$t,
-            boardChampion: ent.gsx$boardchampion.$t
-          };
-          this.currentPanels.push(this.currentPanel);
-        });
-      });
+    return '';
   }
-
-  showCorrectionalFacilities() {
-    this.panelService.getCorrectionalFacilities()
-      .subscribe((data: Panels) => {
-        data.feed.entry.forEach( ent => {
-          this.correctionalPanel = {
-            facility: ent.gsx$facility.$t,
-            location: ent.gsx$location.$t,
-            day: ent.gsx$day.$t,
-            time: ent.gsx$time.$t,
-            gender: ent.gsx$gender.$t,
-            panelCoordinator: ent.gsx$panelcoordinator.$t,
-            boardChampion: ent.gsx$boardchampion.$t
-          };
-          this.correctionalPanels.push(this.correctionalPanel);
-        });
-      });
-  }
-
-  contactPanelClicked() {
-    this.isTableOpen = !this.isTableOpen;
-  }
-
 }
-
-
-
-
-
-
