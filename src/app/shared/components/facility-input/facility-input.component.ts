@@ -69,6 +69,10 @@ export class FacilityInputComponent {
   onFormSubmit() {
     if (this.userForm.valid) {
       this.formSubmit.emit(this.userForm.getRawValue());
+      this.userForm.reset();
+      Object.keys(this.userForm.controls).forEach(key => {
+        this.userForm.get(key).setErrors(null);
+      });
     }
   }
 }

@@ -93,46 +93,46 @@ export class PanelService {
       .collection('Facilities')
       .doc(data.facilityId);
     const boardChampion = this.firestore
-      .collection('Panel Members')
+      .collection('Members')
       .doc(data.boardChampionId);
     const panelCoordinator = this.firestore
-      .collection('Panel Members')
+      .collection('Members')
       .doc(data.panelCoordinatorId);
 
     let panelLeader;
     if (data.panelLeaderId && data.panelLeaderId.length > 0) {
       panelLeader = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(data.panelLeaderId);
     }
     let panelMember1;
     if (data.panelMember1Id && data.panelMember1Id.length > 0) {
       panelMember1 = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(data.panelMember1Id);
     }
     let panelMember2;
     if (data.panelMember2Id && data.panelMember2Id.length > 0) {
       panelMember2 = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(data.panelMember2Id);
     }
     let panelMember3;
     if (data.panelMember3Id && data.panelMember3Id.length > 0) {
       panelMember3 = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(data.panelMember3Id);
     }
     let panelMember4;
     if (data.panelMember4Id && data.panelMember4Id.length > 0) {
       panelMember4 = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(data.panelMember4Id);
     }
     let panelMember5;
     if (data.panelMember5Id && data.panelMember5Id.length > 0) {
       panelMember5 = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(data.panelMember5Id);
     }
     data.facility = facility ? facility.ref : undefined;
@@ -183,51 +183,51 @@ export class PanelService {
 
     if (panel.boardChampion && panel.boardChampion.id) {
       admin$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.boardChampion.id)
         .get();
     }
 
     if (panel.panelCoordinator && panel.panelCoordinator.id) {
       member$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelCoordinator.id)
         .get();
     }
 
     if (panel.panelLeader && panel.panelLeader.id) {
       panelLeader$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelLeader.id)
         .get();
     }
     if (panel.panelMember1 && panel.panelMember1.id) {
       panelMember1$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelMember1.id)
         .get();
     }
     if (panel.panelMember2 && panel.panelMember2.id) {
       panelMember2$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelMember2.id)
         .get();
     }
     if (panel.panelMember3 && panel.panelMember3.id) {
       panelMember3$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelMember3.id)
         .get();
     }
     if (panel.panelMember4 && panel.panelMember4.id) {
       panelMember4$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelMember4.id)
         .get();
     }
     if (panel.panelMember5 && panel.panelMember5.id) {
       panelMember5$ = this.firestore
-        .collection('Panel Members')
+        .collection('Members')
         .doc(panel.panelMember5.id)
         .get();
     }

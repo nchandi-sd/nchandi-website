@@ -115,6 +115,9 @@ export class PanelInputComponent implements OnInit {
     if (this.valid) {
       this.formSubmit.emit(this.value);
       this.userForm.reset();
+      Object.keys(this.userForm.controls).forEach(key => {
+        this.userForm.get(key).setErrors(null);
+      });
     }
   }
 

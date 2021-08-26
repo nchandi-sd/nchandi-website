@@ -20,14 +20,14 @@ export class PanelMemberService {
   ) {}
 
   getPanelMembers() {
-    return this.getMembers('Panel Members');
+    return this.getMembers('Members');
   }
 
   addPanelMember(admin: AdminMember) {
     return this.isAdmin.pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
-          return from(this.firestore.collection('Panel Members').add({ ...admin }));
+          return from(this.firestore.collection('Members').add({ ...admin }));
         }
         return of(undefined);
       })
@@ -38,7 +38,7 @@ export class PanelMemberService {
     return this.isAdmin.pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
-          return from(this.firestore.collection('Panel Members').doc(id).update(member));
+          return from(this.firestore.collection('Members').doc(id).update(member));
         }
         return of(undefined);
       })
@@ -49,7 +49,7 @@ export class PanelMemberService {
     return this.isAdmin.pipe(
       switchMap((isAdmin) => {
         if (isAdmin) {
-          return from(this.firestore.collection('Panel Members').doc(id).delete());
+          return from(this.firestore.collection('Members').doc(id).delete());
         }
         return of(undefined);
       })
