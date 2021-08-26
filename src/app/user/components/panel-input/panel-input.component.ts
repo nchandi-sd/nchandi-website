@@ -93,7 +93,6 @@ export class PanelInputComponent implements OnInit {
     panelMember3: new FormControl(''),
     panelMember4: new FormControl(''),
     panelMember5: new FormControl(''),
-    panelMembers: new FormControl([]),
   });
 
   constructor(
