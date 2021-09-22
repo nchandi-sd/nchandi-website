@@ -17,6 +17,8 @@ import { Announcement } from '../model/Announcement';
 import { Link } from '../model/Link';
 import { LINKS } from '../model/Local-Links';
 import { PanelService } from '../shared/services/panel.service';
+import { FacilitiesService } from '../shared/services/facilities.service';
+import { Facility } from '../model/Facility';
 
 @Component({
   selector: 'app-resources',
@@ -25,7 +27,7 @@ import { PanelService } from '../shared/services/panel.service';
 })
 export class ResourcesComponent implements OnInit {
   localLinks: Link[] = null;
-  facilities: Array<string> = [];
+  facilities: Facility[] = [];
   announcements: Announcement[] = null;
   monthlyReports: MonthlyReport[] = null;
   committeeReports: Array<CommitteeReport> = [];
@@ -54,6 +56,7 @@ export class ResourcesComponent implements OnInit {
 
   constructor(
     private resourceService: ResourceService,
+    private facilitiesService: FacilitiesService,
     private panelService: PanelService,
     private formBuilder: FormBuilder,
     private resourceSubmissionService: ResourceSubmissionService
@@ -111,6 +114,10 @@ export class ResourcesComponent implements OnInit {
 
     this.resourceService.getAnnouncements().subscribe((data) => {
       this.announcements = data;
+    });
+
+    this.facilitiesService.getFacilities().subscribe((data) => {
+      this.facilities = data;
     });
 
     this.resourceService.getMonthlyReports().subscribe((data) => {
