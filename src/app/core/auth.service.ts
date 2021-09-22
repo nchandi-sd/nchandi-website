@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
-import { AdminService } from '../shared/services/admin.service';
+import { Injectable } from "@angular/core";
+import "rxjs/add/operator/toPromise";
+import { AngularFireAuth } from "@angular/fire/auth";
+import * as firebase from "firebase/app";
+import { AdminService } from "../shared/services/admin.service";
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -44,8 +45,8 @@ export class AuthService {
   doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('profile');
-      provider.addScope('email');
+      provider.addScope("profile");
+      provider.addScope("email");
       this.afAuth.auth.signInWithPopup(provider).then(
         (res) => {
           resolve(res);
@@ -61,6 +62,7 @@ export class AuthService {
   async doRegister(value) {
     const isAdmin = await this.adminService
       .isEmailAdmin(value.email)
+      .pipe(take(1))
       .toPromise();
     if (isAdmin) {
       return new Promise<any>((resolve, reject) => {
