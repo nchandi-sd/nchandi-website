@@ -17,8 +17,8 @@ const PANEL_OPENING_CONTACTS = [
   },
   */
   {
-    name: 'Don C',
-    phone: '(760) 212-9759',
+    name: 'David P',
+    phone: '(626) 200-0254',
     email: 'northcountyhandi@gmail.com',
     contactMethod: 'Text',
     type: 'tx',
