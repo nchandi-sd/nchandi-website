@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../core/auth.service';
-import { Router, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from "@angular/core";
+import { AuthService } from "../core/auth.service";
+import { Router, Params } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  errorMessage = '';
-  successMessage = '';
+  errorMessage = "";
+  successMessage = "";
 
   constructor(
     public authService: AuthService,
@@ -23,50 +23,50 @@ export class RegisterComponent {
 
   createForm() {
     this.registerForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ["", Validators.required],
+      password: ["", Validators.required],
     });
   }
 
-  tryFacebookLogin() {
-    this.authService.doFacebookLogin().then(
+  async tryFacebookLogin() {
+    await this.authService.doFacebookLogin().then(
       (res) => {
-        this.router.navigate(['/user']);
+        this.router.navigate(["/user"]);
       },
       (err) => console.log(err)
     );
   }
 
-  tryTwitterLogin() {
-    this.authService.doTwitterLogin().then(
+  async tryTwitterLogin() {
+    await this.authService.doTwitterLogin().then(
       (res) => {
-        this.router.navigate(['/user']);
+        this.router.navigate(["/user"]);
       },
       (err) => console.log(err)
     );
   }
 
-  tryGoogleLogin() {
-    this.authService.doGoogleLogin().then(
+  async tryGoogleLogin() {
+    await this.authService.doGoogleLogin().then(
       (res) => {
-        this.router.navigate(['/user']);
+        this.router.navigate(["/user"]);
       },
       (err) => console.log(err)
     );
   }
 
-  tryRegister(value) {
-    this.authService.doRegister(value).then(
+  async tryRegister(value) {
+    await this.authService.doRegister(value).then(
       (res) => {
         console.log(res);
-        this.errorMessage = '';
-        this.successMessage = 'Your account has been created';
+        this.errorMessage = "";
+        this.successMessage = "Your account has been created";
         this.tryLogin(value);
       },
       (err) => {
         console.log(err);
         this.errorMessage = err.message;
-        this.successMessage = '';
+        this.successMessage = "";
       }
     );
   }
@@ -74,7 +74,7 @@ export class RegisterComponent {
   private tryLogin(value) {
     this.authService.doLogin(value).then(
       (res) => {
-        this.router.navigate(['/user']);
+        this.router.navigate(["/user"]);
       },
       (err) => {
         console.log(err);

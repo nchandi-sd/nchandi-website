@@ -291,8 +291,8 @@
                     <div class="col-12 col-lg-6">
                       <label class="form-label">Facility</label>
                       <select formControlName="facility" name="facility" class="browser-default custom-select">
-                        <option *ngFor="let facility of facilities" value={{facility}}>
-                          {{facility}}
+                        <option *ngFor="let facility of facilities" [value]="facility.facilityName">
+                          {{facility.facilityName}}
                         </option>
                       </select>
                       <p *ngIf="showError('facility')" class="help-block">Select a facility.</p>
