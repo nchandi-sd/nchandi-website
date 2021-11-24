@@ -49,6 +49,52 @@ export class SortByPipe implements PipeTransform {
           value[e + 1] = value[e]
           value[e] = altTempPosition
         }
+      } else if(property === "boardChampion"){
+        if(value[e].boardChampion.firstName.toUpperCase() + value[e].boardChampion.lastName.toUpperCase() > value[e + 1].boardChampion.firstName.toUpperCase() + value[e + 1].boardChampion.lastName.toUpperCase() && direction === true){
+          value[e] = value[e + 1]
+          value[e + 1] = tempPosition
+        }
+        
+        if(value[e].boardChampion.firstName.toUpperCase() + value[e].boardChampion.lastName.toUpperCase() < value[e + 1].boardChampion.firstName.toUpperCase() + value[e + 1].boardChampion.lastName.toUpperCase() && direction === false){
+          value[e + 1] = value[e]
+          value[e] = altTempPosition
+        }
+      } else if(property === "panelCoordinator"){
+        if(value[e].panelCoordinator.firstName.toUpperCase() + value[e].panelCoordinator.lastName.toUpperCase() > value[e + 1].panelCoordinator.firstName.toUpperCase() + value[e + 1].panelCoordinator.lastName.toUpperCase() && direction === true){
+          value[e] = value[e + 1]
+          value[e + 1] = tempPosition
+        }
+        
+        if(value[e].panelCoordinator.firstName.toUpperCase() + value[e].panelCoordinator.lastName.toUpperCase() < value[e + 1].panelCoordinator.firstName.toUpperCase() + value[e + 1].panelCoordinator.lastName.toUpperCase() && direction === false){
+          value[e + 1] = value[e]
+          value[e] = altTempPosition
+        }
+      } else if(property.includes("...")){
+        let propertyParts = property.split("...")
+
+        if(propertyParts.length === 2){
+          if(value[e][propertyParts[0]][propertyParts[1]].toUpperCase() > value[e + 1][propertyParts[0]][propertyParts[1]].toUpperCase() && direction === true){
+            value[e] = value[e + 1]
+            value[e + 1] = tempPosition
+          }
+          
+          if(value[e][propertyParts[0]][propertyParts[1]].toUpperCase() < value[e + 1][propertyParts[0]][propertyParts[1]].toUpperCase() && direction === false){
+            value[e + 1] = value[e]
+            value[e] = altTempPosition
+          }
+        }
+
+        if(propertyParts.length === 3){
+          if(value[e][propertyParts[0]][propertyParts[1]].toUpperCase() + value[e][propertyParts[0]][propertyParts[2]].toUpperCase() > value[e + 1][propertyParts[0]][propertyParts[1]].toUpperCase() + value[e + 1][propertyParts[0]][propertyParts[2]].toUpperCase() && direction === true){
+            value[e] = value[e + 1]
+            value[e + 1] = tempPosition
+          }
+          
+          if(value[e][propertyParts[0]][propertyParts[1]].toUpperCase() + value[e][propertyParts[0]][propertyParts[2]].toUpperCase() < value[e + 1][propertyParts[0]][propertyParts[1]].toUpperCase() + value[e + 1][propertyParts[0]][propertyParts[2]].toUpperCase() && direction === false){
+            value[e + 1] = value[e]
+            value[e] = altTempPosition
+          }
+        }
       } /* else if(value[e][property].match(/\W/g)) {
         console.log("is alphanumeric")
         if(value[e][property] > value[e + 1][property] && direction === true){

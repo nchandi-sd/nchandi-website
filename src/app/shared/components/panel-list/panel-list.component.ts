@@ -30,7 +30,6 @@ export class PanelListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.panels$ = this.panelService.getPanels();
-    this.panels$.subscribe(value => console.log("value", value))
   }
 
   ngOnDestroy() {

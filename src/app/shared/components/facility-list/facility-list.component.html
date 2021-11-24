@@ -10,18 +10,18 @@
       <thead>
         <tr>
           <th></th>
-          <th>Facility</th>
-          <th>Type</th>
-          <th>Address</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Primary Contact</th>
-          <th>Primary Email</th>
-          <th>Primary Phone</th>
-          <th>Alt. Contact</th>
-          <th>Alt. Email</th>
-          <th>Alt. Phone</th>
-          <th>Website</th>
+          <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
+          <th (click)="onSortThisBy('facilityType', facilities)">Type</th>
+          <th (click)="onSortThisBy('address', facilities)">Address</th>
+          <th (click)="onSortThisBy('city', facilities)">City</th>
+          <th (click)="onSortThisBy('state', facilities)">State</th>
+          <th (click)="onSortThisBy('mainContactName', facilities)">Primary Contact</th>
+          <th (click)="onSortThisBy('mainContactEmail', facilities)">Primary Email</th>
+          <th (click)="onSortThisBy('mainContactPhone', facilities)">Primary Phone</th>
+          <th (click)="onSortThisBy('alternateContactName', facilities)">Alt. Contact</th>
+          <th (click)="onSortThisBy('alternateContactEmail', facilities)">Alt. Email</th>
+          <th (click)="onSortThisBy('alternateContactPhone', facilities)">Alt. Phone</th>
+          <th (click)="onSortThisBy('website', facilities)">Website</th>
         </tr>
       </thead>
       <tbody id="openings-panel">

@@ -111,17 +111,18 @@
               table-striped
             "
             id="openingsTable"
+            *ngIf="openPanels$ | async as panels"
           >
             <thead>
               <tr>
-                <th>Day of Week</th>
-                <th>Week of Month</th>
-                <th>Time</th>
-                <th>Facility</th>
+                <th (click)="onSortThisBy('dayOfWeek', panels)">Day of Week</th>
+                <th (click)="onSortThisBy('weekOfMonth', panels)">Week of Month</th>
+                <th (click)="onSortThisBy('eventTime', panels)">Time</th>
+                <th (click)="onSortThisBy('facility...facilityName', panels)">Facility</th>
                 <!--<th>Location</th>-->
-                <th>Gender</th>
+                <th (click)="onSortThisBy('gender', panels)">Gender</th>
                 <!--<th>Mark as Number Needed?</th>-->
-                <th># Needed</th>
+                <th (click)="onSortThisBy('numberNeeded', panels)"># Needed</th>
                 <!--<th>Board Champion</th>
                 <th>Panel Coordinator</th>
                 <th>Panel Leader</th>
@@ -132,7 +133,7 @@
                 <th>Panel Member 5</th>-->
               </tr>
             </thead>
-            <tbody id="openings-panel" *ngIf="openPanels$ | async as panels">
+            <tbody id="openings-panel">
               <tr *ngFor="let panel of panels">
                 <td>{{ panel.dayOfWeek }}</td>
                 <td>{{ panel.weekOfMonth | number }}</td>
@@ -174,22 +175,22 @@
               table-striped
             "
             id="treatmentPanels"
+            *ngIf="treatmentFacilities$ | async as facilities"
           >
             <thead>
               <tr>
-                <th>Facility</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
+                <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
+                <th (click)="onSortThisBy('address', facilities)">Address</th>
+                <th (click)="onSortThisBy('city', facilities)">City</th>
+                <th (click)="onSortThisBy('state', facilities)">State</th>
                 <!--<th>Primary Contact</th>
                 <th>Primary Email</th>
                 <th>Primary Phone</th>-->
-                <th>Website</th>
+                <th (click)="onSortThisBy('website', facilities)">Website</th>
               </tr>
             </thead>
             <tbody
               id="facility-panels"
-              *ngIf="treatmentFacilities$ | async as facilities"
             >
               <ng-container *ngFor="let facility of facilities">
                 <tr>
@@ -222,22 +223,22 @@
               table-striped
             "
             id="correctionalPanels"
+            *ngIf="correctionalFacilities$ | async as facilities"
           >
             <thead>
               <tr>
-                <th>Facility</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
+                <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
+                <th (click)="onSortThisBy('address', facilities)">Address</th>
+                <th (click)="onSortThisBy('city', facilities)">City</th>
+                <th (click)="onSortThisBy('state', facilities)">State</th>
                 <!--<th>Primary Contact</th>
                 <th>Primary Email</th>
                 <th>Primary Phone</th>-->
-                <th>Website</th>
+                <th (click)="onSortThisBy('website', facilities)">Website</th>
               </tr>
             </thead>
             <tbody
               id="facility-panels"
-              *ngIf="correctionalFacilities$ | async as facilities"
             >
               <ng-container *ngFor="let facility of facilities">
                 <tr>
@@ -248,7 +249,7 @@
                   <!--<td>{{ facility.mainContactName }}</td>
                   <td>{{ facility.mainContactEmail }}</td>
                   <td>{{ facility.mainContactPhone }}</td>-->
-                  <td>{{ facility.website }}</td>-->
+                  <td>{{ facility.website }}</td>
                 </tr>
               </ng-container>
             </tbody>
