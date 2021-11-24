@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AdminMember } from 'src/app/model/AdminMember';
+import { SortByPipe } from 'src/app/sort-by.pipe';
+import { SortPanelMembersByFirstNamePipe } from 'src/app/sort-panel-members-by-first-name.pipe';
+import { SortPanelMembersByLastNamePipe } from 'src/app/sort-panel-members-by-last-name.pipe';
+import { AmdDependency } from 'typescript';
 
 @Component({
   selector: 'app-member-list',
@@ -7,6 +11,8 @@ import { AdminMember } from 'src/app/model/AdminMember';
   styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
+
+  sortDirection: boolean = true
 
   @Input()
   title = '';
@@ -23,7 +29,11 @@ export class MemberListComponent implements OnInit {
   @Output()
   editItem = new EventEmitter<AdminMember>();
 
-  constructor() { }
+
+  @Output()
+  sortThisBy = new EventEmitter<string>()
+
+  constructor(private sortByFirst: SortPanelMembersByFirstNamePipe, private sortByLast: SortPanelMembersByLastNamePipe, private sortBy: SortByPipe) { }
 
   ngOnInit() {
   }
@@ -35,4 +45,11 @@ export class MemberListComponent implements OnInit {
   onEditItem(member: AdminMember) {
     this.editItem.emit(member);
   }
+
+  onSortThisBy(action: string, members: AdminMember[]){
+    this.sortDirection = !this.sortDirection
+    console.log("direction", this.sortDirection)
+    this.sortBy.transform(members, action, this.sortDirection)
+  }
+
 }

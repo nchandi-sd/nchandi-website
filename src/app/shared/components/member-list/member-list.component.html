@@ -10,12 +10,12 @@
       <thead>
         <tr>
           <th></th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th *ngIf="hasCommitment">Commitment</th>
-          <th>Preferred Contact Method</th>
+          <th (click)="onSortThisBy('firstName', members)">First Name</th>
+          <th (click)="onSortThisBy('lastName', members)">Last Name</th>
+          <th (click)="onSortThisBy('email', members)">Email</th>
+          <th (click)="onSortThisBy('phone', members)">Phone</th>
+          <th (click)="onSortThisBy('commitment', members)" *ngIf="hasCommitment">Commitment</th>
+          <th (click)="onSortThisBy('preferredContactMethod', members)">Preferred Contact Method</th>
         </tr>
       </thead>
       <tbody id="openings-panel">

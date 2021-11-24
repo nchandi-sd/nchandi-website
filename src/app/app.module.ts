@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ChangeDetectorRef, NgModule, Provider } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -60,6 +60,11 @@ import { PanelDialogComponent } from './shared/components/panel-dialog/panel-dia
 import { FacilityDialogComponent } from './shared/components/facility-dialog/facility-dialog.component';
 import { FacilityListComponent } from './shared/components/facility-list/facility-list.component';
 import { FacilityInputComponent } from './shared/components/facility-input/facility-input.component';
+import { SortPanelMembersByFirstNamePipe } from './sort-panel-members-by-first-name.pipe';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { SortPanelMembersByLastNamePipe } from './sort-panel-members-by-last-name.pipe';
+import { SortPanelMembersByEmailPipe } from './sort-panel-members-by-email.pipe';
+import { SortByPipe } from './sort-by.pipe';
 
 @NgModule({
   declarations: [
@@ -93,6 +98,10 @@ import { FacilityInputComponent } from './shared/components/facility-input/facil
     FacilityDialogComponent,
     FacilityListComponent,
     FacilityInputComponent,
+    SortPanelMembersByFirstNamePipe,
+    SortPanelMembersByLastNamePipe,
+    SortPanelMembersByEmailPipe,
+    SortByPipe,
   ],
   imports: [
     AngularSvgIconModule,
@@ -121,12 +130,17 @@ import { FacilityInputComponent } from './shared/components/facility-input/facil
     DragDropModule,
   ],
   providers: [
+    [AsyncPipe, ChangeDetectorRef as Provider],
     ContactService,
     AuthGuard,
     UserService,
     AuthService,
     UserResolver,
     ResourceService,
+    SortPanelMembersByFirstNamePipe,
+    SortPanelMembersByLastNamePipe,
+    SortPanelMembersByEmailPipe,
+    SortByPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
