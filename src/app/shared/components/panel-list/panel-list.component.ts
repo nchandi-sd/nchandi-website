@@ -8,6 +8,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { AdminMember } from 'src/app/model/AdminMember';
 import { Panel } from 'src/app/model/Panel';
+import { SortByPipe } from 'src/app/sort-by.pipe';
 import { PanelService } from '../../services/panel.service';
 
 @Component({
@@ -21,9 +22,11 @@ export class PanelListComponent implements OnInit, OnDestroy {
 
   panels$: Observable<Panel[]>;
 
+  sortDirection: boolean = true
+
   private subscriptions = new Subscription();
 
-  constructor(private panelService: PanelService) {}
+  constructor(private panelService: PanelService, private sortBy: SortByPipe) {}
 
   ngOnInit() {
     this.panels$ = this.panelService.getPanels();
@@ -46,5 +49,11 @@ export class PanelListComponent implements OnInit, OnDestroy {
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
+  }
+
+  onSortThisBy(action: string, members: AdminMember[]){
+    this.sortDirection = !this.sortDirection
+    console.log("direction", this.sortDirection)
+    this.sortBy.transform(members, action, this.sortDirection)
   }
 }

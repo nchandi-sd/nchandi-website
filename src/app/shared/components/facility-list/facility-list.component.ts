@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Facility } from 'src/app/model/Facility';
+import { SortByPipe } from 'src/app/sort-by.pipe';
 import { FacilitiesService } from '../../services/facilities.service';
 
 @Component({
@@ -14,12 +15,15 @@ export class FacilityListComponent implements OnInit, OnDestroy {
 
   facilities$: Observable<Facility[]>;
 
+  sortDirection: boolean = true;
+
   private subscriptions = new Subscription();
 
-  constructor(private facilitiesService: FacilitiesService) {}
+  constructor(private facilitiesService: FacilitiesService, private sortBy: SortByPipe) {}
 
   ngOnInit() {
     this.facilities$ = this.facilitiesService.getFacilities();
+    this.facilities$.subscribe(value => console.log("value", value))
   }
 
   ngOnDestroy() {
@@ -34,5 +38,11 @@ export class FacilityListComponent implements OnInit, OnDestroy {
 
   onEditItem(facility: Facility) {
     this.edit.emit(facility);
+  }
+
+  onSortThisBy(action: string, facilities: Facility[]){
+    this.sortDirection = !this.sortDirection
+    console.log("direction", this.sortDirection)
+    this.sortBy.transform(facilities, action, this.sortDirection)
   }
 }
