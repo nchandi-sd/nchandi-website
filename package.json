@@ -42,6 +42,7 @@
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
     "web-animations-js": "^2.3.2",
+    "xlsx": "^0.17.4",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

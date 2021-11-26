@@ -50,8 +50,6 @@ export class PanelsComponent implements OnInit {
     this.treatmentFacilities$ = this.facilitiesService.getTreatmentFacilities();
     this.correctionalFacilities$ =
     this.facilitiesService.getCorrectionalFacilities();
-
-    this.openPanels$.subscribe(value => console.log("openPanels$", value))
   }
 
   getMemberName(user: AdminMember) {
@@ -65,5 +63,19 @@ export class PanelsComponent implements OnInit {
     this.sortDirection = !this.sortDirection
     console.log("direction", this.sortDirection)
     this.sortBy.transform(arr, action, this.sortDirection)
+  }
+
+  onPrint(elementId: string, printedTitle: string){
+    let selectedElement = document.getElementById(elementId).innerHTML
+    console.log("selectedElement", selectedElement)
+    let originalContent = document.body.innerHTML
+    let originalTitle = document.title
+    document.body.innerHTML = selectedElement
+    document.title = printedTitle
+    window.print()
+    /* document.body.innerHTML = originalContent
+    document.title = originalTitle */
+    window.location.reload()
+    
   }
 }

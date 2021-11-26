@@ -3,9 +3,10 @@
     <div class="title">Current Panels</div>
   </div>
 
-  <div *ngIf="panels$ | async as panels">
+  <div *ngIf="panels$ | async as panels" >
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
+      id="currentPanelsTable"
     >
       <thead>
         <tr>
@@ -75,4 +76,58 @@
       </tbody>
     </table>
   </div>
+  <button class="btn btn-primary btn-lg" (click)="onPrint('currentPanels', 'Current Panels')">Print</button>
+  <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'currentPanels', 'currentPanelsTable')">Export</button>
+</div>
+
+
+<div *ngIf="panels$ | async as panels" id="currentPanels" style="display: none">
+  <table id="invisibleTable">
+    <thead>
+      <tr>
+        <th>Day of Week</th>
+        <th>Week of Month</th>
+        <th>Time</th>
+        <th>Facility</th>
+        <th>Location</th>
+        <th>Gender</th>
+        <th>Mark as Number Needed?</th>
+        <th># Needed</th>
+        <th>Board Champion</th>
+        <th>Panel Coordinator</th>
+        <th>Panel Leader</th>
+        <th>Panel Member 1</th>
+        <th>Panel Member 2</th>
+        <th>Panel Member 3</th>
+        <th>Panel Member 4</th>
+        <th>Panel Member 5</th>
+      </tr>
+    </thead>
+    <tbody id="openings-panel">
+      <tr *ngFor="let panel of panels">
+        <td>{{ panel.dayOfWeek }}</td>
+        <td>{{ panel.weekOfMonth | number }}</td>
+        <td>{{ panel.eventTime }}</td>
+        <td style="word-wrap: normal">
+          {{ panel.facility ? panel.facility.facilityName : "" }}
+        </td>
+        <td>{{ panel.location }}</td>
+        <td>{{ panel.gender }}</td>
+        <td>
+          {{ panel.markAsMembersNeeded }}
+        </td>
+        <td>
+          {{ panel.numberNeeded ? panel.numberNeeded : "" }}
+        </td>
+        <td>{{ getMemberName(panel.boardChampion) }}</td>
+        <td>{{ getMemberName(panel.panelCoordinator) }}</td>
+        <td>{{ getMemberName(panel.panelLeader) }}</td>
+        <td>{{ getMemberName(panel.panelMember1) }}</td>
+        <td>{{ getMemberName(panel.panelMember2) }}</td>
+        <td>{{ getMemberName(panel.panelMember3) }}</td>
+        <td>{{ getMemberName(panel.panelMember4) }}</td>
+        <td>{{ getMemberName(panel.panelMember5) }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
