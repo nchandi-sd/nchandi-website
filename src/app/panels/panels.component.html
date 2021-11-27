@@ -161,7 +161,11 @@
             </tbody>
           </table>
         </div>
-        <button (click)="onPrint('openPanels', 'Open Panels')">Print</button>
+        <div class="printOrExport">
+          <button class="btn btn-primary btn-lg" (click)="onPrint('openPanels', 'Open Panels')">Print</button>
+          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'openPanels', 'openingsTable')">Export</button>
+        </div>
+
 
         <div class="spacer"></div>
 
@@ -208,7 +212,10 @@
             </tbody>
           </table>
         </div>
-        <button (click)="onPrint('currentPanels', 'Current Panels')">Print</button>
+        <div class="printOrExport">
+          <button class="btn btn-primary btn-lg" (click)="onPrint('currentPanels', 'Current Panels')">Print</button>
+          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'currentPanels', 'treatmentPanels')">Export</button>
+        </div>
 
         <div class="spacer"></div>
 
@@ -257,7 +264,10 @@
             </tbody>
           </table>
         </div>
-        <button class="btn btn-primary btn-lg" (click)="onPrint('correctionalFacilities', 'correctional Facilities')">Print</button>
+        <div class="printOrExport">
+          <button class="btn btn-primary btn-lg" (click)="onPrint('correctionalFacilities', 'correctional Facilities')">Print</button>
+          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'correctionalFacilities', 'correctionalPanels')">Export</button>
+        </div>
         <div class="spacer"></div>
         <div class="about-location-view section"></div>
       </div>

@@ -64,6 +64,13 @@ li.noStyle {
   text-align: center;
 }
 
+.printOrExport {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  width: fit-content
+}
+
 /*Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {
   .navbar-spacer{

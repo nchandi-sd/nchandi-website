@@ -6,6 +6,7 @@ import { Facility } from '../model/Facility';
 import { FacilitiesService } from '../shared/services/facilities.service';
 import { AdminMember } from '../model/AdminMember';
 import { SortByPipe } from '../sort-by.pipe';
+import * as XLSX from 'xlsx'
 
 const PANEL_OPENING_CONTACTS = [
   /*
@@ -77,5 +78,12 @@ export class PanelsComponent implements OnInit {
     document.title = originalTitle */
     window.location.reload()
     
+  }
+
+  onExport(fileExtension: string, fileName: string, table: string){
+    console.log("table", table)
+    let selectedTable = document.getElementById(table)
+    let spreadSheet = XLSX.utils.table_to_book(selectedTable)
+    XLSX.writeFile(spreadSheet, `${fileName}.${fileExtension}`)
   }
 }
