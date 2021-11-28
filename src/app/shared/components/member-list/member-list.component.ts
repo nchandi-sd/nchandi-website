@@ -4,6 +4,7 @@ import { SortByPipe } from 'src/app/sort-by.pipe';
 import { SortPanelMembersByFirstNamePipe } from 'src/app/sort-panel-members-by-first-name.pipe';
 import { SortPanelMembersByLastNamePipe } from 'src/app/sort-panel-members-by-last-name.pipe';
 import { AmdDependency } from 'typescript';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-member-list',
@@ -50,6 +51,25 @@ export class MemberListComponent implements OnInit {
     this.sortDirection = !this.sortDirection
     console.log("direction", this.sortDirection)
     this.sortBy.transform(members, action, this.sortDirection)
+  }
+
+  onPrint(elementId: string, printedTitle: string){
+    let selectedElement = document.getElementById(elementId).innerHTML
+    console.log("selectedElement", selectedElement)
+    let originalContent = document.body.innerHTML
+    let originalTitle = document.title
+    document.body.innerHTML = selectedElement
+    document.title = printedTitle
+    window.print()
+    /* document.body.innerHTML = originalContent
+    document.title = originalTitle */
+    window.location.reload()
+  }
+
+  onExport(fileExtension: string, fileName: string, table: string){
+    let selectedTable = document.getElementById(table)
+    let spreadSheet = XLSX.utils.table_to_book(selectedTable)
+    XLSX.writeFile(spreadSheet, `${fileName}.${fileExtension}`)
   }
 
 }

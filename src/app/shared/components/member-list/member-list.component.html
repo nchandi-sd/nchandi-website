@@ -3,9 +3,10 @@
     <div class="title">{{ title }}</div>
   </div>
 
-  <div>
+  <div id={{title}}>
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
+      id="{{title}}Table"
     >
       <thead>
         <tr>
@@ -48,5 +49,9 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="printOrExport">
+    <button class="btn btn-primary btn-lg" (click)="onPrint(title, title)">Print</button>
+    <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', title, title + 'Table')">Export</button>
   </div>
 </div>

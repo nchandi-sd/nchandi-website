@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Facility } from 'src/app/model/Facility';
 import { SortByPipe } from 'src/app/sort-by.pipe';
 import { FacilitiesService } from '../../services/facilities.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-facility-list',
@@ -44,5 +45,25 @@ export class FacilityListComponent implements OnInit, OnDestroy {
     this.sortDirection = !this.sortDirection
     console.log("direction", this.sortDirection)
     this.sortBy.transform(facilities, action, this.sortDirection)
+  }
+
+  onPrint(elementId: string, printedTitle: string){
+    let selectedElement = document.getElementById(elementId).innerHTML
+    console.log("selectedElement", selectedElement)
+    let originalContent = document.body.innerHTML
+    let originalTitle = document.title
+    document.body.innerHTML = selectedElement
+    document.title = printedTitle
+    window.print()
+    /* document.body.innerHTML = originalContent
+    document.title = originalTitle */
+    window.location.reload()
+    
+  }
+
+  onExport(fileExtension: string, fileName: string, table: string){
+    let selectedTable = document.getElementById(table)
+    let spreadSheet = XLSX.utils.table_to_book(selectedTable)
+    XLSX.writeFile(spreadSheet, `${fileName}.${fileExtension}`)
   }
 }

@@ -1,3 +1,40 @@
+<div id="currentFacilities" *ngIf="facilities$ | async as facilities" style="display: none">
+  <table id="invisibleTable">
+      <thead>
+        <tr>
+          <th>Facility</th>
+          <th>Type</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Primary Contact</th>
+          <th>Primary Email</th>
+          <th>Primary Phone</th>
+          <th>Alt. Contact</th>
+          <th>Alt. Email</th>
+          <th>Alt. Phone</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facility of facilities">
+          <td class="invisibleData">{{ facility.facilityName }}</td>
+          <td class="invisibleData">{{ facility.facilityType }}</td>
+          <td class="invisibleData">{{ facility.address }}</td>
+          <td class="invisibleData">{{ facility.city }}</td>
+          <td class="invisibleData">{{ facility.state }}</td>
+          <td class="invisibleData">{{ facility.mainContactName }}</td>
+          <td class="invisibleData">{{ facility.mainContactEmail }}</td>
+          <td class="invisibleData">{{ facility.mainContactPhone }}</td>
+          <td class="invisibleData">{{ facility.alternateContactName }}</td>
+          <td class="invisibleData">{{ facility.alternateContactEmail }}</td>
+          <td class="invisibleData">{{ facility.alternateContactPhone }}</td>
+          <td class="invisibleData">{{ facility.website }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 <div class="panel facility-list">
   <div class="header">
     <div class="title">Current Facilities</div>
@@ -6,6 +43,7 @@
   <div *ngIf="facilities$ | async as facilities">
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
+      id="currentFacilitiesTable"
     >
       <thead>
         <tr>
@@ -61,4 +99,9 @@
       </tbody>
     </table>
   </div>
+  <div class="printOrExport">
+    <button class="btn btn-primary btn-lg" (click)="onPrint('currentFacilities', 'Current Facilities')">Print</button>
+    <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'currentFacilities', 'currentFacilitiesTable')">Export</button>
+  </div>
 </div>
+

@@ -10,6 +10,7 @@ import { AdminMember } from 'src/app/model/AdminMember';
 import { Panel } from 'src/app/model/Panel';
 import { SortByPipe } from 'src/app/sort-by.pipe';
 import { PanelService } from '../../services/panel.service';
+import * as XLSX from 'xlsx'
 
 @Component({
   selector: 'app-panel-list',
@@ -55,5 +56,24 @@ export class PanelListComponent implements OnInit, OnDestroy {
     this.sortDirection = !this.sortDirection
     console.log("direction", this.sortDirection)
     this.sortBy.transform(members, action, this.sortDirection)
+  }
+
+  onPrint(elementId: string, printedTitle: string){
+    let selectedElement = document.getElementById(elementId).innerHTML
+    console.log("selectedElement", selectedElement)
+    let originalContent = document.body.innerHTML
+    let originalTitle = document.title
+    document.body.innerHTML = selectedElement
+    document.title = printedTitle
+    window.print()
+    /* document.body.innerHTML = originalContent
+    document.title = originalTitle */
+    window.location.reload()
+  }
+
+  onExport(fileExtension: string, fileName: string, table: string){
+    let selectedTable = document.getElementById(table)
+    let spreadSheet = XLSX.utils.table_to_book(selectedTable)
+    XLSX.writeFile(spreadSheet, `${fileName}.${fileExtension}`)
   }
 }

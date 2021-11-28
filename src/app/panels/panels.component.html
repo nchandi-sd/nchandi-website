@@ -101,7 +101,7 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Open Panels</h2>
-        <div class="panel-container1 panel flex-center">
+        <div class="panel-container1 panel flex-center" id="openPanels">
           <table
             class="
               table table
@@ -161,11 +161,16 @@
             </tbody>
           </table>
         </div>
+        <div class="printOrExport">
+          <button class="btn btn-primary btn-lg" (click)="onPrint('openPanels', 'Open Panels')">Print</button>
+          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'openPanels', 'openingsTable')">Export</button>
+        </div>
+
 
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Current Panels</h2>
-        <div class="panel-container2 panel flex-center">
+        <div class="panel-container2 panel flex-center" id="currentPanels">
           <table
             class="
               table table
@@ -207,13 +212,17 @@
             </tbody>
           </table>
         </div>
+        <div class="printOrExport">
+          <button class="btn btn-primary btn-lg" (click)="onPrint('currentPanels', 'Current Panels')">Print</button>
+          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'currentPanels', 'treatmentPanels')">Export</button>
+        </div>
 
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">
           Correctional Facilities
         </h2>
-        <div class="panel-container3 panel flex-center">
+        <div class="panel-container3 panel flex-center" id="correctionalFacilities">
           <table
             class="
               table table
@@ -254,6 +263,10 @@
               </ng-container>
             </tbody>
           </table>
+        </div>
+        <div class="printOrExport">
+          <button class="btn btn-primary btn-lg" (click)="onPrint('correctionalFacilities', 'correctional Facilities')">Print</button>
+          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'correctionalFacilities', 'correctionalPanels')">Export</button>
         </div>
         <div class="spacer"></div>
         <div class="about-location-view section"></div>
