@@ -19,7 +19,7 @@ export class MemberInputComponent implements OnInit {
       email: val.email,
       phone: val.phone,
       commitment: val.commitment ? val.commitment : '',
-      preferredContactMethod: val.preferredContactMethod ? val.preferredContactMethod : 'text',
+      preferredContactMethod: val.preferredContactMethod ? val.preferredContactMethod : 'none',
     });
   }
 
