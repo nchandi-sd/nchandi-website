@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   OnDestroy,
   OnInit,
@@ -25,12 +26,33 @@ export class PanelListComponent implements OnInit, OnDestroy {
 
   sortDirection: boolean = true
 
+  id: string = window.location.href.split("#")[0]
+
+  pageWidth: number = window.innerWidth
+
   private subscriptions = new Subscription();
 
-  constructor(private panelService: PanelService, private sortBy: SortByPipe) {}
+  constructor(
+    private panelService: PanelService,
+    private sortBy: SortByPipe,
+    private eleRef: ElementRef
+    ) {
+    }
+
+    changeBasedOnScreenSize(){
+      if(Number(this.pageWidth.toString()[0]) <= 6 && this.pageWidth.toString().length === 3){
+        console.log("eleRef", this.eleRef.nativeElement.style["--desired-width"])
+        this.eleRef.nativeElement.style.width = "100%"
+        this.eleRef.nativeElement.style.setProperty("--desired-width", "100%")
+      } else if(Number(window.innerWidth.toString()[0]) > 6) {
+        this.eleRef.nativeElement.style.setProperty("--desired-width", "initial")
+      }
+    }
 
   ngOnInit() {
     this.panels$ = this.panelService.getPanels();
+    this.changeBasedOnScreenSize()
+    console.log("style", document.querySelector(".panel-list").getAttribute("style"))
   }
 
   ngOnDestroy() {

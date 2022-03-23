@@ -65,7 +65,8 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { SortPanelMembersByLastNamePipe } from './sort-panel-members-by-last-name.pipe';
 import { SortPanelMembersByEmailPipe } from './sort-panel-members-by-email.pipe';
 import { SortByPipe } from './sort-by.pipe';
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx';
+import { FilterByPipe } from './filter-by.pipe'
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import * as XLSX from 'xlsx'
     SortPanelMembersByLastNamePipe,
     SortPanelMembersByEmailPipe,
     SortByPipe,
+    FilterByPipe,
 
   ],
   imports: [

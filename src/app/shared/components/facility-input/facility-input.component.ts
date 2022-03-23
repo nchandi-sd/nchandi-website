@@ -42,7 +42,7 @@ export class FacilityInputComponent {
   formSubmit = new EventEmitter<Facility>();
 
   userForm = new FormGroup({
-    active: new FormControl(true),
+    active: new FormControl(false, Validators.required),
     facilityName: new FormControl('', Validators.required),
     facilityType: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),

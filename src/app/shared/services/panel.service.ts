@@ -40,7 +40,7 @@ export class PanelService {
    */
   getOpenPanels(): Observable<Panel[]> {
     return this.firestore
-      .collection('Panels')
+      .collection('Panels', ref => ref.where("active", "==", true).where("markAsMembersNeeded", "==", true))
       .snapshotChanges()
       .pipe(
         switchMap((data) => {

@@ -11,22 +11,22 @@
       <thead>
         <tr>
           <th></th>
-          <th (click)="onSortThisBy('dayOfWeek', panels)">Day of Week</th>
-          <th (click)="onSortThisBy('weekOfMonth', panels)">Week of Month</th>
-          <th (click)="onSortThisBy('eventTime', panels)">Time</th>
-          <th (click)="onSortThisBy('facility', panels)">Facility</th>
-          <th (click)="onSortThisBy('location', panels)">Location</th>
-          <th (click)="onSortThisBy('gender', panels)">Gender</th>
-          <th (click)="onSortThisBy('markAsMembersNeeded', panels)">Mark as Number Needed?</th>
-          <th (click)="onSortThisBy('numberNeeded', panels)"># Needed</th>
-          <th (click)="onSortThisBy('boardChampion', panels)">Board Champion</th>
-          <th (click)="onSortThisBy('panelCoordinator', panels)">Panel Coordinator</th>
-          <th (click)="onSortThisBy('panelLeader...firstName...lastName', panels)">Panel Leader</th>
-          <th (click)="onSortThisBy('panelMember1...firstName...lastName', panels)">Panel Member 1</th>
-          <th (click)="onSortThisBy('panelMember2...firstName...lastName', panels)">Panel Member 2</th>
-          <th (click)="onSortThisBy('panelMember3...firstName...lastName', panels)">Panel Member 3</th>
-          <th (click)="onSortThisBy('panelMember4...firstName...lastName', panels)">Panel Member 4</th>
-          <th (click)="onSortThisBy('panelMember5...firstName...lastName', panels)">Panel Member 5</th>
+          <th id="dow" (click)="onSortThisBy('dayOfWeek', panels)">Day of Week</th>
+          <th id="wom" (click)="onSortThisBy('weekOfMonth', panels)">Week of Month</th>
+          <th id="time" (click)="onSortThisBy('eventTime', panels)">Time</th>
+          <th id="fac" (click)="onSortThisBy('facility', panels)">Facility</th>
+          <th id="loc" (click)="onSortThisBy('location', panels)">Location</th>
+          <th id="gen" (click)="onSortThisBy('gender', panels)">Gender</th>
+          <th id="mann" (click)="onSortThisBy('markAsMembersNeeded', panels)">Mark as Number Needed?</th>
+          <th id="nee" (click)="onSortThisBy('numberNeeded', panels)"># Needed</th>
+          <th id="boa" (click)="onSortThisBy('boardChampion', panels)">Board Champion</th>
+          <th id="panc" (click)="onSortThisBy('panelCoordinator', panels)">Panel Coordinator</th>
+          <th id="panl" (click)="onSortThisBy('panelLeader...firstName...lastName', panels)">Panel Leader</th>
+          <th id="pan1" (click)="onSortThisBy('panelMember1...firstName...lastName', panels)">Panel Member 1</th>
+          <th id="pan2" (click)="onSortThisBy('panelMember2...firstName...lastName', panels)">Panel Member 2</th>
+          <th id="pan3" (click)="onSortThisBy('panelMember3...firstName...lastName', panels)">Panel Member 3</th>
+          <th id="pan4" (click)="onSortThisBy('panelMember4...firstName...lastName', panels)">Panel Member 4</th>
+          <th id="pan5" (click)="onSortThisBy('panelMember5...firstName...lastName', panels)">Panel Member 5</th>
         </tr>
       </thead>
       <tbody id="openings-panel">
