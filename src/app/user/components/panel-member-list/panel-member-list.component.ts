@@ -4,7 +4,6 @@ import { Observable, Subject, Subscription } from 'rxjs';
 
 import { AdminMember } from 'src/app/model/AdminMember';
 import { PanelMemberService } from 'src/app/shared/services/panel-member.service';
-import { SortPanelMembersByFirstNamePipe } from 'src/app/sort-panel-members-by-first-name.pipe';
 
 @Component({
   selector: 'app-panel-member-list',
@@ -20,7 +19,7 @@ export class PanelMemberListComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(private resourceService: PanelMemberService, private sortByFirstName: SortPanelMembersByFirstNamePipe, private asyncPipe: AsyncPipe) {}
+  constructor(private resourceService: PanelMemberService) {}
 
   ngOnInit() {
     this.members$ = this.resourceService.getPanelMembers()

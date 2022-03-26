@@ -1,6 +1,8 @@
 <app-member-list
   title="Current H&I Board Members"
   [members]="members$ | async"
+  [shownMembers]="members$ | async"
   (deleteItem)="deleteItem($event)"
   (editItem)="editItem($event)"
+  filterType="admin"
 ></app-member-list>

@@ -3,10 +3,18 @@
     <div class="title">Current Panels</div>
   </div>
 
-  <div *ngIf="panels$ | async as panels" >
+  <div *ngIf="{panels: shownPanels$ | async, allPanels: panels$ | async} as bothPanels" >
+    <app-filter
+    filterType="panel"
+    [list]="panels"
+    *ngIf="bothPanels.allPanels as allPanels"
+    (filter)="filterEmitter(allPanels, $event.property, $event.value)"
+    >
+    </app-filter>
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
       id="currentPanelsTable"
+      *ngIf="bothPanels.panels as panels"
     >
       <thead>
         <tr>
@@ -83,7 +91,7 @@
 </div>
 
 
-<div *ngIf="panels$ | async as panels" id="currentPanels" style="display: none">
+<div *ngIf="shownPanels$ | async as panels" id="currentPanels" style="display: none">
   <table id="invisibleTable">
     <thead>
       <tr>

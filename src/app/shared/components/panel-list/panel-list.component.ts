@@ -2,16 +2,19 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { observable, Observable, of, Subscription } from 'rxjs';
 import { AdminMember } from 'src/app/model/AdminMember';
 import { Panel } from 'src/app/model/Panel';
 import { SortByPipe } from 'src/app/sort-by.pipe';
 import { PanelService } from '../../services/panel.service';
 import * as XLSX from 'xlsx'
+import { FilterByPipe } from 'src/app/filter-by.pipe';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-panel-list',
@@ -24,35 +27,46 @@ export class PanelListComponent implements OnInit, OnDestroy {
 
   panels$: Observable<Panel[]>;
 
+  shownPanels$: Observable<Panel[]>;
+
   sortDirection: boolean = true
 
   id: string = window.location.href.split("#")[0]
 
   pageWidth: number = window.innerWidth
 
+  filterType: string = "panel"
+
   private subscriptions = new Subscription();
 
   constructor(
     private panelService: PanelService,
     private sortBy: SortByPipe,
-    private eleRef: ElementRef
+    private eleRef: ElementRef,
+    private filterBy: FilterByPipe,
     ) {
     }
 
-    changeBasedOnScreenSize(){
-      if(Number(this.pageWidth.toString()[0]) <= 6 && this.pageWidth.toString().length === 3){
-        console.log("eleRef", this.eleRef.nativeElement.style["--desired-width"])
-        this.eleRef.nativeElement.style.width = "100%"
-        this.eleRef.nativeElement.style.setProperty("--desired-width", "100%")
-      } else if(Number(window.innerWidth.toString()[0]) > 6) {
-        this.eleRef.nativeElement.style.setProperty("--desired-width", "initial")
-      }
+  changeBasedOnScreenSize(){
+    if(Number(this.pageWidth.toString()[0]) <= 6 && this.pageWidth.toString().length === 3){
+      console.log("eleRef", this.eleRef.nativeElement.style["--desired-width"])
+      this.eleRef.nativeElement.style.width = "100%"
+      this.eleRef.nativeElement.style.setProperty("--desired-width", "100%")
+    } else if(Number(window.innerWidth.toString()[0]) > 6) {
+      this.eleRef.nativeElement.style.setProperty("--desired-width", "initial")
     }
+  }
 
   ngOnInit() {
     this.panels$ = this.panelService.getPanels();
+    this.shownPanels$ = this.panels$
     this.changeBasedOnScreenSize()
     console.log("style", document.querySelector(".panel-list").getAttribute("style"))
+  }
+
+  filterEmitter(list, property, value){
+    console.log("this.filterBy.transform(list, property, value)", this.filterBy.transform(list, property, value))
+    this.shownPanels$ =  of(this.filterBy.transform(list, property, value))
   }
 
   ngOnDestroy() {
@@ -79,6 +93,10 @@ export class PanelListComponent implements OnInit, OnDestroy {
     console.log("direction", this.sortDirection)
     this.sortBy.transform(members, action, this.sortDirection)
   }
+
+  /* onFilterThisBy(action: string, members: AdminMember[]){
+
+  } */
 
   onPrint(elementId: string, printedTitle: string){
     let selectedElement = document.getElementById(elementId).innerHTML

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { Facility } from 'src/app/model/Facility';
 import { SortByPipe } from 'src/app/sort-by.pipe';
+import { FilterByPipe } from 'src/app/filter-by.pipe';
 import { FacilitiesService } from '../../services/facilities.service';
 import * as XLSX from 'xlsx'
 
@@ -16,19 +17,34 @@ export class FacilityListComponent implements OnInit, OnDestroy {
 
   facilities$: Observable<Facility[]>;
 
+  shownFacilities$: Observable<Facility[]>;
+
   sortDirection: boolean = true;
 
   private subscriptions = new Subscription();
 
-  constructor(private facilitiesService: FacilitiesService, private sortBy: SortByPipe) {}
+
+
+  constructor(
+    private facilitiesService: FacilitiesService,
+    private sortBy: SortByPipe,
+    private filterBy: FilterByPipe,
+    ) {}
 
   ngOnInit() {
     this.facilities$ = this.facilitiesService.getFacilities();
     this.facilities$.subscribe(value => console.log("value", value))
+    this.shownFacilities$ = this.facilities$
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  filterEmitter(list, property, value){
+    console.log("this.filterBy.transform(list, property, value)", this.filterBy.transform(list, property, value))
+    typeof value === "string" && console.log("empty length", value.length)
+    this.shownFacilities$ = of(this.filterBy.transform(list, property, value))
   }
 
   onDeleteItem(facility: Facility) {
@@ -58,7 +74,7 @@ export class FacilityListComponent implements OnInit, OnDestroy {
     /* document.body.innerHTML = originalContent
     document.title = originalTitle */
     window.location.reload()
-    
+
   }
 
   onExport(fileExtension: string, fileName: string, table: string){

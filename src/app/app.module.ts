@@ -66,7 +66,8 @@ import { SortPanelMembersByLastNamePipe } from './sort-panel-members-by-last-nam
 import { SortPanelMembersByEmailPipe } from './sort-panel-members-by-email.pipe';
 import { SortByPipe } from './sort-by.pipe';
 import * as XLSX from 'xlsx';
-import { FilterByPipe } from './filter-by.pipe'
+import { FilterByPipe } from './filter-by.pipe';
+import { FilterComponent } from './shared/components/filter/filter.component'
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { FilterByPipe } from './filter-by.pipe'
     SortPanelMembersByEmailPipe,
     SortByPipe,
     FilterByPipe,
+    FilterComponent,
 
   ],
   imports: [
@@ -145,6 +147,7 @@ import { FilterByPipe } from './filter-by.pipe'
     SortPanelMembersByLastNamePipe,
     SortPanelMembersByEmailPipe,
     SortByPipe,
+    FilterByPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

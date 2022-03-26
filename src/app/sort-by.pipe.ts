@@ -15,36 +15,33 @@ export class SortByPipe implements PipeTransform {
 
 
       if(property === 'facility'){
-        console.log("this is a facility")
         if(value[e].facility.facilityName.toUpperCase() > value[e + 1].facility.facilityName.toUpperCase() && direction === true){
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-        
+
         if(value[e].facility.facilityName.toUpperCase() < value[e + 1].facility.facilityName.toUpperCase() && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
         }
       } else if(typeof value[e][property] === 'boolean') {
-        console.log("is boolean")
         if(value[e][property] > value[e + 1][property] && direction === true){
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-  
-        
+
+
         if(value[e][property] < value[e + 1][property] && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
         }
       } else if(typeof value[e][property] === 'number') {
-        console.log("is number")
         if(value[e][property] > value[e + 1][property] && direction === true){
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-  
-        
+
+
         if(value[e][property] < value[e + 1][property] && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
@@ -54,7 +51,7 @@ export class SortByPipe implements PipeTransform {
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-        
+
         if(value[e].boardChampion.firstName.toUpperCase() + value[e].boardChampion.lastName.toUpperCase() < value[e + 1].boardChampion.firstName.toUpperCase() + value[e + 1].boardChampion.lastName.toUpperCase() && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
@@ -64,7 +61,7 @@ export class SortByPipe implements PipeTransform {
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-        
+
         if(value[e].panelCoordinator.firstName.toUpperCase() + value[e].panelCoordinator.lastName.toUpperCase() < value[e + 1].panelCoordinator.firstName.toUpperCase() + value[e + 1].panelCoordinator.lastName.toUpperCase() && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
@@ -77,7 +74,7 @@ export class SortByPipe implements PipeTransform {
             value[e] = value[e + 1]
             value[e + 1] = tempPosition
           }
-          
+
           if(value[e][propertyParts[0]][propertyParts[1]].toUpperCase() < value[e + 1][propertyParts[0]][propertyParts[1]].toUpperCase() && direction === false){
             value[e + 1] = value[e]
             value[e] = altTempPosition
@@ -89,7 +86,7 @@ export class SortByPipe implements PipeTransform {
             value[e] = value[e + 1]
             value[e + 1] = tempPosition
           }
-          
+
           if(value[e][propertyParts[0]][propertyParts[1]].toUpperCase() + value[e][propertyParts[0]][propertyParts[2]].toUpperCase() < value[e + 1][propertyParts[0]][propertyParts[1]].toUpperCase() + value[e + 1][propertyParts[0]][propertyParts[2]].toUpperCase() && direction === false){
             value[e + 1] = value[e]
             value[e] = altTempPosition
@@ -101,8 +98,8 @@ export class SortByPipe implements PipeTransform {
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-  
-        
+
+
         if(value[e][property] < value[e + 1][property] && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
@@ -112,8 +109,8 @@ export class SortByPipe implements PipeTransform {
           value[e] = value[e + 1]
           value[e + 1] = tempPosition
         }
-  
-        
+
+
         if(value[e][property].toUpperCase() < value[e + 1][property].toUpperCase() && direction === false){
           value[e + 1] = value[e]
           value[e] = altTempPosition
