@@ -101,7 +101,7 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Open Panels</h2>
-        <div class="panel-container1 panel flex-center" id="openPanels" *ngIf="{allOpenPanels: openPanels$ | async, openPanels: shownOpenPanels$ | async} as bothOpenPanels">
+        <div class="panel-container1 panel flex-center flex-column" id="openPanels" *ngIf="{allOpenPanels: openPanels$ | async, openPanels: shownOpenPanels$ | async} as bothOpenPanels">
           <app-filter
           filterType="openPanels"
           *ngIf="bothOpenPanels.allOpenPanels as allOpenPanels"
@@ -177,7 +177,7 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Current Panels</h2>
-        <div class="panel-container2 panel flex-center" id="currentPanels" *ngIf="{allTreatmentFacilities: treatmentFacilities$ | async, treatmentFacilities: shownTreatmentFacilities$ | async} as bothTreatmentFacilities">
+        <div class="panel-container2 panel flex-center flex-column" id="currentPanels" *ngIf="{allTreatmentFacilities: treatmentFacilities$ | async, treatmentFacilities: shownTreatmentFacilities$ | async} as bothTreatmentFacilities">
           <app-filter
           filterType="otherFacilities"
           *ngIf="bothTreatmentFacilities.allTreatmentFacilities as allTreatmentFacilities"
@@ -236,7 +236,7 @@
         <h2 class="section-header text-white flex-center">
           Correctional Facilities
         </h2>
-        <div class="panel-container3 panel flex-center" id="correctionalFacilities" *ngIf="{allCorrectionalFacilities: correctionalFacilities$ | async, correctionalFacilities: shownCorrectionalFacilities$ | async} as bothCorrectionalFacilities">
+        <div class="panel-container3 panel flex-center flex-column" id="correctionalFacilities" *ngIf="{allCorrectionalFacilities: correctionalFacilities$ | async, correctionalFacilities: shownCorrectionalFacilities$ | async} as bothCorrectionalFacilities">
           <app-filter
             filterType="otherFacilities"
             *ngIf="bothCorrectionalFacilities.allCorrectionalFacilities as allCorrectionalFacilities"

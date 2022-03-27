@@ -53,9 +53,13 @@
   margin: 0 auto;
   border-radius: 3px;
   width: 100%;
-  max-width: 960px;;
-  padding: 15px;
+  max-width: 960px;
+  /* padding: 15px; */
   background-color: white;
+}
+
+table {
+  width: 100%
 }
 
 .panels-container {
@@ -190,5 +194,12 @@ button:focus{
   }
   .panel-title {
     font-size: 13pt;
+  }
+}
+
+@media print {
+  table {
+    width: 100%;
+    height: auto;
   }
 }
