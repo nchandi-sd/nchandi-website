@@ -15,6 +15,8 @@ import { PanelService } from '../../services/panel.service';
 import * as XLSX from 'xlsx'
 import { FilterByPipe } from 'src/app/filter-by.pipe';
 import { AsyncPipe } from '@angular/common';
+import { UserService } from 'src/app/core/user.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-panel-list',
@@ -37,6 +39,10 @@ export class PanelListComponent implements OnInit, OnDestroy {
 
   filterType: string = "panel"
 
+  userEmail: any
+
+  adminList$: Observable<AdminMember[]>
+
   private subscriptions = new Subscription();
 
   constructor(
@@ -44,6 +50,8 @@ export class PanelListComponent implements OnInit, OnDestroy {
     private sortBy: SortByPipe,
     private eleRef: ElementRef,
     private filterBy: FilterByPipe,
+    private currentUser: UserService,
+    private adminService: AdminService,
     ) {
     }
 
@@ -57,11 +65,38 @@ export class PanelListComponent implements OnInit, OnDestroy {
     }
   }
 
+  findAdmin(email) {
+    this.adminList$ = this.adminService.getSpecificAdmin(email)
+  }
+
+  async getEmail() {
+
+  }
+
+
+
   ngOnInit() {
     this.panels$ = this.panelService.getPanels();
     this.shownPanels$ = this.panels$
     this.changeBasedOnScreenSize()
     console.log("style", document.querySelector(".panel-list").getAttribute("style"))
+
+    this.panels$.subscribe(panels => {
+      this.currentUser.getCurrentUser().then(info => {
+        this.findAdmin(info.email)
+        this.adminList$.subscribe(admin => {
+          var adminCommitment: any = admin[0].commitment
+          if(adminCommitment === "Panel Leader"){
+            this.shownPanels$ = of(this.filterBy.transform(panels, "panelLeader...email", info.email))
+          }
+          if(adminCommitment === "Panel Coordinator"){
+            this.shownPanels$ = of(this.filterBy.transform(panels, "panelCoordinator...email", info.email))
+          }
+        })
+      })
+    })
+
+
   }
 
   filterEmitter(list, property, value){

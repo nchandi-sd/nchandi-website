@@ -38,7 +38,7 @@ export class PanelDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.panels$ = this.panels.getPanels();
-    this.panels$.subscribe(panel => console.table(panel.filter(info => info.facility.facilityName === "Women's First Step House")))
+    this.panels$.subscribe(panel => console.table(panel))
   }
 
   ngOnDestroy() {

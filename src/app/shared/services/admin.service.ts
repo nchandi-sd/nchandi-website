@@ -33,6 +33,10 @@ export class AdminService {
     );
   }
 
+  getSpecificAdmin(email: string){
+    return this.getMember("Admin", email)
+  }
+
   getAdminList() {
     return this.getMembers('Admin');
   }
@@ -68,6 +72,23 @@ export class AdminService {
         return of(undefined);
       })
     );
+  }
+
+  private getMember(resourceType: string, email: string) {
+    return this.firestore
+      .collection(resourceType, ref => ref.where("email", "==", email))
+      .snapshotChanges()
+      .pipe(
+        map((data) => {
+          return data.map((e) => {
+            return {
+              id: e.payload.doc.id,
+              // @ts-ignore
+              ...e.payload.doc.data(),
+            } as AdminMember;
+          });
+        })
+      );
   }
 
   private getMembers(resourceType: string) {

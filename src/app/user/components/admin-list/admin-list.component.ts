@@ -21,7 +21,6 @@ export class AdminListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.members$ = this.adminService.getAdminList();
-    this.members$.subscribe(members => console.log("member", members.filter(member => member.firstName === "Alonzo")))
   }
 
   ngOnDestroy() {

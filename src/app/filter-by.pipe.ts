@@ -12,10 +12,21 @@ export class FilterByPipe implements PipeTransform {
 
     console.log("thatList", list)
     console.log("that value", typeof value)
-    if(property === 'facility'){
+    if(!value || value === "" || (typeof value === "string" && value.length === 0)){
+      console.log("nothing")
+      return list
+    } else if(property === 'facility'){
       return list.filter((item: Panel) => {
         if(typeof value === "string"){
           return item.facility.facilityName.toLowerCase().split(" ").join("").includes(value.toLowerCase().split(" ").join(""))
+        }
+      })
+    } else if(property === "allMembers"){
+      return list.filter((item) => {
+        if(typeof value === "string"){
+          if(item.allMembers.includes(value.split(" ").join("").trim().toLowerCase())){
+            return item
+          }
         }
       })
     } else if(property === "boardChampion"){
@@ -44,6 +55,16 @@ export class FilterByPipe implements PipeTransform {
       })
     } else if(property.includes("...")){
         let propertyParts = property.split("...")
+        if(propertyParts.length === 2){
+          console.log(2)
+          return list.filter(item => {
+            if(typeof value === "string" && item[propertyParts[0]][propertyParts[1]]){
+              let filteredProperty = item[propertyParts[0]][propertyParts[1]].toLowerCase()
+              return filteredProperty.includes(value.toLowerCase())
+            }
+          })
+        }
+
         if(propertyParts.length === 3){
           return list.filter(item => {
             if(typeof value === "string" && item[propertyParts[0]][propertyParts[1]] && item[propertyParts[0]][propertyParts[2]]){
@@ -62,9 +83,6 @@ export class FilterByPipe implements PipeTransform {
       return list.filter(item => item[property] === Number(value))
     } else if(property === "gender"){
       return list.filter(item => item.gender === value)
-    } else if(!value || value === "" || (typeof value === "string" && value.length === 0)){
-      console.log("nothing")
-      return list
     } else {
         console.log("it's a string!")
         list = list.filter(item => item[property] !== null)
