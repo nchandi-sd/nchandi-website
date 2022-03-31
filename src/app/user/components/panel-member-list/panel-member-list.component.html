@@ -1,7 +1,9 @@
 <app-member-list
   title="Current Panel Members"
   [members]="members$ | async"
+  [shownMembers]="members$ | async"
   (deleteItem)="deleteItem($event)"
   (editItem)="editItem($event)"
   [hasCommitment]="false"
+  filterType="panelMember"
 ></app-member-list>

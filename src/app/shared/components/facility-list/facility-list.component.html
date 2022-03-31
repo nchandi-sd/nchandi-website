@@ -1,4 +1,4 @@
-<div id="currentFacilities" *ngIf="facilities$ | async as facilities" style="display: none">
+<div id="currentFacilities" *ngIf="shownFacilities$ | async as facilities" style="display: none">
   <table id="invisibleTable">
       <thead>
         <tr>
@@ -40,10 +40,18 @@
     <div class="title">Current Facilities</div>
   </div>
 
-  <div *ngIf="facilities$ | async as facilities">
+  <div *ngIf="{allFacilities: facilities$ | async, facilities: shownFacilities$ | async} as bothFacilities">
+    <app-filter
+    filterType="facility"
+    *ngIf="bothFacilities.allFacilities as allFacilities"
+    [list]="allFacilities"
+    (filter)="filterEmitter(allFacilities, $event.property, $event.value)"
+    >
+    </app-filter>
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
       id="currentFacilitiesTable"
+      *ngIf="bothFacilities.facilities as facilities"
     >
       <thead>
         <tr>

@@ -101,7 +101,14 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Open Panels</h2>
-        <div class="panel-container1 panel flex-center" id="openPanels">
+        <div class="panel-container1 panel flex-center flex-column" id="openPanels" *ngIf="{allOpenPanels: openPanels$ | async, openPanels: shownOpenPanels$ | async} as bothOpenPanels">
+          <app-filter
+          filterType="openPanels"
+          *ngIf="bothOpenPanels.allOpenPanels as allOpenPanels"
+          [list]="allOpenPanels"
+          (filter)="filterOpenPanels(allOpenPanels, $event.property, $event.value)"
+          >
+          </app-filter>
           <table
             class="
               table table
@@ -111,7 +118,7 @@
               table-striped
             "
             id="openingsTable"
-            *ngIf="openPanels$ | async as panels"
+            *ngIf="bothOpenPanels.openPanels as panels"
           >
             <thead>
               <tr>
@@ -170,7 +177,14 @@
         <div class="spacer"></div>
 
         <h2 class="section-header text-white flex-center">Current Panels</h2>
-        <div class="panel-container2 panel flex-center" id="currentPanels">
+        <div class="panel-container2 panel flex-center flex-column" id="currentPanels" *ngIf="{allTreatmentFacilities: treatmentFacilities$ | async, treatmentFacilities: shownTreatmentFacilities$ | async} as bothTreatmentFacilities">
+          <app-filter
+          filterType="otherFacilities"
+          *ngIf="bothTreatmentFacilities.allTreatmentFacilities as allTreatmentFacilities"
+          [list]="allFacilities"
+          (filter)="filterTreatmentFacilities(allTreatmentFacilities, $event.property, $event.value)"
+          >
+          </app-filter>
           <table
             class="
               table table
@@ -180,7 +194,7 @@
               table-striped
             "
             id="treatmentPanels"
-            *ngIf="treatmentFacilities$ | async as facilities"
+            *ngIf="bothTreatmentFacilities.treatmentFacilities as facilities"
           >
             <thead>
               <tr>
@@ -222,7 +236,14 @@
         <h2 class="section-header text-white flex-center">
           Correctional Facilities
         </h2>
-        <div class="panel-container3 panel flex-center" id="correctionalFacilities">
+        <div class="panel-container3 panel flex-center flex-column" id="correctionalFacilities" *ngIf="{allCorrectionalFacilities: correctionalFacilities$ | async, correctionalFacilities: shownCorrectionalFacilities$ | async} as bothCorrectionalFacilities">
+          <app-filter
+            filterType="otherFacilities"
+            *ngIf="bothCorrectionalFacilities.allCorrectionalFacilities as allCorrectionalFacilities"
+            [list]="allCorrectionalFacilities"
+            (filter)="filterCorrectionalFacilities(allCorrectionalFacilities, $event.property, $event.value)"
+          >
+          </app-filter>
           <table
             class="
               table table
@@ -232,7 +253,7 @@
               table-striped
             "
             id="correctionalPanels"
-            *ngIf="correctionalFacilities$ | async as facilities"
+            *ngIf="bothCorrectionalFacilities.correctionalFacilities as facilities"
           >
             <thead>
               <tr>

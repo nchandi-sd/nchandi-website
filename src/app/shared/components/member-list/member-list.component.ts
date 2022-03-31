@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AdminMember } from 'src/app/model/AdminMember';
 import { SortByPipe } from 'src/app/sort-by.pipe';
+import { FilterByPipe } from 'src/app/filter-by.pipe';
 import { SortPanelMembersByFirstNamePipe } from 'src/app/sort-panel-members-by-first-name.pipe';
 import { SortPanelMembersByLastNamePipe } from 'src/app/sort-panel-members-by-last-name.pipe';
 import { AmdDependency } from 'typescript';
@@ -22,7 +23,16 @@ export class MemberListComponent implements OnInit {
   hasCommitment = true;
 
   @Input()
+  list: string
+
+  @Input()
+  filterType: string
+
+  @Input()
   members: AdminMember[];
+
+  @Input()
+  shownMembers: AdminMember[];
 
   @Output()
   deleteItem = new EventEmitter<AdminMember>();
@@ -34,9 +44,12 @@ export class MemberListComponent implements OnInit {
   @Output()
   sortThisBy = new EventEmitter<string>()
 
-  constructor(private sortByFirst: SortPanelMembersByFirstNamePipe, private sortByLast: SortPanelMembersByLastNamePipe, private sortBy: SortByPipe) { }
+  constructor(private sortBy: SortByPipe, private filterBy: FilterByPipe) {
+    console.log("shownMembers", this.shownMembers)
+   }
 
   ngOnInit() {
+
   }
 
   onDeleteItem(member: AdminMember) {
@@ -45,6 +58,10 @@ export class MemberListComponent implements OnInit {
 
   onEditItem(member: AdminMember) {
     this.editItem.emit(member);
+  }
+
+  filterEmitter(members, property, value){
+    this.shownMembers = this.filterBy.transform(members, property, value)
   }
 
   onSortThisBy(action: string, members: AdminMember[]){

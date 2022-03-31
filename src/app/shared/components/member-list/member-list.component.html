@@ -4,6 +4,12 @@
   </div>
 
   <div id={{title}}>
+    <app-filter
+    filterType="{{ filterType }}"
+    [list]="list"
+    (filter)="filterEmitter(members, $event.property, $event.value)"
+    >
+    </app-filter>
     <table
       class="table table bordered table-responsive text-nowrap table-striped"
       id="{{title}}Table"
@@ -11,16 +17,16 @@
       <thead>
         <tr>
           <th></th>
-          <th (click)="onSortThisBy('firstName', members)">First Name</th>
-          <th (click)="onSortThisBy('lastName', members)">Last Name</th>
-          <th (click)="onSortThisBy('email', members)">Email</th>
-          <th (click)="onSortThisBy('phone', members)">Phone</th>
-          <th (click)="onSortThisBy('commitment', members)" *ngIf="hasCommitment">Commitment</th>
-          <th (click)="onSortThisBy('preferredContactMethod', members)">Preferred Contact Method</th>
+          <th (click)="onSortThisBy('firstName', shownMembers)">First Name</th>
+          <th (click)="onSortThisBy('lastName', shownMembers)">Last Name</th>
+          <th (click)="onSortThisBy('email', shownMembers)">Email</th>
+          <th (click)="onSortThisBy('phone', shownMembers)">Phone</th>
+          <th (click)="onSortThisBy('commitment', shownMembers)" *ngIf="hasCommitment">Commitment</th>
+          <th (click)="onSortThisBy('preferredContactMethod', shownMembers)">Preferred Contact Method</th>
         </tr>
       </thead>
       <tbody id="openings-panel">
-        <tr *ngFor="let member of members">
+        <tr *ngFor="let member of shownMembers">
           <td>
             <button
               mat-icon-button

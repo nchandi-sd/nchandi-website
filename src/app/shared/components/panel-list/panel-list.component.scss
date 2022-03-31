@@ -1,4 +1,6 @@
 .panel-list {
+  --desired-width: initial;
+  width: var(--desired-width);
   height: 100%;
   padding: 10px;
   border-radius: 3px;
@@ -30,6 +32,12 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .panel-list {
+    width: 100%
+  }
+}
+
 @media print {
   #invisibleTable {
     margin: 0;
@@ -38,7 +46,7 @@
     height: 50%;
     page-break-after:auto;
   }
-  
+
   #invisibleTable>thead>tr>th, #invisibleTable>tbody>tr>td, #invisibleTable {
     border: solid 1px black;
     white-space: normal;
@@ -46,17 +54,17 @@
     overflow: hidden;
     font-size: 8px;
   }
-  
+
   #invisibleTable>tbody>tr {
     page-break-after: auto;
   }
-  
+
   #invisibleTable>tbody>tr>td:nth-of-type(12n){
     width: 30px;
     height: max-content;
     white-space: pre-line;
   }
-  
+
   #invisibleTable>tbody>tr:nth-of-type(2n) {
     background: rgba(0, 0, 0, 0.25)
   }
