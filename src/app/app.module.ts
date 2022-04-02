@@ -67,7 +67,9 @@ import { SortPanelMembersByEmailPipe } from './sort-panel-members-by-email.pipe'
 import { SortByPipe } from './sort-by.pipe';
 import * as XLSX from 'xlsx';
 import { FilterByPipe } from './filter-by.pipe';
-import { FilterComponent } from './shared/components/filter/filter.component'
+import { FilterComponent } from './shared/components/filter/filter.component';
+import { VolunteerComponent } from './shared/components/volunteer/volunteer.component';
+import { PendingDashboardComponent } from './user/components/pending-dashboard/pending-dashboard.component'
 
 @NgModule({
   declarations: [
@@ -107,6 +109,8 @@ import { FilterComponent } from './shared/components/filter/filter.component'
     SortByPipe,
     FilterByPipe,
     FilterComponent,
+    VolunteerComponent,
+    PendingDashboardComponent,
 
   ],
   imports: [

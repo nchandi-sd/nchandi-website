@@ -1,0 +1,47 @@
+#tableContainer {
+  display: block;
+  margin: auto;
+  background-color: white;
+  width: max-content;
+  padding: 0;
+}
+
+table {
+  margin: auto;
+}
+
+#actionContainer {
+  display:flex;
+  flex-direction: row;
+}
+
+.action {
+  color: white;
+  font-size: 150%;
+  cursor: pointer;
+  border: none;
+  border-radius: 360px;
+  margin: 5px;
+  display: flex;
+  padding: 10px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 0px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 1000ms;
+}
+
+.action:hover {
+  border: none;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25), 0px 0px 0px rgba(0, 0, 0, 0.25), inset 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+.action:active {
+  border: none;
+  box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25), inset -4px -4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#approve {
+  background-color: green;
+}
+
+#reject {
+  background-color: red;
+}

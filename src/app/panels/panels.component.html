@@ -99,6 +99,9 @@
         </div>
 
         <div class="spacer"></div>
+        <div mat-dialog-content class="dialog__content" *ngIf="signUpDialog">
+          <app-volunteer [panel]="selectedPanel" (close)="closeVolunteerForm($event)" (formSubmit)="addVolunteer($event)"></app-volunteer>
+        </div>
 
         <h2 class="section-header text-white flex-center">Open Panels</h2>
         <div class="panel-container1 panel flex-center flex-column" id="openPanels" *ngIf="{allOpenPanels: openPanels$ | async, openPanels: shownOpenPanels$ | async} as bothOpenPanels">
@@ -122,6 +125,7 @@
           >
             <thead>
               <tr>
+                <th></th>
                 <th (click)="onSortThisBy('dayOfWeek', panels)">Day of Week</th>
                 <th (click)="onSortThisBy('weekOfMonth', panels)">Week of Month</th>
                 <th (click)="onSortThisBy('eventTime', panels)">Time</th>
@@ -142,6 +146,7 @@
             </thead>
             <tbody id="openings-panel">
               <tr *ngFor="let panel of panels">
+                <td><button class="btn btn-primary" (click)="toggleSignUpDialog(panel)">Volunteer</button></td>
                 <td>{{ panel.dayOfWeek }}</td>
                 <td>{{ panel.weekOfMonth | number }}</td>
                 <td>{{ panel.eventTime }}</td>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Panel } from '../model/Panel';
 import { PanelService } from '../shared/services/panel.service';
 import { Observable, of } from 'rxjs';
@@ -8,6 +8,7 @@ import { AdminMember } from '../model/AdminMember';
 import { SortByPipe } from '../sort-by.pipe';
 import { FilterByPipe } from '../filter-by.pipe';
 import * as XLSX from 'xlsx'
+import { PendingService } from '../shared/services/pending.service';
 
 const PANEL_OPENING_CONTACTS = [
   /*
@@ -43,12 +44,15 @@ export class PanelsComponent implements OnInit {
   panelOpeningContacts = PANEL_OPENING_CONTACTS;
   isTableOpen = false;
   sortDirection: boolean = true
+  signUpDialog: boolean = false
+  selectedPanel
 
   constructor(
     private panelService: PanelService,
     private facilitiesService: FacilitiesService,
     private sortBy: SortByPipe,
-    private filterBy: FilterByPipe
+    private filterBy: FilterByPipe,
+    private pendingService: PendingService
   ) {}
 
   ngOnInit() {
@@ -58,6 +62,22 @@ export class PanelsComponent implements OnInit {
     this.shownTreatmentFacilities$ = this.treatmentFacilities$
     this.correctionalFacilities$ = this.facilitiesService.getCorrectionalFacilities();
     this.shownCorrectionalFacilities$ = this.correctionalFacilities$
+    this.pendingService.getVolunteers().subscribe(vols => console.log("vols", vols))
+  }
+
+  toggleSignUpDialog(panel){
+    this.selectedPanel = panel
+    this.signUpDialog = !this.signUpDialog
+    console.log("this.signupdialog", this.signUpDialog)
+  }
+
+  closeVolunteerForm(toggle){
+    console.log("toggle", toggle)
+    this.signUpDialog = toggle
+  }
+
+  addVolunteer(volunteer){
+    console.log("added", this.pendingService.addVolunteer(volunteer))
   }
 
   getMemberName(user: AdminMember) {

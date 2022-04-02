@@ -21,6 +21,9 @@
             <button class="btn admin-top-btn" (click)="viewFacilitiesPage()">
               Facilities
             </button>
+            <button class="btn admin-top-btn" (click)="viewPendingPage()">
+              Pending
+            </button>
           </div>
         </div>
       </div>
@@ -394,6 +397,10 @@
         <div *ngSwitchCase="5">
           <!-- Facilities -->
           <app-facilities-dashboard></app-facilities-dashboard>
+        </div>
+        <div *ngSwitchCase="6">
+          <!-- Pending -->
+          <app-pending-dashboard></app-pending-dashboard>
         </div>
       </ng-container>
     </ng-container>
