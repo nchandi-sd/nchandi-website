@@ -23,7 +23,7 @@ export class ResourceSubmissionService {
     //use for mocking of submission.  no post will be made
     //return of(null).pipe(delay(2000))
     };
-  
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
