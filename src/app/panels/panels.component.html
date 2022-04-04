@@ -46,24 +46,6 @@
             <div class="container">
               <mat-accordion>
                 <mat-expansion-panel #panel>
-                  <mat-expansion-panel-header
-                    class="disable_ripple contactViewer"
-                    (click)="isTableOpen = !isTableOpen"
-                  >
-                    <div>
-                      <mat-panel-title
-                        ><h4 class="panel-title text-white exp-content">
-                          <strong
-                            >Panel Opening Contacts
-                            <ng-container *ngIf="!isTableOpen"
-                              >(click here to contact someone to join a
-                              panel)</ng-container
-                            ></strong
-                          >
-                        </h4></mat-panel-title
-                      >
-                    </div>
-                  </mat-expansion-panel-header>
 
                   <table class="contact-table text-white tab-content">
                     <tr
