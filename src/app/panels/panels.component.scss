@@ -203,3 +203,32 @@ button:focus{
     height: auto;
   }
 }
+
+.panel-dialog__button {
+  text-transform: uppercase;
+}
+
+app-volunteer::ng-deep .btn-container {
+  display: none !important;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dialog volunteer::ng-deep {
+  .panel-input__header,
+  .btn-primary {
+    display: none !important;
+  }
+}
+
+.dialog__content {
+  flex: 1 1 auto;
+}
+
+.dialog__actions {
+  justify-content: right;
+}

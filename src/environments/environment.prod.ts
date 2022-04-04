@@ -8,5 +8,7 @@ export const environment = {
     storageBucket: 'nchandi-website.appspot.com',
     messagingSenderId: '71952078526',
     appId: '1:71952078526:web:b833c466158728f1'
-  }
+  },
+  user: "northcountyhandi@gmail.com",
+  password: "jxxrxiipqbtsakoc"
 };

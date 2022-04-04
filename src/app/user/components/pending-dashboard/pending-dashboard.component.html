@@ -1,0 +1,54 @@
+<div>
+  <div class="admin-content admin-container flex-center" id="description">
+    Pending Dashboard. This is a confidential area of the web site where
+    you can see those who signed up to volunteer on some panels.
+  </div>
+  <div class="spacer"></div>
+  <div *ngIf="{allPending: pending$ | async, pending: shownPending$ | async} as bothPending" class="translate-middle mx-auto" id="tableContainer">
+    <app-filter
+      filterType="pending"
+      *ngIf="bothPending.allPending as allPending"
+      [list]="allPending"
+      (filter)="filterEmitter(allPending, $event.property, $event.value)"
+    ></app-filter>
+    <table
+    class="
+      table table
+      bordered
+      table-responsive
+      text-nowrap
+      table-striped
+    "
+    id="openingsTable"
+    *ngIf="bothPending.pending as pending"
+  >
+    <thead>
+      <tr>
+        <th></th>
+        <th (click)="onSortThisBy('fullName', pending)">Full Name</th>
+        <th (click)="onSortThisBy('email', pending)">email</th>
+        <th (click)="onSortThisBy('phone', pending)">phone</th>
+        <th (click)="onSortThisBy('facilityName', pending)">Facility</th>
+        <th (click)="onSortThisBy('dayOfWeek', pending)">Day of Week</th>
+        <th (click)="onSortThisBy('weekOfMonth', pending)">Week of Month</th>
+        <th (click)="onSortThisBy('eventTime', pending)">Time</th>
+      </tr>
+    </thead>
+    <tbody id="openings-panel">
+      <tr *ngFor="let volunteer of pending">
+        <td id="actionContainer" class="flex-row">
+          <button class="action" id="approve" (click)="approve(volunteer)"><mat-icon >check</mat-icon></button>
+          <button class="action" id="reject" (click)="reject(volunteer)"><mat-icon >delete</mat-icon></button>
+        </td>
+        <td>{{ volunteer.firstName + " " + volunteer.lastName }}</td>
+        <td>{{ volunteer.email }}</td>
+        <td>{{ volunteer.phone }}</td>
+        <td style="word-wrap: normal">{{ volunteer.facilityName }}</td>
+        <td>{{ volunteer.dayOfWeek }}</td>
+        <td>{{ volunteer.weekOfMonth | number }}</td>
+        <td>{{ volunteer.eventTime }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

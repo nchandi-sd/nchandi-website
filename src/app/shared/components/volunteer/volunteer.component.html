@@ -1,5 +1,6 @@
-<form class="member-input" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-  <div class="member-input__header">Add a new member</div>
+<form class="volunteer" [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <button id="close"><mat-icon (click)="onClose(false)">close</mat-icon></button>
+  <div class="volunteer__header">Volunteer</div>
 
   <mat-form-field appearance="outline">
     <mat-label>First Name</mat-label>
@@ -27,24 +28,9 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Contact Method</mat-label>
-    <mat-select formControlName="preferredContactMethod">
+    <mat-select formControlName="preferredContactMethod" required>
       <mat-option value="text">Text</mat-option>
       <mat-option value="email">Email</mat-option>
-      <mat-option value="none">None</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" *ngIf="hasCommitment">
-    <mat-label>Commitment</mat-label>
-    <mat-select formControlName="commitment">
-      <mat-option value="Chair">Chair</mat-option>
-      <mat-option value="Co-Chair">Co-Chair</mat-option>
-      <mat-option value="Librarian">Librarian</mat-option>
-      <mat-option value="Technology">Technology</mat-option>
-      <mat-option value="Treasurer">Treasurer</mat-option>
-      <mat-option value="Facility">Facilities</mat-option>
-      <mat-option value="Panel Leader">Panel Leader</mat-option>
-      <mat-option value="Panel Coordinator">Panel Coordinator</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -55,7 +41,7 @@
       [disabled]="!userForm.valid"
       mat-raised-button color="primary"
     >
-      Add member
+      Volunteer
     </button>
   </div>
 </form>

@@ -23,7 +23,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'gender' && filterProperty !== 'markAsMembersNeeded'" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'gender' && filterProperty !== 'markAsMembersNeeded'" (change)="onFilterBy(list, filterProperty, filterValue)" />
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'gender'">
       <mat-option (click)="consoleProperty()" value="Male" >Male</mat-option>
       <mat-option (click)="consoleProperty()" value="Female" >Female</mat-option>
@@ -56,7 +56,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'facilityType'" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'facilityType'" (change)="onFilterBy(list, filterProperty, filterValue)" />
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'facilityType'">
       <mat-option (click)="consoleProperty()" value="Treatment" >Treatment</mat-option>
       <mat-option (click)="consoleProperty()" value="Correctional" >Correctional</mat-option>
@@ -80,7 +80,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'commitment' && filterProperty !== 'preferredContactMethod'" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'commitment' && filterProperty !== 'preferredContactMethod'" (change)="onFilterBy(list, filterProperty, filterValue)" />
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'commitment'">
       <mat-option (click)="consoleProperty()" value="Chair" >Chair</mat-option>
       <mat-option (click)="consoleProperty()" value="Co-Chair" >Co-Chair</mat-option>
@@ -113,7 +113,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'preferredContactMethod'" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'preferredContactMethod'" (change)="onFilterBy(list, filterProperty, filterValue)" />
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'preferredContactMethod'">
       <mat-option (click)="consoleProperty()" value="text" >Text</mat-option>
       <mat-option (click)="consoleProperty()" value="email" >Email</mat-option>
@@ -137,7 +137,7 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'gender'" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'gender'" (change)="onFilterBy(list, filterProperty, filterValue)" />
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'gender'">
       <mat-option (click)="consoleProperty()" value="Male" >Male</mat-option>
       <mat-option (click)="consoleProperty()" value="Female" >Female</mat-option>
@@ -159,7 +159,25 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" (change)="onFilterBy(list, filterProperty, filterValue)" />
+  </mat-form-field>
+  <button mat-button (click)="onFilterBy(list, filterProperty, filterValue)">filter</button>
+</div>
+
+<div *ngIf='filterType === "pending"'>
+  <mat-form-field appearance="outline">
+    <mat-label>filter by:</mat-label>
+    <mat-select [(value)]="filterProperty">
+      <mat-option (click)="consoleProperty()" value="fullName" >Full Name</mat-option>
+      <mat-option (click)="consoleProperty()" value="facilityName" >Facility</mat-option>
+      <mat-option (click)="consoleProperty()" value="dayOfWeek" >Day of Week</mat-option>
+      <mat-option (click)="consoleProperty()" value="weekOfMonth" >Week of Month</mat-option>
+      <mat-option (click)="consoleProperty()" value="eventTime" >Time</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>filter value</mat-label>
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" (change)="onFilterBy(list, filterProperty, filterValue)" />
   </mat-form-field>
   <button mat-button (click)="onFilterBy(list, filterProperty, filterValue)">filter</button>
 </div>
