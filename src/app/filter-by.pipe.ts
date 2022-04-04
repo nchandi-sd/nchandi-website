@@ -8,7 +8,7 @@ import { Panel } from './model/Panel';
 })
 export class FilterByPipe implements PipeTransform {
 
-  transform(list: any[], property: any, value: string | number | boolean): any {
+  transform(list: any[], property: any, value: string | number | boolean): any[] {
 
     console.log("thatList", list)
     console.log("that value", typeof value)

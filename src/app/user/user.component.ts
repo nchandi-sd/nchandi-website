@@ -34,6 +34,7 @@ enum PageType {
   PanelMemberPage = 3,
   PanelsPage = 4,
   FacilitiesPage = 5,
+  PendingPage = 6
 }
 
 const MONTHS = [
@@ -358,6 +359,10 @@ export class UserComponent implements OnInit, OnDestroy {
 
   viewFacilitiesPage() {
     this.router.navigate(['/user', PageType.FacilitiesPage]);
+  }
+
+  viewPendingPage() {
+    this.router.navigate(['/user', PageType.PendingPage])
   }
 
   onAdminEntry(member: AdminMember) {

@@ -88,9 +88,11 @@ export class PanelListComponent implements OnInit, OnDestroy {
           var adminCommitment: any = admin[0].commitment
           if(adminCommitment === "Panel Leader"){
             this.shownPanels$ = of(this.filterBy.transform(panels, "panelLeader...email", info.email))
+            this.panels$ = of(this.filterBy.transform(panels, "panelLeader...email", info.email))
           }
           if(adminCommitment === "Panel Coordinator"){
             this.shownPanels$ = of(this.filterBy.transform(panels, "panelCoordinator...email", info.email))
+            this.panels$ = of(this.filterBy.transform(panels, "panelCoordinator...email", info.email))
           }
         })
       })
