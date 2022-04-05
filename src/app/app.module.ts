@@ -69,7 +69,8 @@ import * as XLSX from 'xlsx';
 import { FilterByPipe } from './filter-by.pipe';
 import { FilterComponent } from './shared/components/filter/filter.component';
 import { VolunteerComponent } from './shared/components/volunteer/volunteer.component';
-import { PendingDashboardComponent } from './user/components/pending-dashboard/pending-dashboard.component'
+import { PendingDashboardComponent } from './user/components/pending-dashboard/pending-dashboard.component';
+import { EmailPipe } from './email.pipe'
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { PendingDashboardComponent } from './user/components/pending-dashboard/p
     FilterComponent,
     VolunteerComponent,
     PendingDashboardComponent,
+    EmailPipe,
 
   ],
   imports: [

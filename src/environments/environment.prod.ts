@@ -9,6 +9,6 @@ export const environment = {
     messagingSenderId: '71952078526',
     appId: '1:71952078526:web:b833c466158728f1'
   },
-  user: "northcountyhandi@gmail.com",
-  password: "jxxrxiipqbtsakoc"
+  user: "Technology@nchandi.org",
+  password: "698875011"
 };
