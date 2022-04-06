@@ -85,198 +85,205 @@
           <app-volunteer [panel]="selectedPanel" (close)="closeVolunteerForm($event)" (formSubmit)="addVolunteer($event)"></app-volunteer>
         </div>
 
-        <h2 class="section-header text-white flex-center">Open Panels</h2>
-        <div class="panel-container1 panel flex-center flex-column" id="openPanels" *ngIf="{allOpenPanels: openPanels$ | async, openPanels: shownOpenPanels$ | async} as bothOpenPanels">
-          <app-filter
-          filterType="openPanels"
-          *ngIf="bothOpenPanels.allOpenPanels as allOpenPanels"
-          [list]="allOpenPanels"
-          (filter)="filterOpenPanels(allOpenPanels, $event.property, $event.value)"
-          >
-          </app-filter>
-          <table
-            class="
-              table table
-              bordered
-              table-responsive
-              text-nowrap
-              table-striped
-            "
-            id="openingsTable"
-            *ngIf="bothOpenPanels.openPanels as panels"
-          >
-            <thead>
-              <tr>
-                <th></th>
-                <th (click)="onSortThisBy('dayOfWeek', panels)">Day of Week</th>
-                <th (click)="onSortThisBy('weekOfMonth', panels)">Week of Month</th>
-                <th (click)="onSortThisBy('eventTime', panels)">Time</th>
-                <th (click)="onSortThisBy('facility...facilityName', panels)">Facility</th>
-                <!--<th>Location</th>-->
-                <th (click)="onSortThisBy('gender', panels)">Gender</th>
-                <!--<th>Mark as Number Needed?</th>-->
-                <th (click)="onSortThisBy('numberNeeded', panels)"># Needed</th>
-                <!--<th>Board Champion</th>
-                <th>Panel Coordinator</th>
-                <th>Panel Leader</th>
-                <th>Panel Member 1</th>
-                <th>Panel Member 2</th>
-                <th>Panel Member 3</th>
-                <th>Panel Member 4</th>
-                <th>Panel Member 5</th>-->
-              </tr>
-            </thead>
-            <tbody id="openings-panel">
-              <tr *ngFor="let panel of panels">
-                <td><button class="btn btn-primary" (click)="toggleSignUpDialog(panel)">Volunteer</button></td>
-                <td>{{ panel.dayOfWeek }}</td>
-                <td>{{ panel.weekOfMonth | number }}</td>
-                <td>{{ panel.eventTime }}</td>
-                <td style="word-wrap: normal">
-                  {{ panel.facility ? panel.facility.facilityName : "" }}
-                </td>
-                <!--<td>{{ panel.location }}</td>-->
-                <td>{{ panel.gender }}</td>
-                <!--<td>
-                  {{ panel.markAsMembersNeeded }}
-                </td>-->
-                <td>
-                  {{ panel.numberNeeded ? panel.numberNeeded : "" }}
-                </td>
-                <!--<td>{{ getMemberName(panel.boardChampion) }}</td>
-                <td>{{ getMemberName(panel.panelCoordinator) }}</td>
-                <td>{{ getMemberName(panel.panelLeader) }}</td>
-                <td>{{ getMemberName(panel.panelMember1) }}</td>
-                <td>{{ getMemberName(panel.panelMember2) }}</td>
-                <td>{{ getMemberName(panel.panelMember3) }}</td>
-                <td>{{ getMemberName(panel.panelMember4) }}</td>
-                <td>{{ getMemberName(panel.panelMember5) }}</td>-->
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="printOrExport">
-          <button class="btn btn-primary btn-lg" (click)="onPrint('openPanels', 'Open Panels')">Print</button>
-          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'openPanels', 'openingsTable')">Export</button>
-        </div>
-
-
-        <div class="spacer"></div>
-
-        <h2 class="section-header text-white flex-center">Current Panels</h2>
-        <div class="panel-container2 panel flex-center flex-column" id="currentPanels" *ngIf="{allTreatmentFacilities: treatmentFacilities$ | async, treatmentFacilities: shownTreatmentFacilities$ | async} as bothTreatmentFacilities">
-          <app-filter
-          filterType="otherFacilities"
-          *ngIf="bothTreatmentFacilities.allTreatmentFacilities as allTreatmentFacilities"
-          [list]="allFacilities"
-          (filter)="filterTreatmentFacilities(allTreatmentFacilities, $event.property, $event.value)"
-          >
-          </app-filter>
-          <table
-            class="
-              table table
-              bordered
-              table-responsive
-              text-nowrap
-              table-striped
-            "
-            id="treatmentPanels"
-            *ngIf="bothTreatmentFacilities.treatmentFacilities as facilities"
-          >
-            <thead>
-              <tr>
-                <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
-                <th (click)="onSortThisBy('address', facilities)">Address</th>
-                <th (click)="onSortThisBy('city', facilities)">City</th>
-                <th (click)="onSortThisBy('state', facilities)">State</th>
-                <!--<th>Primary Contact</th>
-                <th>Primary Email</th>
-                <th>Primary Phone</th>-->
-                <th (click)="onSortThisBy('website', facilities)">Website</th>
-              </tr>
-            </thead>
-            <tbody
-              id="facility-panels"
-            >
-              <ng-container *ngFor="let facility of facilities">
-                <tr>
-                  <td>{{ facility.facilityName }}</td>
-                  <td>{{ facility.address }}</td>
-                  <td>{{ facility.city }}</td>
-                  <td>{{ facility.state }}</td>
-                  <!--<td>{{ facility.mainContactName }}</td>
-                  <td>{{ facility.mainContactEmail }}</td>
-                  <td>{{ facility.mainContactPhone }}</td>-->
-                  <td><a href="{{ facility.website }}">{{ facility.website }}</a></td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
-        </div>
-        <div class="printOrExport">
-          <button class="btn btn-primary btn-lg" (click)="onPrint('currentPanels', 'Current Panels')">Print</button>
-          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'currentPanels', 'treatmentPanels')">Export</button>
-        </div>
-
-        <div class="spacer"></div>
-
-        <h2 class="section-header text-white flex-center">
-          Correctional Facilities
-        </h2>
-        <div class="panel-container3 panel flex-center flex-column" id="correctionalFacilities" *ngIf="{allCorrectionalFacilities: correctionalFacilities$ | async, correctionalFacilities: shownCorrectionalFacilities$ | async} as bothCorrectionalFacilities">
-          <app-filter
-            filterType="otherFacilities"
-            *ngIf="bothCorrectionalFacilities.allCorrectionalFacilities as allCorrectionalFacilities"
-            [list]="allCorrectionalFacilities"
-            (filter)="filterCorrectionalFacilities(allCorrectionalFacilities, $event.property, $event.value)"
-          >
-          </app-filter>
-          <table
-            class="
-              table table
-              bordered
-              table-responsive
-              text-nowrap
-              table-striped
-            "
-            id="correctionalPanels"
-            *ngIf="bothCorrectionalFacilities.correctionalFacilities as facilities"
-          >
-            <thead>
-              <tr>
-                <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
-                <th (click)="onSortThisBy('address', facilities)">Address</th>
-                <th (click)="onSortThisBy('city', facilities)">City</th>
-                <th (click)="onSortThisBy('state', facilities)">State</th>
-                <!--<th>Primary Contact</th>
-                <th>Primary Email</th>
-                <th>Primary Phone</th>-->
-                <th (click)="onSortThisBy('website', facilities)">Website</th>
-              </tr>
-            </thead>
-            <tbody
-              id="facility-panels"
-            >
-              <ng-container *ngFor="let facility of facilities">
-                <tr>
-                  <td>{{ facility.facilityName }}</td>
-                  <td>{{ facility.address }}</td>
-                  <td>{{ facility.city }}</td>
-                  <td>{{ facility.state }}</td>
-                  <!--<td>{{ facility.mainContactName }}</td>
-                  <td>{{ facility.mainContactEmail }}</td>
-                  <td>{{ facility.mainContactPhone }}</td>-->
-                  <td><a href="{{ facility.website }}">{{ facility.website }}</a></td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
-        </div>
-        <div class="printOrExport">
-          <button class="btn btn-primary btn-lg" (click)="onPrint('correctionalFacilities', 'correctional Facilities')">Print</button>
-          <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'correctionalFacilities', 'correctionalPanels')">Export</button>
-        </div>
-        <div class="spacer"></div>
+        <ngb-accordion [closeOthers]="true" activeIds="static-1">
+          <ngb-panel id="static-1" title="Open Panels">
+            <ng-template ngbPanelContent>
+              <div class="panel-container1 panel flex-center flex-column" id="openPanels" *ngIf="{allOpenPanels: openPanels$ | async, openPanels: shownOpenPanels$ | async} as bothOpenPanels">
+                <app-filter
+                filterType="openPanels"
+                *ngIf="bothOpenPanels.allOpenPanels as allOpenPanels"
+                [list]="allOpenPanels"
+                (filter)="filterOpenPanels(allOpenPanels, $event.property, $event.value)"
+                >
+                </app-filter>
+                <table
+                  class="
+                    table table
+                    bordered
+                    table-responsive
+                    text-nowrap
+                    table-striped
+                  "
+                  id="openingsTable"
+                  *ngIf="bothOpenPanels.openPanels as panels"
+                >
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th (click)="onSortThisBy('dayOfWeek', panels)">Day of Week</th>
+                      <th (click)="onSortThisBy('weekOfMonth', panels)">Week of Month</th>
+                      <th (click)="onSortThisBy('eventTime', panels)">Time</th>
+                      <th (click)="onSortThisBy('facility...facilityName', panels)">Facility</th>
+                      <!--<th>Location</th>-->
+                      <th (click)="onSortThisBy('gender', panels)">Gender</th>
+                      <!--<th>Mark as Number Needed?</th>-->
+                      <th (click)="onSortThisBy('numberNeeded', panels)"># Needed</th>
+                      <!--<th>Board Champion</th>
+                      <th>Panel Coordinator</th>
+                      <th>Panel Leader</th>
+                      <th>Panel Member 1</th>
+                      <th>Panel Member 2</th>
+                      <th>Panel Member 3</th>
+                      <th>Panel Member 4</th>
+                      <th>Panel Member 5</th>-->
+                    </tr>
+                  </thead>
+                  <tbody id="openings-panel">
+                    <tr *ngFor="let panel of panels">
+                      <td><button class="btn btn-primary" (click)="toggleSignUpDialog(panel)">Volunteer</button></td>
+                      <td>{{ panel.dayOfWeek }}</td>
+                      <td>{{ panel.weekOfMonth | number }}</td>
+                      <td>{{ panel.eventTime }}</td>
+                      <td style="word-wrap: normal">
+                        {{ panel.facility ? panel.facility.facilityName : "" }}
+                      </td>
+                      <!--<td>{{ panel.location }}</td>-->
+                      <td>{{ panel.gender }}</td>
+                      <!--<td>
+                        {{ panel.markAsMembersNeeded }}
+                      </td>-->
+                      <td>
+                        {{ panel.numberNeeded ? panel.numberNeeded : "" }}
+                      </td>
+                      <!--<td>{{ getMemberName(panel.boardChampion) }}</td>
+                      <td>{{ getMemberName(panel.panelCoordinator) }}</td>
+                      <td>{{ getMemberName(panel.panelLeader) }}</td>
+                      <td>{{ getMemberName(panel.panelMember1) }}</td>
+                      <td>{{ getMemberName(panel.panelMember2) }}</td>
+                      <td>{{ getMemberName(panel.panelMember3) }}</td>
+                      <td>{{ getMemberName(panel.panelMember4) }}</td>
+                      <td>{{ getMemberName(panel.panelMember5) }}</td>-->
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="printOrExport">
+                  <button class="btn btn-primary btn-lg" (click)="onPrint('openPanels', 'Open Panels')">Print</button>
+                  <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'openPanels', 'openingsTable')">Export</button>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="static-2">
+            <ng-template ngbPanelTitle>
+              <span>Current Panels</span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="panel-container2 panel flex-center flex-column" id="currentPanels" *ngIf="{allTreatmentFacilities: treatmentFacilities$ | async, treatmentFacilities: shownTreatmentFacilities$ | async} as bothTreatmentFacilities">
+                <app-filter
+                filterType="otherFacilities"
+                *ngIf="bothTreatmentFacilities.allTreatmentFacilities as allTreatmentFacilities"
+                [list]="allFacilities"
+                (filter)="filterTreatmentFacilities(allTreatmentFacilities, $event.property, $event.value)"
+                >
+                </app-filter>
+                <table
+                  class="
+                    table table
+                    bordered
+                    table-responsive
+                    text-nowrap
+                    table-striped
+                  "
+                  id="treatmentPanels"
+                  *ngIf="bothTreatmentFacilities.treatmentFacilities as facilities"
+                >
+                  <thead>
+                    <tr>
+                      <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
+                      <th (click)="onSortThisBy('address', facilities)">Address</th>
+                      <th (click)="onSortThisBy('city', facilities)">City</th>
+                      <th (click)="onSortThisBy('state', facilities)">State</th>
+                      <!--<th>Primary Contact</th>
+                      <th>Primary Email</th>
+                      <th>Primary Phone</th>-->
+                      <th (click)="onSortThisBy('website', facilities)">Website</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="facility-panels"
+                  >
+                    <ng-container *ngFor="let facility of facilities">
+                      <tr>
+                        <td>{{ facility.facilityName }}</td>
+                        <td>{{ facility.address }}</td>
+                        <td>{{ facility.city }}</td>
+                        <td>{{ facility.state }}</td>
+                        <!--<td>{{ facility.mainContactName }}</td>
+                        <td>{{ facility.mainContactEmail }}</td>
+                        <td>{{ facility.mainContactPhone }}</td>-->
+                        <td><a href="{{ facility.website }}">{{ facility.website }}</a></td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                <div class="printOrExport">
+                  <button class="btn btn-primary btn-lg" (click)="onPrint('currentPanels', 'Current Panels')">Print</button>
+                  <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'currentPanels', 'treatmentPanels')">Export</button>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="static-3">
+            <ng-template ngbPanelTitle>
+              <span>Correctional Facilities</span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="panel-container3 panel flex-center flex-column" id="correctionalFacilities" *ngIf="{allCorrectionalFacilities: correctionalFacilities$ | async, correctionalFacilities: shownCorrectionalFacilities$ | async} as bothCorrectionalFacilities">
+                <app-filter
+                  filterType="otherFacilities"
+                  *ngIf="bothCorrectionalFacilities.allCorrectionalFacilities as allCorrectionalFacilities"
+                  [list]="allCorrectionalFacilities"
+                  (filter)="filterCorrectionalFacilities(allCorrectionalFacilities, $event.property, $event.value)"
+                >
+                </app-filter>
+                <table
+                  class="
+                    table table
+                    bordered
+                    table-responsive
+                    text-nowrap
+                    table-striped
+                  "
+                  id="correctionalPanels"
+                  *ngIf="bothCorrectionalFacilities.correctionalFacilities as facilities"
+                >
+                  <thead>
+                    <tr>
+                      <th (click)="onSortThisBy('facilityName', facilities)">Facility</th>
+                      <th (click)="onSortThisBy('address', facilities)">Address</th>
+                      <th (click)="onSortThisBy('city', facilities)">City</th>
+                      <th (click)="onSortThisBy('state', facilities)">State</th>
+                      <!--<th>Primary Contact</th>
+                      <th>Primary Email</th>
+                      <th>Primary Phone</th>-->
+                      <th (click)="onSortThisBy('website', facilities)">Website</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="facility-panels"
+                  >
+                    <ng-container *ngFor="let facility of facilities">
+                      <tr>
+                        <td>{{ facility.facilityName }}</td>
+                        <td>{{ facility.address }}</td>
+                        <td>{{ facility.city }}</td>
+                        <td>{{ facility.state }}</td>
+                        <!--<td>{{ facility.mainContactName }}</td>
+                        <td>{{ facility.mainContactEmail }}</td>
+                        <td>{{ facility.mainContactPhone }}</td>-->
+                        <td><a href="{{ facility.website }}">{{ facility.website }}</a></td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                <div class="printOrExport">
+                  <button class="btn btn-primary btn-lg" (click)="onPrint('correctionalFacilities', 'correctional Facilities')">Print</button>
+                  <button class="btn btn-primary btn-lg" (click)="onExport('xlsx', 'correctionalFacilities', 'correctionalPanels')">Export</button>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
         <div class="about-location-view section"></div>
       </div>
     </div>

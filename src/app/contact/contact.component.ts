@@ -4,6 +4,7 @@ import {Contact} from '../model/Contact';
 import {ContactService} from '../contact/contact.service';
 import {timer} from 'rxjs';
 import {isCombinedNodeFlagSet} from 'tslint';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class ContactComponent implements OnInit {
   contactSubmitted = false;
 
 
-  constructor(private formBuilder: FormBuilder, private contactService: ContactService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private contactService: ContactService,
+    private http: HttpClient
+  ) {
   }
 
   invalidFirstName() {
@@ -46,6 +51,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.http.get("https://nchandi-email.herokuapp.com/").subscribe(ref => console.log(ref))
     this.contact = new Contact();
     this.userForm = this.formBuilder.group({
       first_name: ['', Validators.required],
