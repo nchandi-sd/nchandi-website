@@ -94,11 +94,9 @@ export class ContactComponent implements OnInit {
 
   postContactForm(form: NgForm) {
     this.contactService.postContactForm(this.contact)
-      .subscribe(() => {
-        this.sendDisabled = false;
-        this.contactSubmitted = true;
-        console.log('Contact form successfully sent');
-        this.timerToClear(form);
-      });
+    this.sendDisabled = false;
+    this.contactSubmitted = true;
+    console.log('Contact form successfully sent');
+    this.timerToClear(form);
   }
 }

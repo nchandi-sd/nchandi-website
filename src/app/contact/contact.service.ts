@@ -6,20 +6,50 @@ import { catchError, retry } from 'rxjs/operators';
 import {Panels} from '../model/Panels';
 import {TableData} from '../model/TableData';
 import { Contact } from '../model/Contact';
+import { environment } from 'src/environments/environment';
+import { env } from 'process';
 
 
 @Injectable()
 export class ContactService {
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient) {
 
-  contactUrl = 'https://script.google.com/macros/s/AKfycbzezNitOBOTReBZ7kvtV8fzTEiW-bA8mGOnJDQl7orAr65gvRd8/exec';
+  }
 
-  postContactForm(contact: Contact): Observable<Contact> {
+  /* contactUrl = 'https://script.google.com/macros/s/AKfycbzezNitOBOTReBZ7kvtV8fzTEiW-bA8mGOnJDQl7orAr65gvRd8/exec'; */
+  contactUrl = `https://nchandi-email.herokuapp.com/`;
 
-    console.log("entered ContactForm.postConactForm")
-    let headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'})
+  postContactForm(contact: Contact) {
+
+    console.log("entered ContactForm.postConactForm", contact)
+    let headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
     let options = {headers: headers}
-    return this.https.post<Contact>(this.contactUrl, JSON.stringify(contact), options)
+
+    var body = () => {
+      let i = 0
+      let theBody = ""
+      while(i < Object.keys(contact).length){
+        let keyList = Object.keys(contact)
+        let valueList = Object.values(contact)
+        theBody += `<h3>${keyList[i]}</h3><p>${valueList[i]}</p>`
+        i++
+      }
+      return theBody
+    }
+
+    console.log("body", body(), environment.user, options)
+
+    /* return this.emailPipe.transform(`smtp.gmail.com`, environment.user, environment.password, "info@nchandi.org", environment.user, "Contact", body()) */
+
+    let postRequest = {
+      fromAddress: environment.user,
+      toAddress: "alonzo6546@outlook.com",
+      subject: "Contact Request",
+      askReceipt: "yes",
+      content: body(),
+   }
+
+    return this.https.post(this.contactUrl, contact).subscribe(res => console.log("res", res))
     };
 
 

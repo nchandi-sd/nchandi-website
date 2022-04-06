@@ -246,14 +246,12 @@ export class ResourcesComponent implements OnInit {
     console.log('resource: ' + this.resourceSubmission);
     this.resourceSubmissionService
       .postResourceForm(this.resourceSubmission)
-      .subscribe(() => {
         this.sendDisabled = false;
         // display success
 
         // hide form
         document.getElementById('sub-container').classList.add('hidden');
         document.getElementById('thank-you-container').classList.add('show');
-      });
   }
 
   getStringMonth(month: number): string {
