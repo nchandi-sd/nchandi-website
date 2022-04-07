@@ -19,6 +19,7 @@ import { LINKS } from '../model/Local-Links';
 import { PanelService } from '../shared/services/panel.service';
 import { FacilitiesService } from '../shared/services/facilities.service';
 import { Facility } from '../model/Facility';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-resources',
@@ -59,10 +60,12 @@ export class ResourcesComponent implements OnInit {
     private facilitiesService: FacilitiesService,
     private panelService: PanelService,
     private formBuilder: FormBuilder,
-    private resourceSubmissionService: ResourceSubmissionService
+    private resourceSubmissionService: ResourceSubmissionService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
+    this.http.get("https://nchandi-email.herokuapp.com/").subscribe(ref => console.log(ref))
     this.localLinks = LINKS;
     this.hasArchives = false;
     this.hasFinancialArchive = false;
