@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, of } from 'rxjs';
@@ -11,7 +12,8 @@ export class PendingService {
 
   constructor(
     private firestore: AngularFirestore,
-    private panelMemberService: PanelMemberService
+    private panelMemberService: PanelMemberService,
+    private https: HttpClient,
   ) { }
 
   addVolunteer(volunteer) {
@@ -19,40 +21,19 @@ export class PendingService {
       var equivilentMemberArray: any[] = members.filter(member => member.phone === volunteer.phone)
       this.getVolunteers().subscribe(volunteers => {
         equivilentMemberArray = equivilentMemberArray.concat(volunteers.filter((vol: any) => vol.phone === volunteer.phone))
-        equivilentMemberArray.length > 0 ? "Sorry but this member already exists" : this.firestore.collection("Pending").add(volunteer)
+        equivilentMemberArray.length > 0 ? "Sorry but this member already exists" : this.https.post("https://nchandi-email.herokuapp.com/pending", volunteer).subscribe(res => console.log("res", res))
       })
     }
     )
   }
 
   approveVolunteer(volunteer: any) {
-    return this.firestore.collection("Panels").doc(volunteer.panelId).get().subscribe(panel => {
-      this.firestore.collection("Members").add({
-        firstName: volunteer.firstName,
-        lastName: volunteer.lastName,
-        email: volunteer.email,
-        phone: volunteer.phone,
-        commitment: -1
-      }).then(newMember => {
-        newMember.get().then(member => {
-          let numberNeeded = panel.data().numberNeeded
-          let soonToBeFilledSlot = `panelMember${6 - numberNeeded}`
-
-          if(numberNeeded !== 0){
-            panel.ref.update({
-              numberNeeded: numberNeeded - 1,
-              [soonToBeFilledSlot]: member.ref
-            })
-            this.deleteVolunteer(volunteer.id)
-          }
-        })
-      })
-
-    })
+    return this.https.post("https://nchandi-email.herokuapp.com/approve", volunteer).subscribe(res => console.log("res", res))
   }
 
   deleteVolunteer(id){
-    return this.firestore.collection("Pending").doc(id).delete()
+    console.log("id", id)
+    return this.https.delete("https://nchandi-email.herokuapp.com/reject/" + id).subscribe(res => console.log("res", res))
   }
 
   getVolunteer(id){

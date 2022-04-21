@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, Output, EventEmitter,  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Panel } from 'src/app/model/Panel';
@@ -21,9 +22,12 @@ export class VolunteerComponent implements OnInit {
 
 
 
-  constructor() {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
+    this.http.get("https://nchandi-email.herokuapp.com/").subscribe(ref => console.log(ref))
     this.userForm.addControl("panelId", new FormControl(this.panel.id))
     this.userForm.addControl("facilityName", new FormControl(this.panel.facility.facilityName))
     this.userForm.addControl("dayOfWeek", new FormControl(this.panel.dayOfWeek))
