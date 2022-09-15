@@ -12,6 +12,8 @@ export class FilterByPipe implements PipeTransform {
 
     console.log("thatList", list)
     console.log("that value", typeof value)
+    console.log("that property", property)
+    console.log("the value the way the pipe sees it", value)
     if(!value || value === "" || (typeof value === "string" && value.length === 0)){
       console.log("nothing")
       return list
@@ -24,7 +26,7 @@ export class FilterByPipe implements PipeTransform {
     } else if(property === "allMembers"){
       return list.filter((item) => {
         if(typeof value === "string"){
-          if(item.allMembers.includes(value.split(" ").join("").trim().toLowerCase())){
+          if(item.allMembers.split(" ").join("").includes(value.split(" ").join("").trim().toLowerCase())){
             return item
           }
         }
@@ -33,14 +35,14 @@ export class FilterByPipe implements PipeTransform {
       return list.filter((item: Panel) => {
         if(typeof value === "string" && item.boardChampion.firstName && item.boardChampion.lastName){
           let fullName = item.boardChampion.firstName.toLowerCase() + item.boardChampion.lastName.toLowerCase()
-          return fullName.includes(value.toLowerCase())
+          return fullName.includes(value.split(" ").join("").toLowerCase())
         }
       })
     } else if(property === "panelCoordinator"){
       return list.filter((item: Panel) => {
         if(typeof value === "string" && item.panelCoordinator.firstName && item.panelCoordinator.lastName){
           let fullName = item.panelCoordinator.firstName.toLowerCase() + item.panelCoordinator.lastName.toLowerCase()
-          return fullName.includes(value.toLowerCase())
+          return fullName.includes(value.split(" ").join("").toLowerCase())
         }
       })
     } else if(property === "commitment") {
@@ -60,7 +62,7 @@ export class FilterByPipe implements PipeTransform {
           return list.filter(item => {
             if(typeof value === "string" && item[propertyParts[0]][propertyParts[1]]){
               let filteredProperty = item[propertyParts[0]][propertyParts[1]].toLowerCase()
-              return filteredProperty.includes(value.toLowerCase())
+              return filteredProperty.includes(value.split(" ").join("").toLowerCase())
             }
           })
         }
@@ -70,7 +72,7 @@ export class FilterByPipe implements PipeTransform {
             if(typeof value === "string" && item[propertyParts[0]][propertyParts[1]] && item[propertyParts[0]][propertyParts[2]]){
               let full = item[propertyParts[0]][propertyParts[1]].toLowerCase() + item[propertyParts[0]][propertyParts[2]].toLowerCase()
               console.log("full", full)
-              return full.includes(value.toLowerCase())
+              return full.includes(value.split(" ").join("").toLowerCase())
             }
           })
         }

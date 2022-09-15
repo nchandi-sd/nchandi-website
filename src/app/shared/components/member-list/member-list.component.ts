@@ -44,6 +44,8 @@ export class MemberListComponent implements OnInit {
   @Output()
   sortThisBy = new EventEmitter<string>()
 
+  @Input() listOfNames: any[]
+
   constructor(private sortBy: SortByPipe, private filterBy: FilterByPipe) {
     console.log("shownMembers", this.shownMembers)
    }
@@ -62,6 +64,13 @@ export class MemberListComponent implements OnInit {
 
   filterEmitter(members, property, value){
     this.shownMembers = this.filterBy.transform(members, property, value)
+  }
+
+  searchEmitter(members, property){
+    var collectionOfNames = {}
+    console.log("members", members)
+    members.map(member => collectionOfNames[member.firstName + " " + member.lastName] = 1)
+    this.listOfNames = Object.keys(collectionOfNames)
   }
 
   onSortThisBy(action: string, members: AdminMember[]){

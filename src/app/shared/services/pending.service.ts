@@ -21,7 +21,9 @@ export class PendingService {
       var equivilentMemberArray: any[] = members.filter(member => member.phone === volunteer.phone)
       this.getVolunteers().subscribe(volunteers => {
         equivilentMemberArray = equivilentMemberArray.concat(volunteers.filter((vol: any) => vol.phone === volunteer.phone))
-        equivilentMemberArray.length > 0 ? "Sorry but this member already exists" : this.https.post("https://nchandi-email.herokuapp.com/pending", volunteer).subscribe(res => console.log("res", res))
+        equivilentMemberArray.length > 0 ? "Sorry but this member already exists" : (
+          this.https.post(/* "https://nchandi-email.herokuapp.com/pending" */ "https://nchandi-serverless-email.vercel.app/api/pending", volunteer).subscribe(res => console.log("res", res))
+        )
       })
     }
     )

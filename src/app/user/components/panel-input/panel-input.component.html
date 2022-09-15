@@ -71,7 +71,62 @@
     <input type="number" matInput formControlName="numberNeeded" />
     <mat-error>Value is required</mat-error>
   </mat-form-field>
-
+  <mat-form-field appearance="outline">
+    <mat-label>Board Champion</mat-label>
+  <input matInput name="boardChampion" formControlName="boardChampion" type="search" list="boardChampion-suggestions">
+  <datalist id="boardChampion-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Coordinator</mat-label>
+  <input matInput name="panelCoordinator" formControlName="panelCoordinator" type="search" list="panelCoordinator-suggestions">
+  <datalist id="panelCoordinator-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Leader</mat-label>
+  <input matInput name="panelLeader" formControlName="panelLeader" type="search" list="panelLeader-suggestions">
+  <datalist id="panelLeader-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 1</mat-label>
+  <input matInput name="panelMember1" formControlName="panelMember1" type="search" list="panelMember1-suggestions">
+  <datalist id="panelMember1-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 2</mat-label>
+  <input matInput name="panelMember2" formControlName="panelMember2" type="search" list="panelMember2-suggestions">
+  <datalist id="panelMember2-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 3</mat-label>
+  <input matInput name="panelMember3" formControlName="panelMember3" type="search" list="panelMember3-suggestions">
+  <datalist id="panelMember3-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 4</mat-label>
+  <input matInput name="panelMember4" formControlName="panelMember4" type="search" list="panelMember4-suggestions">
+  <datalist id="panelMember4-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Panel Member 5</mat-label>
+  <input matInput name="panelMember5" formControlName="panelMember5" type="search" list="panelMember5-suggestions">
+  <datalist id="panelMember5-suggestions" *ngIf="panelMembers$ | async as panelMembers">
+    <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
+  </datalist>
+  </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Board Champion</mat-label>
     <mat-select formControlName="boardChampion">

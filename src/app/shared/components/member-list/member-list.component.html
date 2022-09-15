@@ -7,7 +7,9 @@
     <app-filter
     filterType="{{ filterType }}"
     [list]="list"
+    [listOfNames]="listOfNames"
     (filter)="filterEmitter(members, $event.property, $event.value)"
+    (search)="searchEmitter(members, $event.property)"
     >
     </app-filter>
     <table

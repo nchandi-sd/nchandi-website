@@ -15,6 +15,8 @@ export class AdminListComponent implements OnInit, OnDestroy {
 
   members$: Observable<AdminMember[]>;
 
+  listOfNames: any[]
+
   private subscriptions = new Subscription();
 
   constructor(private adminService: AdminService) {}
@@ -35,5 +37,12 @@ export class AdminListComponent implements OnInit, OnDestroy {
 
   editItem(member: AdminMember) {
     this.edit.emit(member);
+  }
+
+  searchEmitter(members, property){
+    var collectionOfNames = {}
+    console.log("members", members)
+    members.map(member => collectionOfNames[member.firstName + " " + member.lastName] = 1)
+    this.listOfNames = Object.keys(collectionOfNames)
   }
 }

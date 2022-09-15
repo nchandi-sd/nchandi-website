@@ -23,7 +23,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'gender' && filterProperty !== 'markAsMembersNeeded'" (change)="onFilterBy(list, filterProperty, filterValue)" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="search" *ngIf="filterProperty !== 'gender' && filterProperty !== 'markAsMembersNeeded'" list="panel-suggestions" />
+    <datalist id="panel-suggestions">
+      <option *ngFor="let name of listOfNames">{{name}}</option>
+    </datalist>
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'gender'">
       <mat-option (click)="consoleProperty()" value="Male" >Male</mat-option>
       <mat-option (click)="consoleProperty()" value="Female" >Female</mat-option>
@@ -80,7 +83,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'commitment' && filterProperty !== 'preferredContactMethod'" (change)="onFilterBy(list, filterProperty, filterValue)" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="search" *ngIf="filterProperty !== 'commitment' && filterProperty !== 'preferredContactMethod'" list="admin-suggestions" />
+    <datalist id="admin-suggestions">
+      <option *ngFor="let name of listOfNames">{{name}}</option>
+    </datalist>
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'commitment'">
       <mat-option (click)="consoleProperty()" value="Chair" >Chair</mat-option>
       <mat-option (click)="consoleProperty()" value="Co-Chair" >Co-Chair</mat-option>
@@ -113,7 +119,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" *ngIf="filterProperty !== 'preferredContactMethod'" (change)="onFilterBy(list, filterProperty, filterValue)" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="search" *ngIf="filterProperty !== 'preferredContactMethod'" list="panel-member-suggestions" />
+    <datalist id="panel-member-suggestions">
+      <option *ngFor="let name of listOfNames">{{name}}</option>
+    </datalist>
     <mat-select [(value)]="filterValue" *ngIf="filterProperty === 'preferredContactMethod'">
       <mat-option (click)="consoleProperty()" value="text" >Text</mat-option>
       <mat-option (click)="consoleProperty()" value="email" >Email</mat-option>
@@ -177,7 +186,10 @@
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>filter value</mat-label>
-    <input matInput name="filterValue" [(ngModel)]="filterValue" type="text" (change)="onFilterBy(list, filterProperty, filterValue)" />
+    <input matInput name="filterValue" [(ngModel)]="filterValue" type="search" list="pending-suggestions" />
+    <datalist id="pending-suggestions">
+      <option *ngFor="let name of listOfNames">{{name}}</option>
+    </datalist>
   </mat-form-field>
   <button mat-button (click)="onFilterBy(list, filterProperty, filterValue)">filter</button>
 </div>

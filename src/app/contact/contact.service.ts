@@ -41,13 +41,6 @@ export class ContactService {
 
     /* return this.emailPipe.transform(`smtp.gmail.com`, environment.user, environment.password, "info@nchandi.org", environment.user, "Contact", body()) */
 
-    let postRequest = {
-      fromAddress: environment.user,
-      toAddress: "alonzo6546@outlook.com",
-      subject: "Contact Request",
-      askReceipt: "yes",
-      content: body(),
-   }
 
     return this.https.post(this.contactUrl, contact).subscribe(res => console.log("res", res))
     };

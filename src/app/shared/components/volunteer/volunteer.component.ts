@@ -33,6 +33,8 @@ export class VolunteerComponent implements OnInit {
     this.userForm.addControl("dayOfWeek", new FormControl(this.panel.dayOfWeek))
     this.userForm.addControl("weekOfMonth", new FormControl(this.panel.weekOfMonth))
     this.userForm.addControl("eventTime", new FormControl(this.panel.eventTime))
+    this.userForm.addControl("panelCoordinator", new FormControl(this.panel.panelCoordinator.email))
+    this.userForm.addControl("panelLeader", new FormControl(this.panel.panelLeader.email))
   }
 
   get valid() {

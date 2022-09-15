@@ -312,13 +312,13 @@ export class PanelService {
             };
           }
           panel.allMembers = []
-            panel.allMembers.push(boardChampion.data().firstName + boardChampion.data().lastName)
-            panel.allMembers.push(panelCoordinator.data().firstName + panelCoordinator.data().lastName)
-            panel.allMembers.push(panelMember1.data().firstName + panelMember1.data().lastName)
-            panel.allMembers.push(panelMember2.data().firstName + panelMember2.data().lastName)
-            panel.allMembers.push(panelMember3.data().firstName + panelMember3.data().lastName)
-            panel.allMembers.push(panelMember4.data().firstName + panelMember4.data().lastName)
-            panel.allMembers.push(panelMember5.data().firstName + panelMember5.data().lastName)
+            panel.allMembers.push(boardChampion.data().firstName + " " + boardChampion.data().lastName)
+            panel.allMembers.push(panelCoordinator.data().firstName + " " + panelCoordinator.data().lastName)
+            panel.allMembers.push(panelMember1.data().firstName + " " + panelMember1.data().lastName)
+            panel.allMembers.push(panelMember2.data().firstName + " " + panelMember2.data().lastName)
+            panel.allMembers.push(panelMember3.data().firstName + " " + panelMember3.data().lastName)
+            panel.allMembers.push(panelMember4.data().firstName + " " + panelMember4.data().lastName)
+            panel.allMembers.push(panelMember5.data().firstName + " " + panelMember5.data().lastName)
 
           panel.allMembers = panel.allMembers.map(name => {
             return name.toLowerCase()
