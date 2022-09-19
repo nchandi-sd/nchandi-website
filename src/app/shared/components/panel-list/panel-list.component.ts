@@ -140,6 +140,11 @@ export class PanelListComponent implements OnInit, OnDestroy {
       var collectionOfNames = {}
       listOfNames.map(list => list.map(name => collectionOfNames[name] = 1))
       this.listOfNames = Object.keys(collectionOfNames)
+    } else if(property === "facility") {
+      var listOfNames: any[] = list.map(item => item.facility.facilityName.toLowerCase())
+      var collectionOfNames = {}
+      listOfNames.map(name => collectionOfNames[name] = 1)
+      this.listOfNames = Object.keys(collectionOfNames)
     }
 
   }
@@ -169,7 +174,7 @@ export class PanelListComponent implements OnInit, OnDestroy {
     if(scope === null || scope === "c"){
       alert("member removal has been cancelled")
     } else {
-      this.http.post("https://nchandi-serverless.vercel.app/api/remove", {
+      this.http.post("https://nchandi-serverless-email.vercel.app/api/remove", {
         panelId: panel.id,
         property: property,
         scope: scope === "p" ? "panel" : "all",

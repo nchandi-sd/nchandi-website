@@ -104,7 +104,7 @@
               class="btn-delete"
               color="warn"
               aria-label="Remove Member"
-              ((click)="onRemoveMember(panel, 'panelLeader', panel.panelLeaderId)"
+              (click)="onRemoveMember(panel, 'panelLeader', panel.panelLeaderId)"
               *ngIf="getMemberName(panel.panelLeader) !== 'Need Person'"
             ><mat-icon>delete</mat-icon>
             </button>
@@ -128,7 +128,7 @@
               class="btn-delete"
               color="warn"
               aria-label="Remove Member"
-              ((click)="onRemoveMember(panel, 'panelMember2', panel.panelMember2Id)"
+              (click)="onRemoveMember(panel, 'panelMember2', panel.panelMember2Id)"
               *ngIf="getMemberName(panel.panelMember2) !== 'Need Person'"
             ><mat-icon>delete</mat-icon>
             </button>

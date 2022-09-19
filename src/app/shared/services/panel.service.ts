@@ -312,13 +312,30 @@ export class PanelService {
             };
           }
           panel.allMembers = []
-            panel.allMembers.push(boardChampion.data().firstName + " " + boardChampion.data().lastName)
-            panel.allMembers.push(panelCoordinator.data().firstName + " " + panelCoordinator.data().lastName)
-            panel.allMembers.push(panelMember1.data().firstName + " " + panelMember1.data().lastName)
-            panel.allMembers.push(panelMember2.data().firstName + " " + panelMember2.data().lastName)
-            panel.allMembers.push(panelMember3.data().firstName + " " + panelMember3.data().lastName)
-            panel.allMembers.push(panelMember4.data().firstName + " " + panelMember4.data().lastName)
-            panel.allMembers.push(panelMember5.data().firstName + " " + panelMember5.data().lastName)
+            if(boardChampion.exists){
+              panel.allMembers.push(boardChampion.data().firstName + " " + boardChampion.data().lastName)
+            }
+            if(panelCoordinator.exists){
+              panel.allMembers.push(panelCoordinator.data().firstName + " " + panelCoordinator.data().lastName)
+            }
+            if(panelLeader.exists){
+              panel.allMembers.push(panelLeader.data().firstName + " " + panelLeader.data().lastName)
+            }
+            if(panelMember1.exists){
+              panel.allMembers.push(panelMember1.data().firstName + " " + panelMember1.data().lastName)
+            }
+            if(panelMember2.exists){
+              panel.allMembers.push(panelMember2.data().firstName + " " + panelMember2.data().lastName)
+            }
+            if(panelMember3.exists){
+              panel.allMembers.push(panelMember3.data().firstName + " " + panelMember3.data().lastName)
+            }
+            if(panelMember4.exists){
+              panel.allMembers.push(panelMember4.data().firstName + " " + panelMember4.data().lastName)
+            }
+            if(panelMember5.exists){
+              panel.allMembers.push(panelMember5.data().firstName + " " + panelMember5.data().lastName)
+            }
 
           panel.allMembers = panel.allMembers.map(name => {
             return name.toLowerCase()

@@ -35,6 +35,14 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Facility</mat-label>
+  <input matInput name="facility" formControlName="facility" type="search" list="facility-suggestions">
+  <datalist id="facility-suggestions" *ngIf="facilities$ | async as facilities">
+    <option *ngFor="let facility of facilities" [value]="facility.id">{{ facility.facilityName }}</option>
+  </datalist>
+  </mat-form-field>
+
+<!--   <mat-form-field appearance="outline">
+    <mat-label>Facility</mat-label>
     <mat-select formControlName="facility">
       <ng-container *ngIf="facilities$ | async as facilities">
         <mat-option *ngFor="let facility of facilities" [value]="facility.id">
@@ -43,7 +51,7 @@
       </ng-container>
     </mat-select>
     <mat-error>Value is required</mat-error>
-  </mat-form-field>
+  </mat-form-field> -->
 
   <mat-form-field appearance="outline">
     <mat-label>Location</mat-label>
@@ -127,7 +135,9 @@
     <option *ngFor="let member of panelMembers" [value]="member.id">{{ member.firstName }} {{ member.lastName }}</option>
   </datalist>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+
+
+ <!--  <mat-form-field appearance="outline">
     <mat-label>Board Champion</mat-label>
     <mat-select formControlName="boardChampion">
       <ng-container *ngIf="panelMembers$ | async as panelMembers">
@@ -221,7 +231,7 @@
       </ng-container>
     </mat-select>
     <mat-error>Value is required</mat-error>
-  </mat-form-field>
+  </mat-form-field> -->
 
   <div class="form-group">
     <button

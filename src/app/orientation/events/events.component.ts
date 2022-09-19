@@ -18,10 +18,20 @@ export class EventsComponent implements OnInit {
   }
 
   events = EVENTS;
-  currentEvent = this.events[0];
+  /* currentEvent = this.events[0]; */
+  currentEvent = this.events.filter((event, index) => {
+    const now = new Date().valueOf()
+    console.log("event miliseconds", new Date(event.name).valueOf())
+    if((index === 0) && now <= new Date(event.name).valueOf()) {
+      return event
+    }
+    if(index !== 0 && now <= new Date(event.name).valueOf() && now > new Date(this.events[index - 1].name).valueOf()){
+      return event
+    }
+  })
 
   ngOnInit() {
-    this.eventClicked.emit(this.currentEvent);
+    this.eventClicked.emit(this.currentEvent[0]);
   }
 
   onClick(event: Event): void {

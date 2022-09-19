@@ -22,6 +22,7 @@ export class PendingService {
       this.getVolunteers().subscribe(volunteers => {
         equivilentMemberArray = equivilentMemberArray.concat(volunteers.filter((vol: any) => vol.phone === volunteer.phone))
         equivilentMemberArray.length > 0 ? "Sorry but this member already exists" : (
+          console.log("volunteer", volunteer),
           this.https.post(/* "https://nchandi-email.herokuapp.com/pending" */ "https://nchandi-serverless-email.vercel.app/api/pending", volunteer).subscribe(res => console.log("res", res))
         )
       })
@@ -30,12 +31,14 @@ export class PendingService {
   }
 
   approveVolunteer(volunteer: any) {
-    return this.https.post("https://nchandi-email.herokuapp.com/approve", volunteer).subscribe(res => console.log("res", res))
+    return this.https.post("https://nchandi-serverless-email.vercel.app/api/approve", volunteer).subscribe(res => console.log("res", res))
+    /* return this.https.post("https://nchandi-email.herokuapp.com/approve", volunteer).subscribe(res => console.log("res", res)) */
   }
 
   deleteVolunteer(id){
     console.log("id", id)
-    return this.https.delete("https://nchandi-email.herokuapp.com/reject/" + id).subscribe(res => console.log("res", res))
+    return this.https.delete("https://nchandi-serverless-email.vercel.app/api/reject?id=" + id).subscribe(res => console.log("res", res))
+/*     return this.https.delete("https://nchandi-email.herokuapp.com/reject/" + id).subscribe(res => console.log("res", res)) */
   }
 
   getVolunteer(id){
