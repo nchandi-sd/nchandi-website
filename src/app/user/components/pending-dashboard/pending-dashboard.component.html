@@ -10,6 +10,8 @@
       *ngIf="bothPending.allPending as allPending"
       [list]="allPending"
       (filter)="filterEmitter(allPending, $event.property, $event.value)"
+      [listOfNames]="listOfNames"
+      (search)="searchEmitter(allPending, $event.property)"
     ></app-filter>
     <table
     class="

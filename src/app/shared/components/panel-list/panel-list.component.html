@@ -9,6 +9,8 @@
     [list]="panels"
     *ngIf="bothPanels.allPanels as allPanels"
     (filter)="filterEmitter(allPanels, $event.property, $event.value)"
+    (search)="searchEmitter(allPanels, $event.property)"
+    [listOfNames]="listOfNames"
     >
     </app-filter>
     <table
@@ -72,14 +74,102 @@
           <td>
             {{ panel.numberNeeded ? panel.numberNeeded : "" }}
           </td>
-          <td>{{ getMemberName(panel.boardChampion) }}</td>
-          <td>{{ getMemberName(panel.panelCoordinator) }}</td>
-          <td>{{ getMemberName(panel.panelLeader) }}</td>
-          <td>{{ getMemberName(panel.panelMember1) }}</td>
-          <td>{{ getMemberName(panel.panelMember2) }}</td>
-          <td>{{ getMemberName(panel.panelMember3) }}</td>
-          <td>{{ getMemberName(panel.panelMember4) }}</td>
-          <td>{{ getMemberName(panel.panelMember5) }}</td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'boardChampion', panel.boardChampionId)"
+              *ngIf="getMemberName(panel.boardChampion) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.boardChampion) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelCoordinator', panel.panelCoordinatorId)"
+              *ngIf="getMemberName(panel.panelCoordinator) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelCoordinator) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelLeader', panel.panelLeaderId)"
+              *ngIf="getMemberName(panel.panelLeader) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelLeader) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelMember1', panel.panelMember1Id)"
+              *ngIf="getMemberName(panel.panelMember1) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelMember1) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelMember2', panel.panelMember2Id)"
+              *ngIf="getMemberName(panel.panelMember2) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelMember2) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelMember3', panel.panelMember3Id)"
+              *ngIf="getMemberName(panel.panelMember3) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelMember3) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelMember4', panel.panelMember4Id)"
+              *ngIf="getMemberName(panel.panelMember4) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelMember4) }}
+          </td>
+          <td>
+            <button
+              mat-icon-button
+              class="btn-delete"
+              color="warn"
+              aria-label="Remove Member"
+              (click)="onRemoveMember(panel, 'panelMember5', panel.panelMember5Id)"
+              *ngIf="getMemberName(panel.panelMember5) !== 'Need Person'"
+            ><mat-icon>delete</mat-icon>
+            </button>
+            {{ getMemberName(panel.panelMember5) }}
+          </td>
         </tr>
       </tbody>
     </table>

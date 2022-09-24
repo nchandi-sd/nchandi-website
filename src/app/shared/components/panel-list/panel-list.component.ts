@@ -17,6 +17,7 @@ import { FilterByPipe } from 'src/app/filter-by.pipe';
 import { AsyncPipe } from '@angular/common';
 import { UserService } from 'src/app/core/user.service';
 import { AdminService } from '../../services/admin.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-panel-list',
@@ -43,6 +44,8 @@ export class PanelListComponent implements OnInit, OnDestroy {
 
   adminList$: Observable<AdminMember[]>
 
+  listOfNames: any[]
+
   private subscriptions = new Subscription();
 
   constructor(
@@ -52,6 +55,7 @@ export class PanelListComponent implements OnInit, OnDestroy {
     private filterBy: FilterByPipe,
     private currentUser: UserService,
     private adminService: AdminService,
+    private http: HttpClient
     ) {
     }
 
@@ -94,6 +98,7 @@ export class PanelListComponent implements OnInit, OnDestroy {
             this.shownPanels$ = of(this.filterBy.transform(panels, "panelCoordinator...email", info.email))
             this.panels$ = of(this.filterBy.transform(panels, "panelCoordinator...email", info.email))
           }
+          this.panels$.subscribe(panels => console.log("thePanels", panels))
         })
       })
     })
@@ -104,6 +109,44 @@ export class PanelListComponent implements OnInit, OnDestroy {
   filterEmitter(list, property, value){
     console.log("this.filterBy.transform(list, property, value)", this.filterBy.transform(list, property, value))
     this.shownPanels$ =  of(this.filterBy.transform(list, property, value))
+  }
+
+  searchEmitter(list, property){
+
+    console.log("searchEmitter", list)
+    if(property.includes("...")) {
+      var propertyParts = property.split("...")
+      var listOfNames: any[] = list.map(item => {
+        if(item[propertyParts[0]][propertyParts[1]] && item[propertyParts[0]][propertyParts[2]]){
+          return item[propertyParts[0]][propertyParts[1]].toLowerCase() + " " + item[propertyParts[0]][propertyParts[2]].toLowerCase()
+        }
+      })
+      var collectionOfNames = {}
+      listOfNames.map(name => collectionOfNames[name] = 1)
+      this.listOfNames = Object.keys(collectionOfNames)
+    } else if(property === "boardChampion") {
+      var listOfNames: any[] = list.map(item => item.boardChampion.firstName.toLowerCase() + " " + item.boardChampion.lastName.toLowerCase())
+      var collectionOfNames = {}
+      listOfNames.map(name => collectionOfNames[name] = 1)
+      this.listOfNames = Object.keys(collectionOfNames)
+    } else if(property === "panelCoordinator") {
+      var listOfNames: any[] = list.map(item => item.panelCoordinator.firstName.toLowerCase() + " " + item.panelCoordinator.lastName.toLowerCase())
+      var collectionOfNames = {}
+      listOfNames.map(name => collectionOfNames[name] = 1)
+      this.listOfNames = Object.keys(collectionOfNames)
+    } else if(property === "allMembers") {
+      var listOfNames: any[] = list.map(item => item.allMembers.split(";"))
+      console.log("allMembers", listOfNames)
+      var collectionOfNames = {}
+      listOfNames.map(list => list.map(name => collectionOfNames[name] = 1))
+      this.listOfNames = Object.keys(collectionOfNames)
+    } else if(property === "facility") {
+      var listOfNames: any[] = list.map(item => item.facility.facilityName.toLowerCase())
+      var collectionOfNames = {}
+      listOfNames.map(name => collectionOfNames[name] = 1)
+      this.listOfNames = Object.keys(collectionOfNames)
+    }
+
   }
 
   ngOnDestroy() {
@@ -123,6 +166,23 @@ export class PanelListComponent implements OnInit, OnDestroy {
       return `${user.firstName} ${user.lastName}`;
     }
     return '';
+  }
+
+  onRemoveMember(panel: Panel, property: string, memberId: string){
+
+    var scope = prompt("Type 'p' if you want to remove this member from this panel.\n Type 'a' if you would like to remove this member from all panels.\n Type 'c' if you would like to cancel")
+    if(scope === null || scope === "c"){
+      alert("member removal has been cancelled")
+    } else {
+      this.http.post("https://nchandi-serverless-email.vercel.app/api/remove", {
+        panelId: panel.id,
+        property: property,
+        scope: scope === "p" ? "panel" : "all",
+        memberId: memberId
+      }).subscribe(res => console.log("res", res))
+
+    }
+
   }
 
   onSortThisBy(action: string, members: AdminMember[]){

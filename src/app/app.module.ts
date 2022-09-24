@@ -41,7 +41,7 @@ import { UserResolver } from './user/user.resolver';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceService } from './resources/resource.service';
-import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbAlertModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrientationComponent } from './orientation/orientation.component';
 import { MainEventComponent } from './orientation/main-event/main-event.component';
 import { EventsComponent } from './orientation/events/events.component';
@@ -140,6 +140,7 @@ import { EmailPipe } from './email.pipe'
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireStorageModule,
     NgbAlertModule,
+    NgbTypeaheadModule,
     DragDropModule,
   ],
   providers: [
