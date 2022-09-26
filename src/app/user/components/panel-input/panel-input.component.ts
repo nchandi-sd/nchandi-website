@@ -32,19 +32,28 @@ export class PanelInputComponent implements OnInit {
       dayOfWeek: val.dayOfWeek,
       weekOfMonth: val.weekOfMonth,
       eventTime: val.eventTime,
-      facility: val.facility.id,
+      facility: val.facility.facilityName,
+      facilityId: val.facility.id,
       location: val.location,
       gender: val.gender,
       numberNeeded: val.numberNeeded,
       markAsMembersNeeded: val.markAsMembersNeeded,
-      boardChampion: val.boardChampion.id,
-      panelCoordinator: val.panelCoordinator.id,
-      panelLeader: val.panelLeader.id,
-      panelMember1: val.panelMember1.id,
-      panelMember2: val.panelMember2.id,
-      panelMember3: val.panelMember3.id,
-      panelMember4: val.panelMember4.id,
-      panelMember5: val.panelMember5.id,
+      boardChampion: val.boardChampion.firstName + " " + val.boardChampion.lastName,
+      panelCoordinator: val.panelCoordinator.firstName + " " + val.panelCoordinator.lastName,
+      panelLeader: val.panelLeader.firstName + " " + val.panelLeader.lastName,
+      panelMember1: val.panelMember1.firstName + " " + val.panelMember1.lastName,
+      panelMember2: val.panelMember2.firstName + " " + val.panelMember2.lastName,
+      panelMember3: val.panelMember3.firstName + " " + val.panelMember3.lastName,
+      panelMember4: val.panelMember4.firstName + " " + val.panelMember4.lastName,
+      panelMember5: val.panelMember5.firstName + " " + val.panelMember5.lastName,
+      boardChampionId: val.boardChampion.id,
+      panelCoordinatorId: val.panelCoordinator.id,
+      panelLeaderId: val.panelLeader.id,
+      panelMember1Id: val.panelMember1.id,
+      panelMember2Id: val.panelMember2.id,
+      panelMember3Id: val.panelMember3.id,
+      panelMember4Id: val.panelMember4.id,
+      panelMember5Id: val.panelMember5.id,
     });
 
     this.toggleMembersNeeded();
@@ -59,15 +68,6 @@ export class PanelInputComponent implements OnInit {
 
   get value() {
     const value = this.userForm.getRawValue();
-    value.facilityId = value.facility;
-    value.boardChampionId = value.boardChampion;
-    value.panelCoordinatorId = value.panelCoordinator;
-    value.panelLeaderId = value.panelLeader;
-    value.panelMember1Id = value.panelMember1;
-    value.panelMember2Id = value.panelMember2;
-    value.panelMember3Id = value.panelMember3;
-    value.panelMember4Id = value.panelMember4;
-    value.panelMember5Id = value.panelMember5;
     return value;
   }
 
@@ -81,6 +81,7 @@ export class PanelInputComponent implements OnInit {
     weekOfMonth: new FormControl('', Validators.required),
     eventTime: new FormControl('', Validators.required),
     facility: new FormControl('', Validators.required),
+    facilityId: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
     gender: new FormControl(''),
     numberNeeded: new FormControl(''),
@@ -93,6 +94,14 @@ export class PanelInputComponent implements OnInit {
     panelMember3: new FormControl(''),
     panelMember4: new FormControl(''),
     panelMember5: new FormControl(''),
+    boardChampionId: new FormControl('', Validators.required),
+    panelCoordinatorId: new FormControl('', Validators.required),
+    panelLeaderId: new FormControl(''),
+    panelMember1Id: new FormControl(''),
+    panelMember2Id: new FormControl(''),
+    panelMember3Id: new FormControl(''),
+    panelMember4Id: new FormControl(''),
+    panelMember5Id: new FormControl(''),
   });
 
   constructor(
@@ -108,6 +117,109 @@ export class PanelInputComponent implements OnInit {
 
   onMarkAsNeededChange(checked: boolean) {
     this.toggleMembersNeeded();
+  }
+
+  getId(value, type, list: any[]) {
+    if(type === "facility"){
+      let selectedDocumentId
+      list.map(facility => {
+        if(value === facility.facilityName){
+          selectedDocumentId = facility.id
+        }
+      })
+
+      this.userForm.setControl("facilityId", new FormControl(selectedDocumentId))
+    }
+    if(type === "boardChampion"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("boardChampionId", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelCoordinator"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelCoordinatorId", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelLeader"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelLeaderId", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelMember1"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelMember1Id", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelMember2"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelMember2Id", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelMember3"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelMember3Id", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelMember4"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelMember4Id", new FormControl(selectedDocumentId))
+    }
+    if(type === "panelMember5"){
+      let selectedDocumentId
+      list.map(member => {
+        var fullName = member.firstName + " " + member.lastName
+        if(value === fullName){
+          selectedDocumentId = member.id
+        }
+      })
+
+      this.userForm.setControl("panelMember5Id", new FormControl(selectedDocumentId))
+    }
+
+    console.log("userForm", this.userForm)
   }
 
   onFormSubmit() {
