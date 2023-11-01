@@ -17,13 +17,20 @@ export class PendingService {
   ) { }
 
   addVolunteer(volunteer) {
+    let postRef
     return this.panelMemberService.getPanelMembers().subscribe(members => {
       var equivilentMemberArray: any[] = members.filter(member => member.phone === volunteer.phone)
       this.getVolunteers().subscribe(volunteers => {
         equivilentMemberArray = equivilentMemberArray.concat(volunteers.filter((vol: any) => vol.phone === volunteer.phone))
         equivilentMemberArray.length > 0 ? "Sorry but this member already exists" : (
           console.log("volunteer", volunteer),
-          this.https.post(/* "https://nchandi-email.herokuapp.com/pending" */ "https://nchandi-serverless-email.vercel.app/api/pending", volunteer).subscribe(res => console.log("res", res))
+          this.https.post(/* "https://nchandi-email.herokuapp.com/pending" */ "https://nchandi-serverless-email.vercel.app/api/pending", volunteer).subscribe(res => console.log("res", res), err => {
+            if(err.status === 200) {
+              alert("you have successfully signed up to volunteer. An admin will soon look over your info for approval")
+            } else {
+              alert("there was an error")
+            }
+          })
         )
       })
     }

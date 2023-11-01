@@ -17,5 +17,6 @@ export class OrientationComponent implements OnInit {
 
   childEventClicked(event: Event) {
     this.clickedEvent = event;
+    console.log("event", event)
   }
 }
