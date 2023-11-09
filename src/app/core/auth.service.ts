@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import "rxjs/add/operator/toPromise";
+/* import "rxjs/add/operator/toPromise"; */
 import { AngularFireAuth } from "@angular/fire/auth";
 import * as firebase from "firebase/app";
 import { AdminService } from "../shared/services/admin.service";
@@ -63,7 +63,6 @@ export class AuthService {
     const isAdmin = await this.adminService
       .isEmailAdmin(value.email)
       .pipe(take(1))
-      .toPromise();
     if (isAdmin) {
       return new Promise<any>((resolve, reject) => {
         firebase
@@ -96,7 +95,7 @@ export class AuthService {
   }
 
   doLogout() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.afAuth.auth.signOut();
         resolve();
