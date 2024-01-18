@@ -17,7 +17,7 @@ export class ContactService {
   }
 
   /* contactUrl = 'https://script.google.com/macros/s/AKfycbzezNitOBOTReBZ7kvtV8fzTEiW-bA8mGOnJDQl7orAr65gvRd8/exec'; */
-  contactUrl = "https://nchandi-serverless-email.vercel.app/api/contact" /* `https://nchandi-email.herokuapp.com/` */;
+  contactUrl = "https://nchandi-serverless-functions.vercel.app/api/contact" /* `https://nchandi-email.herokuapp.com/` */;
 
   postContactForm(contact: Contact) {
 

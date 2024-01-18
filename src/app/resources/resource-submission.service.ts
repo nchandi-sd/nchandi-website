@@ -17,7 +17,7 @@ export class ResourceSubmissionService {
     ) {}
 
   /* submissionUrl = 'https://script.google.com/macros/s/AKfycbxmzJuQOT0V1RngU5wiW99Y5ats4heH_jldxu0YcYK6xDKh3mA/exec'; */
-  submissionUrl = "https://nchandi-serverless-email.vercel.app/api/resources" /* `https://nchandi-email.herokuapp.com/resources` */;
+  submissionUrl = "https://nchandi-serverless-functions.vercel.app/api/resources" /* `https://nchandi-email.herokuapp.com/resources` */;
 
   postResourceForm(request: any) {
 
@@ -47,7 +47,7 @@ export class ResourceSubmissionService {
    }
 
     /* return this.emailPipe.transform(`smtp.gmail.com`, environment.user, environment.password, ["literature@nchandi.org", "info@nchandi.org", "facilities@nchandi.org"], environment.user, "Literature Order", body()) */
-
+    this.https.post<any>(this.submissionUrl, request).subscribe(res => console.log("res", res))
     return this.https.post<any>(this.submissionUrl, request).subscribe(res => console.log("res", res))
   }
 
