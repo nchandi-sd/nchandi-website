@@ -65,7 +65,6 @@ export class ResourcesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.http.get("https://nchandi-email.herokuapp.com/").subscribe(ref => console.log(ref))
     this.localLinks = LINKS;
     this.hasArchives = false;
     this.hasFinancialArchive = false;
@@ -246,7 +245,6 @@ export class ResourcesComponent implements OnInit {
   }
 
   postResourceForm(form: NgForm) {
-    console.log('resource: ' + this.resourceSubmission);
     this.resourceSubmissionService
       .postResourceForm(this.resourceSubmission)
         this.sendDisabled = false;
